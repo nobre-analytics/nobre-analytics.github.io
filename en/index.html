@@ -104,6 +104,23 @@ nav .liga a{font-size:15px;color:var(--tinta2);text-decoration:none;padding:8px 
   transition:color .16s,background .16s}
 nav .liga a:hover{color:var(--tinta);background:rgba(18,17,16,.055)}
 @media(max-width:860px){nav .liga a.some{display:none}}
+nav .liga > a[aria-current]{color:var(--tinta);background:rgba(18,17,16,.06)}
+
+/* menu do celular */
+.menuBt{display:none;background:rgba(18,17,16,.05);border:0;border-radius:9px;width:38px;height:38px;
+  place-items:center;cursor:pointer;color:var(--tinta);transition:background .16s}
+.menuBt:hover{background:rgba(18,17,16,.1)}
+.menuBt .fecharIc,.menuBt[aria-expanded="true"] .abrirIc{display:none}
+.menuBt[aria-expanded="true"] .fecharIc{display:block}
+@media(max-width:860px){.menuBt{display:grid}}
+.menuMob{position:absolute;left:0;right:0;top:100%;background:var(--branco);padding:8px;display:grid;gap:2px;
+  box-shadow:0 1px 0 var(--linha),0 24px 44px -24px rgba(18,17,16,.45);
+  animation:desceMenu .26s var(--saida) backwards}
+@keyframes desceMenu{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+.menuMob[hidden]{display:none}
+.menuMob a{padding:12px 14px;border-radius:9px;text-decoration:none;color:var(--tinta2);font-size:16px}
+.menuMob a:hover{background:var(--creme);color:var(--tinta)}
+.menuMob a[aria-current]{color:var(--mag-txt);background:rgba(228,0,124,.07)}
 @media(max-width:470px){
   .marca .nm{display:none}
   nav .w{gap:8px}
@@ -158,11 +175,50 @@ nav .bt{padding:10px 18px;font-size:15px}
   pointer-events:none;z-index:0;
   background:radial-gradient(50% 50% at 50% 50%,rgba(255,200,61,.30),rgba(255,200,61,.10) 45%,transparent 70%);
   filter:blur(18px)}
-.forma{position:absolute;pointer-events:none;z-index:0;will-change:transform;
-  filter:drop-shadow(0 18px 24px rgba(18,17,16,.13))}
-.f1{left:-78px;top:118px;width:252px}
-.f2{right:-52px;top:52px;width:186px}
+.forma{position:absolute;pointer-events:none;z-index:0;will-change:transform}
+.f1{left:-46px;top:150px;width:290px}
+.f2{right:-46px;top:150px;width:290px}
+
+/* ---------- O FIO DO CASO ----------
+   Um quadradinho e um caso, o fio e o processo. O fio rompe, os casos caem
+   no vao, o remendo fecha a passagem. Mesmo desenho do ponto das etiquetas. */
+.fio{overflow:visible}
+.fio .trilho{fill:none;stroke:var(--tinta);stroke-opacity:.16;stroke-width:4;stroke-linecap:round}
+.fio .remendo{fill:none;stroke:var(--mag);stroke-width:4.5;stroke-linecap:round}
+.fio .costura{stroke:var(--mag);stroke-width:2.5;stroke-linecap:round}
+.fio .rastro{fill:none;stroke:var(--mag);stroke-opacity:.34;stroke-width:2;stroke-linecap:round;
+  stroke-dasharray:2 8}
+.anim .hero .fio .rastro,.anim .vis .fio .rastro{animation:surgeRastro .8s var(--curva) .9s backwards}
+@keyframes surgeRastro{from{opacity:0}to{opacity:1}}
+.fio .blk{fill:var(--tinta);fill-opacity:.8}
+.fio .blk.perdido{fill:var(--mag);fill-opacity:1}
+.fio .blk.andamento{fill:var(--amarelo);fill-opacity:1}
+.fio .blk.olho{fill:var(--ciano);fill-opacity:1}
+.anim .fio path[pathLength]{stroke-dasharray:100}
+@keyframes desenhaFio{from{stroke-dashoffset:100}to{stroke-dashoffset:0}}
+@keyframes surgeCaso{from{opacity:0;transform:translateY(-6px) scale(.72)}to{opacity:1;transform:none}}
+@keyframes caiCaso{from{opacity:0;transform:translateY(-22px)}to{opacity:1;transform:none}}
+.anim .hero .fio path[pathLength]{animation:desenhaFio 1.15s var(--saida) .25s backwards}
+.anim .vis .fio path[pathLength]{animation:desenhaFio 1s var(--saida) backwards}
+.fio .blk{transform-box:fill-box;transform-origin:50% 50%}
+.anim .hero .fio .blk{animation:surgeCaso .5s var(--saida) backwards}
+.anim .vis .fio .blk{animation:surgeCaso .5s var(--saida) backwards}
+.anim .hero .fio .blk.perdido,.anim .vis .fio .blk.perdido{animation-name:caiCaso;animation-duration:.7s}
+.fio .c1{animation-delay:.55s}.fio .c2{animation-delay:.68s}.fio .c3{animation-delay:.81s}
+.fio .c4{animation-delay:.94s}.fio .c5{animation-delay:1.07s}.fio .c6{animation-delay:1.2s}
+
+/* o mesmo fio dentro das secoes */
+.fio-bloco{display:block;width:100%;max-width:430px;height:auto;margin-top:30px}
+.fio-linha{display:block;width:100%;max-width:330px;height:auto;margin-top:26px}
+/* no bloco escuro do fim */
+.fio-fim{display:block;width:min(680px,100%);height:auto;margin:38px auto 0;pointer-events:none}
+.fio-fim .trilho{stroke:#fff;stroke-opacity:.3}
+.fio-fim .blk{fill:#fff;fill-opacity:.62}
+.fio-fim .blk.andamento{fill:var(--amarelo);fill-opacity:.95}
+.fio-fim .remendo{stroke:var(--mag);stroke-width:5;stroke-opacity:.95}
+.fio-fim .costura{stroke:var(--mag);stroke-width:3}
 .flutua{transform-box:fill-box;transform-origin:50% 50%;animation:flutuar 11s ease-in-out infinite}
+@media(max-width:1060px){.forma{display:none}}
 .f2 .flutua{animation-duration:13.5s;animation-delay:-4s}
 @keyframes flutuar{
   0%,100%{transform:translateY(-7px) rotate(-1.1deg)}
@@ -229,6 +285,12 @@ nav .bt{padding:10px 18px;font-size:15px}
   transition:background .18s,color .18s,transform .18s var(--curva)}
 .fila:hover{background:var(--creme2);transform:translateY(-1px)}
 .fila[aria-pressed="true"]{background:#121110;color:#fff}
+.dica{margin-left:auto;display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--tinta3);
+  align-self:center}
+.dica{transition:opacity .35s var(--curva)}
+.dica svg{animation:cutuca 2.6s ease-in-out infinite}
+@keyframes cutuca{0%,72%,100%{transform:none}84%{transform:translateX(4px)}}
+@media(max-width:620px){.dica{margin-left:0;width:100%;padding-top:2px}}
 .linhas{position:relative}
 .caso{width:100%;text-align:left;font:inherit;color:inherit;background:var(--branco);border:0;
   cursor:pointer;display:grid;grid-template-columns:120px 1fr 100px 112px;gap:14px;align-items:center;
@@ -646,6 +708,7 @@ dialog[open]{animation:entraD .3s var(--saida) backwards}
   .mask>span{transform:none!important}
   .barra i::after,.tempo .fio::after{transform:scaleX(1) scaleY(1)!important}
   .seta-svg path{stroke-dashoffset:0!important;opacity:1!important}
+  .fio path,.fio .blk{stroke-dashoffset:0!important;stroke-dasharray:none!important;opacity:1!important}
   .gaveta{transition:none}
 }
 </style>
@@ -668,6 +731,7 @@ dialog[open]{animation:entraD .3s var(--saida) backwards}
   <symbol id="i-rota" viewBox="0 0 24 24"><circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/></symbol>
   <symbol id="i-livro" viewBox="0 0 24 24"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></symbol>
   <symbol id="i-escudo" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="M12 8v4"/><path d="M12 16h.01"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h16"/></symbol>
   <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
   <symbol id="i-check-circ" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></symbol>
   <symbol id="i-recarrega" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-6.22-8.56"/><path d="M21 3v6h-6"/></symbol>
@@ -719,50 +783,51 @@ dialog[open]{animation:entraD .3s var(--saida) backwards}
         </a>
       </span>
 
+      <button class="menuBt" id="menuBt" aria-expanded="false" aria-controls="menuMob" aria-label="Open the menu">
+        <svg class="ic abrirIc"><use href="#i-menu"/></svg>
+        <svg class="ic fecharIc"><use href="#i-x"/></svg>
+      </button>
+
       <a class="bt p" href="#falar"><span class="roll" data-t="Let's talk">Let's talk</span></a>
     </div>
+  </div>
+  <div class="menuMob" id="menuMob" hidden>
+    <a href="#construi">Projects</a>
+    <a href="#metodo">Method</a>
+    <a href="#depoimentos">Testimonials</a>
+    <a href="#trajetoria">Timeline</a>
+    <a href="#quem">About me</a>
   </div>
 </nav>
 
 <header class="hero" id="topo">
   <div class="orbe" aria-hidden="true"></div>
-  <svg class="forma f1" viewBox="0 0 220 220" aria-hidden="true">
-    <defs>
-      <linearGradient id="ouro" x1=".08" y1="0" x2=".92" y2="1">
-        <stop offset="0" stop-color="#FFEDBA"/><stop offset=".4" stop-color="#FFC83D"/>
-        <stop offset="1" stop-color="#D08F00"/>
-      </linearGradient>
-      <linearGradient id="agua" x1=".18" y1="0" x2=".82" y2="1">
-        <stop offset="0" stop-color="#A6F2FA"/><stop offset="1" stop-color="#52D2E4"/>
-      </linearGradient>
-    </defs>
+  <svg class="forma f1 fio" viewBox="0 0 290 150" aria-hidden="true">
     <g class="flutua">
-      <g transform="rotate(-24 110 110)">
-        <ellipse cx="110" cy="110" rx="74" ry="44" fill="none" stroke="url(#ouro)" stroke-width="33"/>
-        <ellipse cx="110" cy="110" rx="74" ry="44" fill="none" stroke="#7A4E00" stroke-opacity=".22"
-          stroke-width="11" stroke-linecap="round" stroke-dasharray="62 400" stroke-dashoffset="-38"/>
-        <ellipse cx="110" cy="110" rx="74" ry="44" fill="none" stroke="#FFF8E4" stroke-opacity=".72"
-          stroke-width="7" stroke-linecap="round" stroke-dasharray="44 400" stroke-dashoffset="-232"/>
-      </g>
+      <path class="trilho" pathLength="100" d="M4 58h116"/>
+      <path class="trilho" pathLength="100" d="M186 58h100"/>
+      <path class="rastro" d="M122 66q22 28 52 56"/>
+      <rect class="blk c1" x="26" y="50" width="16" height="16" rx="5"/>
+      <rect class="blk c2" x="78" y="50" width="16" height="16" rx="5"/>
+      <rect class="blk c5" x="198" y="50" width="16" height="16" rx="5"/>
+      <rect class="blk andamento c6" x="252" y="50" width="16" height="16" rx="5"/>
+      <rect class="blk perdido c3" x="126" y="74" width="16" height="16" rx="5" transform="rotate(15)"/>
+      <rect class="blk perdido c4" x="150" y="98" width="14" height="14" rx="4" transform="rotate(-13)" opacity=".78"/>
+      <rect class="blk perdido c5" x="170" y="120" width="12" height="12" rx="4" transform="rotate(22)" opacity=".5"/>
     </g>
   </svg>
-  <svg class="forma f2" viewBox="0 0 180 190" aria-hidden="true">
+  <svg class="forma f2 fio" viewBox="0 0 290 150" aria-hidden="true">
     <g class="flutua">
-      <g transform="translate(0 62)">
-        <path d="M90 24 150 56 90 88 30 56Z" fill="#3FC3D4"/>
-        <path d="M30 56 90 88v13L30 69Z" fill="#1E8C9D"/>
-        <path d="M150 56 90 88v13l60-32Z" fill="#2CA6B8"/>
-      </g>
-      <g transform="translate(0 31)">
-        <path d="M90 24 150 56 90 88 30 56Z" fill="#59D6E6"/>
-        <path d="M30 56 90 88v13L30 69Z" fill="#259FB2"/>
-        <path d="M150 56 90 88v13l60-32Z" fill="#37BACC"/>
-      </g>
-      <g>
-        <path d="M90 24 150 56 90 88 30 56Z" fill="url(#agua)"/>
-        <path d="M30 56 90 88v13L30 69Z" fill="#2CB3C6"/>
-        <path d="M150 56 90 88v13l60-32Z" fill="#45CEDE"/>
-      </g>
+      <path class="trilho" pathLength="100" d="M4 58h104"/>
+      <path class="remendo" pathLength="100" d="M104 58h78"/>
+      <path class="trilho" pathLength="100" d="M178 58h108"/>
+      <line class="costura" x1="106" y1="47" x2="106" y2="69"/>
+      <line class="costura" x1="180" y1="47" x2="180" y2="69"/>
+      <rect class="blk c1" x="26" y="50" width="16" height="16" rx="5"/>
+      <rect class="blk c2" x="76" y="50" width="16" height="16" rx="5"/>
+      <rect class="blk c3" x="135" y="50" width="16" height="16" rx="5"/>
+      <rect class="blk c4" x="196" y="50" width="16" height="16" rx="5"/>
+      <rect class="blk andamento c5" x="252" y="50" width="16" height="16" rx="5"/>
     </g>
   </svg>
 
@@ -825,6 +890,7 @@ dialog[open]{animation:entraD .3s var(--saida) backwards}
               <button class="fila" data-f="emi" aria-pressed="false">Issue 5</button>
               <button class="fila" data-f="reb" aria-pressed="false">Refund 3</button>
               <button class="fila" data-f="rev" aria-pressed="false">Review 3</button>
+              <span class="dica" id="dica">click a row <svg class="ic p"><use href="#i-seta"/></svg></span>
             </div>
             <div class="linhas" id="linhas">
               <button class="caso" data-v="ref"
@@ -959,6 +1025,21 @@ dialog[open]{animation:entraD .3s var(--saida) backwards}
       <h2>The queue looked clean. The money vanished before the screen.</h2>
       <div class="numerao" style="margin-top:34px">R$ 326K
         <small>in payment rejections that never reached the panel.</small></div>
+      <svg class="fio fio-bloco" viewBox="0 0 430 150" role="img"
+           aria-label="Drawing: the queue of cases runs along a thread that breaks in the middle. The cases in the gap fall off the path and never reach the screen.">
+        <path class="trilho" pathLength="100" d="M4 52h172"/>
+        <path class="trilho" pathLength="100" d="M266 52h160"/>
+        <path class="rastro" d="M180 60q34 40 76 76"/>
+        <rect class="blk c1" x="22" y="44" width="16" height="16" rx="5"/>
+        <rect class="blk c1" x="74" y="44" width="16" height="16" rx="5"/>
+        <rect class="blk c2" x="126" y="44" width="16" height="16" rx="5"/>
+        <rect class="blk c5" x="288" y="44" width="16" height="16" rx="5"/>
+        <rect class="blk andamento c5" x="340" y="44" width="16" height="16" rx="5"/>
+        <rect class="blk c6" x="392" y="44" width="16" height="16" rx="5"/>
+        <rect class="blk perdido c3" x="186" y="70" width="17" height="17" rx="5" transform="rotate(15)"/>
+        <rect class="blk perdido c4" x="214" y="96" width="15" height="15" rx="5" transform="rotate(-12)" opacity=".8"/>
+        <rect class="blk perdido c5" x="242" y="120" width="13" height="13" rx="4" transform="rotate(21)" opacity=".55"/>
+      </svg>
     </div>
     <div>
       <p class="acende">
@@ -986,6 +1067,15 @@ dialog[open]{animation:entraD .3s var(--saida) backwards}
       Six systems that today run together as a single platform. Filter by type of work,
       click a row to open the case.
     </p>
+    <svg class="fio fio-linha" viewBox="0 0 330 34" aria-hidden="true">
+      <path class="trilho" pathLength="100" d="M4 17h322"/>
+      <rect class="blk c1" x="14" y="9" width="16" height="16" rx="5"/>
+      <rect class="blk c2" x="74" y="9" width="16" height="16" rx="5"/>
+      <rect class="blk c3" x="134" y="9" width="16" height="16" rx="5"/>
+      <rect class="blk c4" x="194" y="9" width="16" height="16" rx="5"/>
+      <rect class="blk andamento c5" x="254" y="9" width="16" height="16" rx="5"/>
+      <rect class="blk c6" x="300" y="9" width="16" height="16" rx="5"/>
+    </svg>
   </div>
 
   <div class="filtros">
@@ -1274,6 +1364,19 @@ dialog[open]{animation:entraD .3s var(--saida) backwards}
       The numbers on this page come from real systems in production. The screens at the top are
       a demo with invented data: no customer record, name or real document appears here.
     </p>
+    <svg class="fio fio-fim" viewBox="0 0 780 64" aria-hidden="true">
+      <path class="trilho" pathLength="100" d="M8 32h288"/>
+      <path class="remendo" pathLength="100" d="M292 32h196"/>
+      <path class="trilho" pathLength="100" d="M484 32h288"/>
+      <line class="costura" x1="296" y1="19" x2="296" y2="45"/>
+      <line class="costura" x1="484" y1="19" x2="484" y2="45"/>
+      <rect class="blk c1" x="44" y="23" width="18" height="18" rx="6"/>
+      <rect class="blk c2" x="164" y="23" width="18" height="18" rx="6"/>
+      <rect class="blk c3" x="284" y="23" width="18" height="18" rx="6"/>
+      <rect class="blk andamento c4" x="404" y="23" width="18" height="18" rx="6"/>
+      <rect class="blk c5" x="524" y="23" width="18" height="18" rx="6"/>
+      <rect class="blk c6" x="644" y="23" width="18" height="18" rx="6"/>
+    </svg>
   </div>
   <div class="rodape">
     <span>Paulo Nobre · 2026</span>
@@ -1441,9 +1544,28 @@ dialog[open]{animation:entraD .3s var(--saida) backwards}
     gaveta.setAttribute('aria-hidden','true');
     if(ultimoCaso){ultimoCaso.focus();ultimoCaso=null;}
   }
-  casos.forEach(function(c){c.addEventListener('click',function(){abreGaveta(c);});});
+  var dica=document.getElementById('dica');
+  casos.forEach(function(c){c.addEventListener('click',function(){
+    if(dica){var d=dica;dica=null;d.style.opacity='0';setTimeout(function(){d.remove();},400);}
+    abreGaveta(c);
+  });});
   gFecha.addEventListener('click',fechaGaveta);
   addEventListener('keydown',function(e){if(e.key==='Escape')fechaGaveta();});
+
+  /* ---------- menu do celular ---------- */
+  var menuBt=document.getElementById('menuBt'), menuMob=document.getElementById('menuMob');
+  function fechaMenu(){menuBt.setAttribute('aria-expanded','false');menuMob.hidden=true;}
+  menuBt.addEventListener('click',function(){
+    var aberto=menuBt.getAttribute('aria-expanded')==='true';
+    menuBt.setAttribute('aria-expanded',String(!aberto));
+    menuMob.hidden=aberto;
+  });
+  menuMob.addEventListener('click',function(e){if(e.target.tagName==='A')fechaMenu();});
+  addEventListener('keydown',function(e){if(e.key==='Escape')fechaMenu();});
+  addEventListener('click',function(e){
+    if(menuMob.hidden)return;
+    if(!menuMob.contains(e.target)&&e.target!==menuBt&&!menuBt.contains(e.target))fechaMenu();
+  });
 
   /* ---------- diálogos ---------- */
   document.querySelectorAll('[data-abre]').forEach(function(b){
@@ -1470,6 +1592,14 @@ dialog[open]{animation:entraD .3s var(--saida) backwards}
     e.target.classList.add('vis'); io.unobserve(e.target);
   });},{rootMargin:'0px 0px -10% 0px',threshold:.12});
   alvos.forEach(function(el){io.observe(el);});
+  /* rede de seguranca: se o observador nao disparar (aba em segundo plano, prerender),
+     o que ja esta na tela aparece assim mesmo. Nada de conteudo preso invisivel. */
+  setTimeout(function(){
+    alvos.forEach(function(el){
+      var r=el.getBoundingClientRect();
+      if(r.top<innerHeight&&r.bottom>0){el.classList.add('vis');io.unobserve(el);}
+    });
+  },2200);
 
   /* frase que acende palavra a palavra */
   document.querySelectorAll('.acende').forEach(function(p){
@@ -1514,6 +1644,19 @@ dialog[open]{animation:entraD .3s var(--saida) backwards}
     requestAnimationFrame(passo);
   });},{threshold:.9});
   nums.forEach(function(n){io3.observe(n);});
+
+  /* seção atual marcada no menu */
+  var linksNav=[].slice.call(document.querySelectorAll('nav .liga > a[href^="#"], .menuMob a'));
+  var ancoras=['construi','metodo','depoimentos','trajetoria','quem'];
+  var atual='';
+  var io4=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting)atual=e.target.id;});
+    linksNav.forEach(function(a){
+      if(a.getAttribute('href')==='#'+atual)a.setAttribute('aria-current','true');
+      else a.removeAttribute('aria-current');
+    });
+  },{rootMargin:'-22% 0px -68% 0px'});
+  ancoras.forEach(function(id){var el=document.getElementById(id);if(el)io4.observe(el);});
 
   /* botão magnético (leve) */
   var mag=document.getElementById('ctaTopo');
