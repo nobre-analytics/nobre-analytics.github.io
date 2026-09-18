@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paulo Nobre — Analista de Negócios</title>
+<meta name="description" content="Portfólio de Business Analyst — automação de processos financeiros, painéis operacionais e diagnóstico de dados.">
+<style>
+:root{
+  --bg:#0b0d10; --bg-2:#111418; --line:#1e242b;
+  --ink:#e9edf2; --ink-2:#98a4b3; --ink-3:#5e6b7a;
+  --accent:#4ade9b; --accent-dim:#1b3d2e;
+  --r:14px;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg); color:var(--ink); font-family:var(--sans);
+  -webkit-font-smoothing:antialiased; line-height:1.5;
+}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+/* ---------- HERO ---------- */
+.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+#glow{position:absolute;inset:0;width:100%;height:100%;opacity:.55;pointer-events:none}
+.hero .wrap{position:relative;z-index:1;padding-top:120px;padding-bottom:88px}
+.eyebrow{
+  font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:22px;display:flex;align-items:center;gap:10px;
+}
+.eyebrow::before{content:"";width:26px;height:1px;background:var(--accent);opacity:.6}
+h1{
+  font-size:clamp(38px,6.4vw,68px);line-height:1.04;letter-spacing:-.03em;
+  font-weight:600;max-width:17ch;
+}
+h1 em{font-style:normal;color:var(--ink-3)}
+.lede{margin-top:24px;max-width:56ch;color:var(--ink-2);font-size:17px}
+
+.headline{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+  margin-top:56px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);
+  overflow:hidden;
+}
+.headline div{background:var(--bg);padding:22px 20px}
+.headline b{
+  display:block;font-family:var(--mono);font-size:clamp(22px,3.2vw,30px);
+  font-weight:600;letter-spacing:-.02em;
+}
+.headline span{display:block;margin-top:7px;font-size:12.5px;color:var(--ink-3);line-height:1.4}
+
+/* ---------- FILTROS ---------- */
+.bar{
+  position:sticky;top:0;z-index:5;background:rgba(11,13,16,.86);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--line);
+}
+.bar .wrap{display:flex;gap:8px;padding-top:14px;padding-bottom:14px;overflow-x:auto}
+.chip{
+  flex:0 0 auto;font:inherit;font-size:13px;color:var(--ink-2);cursor:pointer;
+  background:transparent;border:1px solid var(--line);border-radius:999px;padding:7px 14px;
+  transition:.15s;
+}
+.chip:hover{color:var(--ink);border-color:var(--ink-3)}
+.chip[aria-pressed="true"]{background:var(--accent-dim);border-color:var(--accent);color:var(--accent)}
+
+/* ---------- CARDS ---------- */
+main{padding:56px 0 40px}
+.grid{display:grid;gap:18px}
+@media(min-width:860px){.grid{grid-template-columns:1fr 1fr}}
+
+.card{
+  background:var(--bg-2);border:1px solid var(--line);border-radius:var(--r);
+  padding:26px 24px 22px;display:flex;flex-direction:column;
+  transition:border-color .18s, transform .18s;
+}
+.card:hover{border-color:#2c3540;transform:translateY(-2px)}
+.card.hide{display:none}
+.card h2{font-size:19px;font-weight:600;letter-spacing:-.01em}
+.tagline{margin-top:6px;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--ink-3)}
+.card p{margin-top:14px;color:var(--ink-2);font-size:14.5px;flex:1}
+
+.nums{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px;
+  padding-top:20px;border-top:1px solid var(--line)}
+.nums b{display:block;font-family:var(--mono);font-size:20px;font-weight:600;letter-spacing:-.02em}
+.nums span{display:block;margin-top:5px;font-size:11.5px;color:var(--ink-3);line-height:1.35}
+
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:20px}
+.tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--ink-3);border:1px solid var(--line);border-radius:5px;padding:3px 7px}
+
+/* ---------- RODAPÉ ---------- */
+footer{border-top:1px solid var(--line);padding:48px 0 64px;margin-top:28px}
+footer h3{font-size:22px;font-weight:600;letter-spacing:-.02em}
+footer p{margin-top:10px;color:var(--ink-2);font-size:15px;max-width:52ch}
+.links{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.links a{
+  font-size:14px;color:var(--ink);text-decoration:none;border:1px solid var(--line);
+  border-radius:8px;padding:9px 15px;transition:.15s;
+}
+.links a:hover{border-color:var(--accent);color:var(--accent)}
+.note{margin-top:34px;font-size:12px;color:var(--ink-3);max-width:60ch;line-height:1.6}
+.lang{margin-left:auto;flex:0 0 auto}
+
+@media(prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important}
+  #glow{display:none}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <canvas id="glow" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="eyebrow">Analista de Negócios · Automação de Processos</div>
+    <h1>Eu encontro o dinheiro que o processo <em>deixa cair.</em></h1>
+    <p class="lede">
+      Trabalho na operação de crédito: leio o processo onde ele realmente acontece,
+      meço onde ele vaza e construo o que fecha o buraco — do diagnóstico ao painel
+      que a equipe usa todo dia.
+    </p>
+
+    <div class="headline">
+      <div><b>R$ 326 mil</b><span>em rejeições que nunca chegavam ao painel — encontradas e recuperadas</span></div>
+      <div><b>57s → 0,22s</b><span>abertura do painel operacional usado diariamente</span></div>
+      <div><b>4 desfechos</b><span>triagem automática de cada rejeição, sem análise manual</span></div>
+    </div>
+  </div>
+</header>
+
+<nav class="bar" aria-label="Filtrar projetos">
+  <div class="wrap">
+    <button class="chip" aria-pressed="true" data-f="all">Todos</button>
+    <button class="chip" aria-pressed="false" data-f="dados">Dados ao vivo</button>
+    <button class="chip" aria-pressed="false" data-f="processo">Processo</button>
+    <button class="chip" aria-pressed="false" data-f="painel">Painéis</button>
+    <button class="chip" aria-pressed="false" data-f="automacao">Automação</button>
+  </div>
+</nav>
+
+<main class="wrap">
+  <div class="grid" id="grid">
+
+    <article class="card" data-tags="dados processo">
+      <h2>O rombo era falha de captura</h2>
+      <div class="tagline">Diagnóstico · Rejeições de pagamento</div>
+      <p>
+        O painel mostrava a fila limpa e a operação acreditava. O problema não era
+        a análise — era a captura: um conjunto inteiro de rejeições nunca entrava
+        no sistema. Reconstruí o caminho do dado da origem até a tela e localizei
+        onde ele desaparecia em silêncio.
+      </p>
+      <div class="nums">
+        <div><b>R$ 326 mil</b><span>valor que não era visto</span></div>
+        <div><b>384</b><span>rejeições invisíveis em um único dia</span></div>
+        <div><b>1</b><span>causa raiz, não sintoma</span></div>
+      </div>
+      <div class="tags"><i class="tag">Análise de causa raiz</i><i class="tag">Rastreio de dados</i><i class="tag">Python</i></div>
+    </article>
+
+    <article class="card" data-tags="painel dados">
+      <h2>Painel de rejeições</h2>
+      <div class="tagline">Produto interno · Uso diário</div>
+      <p>
+        Fila de tratativas para a equipe de cobrança: cada caso com seu diagnóstico,
+        seu histórico e o que fazer a seguir. Reescrevi o carregamento para que a
+        abertura deixasse de ser um motivo de reclamação — carga pesada saiu do
+        caminho crítico e passou a ser sob demanda.
+      </p>
+      <div class="nums">
+        <div><b>259×</b><span>mais rápido na abertura</span></div>
+        <div><b>0,22s</b><span>tempo até a tela útil</span></div>
+        <div><b>4,3 MB</b><span>removidos do carregamento inicial</span></div>
+      </div>
+      <div class="tags"><i class="tag">Flask</i><i class="tag">Performance</i><i class="tag">UX operacional</i></div>
+    </article>
+
+    <article class="card" data-tags="processo automacao">
+      <h2>Motor de diagnóstico</h2>
+      <div class="tagline">Regra de negócio · Decisão automática</div>
+      <p>
+        Cada pagamento rejeitado precisava de um analista para decidir o destino.
+        Mapeei as regras reais com a operação e transformei a decisão em quatro
+        desfechos determinísticos. O que o sistema não consegue afirmar, ele marca
+        para revisão humana — em vez de adivinhar.
+      </p>
+      <div class="nums">
+        <div><b>4</b><span>desfechos cobrindo a fila</span></div>
+        <div><b>100%</b><span>dos casos recebem destino</span></div>
+        <div><b>0</b><span>chutes: sem certeza, vai para revisão</span></div>
+      </div>
+      <div class="tags"><i class="tag">Regras de negócio</i><i class="tag">BRD</i><i class="tag">Modelagem de decisão</i></div>
+    </article>
+
+    <article class="card" data-tags="automacao processo">
+      <h2>Rodada da manhã</h2>
+      <div class="tagline">Automação ponta a ponta</div>
+      <p>
+        A operação começava o dia com uma hora de coleta manual em três sistemas.
+        Hoje a rodada roda sozinha antes de qualquer pessoa chegar, se recupera de
+        falhas sem intervenção e entrega o relatório pronto às 08:40.
+      </p>
+      <div class="nums">
+        <div><b>08:40</b><span>relatório na mesa, todo dia</span></div>
+        <div><b>10 min</b><span>ciclo do watchdog que se recupera sozinho</span></div>
+        <div><b>3</b><span>sistemas coletados sem operador</span></div>
+      </div>
+      <div class="tags"><i class="tag">Automação</i><i class="tag">Orquestração</i><i class="tag">Confiabilidade</i></div>
+    </article>
+
+    <article class="card" data-tags="dados processo painel">
+      <h2>Pipeline de rejeições</h2>
+      <div class="tagline">Extração → Diagnóstico → Painel</div>
+      <p>
+        O fluxo completo em uma linha só: extração dos arquivos de pagamento,
+        cruzamento com o extrato real, diagnóstico caso a caso e entrega na fila
+        que a equipe trabalha. Cada etapa deixa evidência do porquê da decisão.
+      </p>
+      <div class="nums">
+        <div><b>3</b><span>etapas encadeadas sem retrabalho</span></div>
+        <div><b>1</b><span>fonte única de verdade</span></div>
+        <div><b>D+0</b><span>rejeição tratada no mesmo dia</span></div>
+      </div>
+      <div class="tags"><i class="tag">ETL</i><i class="tag">Conciliação</i><i class="tag">BPMN</i></div>
+    </article>
+
+    <article class="card" data-tags="processo">
+      <h2>Todo caso corrigido vira regra</h2>
+      <div class="tagline">Método de trabalho</div>
+      <p>
+        Nenhuma correção morre no caso dela. Quando um erro é entendido, ele vira
+        regra escrita, é reproduzido e a fila inteira é varrida atrás do mesmo
+        padrão. É assim que a fila encolhe em vez de se repetir.
+      </p>
+      <div class="nums">
+        <div><b>4 passos</b><span>origem · regra · reproduzir · varrer</span></div>
+        <div><b>1×</b><span>o mesmo erro não volta duas vezes</span></div>
+        <div><b>∞</b><span>a base de regras só cresce</span></div>
+      </div>
+      <div class="tags"><i class="tag">Melhoria contínua</i><i class="tag">Documentação</i></div>
+    </article>
+
+  </div>
+</main>
+
+<footer class="wrap">
+  <h3>Vamos conversar</h3>
+  <p>
+    Aberto a posições de Analista de Negócios, Analista de Processos e
+    Analista de Dados — remoto ou híbrido.
+  </p>
+  <div class="links">
+    <a href="mailto:nobrecontato21@outlook.com">E-mail</a>
+    <a href="https://www.linkedin.com/in/paulo-nobre-/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://github.com/nobre-analytics" target="_blank" rel="noopener">GitHub</a>
+    <a href="./en/" class="lang">English</a>
+  </div>
+  <p class="note">
+    Os números desta página vêm de sistemas reais em produção. Nenhum dado de
+    cliente, nome, documento ou captura de tela com informação pessoal é exibido
+    aqui — apenas métricas de processo e resultado.
+  </p>
+</footer>
+
+<script>
+/* Filtros */
+const chips=document.querySelectorAll('.chip');
+const cards=document.querySelectorAll('.card');
+chips.forEach(c=>c.addEventListener('click',()=>{
+  chips.forEach(x=>x.setAttribute('aria-pressed','false'));
+  c.setAttribute('aria-pressed','true');
+  const f=c.dataset.f;
+  cards.forEach(card=>{
+    const show = f==='all' || card.dataset.tags.split(' ').includes(f);
+    card.classList.toggle('hide',!show);
+  });
+}));
+
+/* Brilho lento do topo — discreto de propósito */
+(function(){
+  const cv=document.getElementById('glow');
+  if(!cv||window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const ctx=cv.getContext('2d');
+  let w,h,t=0;
+  const blobs=[
+    {x:.22,y:.30,r:.42,c:[74,222,155],a:.16,sx:.00021,sy:.00014},
+    {x:.74,y:.20,r:.36,c:[60,120,255],a:.13,sx:-.00017,sy:.00023},
+    {x:.52,y:.78,r:.46,c:[40,90,140],a:.11,sx:.00013,sy:-.00011}
+  ];
+  function size(){
+    const d=Math.min(devicePixelRatio||1,2);
+    w=cv.clientWidth; h=cv.clientHeight;
+    cv.width=w*d; cv.height=h*d; ctx.setTransform(d,0,0,d,0,0);
+  }
+  function frame(){
+    t++; ctx.clearRect(0,0,w,h);
+    for(const b of blobs){
+      const x=(b.x+Math.sin(t*b.sx*6)*.06)*w;
+      const y=(b.y+Math.cos(t*b.sy*6)*.05)*h;
+      const r=b.r*Math.max(w,h);
+      const g=ctx.createRadialGradient(x,y,0,x,y,r);
+      g.addColorStop(0,`rgba(${b.c[0]},${b.c[1]},${b.c[2]},${b.a})`);
+      g.addColorStop(1,'rgba(0,0,0,0)');
+      ctx.fillStyle=g; ctx.beginPath(); ctx.arc(x,y,r,0,6.284); ctx.fill();
+    }
+    requestAnimationFrame(frame);
+  }
+  addEventListener('resize',size); size(); frame();
+})();
+</script>
+</body>
+</html>
