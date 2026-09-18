@@ -579,8 +579,16 @@ h2{font-size:clamp(30px,4.4vw,52px);line-height:1.02;font-weight:700;max-width:1
 .deps figure{background:var(--branco);border-radius:var(--r-grande);box-shadow:var(--sombra);padding:28px 30px}
 .deps blockquote{font-size:19px;line-height:1.45;letter-spacing:-.015em;max-width:60ch}
 .deps figure:first-child blockquote{font-size:22px}
-.deps figcaption{margin-top:18px;font-size:14.5px;color:var(--tinta3)}
-.deps figcaption b{color:var(--tinta2);font-weight:600}
+.deps figure{position:relative}
+.deps .ic.aspas{position:absolute;right:26px;top:24px;width:26px;height:26px;color:var(--linha)}
+.deps figcaption{margin-top:18px;font-size:14.5px;color:var(--tinta3);line-height:1.5}
+.deps figcaption b{color:var(--tinta2);font-weight:600;font-size:15px}
+.deps figcaption .rel{display:block;margin-top:3px;font-size:13.5px}
+.dep-link{display:inline-flex;align-items:center;gap:8px;margin-top:20px;font-size:14.5px;
+  color:var(--tinta2);text-decoration:none;box-shadow:inset 0 -1.5px 0 var(--creme2);
+  transition:box-shadow .16s,color .16s}
+.dep-link:hover{color:var(--tinta);box-shadow:inset 0 -1.5px 0 var(--mag)}
+.dep-link .ic{color:var(--tinta3)}
 .deps [data-reservado]{background:repeating-linear-gradient(135deg,transparent,transparent 9px,rgba(18,17,16,.028) 9px,rgba(18,17,16,.028) 18px),var(--branco);
   box-shadow:0 0 0 1.5px var(--creme2) inset}
 .deps [data-reservado] blockquote,.deps [data-reservado] figcaption{color:var(--tinta3)}
@@ -632,11 +640,28 @@ h2{font-size:clamp(30px,4.4vw,52px);line-height:1.02;font-weight:700;max-width:1
 .sobre p+p{margin-top:14px}
 .fichas{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:22px}
 .credenciais{margin-top:24px;display:grid;gap:16px;padding-top:22px;box-shadow:inset 0 1px 0 var(--linha)}
-@media(min-width:720px){.credenciais{grid-template-columns:1fr 1fr;gap:30px}}
+@media(min-width:720px){.credenciais{gap:22px}}
 .credenciais i{font-style:normal;font-size:11px;letter-spacing:.09em;text-transform:uppercase;
   color:var(--tinta3);display:block;margin-bottom:6px;font-weight:500}
 .credenciais span{font-size:15px;color:var(--tinta2);display:block;line-height:1.5}
 .credenciais b{font-weight:600;color:var(--tinta)}
+.credenciais .selos{display:flex;flex-wrap:wrap;gap:8px;margin-top:2px}
+.credenciais .selo{display:inline-flex;align-items:center;gap:9px;background:#F5F2EF;border-radius:11px;
+  padding:9px 14px 9px 11px;transition:transform .2s var(--curva),background .2s}
+.credenciais .selo:hover{transform:translateY(-2px);background:#EFEBE6}
+.credenciais .selo .ic{width:19px;height:19px;color:var(--tinta3)}
+.credenciais .selo > span{line-height:1.25}
+.credenciais .selo b{font-size:14px;font-weight:600;display:block;letter-spacing:-.015em;line-height:1.25}
+.credenciais .selo i{font-style:normal;font-size:12px;color:var(--tinta3);display:block;margin-top:1px;
+  line-height:1.3}
+.credenciais .selo.verde{background:rgba(15,106,66,.08)}
+.credenciais .selo.verde:hover{background:rgba(15,106,66,.13)}
+.credenciais .selo.verde .ic,.credenciais .selo.verde b{color:var(--verde)}
+@media(max-width:560px){
+  .credenciais .selo{width:100%}
+  .credenciais .selo > span{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+  .credenciais .selo i{margin-top:0}
+}
 .pessoal{color:var(--tinta3)}
 .ficha{display:flex;align-items:center;gap:8px;font-size:14.5px;color:var(--tinta2)}
 .ficha .ic{color:var(--tinta3)}
@@ -764,6 +789,8 @@ dialog[open]{animation:entraD .3s var(--saida) backwards}
   <symbol id="i-livro" viewBox="0 0 24 24"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></symbol>
   <symbol id="i-escudo" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="M12 8v4"/><path d="M12 16h.01"/></symbol>
   <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h16"/></symbol>
+  <symbol id="i-selo" viewBox="0 0 24 24"><circle cx="12" cy="9" r="6"/><path d="M12 6.5 13 8.6l2.3.3-1.7 1.6.4 2.3-2-1.1-2 1.1.4-2.3-1.7-1.6 2.3-.3z"/><path d="M8.2 14.3 7 22l5-2.6L17 22l-1.2-7.7"/></symbol>
+  <symbol id="i-aspas" viewBox="0 0 24 24"><path d="M9 11H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v7a4 4 0 0 1-4 4"/><path d="M20 11h-4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v7a4 4 0 0 1-4 4"/></symbol>
   <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
   <symbol id="i-check-circ" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></symbol>
   <symbol id="i-recarrega" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-6.22-8.56"/><path d="M21 3v6h-6"/></symbol>
@@ -1332,23 +1359,31 @@ dialog[open]{animation:entraD .3s var(--saida) backwards}
     <p>Quem trabalhou comigo na operação, na gestão e no time técnico.</p>
   </div>
   <p class="aviso-res"><svg class="ic p"><use href="#i-doc"/></svg>
-    3 espaços reservados. Me manda os textos reais e eu encaixo.</p>
+    3 espaços reservados para as recomendações do LinkedIn. Cole os textos e eu encaixo.</p>
   <div class="deps">
     <figure data-reservado>
-      <blockquote>[ Depoimento principal, 2 a 3 linhas. O melhor que você tiver:
-        de preferência de quem sentiu o resultado no dia a dia, falando do problema
-        que existia antes. ]</blockquote>
-      <figcaption><b>[ Nome ]</b> · [ cargo ] · [ empresa ]</figcaption>
+      <svg class="ic aspas" aria-hidden="true"><use href="#i-aspas"/></svg>
+      <blockquote>[ A recomendação mais forte que você tem no LinkedIn, 2 a 3 linhas.
+        De preferência a do colega sênior que citou a organização das demandas no
+        modelo de PMO. ]</blockquote>
+      <figcaption><b>[ Nome ]</b> · [ cargo na época ]
+        <span class="rel">[ trabalhou com Paulo no Itaú Unibanco, 2025 ]</span></figcaption>
     </figure>
     <figure data-reservado>
-      <blockquote>[ Depoimento 2, 1 a 2 linhas. ]</blockquote>
-      <figcaption><b>[ Nome ]</b> · [ cargo ]</figcaption>
+      <svg class="ic aspas" aria-hidden="true"><use href="#i-aspas"/></svg>
+      <blockquote>[ Recomendação 2, 1 a 2 linhas. ]</blockquote>
+      <figcaption><b>[ Nome ]</b> · [ cargo ]
+        <span class="rel">[ relação de trabalho ]</span></figcaption>
     </figure>
     <figure data-reservado>
-      <blockquote>[ Depoimento 3, 1 a 2 linhas. ]</blockquote>
-      <figcaption><b>[ Nome ]</b> · [ cargo ]</figcaption>
+      <svg class="ic aspas" aria-hidden="true"><use href="#i-aspas"/></svg>
+      <blockquote>[ Recomendação 3, 1 a 2 linhas. ]</blockquote>
+      <figcaption><b>[ Nome ]</b> · [ cargo ]
+        <span class="rel">[ relação de trabalho ]</span></figcaption>
     </figure>
   </div>
+  <a class="dep-link" href="https://www.linkedin.com/in/paulo-nobre-/" target="_blank" rel="noopener">
+    <svg class="ic p"><use href="#i-linkedin"/></svg>Ver as recomendações no LinkedIn</a>
 </section>
 
 <section class="w" id="trajetoria">
@@ -1395,8 +1430,19 @@ dialog[open]{animation:entraD .3s var(--saida) backwards}
       <div class="credenciais">
         <div><i>Formação</i><span><b>Data Science</b>, Univesp · 2025 a 2029<br>
           <b>Análise e Desenvolvimento de Sistemas</b>, Anhembi Morumbi · 2024 a 2026</span></div>
-        <div><i>Certificações</i><span>Green Belt Six Sigma · Lean · Six Sigma White Belt ·
-          Qualidade · Artificial Intelligence Journey</span></div>
+        <div><i>Certificações</i>
+          <div class="selos">
+            <span class="selo verde"><svg class="ic"><use href="#i-selo"/></svg>
+              <span><b>Green Belt</b><i>Six Sigma</i></span></span>
+            <span class="selo"><svg class="ic"><use href="#i-selo"/></svg>
+              <span><b>Lean</b><i>Melhoria de processos</i></span></span>
+            <span class="selo"><svg class="ic"><use href="#i-selo"/></svg>
+              <span><b>White Belt</b><i>Six Sigma</i></span></span>
+            <span class="selo"><svg class="ic"><use href="#i-selo"/></svg>
+              <span><b>Qualidade</b><i>Certificação</i></span></span>
+            <span class="selo"><svg class="ic"><use href="#i-selo"/></svg>
+              <span><b>AI Journey</b><i>Inteligência artificial</i></span></span>
+          </div></div>
       </div>
     </div>
   </div>
