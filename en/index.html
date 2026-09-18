@@ -25,7 +25,19 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Familjen+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<script>document.documentElement.className+=' anim';</script>
+<script>
+(function(){
+  var h=document.documentElement;
+  h.className+=' anim';
+  /* quem chega com o navegador em outra lingua ve a oferta da versao certa,
+     em vez de receber a traducao automatica do Chrome */
+  try{
+    var eu='en', dele=(navigator.language||'').slice(0,2).toLowerCase();
+    var fechado=localStorage.getItem('idiomaFechado')==='1';
+    if(dele && dele!==eu && !fechado) h.className+=' outroIdioma';
+  }catch(e){}
+})();
+</script>
 <style>
 /* ============================================================
    TOKENS
@@ -140,6 +152,19 @@ nav .liga > a[aria-current]{color:var(--tinta);background:rgba(18,17,16,.06)}
 .idioma a[aria-current] .bandeira{filter:none}
 .idioma a[aria-current]{background:var(--branco);box-shadow:0 1px 2px rgba(18,17,16,.14)}
 
+/* faixa de idioma */
+.trocaIdioma{display:none}
+.outroIdioma .trocaIdioma{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;
+  padding:10px 20px;background:var(--branco);box-shadow:inset 0 -1px 0 var(--linha);font-size:14.5px;
+  color:var(--tinta2)}
+.trocaIdioma .ic{color:var(--tinta3)}
+.trocaIdioma a{color:var(--mag-txt);font-weight:600;text-decoration:none;
+  box-shadow:inset 0 -1.5px 0 rgba(228,0,124,.35);transition:box-shadow .16s}
+.trocaIdioma a:hover{box-shadow:inset 0 -1.5px 0 var(--mag)}
+.trocaIdioma button{background:none;border:0;cursor:pointer;color:var(--tinta3);padding:4px;border-radius:6px;
+  display:grid;place-items:center;transition:color .16s,background .16s}
+.trocaIdioma button:hover{color:var(--tinta);background:rgba(18,17,16,.06)}
+
 /* ============================================================
    BOTÕES
    ============================================================ */
@@ -163,8 +188,8 @@ nav .bt{padding:10px 18px;font-size:15px}
    HERO
    ============================================================ */
 .hero{position:relative;padding:78px 0 0;text-align:center;overflow-x:clip}
-.hero h1{font-size:clamp(40px,7.4vw,86px);line-height:.98;max-width:16ch;margin:0 auto;font-weight:700;
-  letter-spacing:-.035em}
+.hero h1{font-size:clamp(40px,7.4vw,90px);line-height:.97;max-width:min(100%,11em);
+  margin:0 auto;font-weight:700;letter-spacing:-.035em}
 .hero h1 b{color:var(--mag-txt);font-weight:700}
 .hero .w{position:relative;z-index:1}
 .hero .sub{margin:26px auto 0;max-width:60ch;font-size:19px;color:var(--tinta2)}
@@ -605,7 +630,14 @@ h2{font-size:clamp(30px,4.4vw,52px);line-height:1.02;font-weight:700;max-width:1
   font-family:var(--mono);line-height:1.5;padding:14px;max-width:172px}
 .sobre p{color:var(--tinta2);font-size:17px;max-width:64ch}
 .sobre p+p{margin-top:14px}
-.fichas{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:20px}
+.fichas{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:22px}
+.credenciais{margin-top:24px;display:grid;gap:16px;padding-top:22px;box-shadow:inset 0 1px 0 var(--linha)}
+@media(min-width:720px){.credenciais{grid-template-columns:1fr 1fr;gap:30px}}
+.credenciais i{font-style:normal;font-size:11px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--tinta3);display:block;margin-bottom:6px;font-weight:500}
+.credenciais span{font-size:15px;color:var(--tinta2);display:block;line-height:1.5}
+.credenciais b{font-weight:600;color:var(--tinta)}
+.pessoal{color:var(--tinta3)}
 .ficha{display:flex;align-items:center;gap:8px;font-size:14.5px;color:var(--tinta2)}
 .ficha .ic{color:var(--tinta3)}
 
@@ -799,6 +831,14 @@ dialog[open]{animation:entraD .3s var(--saida) backwards}
     <a href="#quem">About me</a>
   </div>
 </nav>
+
+<div class="trocaIdioma" id="trocaIdioma">
+  <svg class="ic p"><use href="#i-globo"/></svg>
+  <span>Esta página também está em português.</span>
+  <a href="../" hreflang="pt-br">Ler em português</a>
+  <button type="button" id="fechaIdioma" aria-label="Fechar">
+    <svg class="ic p"><use href="#i-x"/></svg></button>
+</div>
 
 <header class="hero" id="topo">
   <div class="orbe" aria-hidden="true"></div>
@@ -1336,15 +1376,29 @@ dialog[open]{animation:entraD .3s var(--saida) backwards}
   <div class="sobre">
     <div class="retrato">RESERVED<br>SPACE<br>1:1 photo<br><br>(send me the file)</div>
     <div>
-      <p>[ RESERVED SPACE: two paragraphs about you. The first one says where you come from
-        and how you ended up in credit back office. The second one says what you are looking
-        for now and the kind of problem that interests you. ]</p>
-      <p>[ One personal line at the end helps: what you do when you are not working. US
-        recruiters like that line. ]</p>
+      <p>I come from bank back office. Two years and ten months at <b>Itaú Unibanco</b>,
+        across corporate due diligence, collateral management and People Analytics. In the
+        guarantees area I restructured the end to end financial flow of an operation of about
+        <b>R$ 2 million a month</b>, around US$ 350 thousand, leading a cross team task force,
+        mapping where the process failed and replacing fragile manual controls with a
+        standardized, auditable path.</p>
+      <p>Today I am a process analyst in a credit recovery operation, where I turned a back
+        office that depended on one person into an automated, documented and remotely
+        monitored flow. I am studying Data Science and Systems Analysis and Development, on a
+        Lean Six Sigma foundation. I look for teams that treat process as a product: someone
+        has to write the rule, prove it on a real case and run it across the whole queue.</p>
+      <p class="pessoal">[ RESERVED SPACE: one personal line, what you do when you are not
+        working. US recruiters like that line. ]</p>
       <div class="fichas">
-        <span class="ficha"><svg class="ic"><use href="#i-mapa"/></svg>[ city, state ]</span>
-        <span class="ficha"><svg class="ic"><use href="#i-globo"/></svg>Native Portuguese · English [ level ]</span>
+        <span class="ficha"><svg class="ic"><use href="#i-mapa"/></svg>São Paulo, Brazil</span>
+        <span class="ficha"><svg class="ic"><use href="#i-globo"/></svg>Native Portuguese · professional English</span>
         <span class="ficha"><svg class="ic"><use href="#i-mala"/></svg>Remote or hybrid</span>
+      </div>
+      <div class="credenciais">
+        <div><i>Education</i><span><b>Data Science</b>, Univesp · 2025 to 2029<br>
+          <b>Systems Analysis and Development</b>, Anhembi Morumbi · 2024 to 2026</span></div>
+        <div><i>Certifications</i><span>Six Sigma Green Belt · Lean · Six Sigma White Belt ·
+          Quality · Artificial Intelligence Journey</span></div>
       </div>
     </div>
   </div>
@@ -1551,6 +1605,15 @@ dialog[open]{animation:entraD .3s var(--saida) backwards}
   });});
   gFecha.addEventListener('click',fechaGaveta);
   addEventListener('keydown',function(e){if(e.key==='Escape')fechaGaveta();});
+
+  /* ---------- faixa de idioma ---------- */
+  var fechaIdioma=document.getElementById('fechaIdioma');
+  if(fechaIdioma){
+    fechaIdioma.addEventListener('click',function(){
+      document.documentElement.classList.remove('outroIdioma');
+      try{localStorage.setItem('idiomaFechado','1');}catch(e){}
+    });
+  }
 
   /* ---------- menu do celular ---------- */
   var menuBt=document.getElementById('menuBt'), menuMob=document.getElementById('menuMob');
