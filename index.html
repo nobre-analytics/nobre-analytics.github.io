@@ -3,311 +3,633 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Paulo Nobre — Analista de Negócios</title>
-<meta name="description" content="Portfólio de Business Analyst — automação de processos financeiros, painéis operacionais e diagnóstico de dados.">
+<title>Paulo Nobre · Analista de Negócios</title>
+<meta name="description" content="Analista de negócios. Mapeio processos de back office, redesenho o fluxo e unifico tudo numa plataforma interna.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23121110'/%3E%3Cpath d='M10 23V9h6a4.5 4.5 0 0 1 0 9h-6' stroke='%23E4007C' stroke-width='2.4' fill='none'/%3E%3Ccircle cx='23' cy='22.5' r='2.2' fill='%23FFC83D'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Familjen+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<script>document.documentElement.className+=' anim';</script>
 <style>
 :root{
-  --bg:#0b0d10; --bg-2:#111418; --line:#1e242b;
-  --ink:#e9edf2; --ink-2:#98a4b3; --ink-3:#5e6b7a;
-  --accent:#4ade9b; --accent-dim:#1b3d2e;
-  --r:14px;
-  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
-  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,system-ui,sans-serif;
+  --papel:#F2F0EE; --branco:#fff; --creme:#EAE6E1;
+  --tinta:#121110; --tinta2:#57534E; --tinta3:#6B6560; --linha:#E1DCD6;
+  --mag:#E4007C; --mag-txt:#C00068; --mag-esc:#A8005A;
+  --amarelo:#FFC83D; --ciano:#4FD8E8;
+  --ui:'Familjen Grotesk',system-ui,sans-serif;
+  --disp:'Bricolage Grotesque','Familjen Grotesk',system-ui,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,Consolas,monospace;
+  --curva:cubic-bezier(.22,.9,.28,1);
+  --sombra:0 1px 2px rgba(18,17,16,.06), 0 12px 32px -10px rgba(18,17,16,.16);
+  --sombra-alta:0 2px 6px rgba(18,17,16,.08), 0 40px 80px -28px rgba(18,17,16,.34);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{
-  background:var(--bg); color:var(--ink); font-family:var(--sans);
-  -webkit-font-smoothing:antialiased; line-height:1.5;
-}
-.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+body{font-family:var(--ui);font-size:17px;line-height:1.5;color:var(--tinta);
+  background:var(--papel);-webkit-font-smoothing:antialiased;caret-color:var(--mag)}
+::selection{background:rgba(228,0,124,.18)}
+*{scrollbar-width:thin;scrollbar-color:#C9C3BC transparent}
+*::-webkit-scrollbar{width:12px;height:12px}
+*::-webkit-scrollbar-thumb{background:#C9C3BC;border-radius:99px;border:3px solid transparent;background-clip:content-box}
+:focus-visible{outline:2.5px solid var(--mag);outline-offset:3px;border-radius:6px}
+.w{max-width:1180px;margin:0 auto;padding:0 28px}
+h1,h2,h3{font-family:var(--disp);letter-spacing:-.035em;text-wrap:balance;font-weight:700}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+/* ---------- NAV ---------- */
+nav{position:sticky;top:0;z-index:40;background:rgba(242,240,238,.86);backdrop-filter:blur(12px)}
+nav .w{display:flex;align-items:center;gap:20px;height:66px}
+.marca{display:flex;align-items:center;gap:10px;font-family:var(--disp);font-weight:700;letter-spacing:-.03em;font-size:17px;
+  text-decoration:none;color:inherit}
+.marca svg{width:26px;height:26px;flex:0 0 auto}
+nav .liga{margin-left:auto;display:flex;gap:6px;align-items:center}
+nav .liga a{font-size:15px;color:var(--tinta2);text-decoration:none;padding:8px 12px;border-radius:8px;
+  transition:color .16s,background .16s}
+nav .liga a:hover{color:var(--tinta);background:var(--creme)}
+@media(max-width:700px){nav .liga a.some{display:none}}
+
+.bt{display:inline-flex;align-items:center;justify-content:center;gap:9px;text-decoration:none;
+  font-size:16px;font-weight:600;padding:13px 24px;border-radius:10px;border:0;cursor:pointer;
+  transition:transform .16s var(--curva),background .16s,box-shadow .16s;font-family:inherit}
+.bt.p{background:var(--mag);color:#fff;box-shadow:0 2px 4px rgba(168,0,90,.2),0 14px 30px -14px rgba(228,0,124,.75)}
+.bt.p:hover{background:var(--mag-esc);color:#fff;transform:translateY(-2px)}
+.bt.s{background:var(--branco);color:var(--tinta);box-shadow:var(--sombra)}
+.bt.s:hover{transform:translateY(-2px)}
+nav .bt{padding:10px 18px;font-size:15px}
 
 /* ---------- HERO ---------- */
-.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
-#glow{position:absolute;inset:0;width:100%;height:100%;opacity:.55;pointer-events:none}
-.hero .wrap{position:relative;z-index:1;padding-top:120px;padding-bottom:88px}
-.eyebrow{
-  font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--accent);margin-bottom:22px;display:flex;align-items:center;gap:10px;
-}
-.eyebrow::before{content:"";width:26px;height:1px;background:var(--accent);opacity:.6}
-h1{
-  font-size:clamp(38px,6.4vw,68px);line-height:1.04;letter-spacing:-.03em;
-  font-weight:600;max-width:17ch;
-}
-h1 em{font-style:normal;color:var(--ink-3)}
-.lede{margin-top:24px;max-width:56ch;color:var(--ink-2);font-size:17px}
+.hero{position:relative;padding:74px 0 0;text-align:center;overflow-x:clip}
+.hero h1{font-size:clamp(40px,7.4vw,86px);line-height:.98;max-width:16ch;margin:0 auto;font-weight:700}
+.hero h1 b{color:var(--mag-txt);font-weight:700}
+.hero .sub{margin:26px auto 0;max-width:62ch;font-size:19px;color:var(--tinta2)}
+.acoes{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:34px}
 
-.headline{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
-  margin-top:56px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);
-  overflow:hidden;
-}
-.headline div{background:var(--bg);padding:22px 20px}
-.headline b{
-  display:block;font-family:var(--mono);font-size:clamp(22px,3.2vw,30px);
-  font-weight:600;letter-spacing:-.02em;
-}
-.headline span{display:block;margin-top:7px;font-size:12.5px;color:var(--ink-3);line-height:1.4}
+/* formas 3D */
+.forma{position:absolute;pointer-events:none;z-index:0}
+.f1{left:-90px;top:120px;width:260px}
+.f2{right:-70px;top:60px;width:200px}
+@media(max-width:900px){.forma{display:none}}
 
-/* ---------- FILTROS ---------- */
-.bar{
-  position:sticky;top:0;z-index:5;background:rgba(11,13,16,.86);
-  backdrop-filter:blur(10px);border-bottom:1px solid var(--line);
+/* ---------- TELA DEMONSTRATIVA ---------- */
+.palco{position:relative;margin-top:56px;padding-bottom:70px}
+.moldura{
+  max-width:1060px;margin:0 auto;background:var(--branco);border-radius:16px 16px 0 0;
+  box-shadow:var(--sombra-alta);overflow:hidden;text-align:left;
 }
-.bar .wrap{display:flex;gap:8px;padding-top:14px;padding-bottom:14px;overflow-x:auto}
-.chip{
-  flex:0 0 auto;font:inherit;font-size:13px;color:var(--ink-2);cursor:pointer;
-  background:transparent;border:1px solid var(--line);border-radius:999px;padding:7px 14px;
-  transition:.15s;
+.barra{display:flex;align-items:center;gap:8px;padding:11px 16px;background:#F7F5F3;
+  box-shadow:inset 0 -1px 0 var(--linha)}
+.pastilha{width:11px;height:11px;border-radius:50%;background:#DCD6D0}
+.url{margin-left:12px;font-family:var(--mono);font-size:11.5px;color:var(--tinta3);
+  background:var(--branco);border-radius:6px;padding:4px 12px}
+.falso{margin-left:auto;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--mag-txt);background:rgba(228,0,124,.09);
+  border-radius:99px;padding:4px 10px}
+
+/* painel falso */
+.dem{font-size:13px;color:var(--tinta)}
+.dem-topo{display:flex;align-items:center;gap:14px;padding:13px 18px;background:#121110;color:#fff}
+.dem-topo strong{font-size:14px;font-weight:600;letter-spacing:-.02em}
+.vivo{width:7px;height:7px;border-radius:50%;background:#46D17E}
+.dem-topo .rel{margin-left:auto;font-family:var(--mono);font-size:11.5px;color:#A8A29C}
+.dem-kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--linha)}
+.dem-kpi div{background:var(--branco);padding:14px 18px}
+.dem-kpi b{display:block;font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:24px;
+  font-weight:700;letter-spacing:-.03em}
+.dem-kpi b.destaque{color:var(--mag-txt)}
+.dem-kpi span{font-size:11.5px;color:var(--tinta3)}
+.dem-filas{display:flex;gap:6px;padding:12px 18px;flex-wrap:wrap;box-shadow:inset 0 -1px 0 var(--linha)}
+.fila{font-family:var(--mono);font-size:11px;letter-spacing:.04em;padding:4px 10px;border-radius:99px;
+  background:var(--creme);color:var(--tinta2)}
+.fila.on{background:#121110;color:#fff}
+.dem-linha{display:grid;grid-template-columns:118px 1fr 96px 108px;gap:14px;align-items:center;
+  padding:11px 18px;box-shadow:inset 0 -1px 0 var(--linha)}
+.dem-linha:last-child{box-shadow:none}
+.dem-linha .doc{font-family:var(--mono);font-size:12px;color:var(--tinta2)}
+.dem-linha .qu{font-size:12.5px;color:var(--tinta3)}
+.dem-linha .vl{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:12.5px;text-align:right}
+.tag{font-family:var(--mono);font-size:11px;letter-spacing:.06em;padding:4px 8px;border-radius:5px;
+  text-align:center;font-weight:500}
+.t-ref{background:#FDE8F2;color:#A8005A}
+.t-emi{background:#E4F1FF;color:#14548F}
+.t-reb{background:#E9F7EC;color:#186B33}
+.t-rev{background:#FFF3D9;color:#8A5B00}
+@media(max-width:760px){
+  .dem-kpi{grid-template-columns:1fr 1fr}
+  .dem-kpi div:last-child{display:none}
+  .dem-linha{grid-template-columns:1fr 92px;gap:6px}
+  .dem-linha .qu,.dem-linha .vl{display:none}
 }
-.chip:hover{color:var(--ink);border-color:var(--ink-3)}
-.chip[aria-pressed="true"]{background:var(--accent-dim);border-color:var(--accent);color:var(--accent)}
 
-/* ---------- CARDS ---------- */
-main{padding:56px 0 40px}
-.grid{display:grid;gap:18px}
-@media(min-width:860px){.grid{grid-template-columns:1fr 1fr}}
+/* ---------- FAIXA DE PROVA ---------- */
+.prova{background:var(--branco);padding:22px 0;box-shadow:inset 0 1px 0 var(--linha),inset 0 -1px 0 var(--linha)}
+.prova .w{display:flex;flex-wrap:wrap;gap:14px 40px;align-items:center;justify-content:center}
+.prova span{font-size:15px;color:var(--tinta2)}
+.prova b{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--tinta);font-weight:700}
 
-.card{
-  background:var(--bg-2);border:1px solid var(--line);border-radius:var(--r);
-  padding:26px 24px 22px;display:flex;flex-direction:column;
-  transition:border-color .18s, transform .18s;
+/* ---------- SEÇÕES ---------- */
+section.w{padding-top:92px;padding-bottom:92px}
+.duas{display:grid;gap:26px}
+@media(min-width:900px){.duas{grid-template-columns:1.05fr .95fr;gap:70px;align-items:start}}
+h2{font-size:clamp(30px,4.4vw,52px);line-height:1.02;font-weight:700;max-width:16ch}
+.duas p{font-size:17.5px;color:var(--tinta2);max-width:60ch}
+.duas p+p{margin-top:16px}
+
+.numerao{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:clamp(31px,7.2vw,86px);white-space:nowrap;
+  font-weight:700;letter-spacing:-.05em;line-height:.9;color:var(--mag-txt)}
+.numerao small{display:block;white-space:normal;font-family:var(--ui);font-size:16px;font-weight:500;color:var(--tinta2);
+  letter-spacing:0;margin-top:14px;max-width:34ch}
+
+/* lista de projetos */
+.lista{margin-top:14px;background:var(--branco);border-radius:16px;box-shadow:var(--sombra);overflow:hidden}
+.item+.item{box-shadow:inset 0 1px 0 var(--linha)}
+.item[hidden]{display:none}
+.cab{width:100%;text-align:left;font:inherit;color:inherit;background:none;border:0;cursor:pointer;
+  padding:20px 24px;display:grid;gap:4px 18px;align-items:center;transition:background .16s}
+@media(min-width:860px){.cab{grid-template-columns:14px 1fr auto}}
+.cab:hover{background:#FAF8F7}
+.chev{width:13px;height:13px;color:var(--tinta3);transition:transform .34s var(--curva),color .2s;display:none}
+@media(min-width:860px){.chev{display:block}}
+.cab[aria-expanded="true"] .chev{transform:rotate(90deg);color:var(--mag)}
+.nome{font-size:19px;font-weight:600;letter-spacing:-.025em;min-width:0}
+.nome em{display:block;font-style:normal;font-size:15px;font-weight:400;color:var(--tinta3);margin-top:3px;
+  letter-spacing:0}
+.marcas{display:flex;gap:20px;font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:13px;
+  color:var(--tinta3);white-space:nowrap;flex:0 0 auto}
+.marcas b{color:var(--mag-txt);font-weight:700}
+.corpo{display:grid;grid-template-rows:0fr;transition:grid-template-rows .44s var(--curva)}
+.cab[aria-expanded="true"]+.corpo{grid-template-rows:1fr}
+.corpo>div{overflow:hidden;min-height:0}
+.dentro{padding:0 24px 24px;opacity:0;filter:blur(3px);transform:translateY(-5px);
+  transition:opacity .34s var(--curva) .06s,filter .34s var(--curva) .06s,transform .34s var(--curva) .06s}
+.cab[aria-expanded="true"]+.corpo .dentro{opacity:1;filter:none;transform:none}
+@media(min-width:860px){.dentro{padding-left:56px}}
+.dentro p{color:var(--tinta2);font-size:16.5px;max-width:70ch}
+.rot{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
+.rot span{font-size:13px;color:var(--tinta2);background:var(--creme);border-radius:99px;padding:5px 13px}
+.lista:not(.js) .corpo{grid-template-rows:1fr}
+.lista:not(.js) .dentro{opacity:1;filter:none;transform:none}
+
+.filtros{display:flex;flex-wrap:wrap;gap:7px}
+.filtros button{font:inherit;font-size:14.5px;color:var(--tinta2);cursor:pointer;border:0;
+  background:var(--branco);border-radius:99px;padding:9px 17px;box-shadow:var(--sombra);
+  transition:transform .16s var(--curva),background .16s,color .16s}
+.filtros button:hover{transform:translateY(-2px);color:var(--tinta)}
+.filtros button[aria-pressed="true"]{background:var(--tinta);color:#fff}
+
+/* método */
+.passos{display:grid;gap:18px;margin-top:10px}
+@media(min-width:860px){.passos{grid-template-columns:repeat(4,1fr)}}
+.passo{background:var(--branco);border-radius:14px;padding:24px;box-shadow:var(--sombra)}
+.passo .bola{width:34px;height:34px;border-radius:50%;background:var(--amarelo);display:grid;place-items:center;
+  font-family:var(--mono);font-size:13px;font-weight:700;color:#121110}
+.passo strong{display:block;margin-top:16px;font-size:19px;font-weight:600;letter-spacing:-.02em}
+.passo p{margin-top:7px;font-size:15.5px;color:var(--tinta3)}
+
+/* escrevo */
+.escrevo{background:var(--branco);border-radius:16px;box-shadow:var(--sombra);overflow:hidden;margin-top:10px}
+.escrevo div{padding:22px 26px}
+@media(min-width:800px){.escrevo div{display:grid;grid-template-columns:250px 1fr;gap:26px;align-items:baseline}}
+.escrevo div+div{box-shadow:inset 0 1px 0 var(--linha)}
+.escrevo b{font-size:18px;font-weight:600;letter-spacing:-.02em}
+.escrevo span{color:var(--tinta2);font-size:16px}
+
+/* tempo */
+.tempo{margin-top:10px;display:grid;gap:2px}
+.tempo div{background:var(--branco);padding:20px 26px;display:grid;gap:3px 26px}
+@media(min-width:760px){.tempo div{grid-template-columns:118px 1fr;align-items:baseline}}
+.tempo div:first-child{border-radius:14px 14px 0 0}
+.tempo div:last-child{border-radius:0 0 14px 14px}
+.tempo i{font-style:normal;font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:13.5px;
+  color:var(--mag-txt);font-weight:500}
+.tempo strong{font-size:18px;font-weight:600;letter-spacing:-.02em}
+.tempo p{font-size:15.5px;color:var(--tinta3);margin-top:3px}
+@media(min-width:760px){.tempo p{grid-column:2}}
+
+/* fim */
+.fim{background:var(--tinta);color:#fff;border-radius:22px;padding:74px 40px;text-align:center;position:relative;
+  overflow:hidden}
+.fim h2{margin:0 auto;max-width:15ch;color:#fff}
+.fim p{margin:20px auto 0;max-width:52ch;color:#C5C0BB;font-size:17.5px}
+.fim .acoes{margin-top:32px}
+.fim .bt.s{background:#26231F;color:#fff;box-shadow:none}
+.fim .bt.p{box-shadow:0 2px 6px rgba(0,0,0,.4),0 16px 34px -16px rgba(0,0,0,.7)}
+.fim .bt.s:hover{background:#322E29}
+.aviso{margin:30px auto 0;max-width:66ch;font-size:13.5px;color:#8A847E;line-height:1.6}
+footer.w{padding-top:0;padding-bottom:80px}
+.rodape{display:flex;flex-wrap:wrap;gap:10px 26px;justify-content:center;padding:34px 0 0;
+  font-size:14.5px;color:var(--tinta3)}
+.rodape a{color:var(--tinta2)}
+
+@media(max-width:640px){
+  section.w{padding-top:58px;padding-bottom:58px}
+  .hero{padding-top:44px}
+  .palco{margin-top:38px;padding-bottom:46px}
+  .fim{padding:52px 24px;border-radius:18px}
 }
-.card:hover{border-color:#2c3540;transform:translateY(-2px)}
-.card.hide{display:none}
-.card h2{font-size:19px;font-weight:600;letter-spacing:-.01em}
-.tagline{margin-top:6px;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;
-  text-transform:uppercase;color:var(--ink-3)}
-.card p{margin-top:14px;color:var(--ink-2);font-size:14.5px;flex:1}
 
-.nums{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px;
-  padding-top:20px;border-top:1px solid var(--line)}
-.nums b{display:block;font-family:var(--mono);font-size:20px;font-weight:600;letter-spacing:-.02em}
-.nums span{display:block;margin-top:5px;font-size:11.5px;color:var(--ink-3);line-height:1.35}
+/* ================= MOVIMENTO =================
+   Efeitos recriados a partir do catálogo do Originkit (originkit.dev),
+   em CSS/JS puro: Mask Text Reveal, Appear Text e Rolling Letters. */
 
-.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:20px}
-.tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;
-  color:var(--ink-3);border:1px solid var(--line);border-radius:5px;padding:3px 7px}
+/* Mask Text Reveal — a linha sobe de dentro de uma máscara */
+.mask{display:block;overflow:hidden}
+.anim .mask > span{transform:translateY(105%)}
+.mask > span{display:block;
+  transition:transform .95s cubic-bezier(.16,.84,.3,1)}
+.pronto .mask > span{transform:none}
+.mask:nth-of-type(2) > span{transition-delay:.1s}
 
-/* ---------- RODAPÉ ---------- */
-footer{border-top:1px solid var(--line);padding:48px 0 64px;margin-top:28px}
-footer h3{font-size:22px;font-weight:600;letter-spacing:-.02em}
-footer p{margin-top:10px;color:var(--ink-2);font-size:15px;max-width:52ch}
-.links{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
-.links a{
-  font-size:14px;color:var(--ink);text-decoration:none;border:1px solid var(--line);
-  border-radius:8px;padding:9px 15px;transition:.15s;
-}
-.links a:hover{border-color:var(--accent);color:var(--accent)}
-.note{margin-top:34px;font-size:12px;color:var(--ink-3);max-width:60ch;line-height:1.6}
-.lang{margin-left:auto;flex:0 0 auto}
+/* Appear Text — títulos e blocos entrando ao rolar */
+.sobe{opacity:0;transform:translateY(22px);
+  transition:opacity .7s var(--curva),transform .7s var(--curva)}
+.sobe.vis{opacity:1;transform:none}
+
+/* Rolling Letters — o rótulo rola e o duplicado entra por baixo */
+.roll{display:inline-block;position:relative;overflow:hidden;height:1.25em;line-height:1.25em;
+  transition:transform .42s cubic-bezier(.3,.9,.25,1)}
+.roll::after{content:attr(data-t);position:absolute;left:0;top:100%;white-space:nowrap}
+.bt:hover .roll,.marca:hover .roll{transform:translateY(-100%)}
+
+/* a tela demonstrativa "liga" quando aparece */
+.anim .dem-linha,.anim .dem-kpi div,.anim .fila{opacity:0;transform:translateY(8px)}
+.dem-linha,.dem-kpi div,.fila{transition:opacity .5s var(--curva),transform .5s var(--curva)}
+.ligado .dem-linha,.ligado .dem-kpi div,.ligado .fila{opacity:1;transform:none}
+.ligado .dem-kpi div:nth-child(2){transition-delay:.07s}
+.ligado .dem-kpi div:nth-child(3){transition-delay:.14s}
+.ligado .fila:nth-child(2){transition-delay:.1s}
+.ligado .fila:nth-child(3){transition-delay:.15s}
+.ligado .fila:nth-child(4){transition-delay:.2s}
+.ligado .fila:nth-child(5){transition-delay:.25s}
+.ligado .dem-linha:nth-of-type(1){transition-delay:.26s}
+.ligado .dem-linha:nth-of-type(2){transition-delay:.33s}
+.ligado .dem-linha:nth-of-type(3){transition-delay:.4s}
+.ligado .dem-linha:nth-of-type(4){transition-delay:.47s}
+.ligado .dem-linha:nth-of-type(5){transition-delay:.54s}
+
+/* o ponto de "rodando" pulsa devagar */
+.vivo{animation:bat 2.6s ease-in-out infinite}
+@keyframes bat{0%,100%{opacity:1}50%{opacity:.35}}
+
+/* as formas 3D deslizam um pouco com a rolagem */
+.forma{will-change:transform}
 
 @media(prefers-reduced-motion:reduce){
   *{transition:none!important;animation:none!important}
-  #glow{display:none}
+  .dentro,.sobe,.dem-linha,.dem-kpi div,.fila{opacity:1!important;transform:none!important}
+  .mask > span{transform:none!important}
 }
 </style>
 </head>
 <body>
 
-<header class="hero">
-  <canvas id="glow" aria-hidden="true"></canvas>
-  <div class="wrap">
-    <div class="eyebrow">Analista de Negócios · Automação de Processos</div>
-    <h1>Eu encontro o dinheiro que o processo <em>deixa cair.</em></h1>
-    <p class="lede">
-      Trabalho na operação de crédito: leio o processo onde ele realmente acontece,
-      meço onde ele vaza e construo o que fecha o buraco — do diagnóstico ao painel
-      que a equipe usa todo dia.
-    </p>
+<nav>
+  <div class="w">
+    <a class="marca" href="#topo">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#121110"/><path d="M10 23V9h6a4.5 4.5 0 0 1 0 9h-6" stroke="#E4007C" stroke-width="2.4" fill="none"/><circle cx="23" cy="22.5" r="2.2" fill="#FFC83D"/></svg>
+      Paulo Nobre
+    </a>
+    <div class="liga">
+      <a class="some" href="#construi">Projetos</a>
+      <a class="some" href="#metodo">Método</a>
+      <a class="some" href="#tempo">Trajetória</a>
+      <a class="bt p" href="#falar"><span class="roll" data-t="Falar comigo">Falar comigo</span></a>
+    </div>
+  </div>
+</nav>
 
-    <div class="headline">
-      <div><b>R$ 326 mil</b><span>em rejeições que nunca chegavam ao painel — encontradas e recuperadas</span></div>
-      <div><b>57s → 0,22s</b><span>abertura do painel operacional usado diariamente</span></div>
-      <div><b>4 desfechos</b><span>triagem automática de cada rejeição, sem análise manual</span></div>
+<header class="hero" id="topo">
+  <svg class="forma f1" viewBox="0 0 200 200" aria-hidden="true">
+    <g transform="translate(100 100) rotate(-18)">
+      <g fill="#FFC83D">
+        <rect x="-78" y="-78" width="34" height="34" rx="3"/><rect x="-40" y="-78" width="34" height="34" rx="3" opacity=".75"/>
+        <rect x="-2" y="-78" width="34" height="34" rx="3" opacity=".5"/>
+        <rect x="-78" y="-40" width="34" height="34" rx="3" opacity=".75"/><rect x="-40" y="-40" width="34" height="34" rx="3"/>
+        <rect x="-2" y="-40" width="34" height="34" rx="3" opacity=".62"/>
+        <rect x="-78" y="-2" width="34" height="34" rx="3" opacity=".5"/><rect x="-40" y="-2" width="34" height="34" rx="3" opacity=".62"/>
+        <rect x="-2" y="-2" width="34" height="34" rx="3" opacity=".85"/>
+      </g>
+    </g>
+  </svg>
+  <svg class="forma f2" viewBox="0 0 160 160" aria-hidden="true">
+    <g fill="#4FD8E8">
+      <rect x="8" y="8" width="26" height="26" rx="2" opacity=".55"/><rect x="42" y="8" width="26" height="26" rx="2"/>
+      <rect x="76" y="42" width="26" height="26" rx="2" opacity=".7"/><rect x="42" y="42" width="26" height="26" rx="2" opacity=".35"/>
+      <rect x="110" y="8" width="26" height="26" rx="2" opacity=".4"/><rect x="76" y="76" width="26" height="26" rx="2"/>
+      <rect x="110" y="110" width="26" height="26" rx="2" opacity=".55"/>
+    </g>
+  </svg>
+
+  <div class="w">
+    <h1><span class="mask"><span>Eu conserto o processo</span></span><span class="mask"><span><b>onde ele perde dinheiro.</b></span></span></h1>
+    <p class="sub">
+      Back office de crédito. Mapeio o processo onde ele acontece de verdade, redesenho
+      o fluxo e unifico tudo numa plataforma interna: da coleta do dado à ação executada
+      no sistema de origem.
+    </p>
+    <div class="acoes">
+      <a class="bt p" href="#falar">Falar comigo</a>
+      <a class="bt s" href="#construi"><span class="roll" data-t="Ver os projetos">Ver os projetos</span></a>
+    </div>
+  </div>
+
+  <div class="palco">
+    <div class="moldura">
+      <div class="barra">
+        <span class="pastilha"></span><span class="pastilha"></span><span class="pastilha"></span>
+        <span class="url">painel-de-rejeicoes</span>
+        <span class="falso">dados fictícios</span>
+      </div>
+      <div class="dem" aria-hidden="true">
+        <div class="dem-topo"><span class="vivo"></span><strong>Painel de Rejeições</strong>
+          <span class="rel">rodada de hoje · 08:40</span></div>
+        <div class="dem-kpi">
+          <div><b class="destaque">18</b><span>falta tratar</span></div>
+          <div><b>96</b><span>tratados</span></div>
+          <div><b>114</b><span>total do dia</span></div>
+        </div>
+        <div class="dem-filas">
+          <span class="fila on">Todas 18</span><span class="fila">Refazer 7</span>
+          <span class="fila">Emitir 5</span><span class="fila">Reembolso 3</span><span class="fila">Revisar 3</span>
+        </div>
+        <div class="dem-linha"><span class="doc">•••.418.___-••</span><span class="qu">acordo quebrado, original em aberto</span><span class="vl">R$ 1.284,00</span><span class="tag t-ref">REFAZER</span></div>
+        <div class="dem-linha"><span class="doc">•••.902.___-••</span><span class="qu">acordo ativo, parcela sem boleto</span><span class="vl">R$ 640,50</span><span class="tag t-emi">EMITIR</span></div>
+        <div class="dem-linha"><span class="doc">•••.137.___-••</span><span class="qu">baixa duplicada confirmada</span><span class="vl">R$ 2.115,90</span><span class="tag t-reb">REEMBOLSO</span></div>
+        <div class="dem-linha"><span class="doc">•••.655.___-••</span><span class="qu">sem correspondência no extrato</span><span class="vl">R$ 389,00</span><span class="tag t-rev">REVISAR</span></div>
+        <div class="dem-linha"><span class="doc">•••.284.___-••</span><span class="qu">acordo quebrado, original em aberto</span><span class="vl">R$ 977,30</span><span class="tag t-ref">REFAZER</span></div>
+      </div>
     </div>
   </div>
 </header>
 
-<nav class="bar" aria-label="Filtrar projetos">
-  <div class="wrap">
-    <button class="chip" aria-pressed="true" data-f="all">Todos</button>
-    <button class="chip" aria-pressed="false" data-f="dados">Dados ao vivo</button>
-    <button class="chip" aria-pressed="false" data-f="processo">Processo</button>
-    <button class="chip" aria-pressed="false" data-f="painel">Painéis</button>
-    <button class="chip" aria-pressed="false" data-f="automacao">Automação</button>
+<div class="prova">
+  <div class="w">
+    <span>em produção desde <b>abril de 2026</b></span>
+    <span><b>8</b> pessoas usando, em 3 áreas</span>
+    <span><b>2</b> treinamentos conduzidos</span>
+    <span><b>+6</b> quando o acesso ao Jira sair</span>
   </div>
-</nav>
+</div>
 
-<main class="wrap">
-  <div class="grid" id="grid">
-
-    <article class="card" data-tags="dados processo">
-      <h2>O rombo era falha de captura</h2>
-      <div class="tagline">Diagnóstico · Rejeições de pagamento</div>
+<section class="w">
+  <div class="duas">
+    <div>
+      <h2>A fila parecia limpa. O dinheiro estava sumindo antes da tela.</h2>
+      <div class="numerao" style="margin-top:34px">R$ 326 mil
+        <small>em rejeições de pagamento que nunca chegavam ao painel.</small></div>
+    </div>
+    <div>
       <p>
-        O painel mostrava a fila limpa e a operação acreditava. O problema não era
-        a análise — era a captura: um conjunto inteiro de rejeições nunca entrava
-        no sistema. Reconstruí o caminho do dado da origem até a tela e localizei
-        onde ele desaparecia em silêncio.
+        O painel mostrava a fila vazia e a operação acreditava nela. O problema não estava
+        na análise: estava na captura. Um conjunto inteiro de rejeições nunca entrava no
+        sistema, e ninguém tinha como saber.
       </p>
-      <div class="nums">
-        <div><b>R$ 326 mil</b><span>valor que não era visto</span></div>
-        <div><b>384</b><span>rejeições invisíveis em um único dia</span></div>
-        <div><b>1</b><span>causa raiz, não sintoma</span></div>
-      </div>
-      <div class="tags"><i class="tag">Análise de causa raiz</i><i class="tag">Rastreio de dados</i><i class="tag">Python</i></div>
+      <p>
+        Refiz o caminho do dado da origem até a tela, encontrei o ponto exato onde ele
+        desaparecia em silêncio e fechei a falha. Em um único dia havia <b>384 casos
+        invisíveis</b>.
+      </p>
+      <p>
+        É o tipo de defeito que nenhum relatório acusa, porque o relatório é feito do mesmo
+        dado que está faltando.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="w" id="construi">
+  <div class="duas" style="margin-bottom:36px">
+    <h2>O que eu construí</h2>
+    <p>
+      Seis sistemas que hoje rodam juntos como uma plataforma só. Filtre pelo tipo de
+      trabalho, clique numa linha para abrir o caso.
+    </p>
+  </div>
+
+  <div class="filtros">
+    <button aria-pressed="true" data-f="tudo">Tudo</button>
+    <button aria-pressed="false" data-f="ba">Business Analysis</button>
+    <button aria-pressed="false" data-f="ops">Product Ops</button>
+    <button aria-pressed="false" data-f="tpm">Technical PM</button>
+    <button aria-pressed="false" data-f="proc">Melhoria de Processo</button>
+    <button aria-pressed="false" data-f="auto">Automação</button>
+    <button aria-pressed="false" data-f="pmo">PMO</button>
+  </div>
+
+  <div class="lista" id="lista">
+
+    <article class="item" data-t="ba proc tpm">
+      <button class="cab" aria-expanded="false">
+        <svg class="chev" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="nome">O rombo era falha de captura<em>O dado sumia antes de chegar na tela</em></span>
+        <span class="marcas"><b>R$ 326 mil</b><span>384 casos</span></span>
+      </button>
+      <div class="corpo"><div><div class="dentro">
+        <p>Refiz o caminho do dado da origem até a tela, encontrei o ponto onde ele desaparecia
+        em silêncio e fechei a falha. Não era um caso perdido: era um conjunto inteiro que
+        nunca entrava no sistema.</p>
+        <div class="rot"><span>Causa raiz</span><span>Rastreio de dados</span><span>Conciliação</span></div>
+      </div></div></div>
     </article>
 
-    <article class="card" data-tags="painel dados">
-      <h2>Painel de rejeições</h2>
-      <div class="tagline">Produto interno · Uso diário</div>
-      <p>
-        Fila de tratativas para a equipe de cobrança: cada caso com seu diagnóstico,
-        seu histórico e o que fazer a seguir. Reescrevi o carregamento para que a
-        abertura deixasse de ser um motivo de reclamação — carga pesada saiu do
-        caminho crítico e passou a ser sob demanda.
-      </p>
-      <div class="nums">
-        <div><b>259×</b><span>mais rápido na abertura</span></div>
-        <div><b>0,22s</b><span>tempo até a tela útil</span></div>
-        <div><b>4,3 MB</b><span>removidos do carregamento inicial</span></div>
-      </div>
-      <div class="tags"><i class="tag">Flask</i><i class="tag">Performance</i><i class="tag">UX operacional</i></div>
+    <article class="item" data-t="ops tpm proc">
+      <button class="cab" aria-expanded="false">
+        <svg class="chev" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="nome">Painel de rejeições<em>Diagnóstico, evidência e ação na mesma tela</em></span>
+        <span class="marcas"><b>57s → 0,22s</b><span>1 operador</span></span>
+      </button>
+      <div class="corpo"><div><div class="dentro">
+        <p>Cada caso chega com o diagnóstico pronto, o histórico e o próximo passo. O painel não
+        só mostra: dispara a ação no sistema de origem e volta a marcar o próprio estado. Tirei
+        4,3 MB do caminho crítico de abertura. O manual do operador foi escrito junto.</p>
+        <div class="rot"><span>Product Ops</span><span>Performance</span><span>Documentação</span></div>
+      </div></div></div>
     </article>
 
-    <article class="card" data-tags="processo automacao">
-      <h2>Motor de diagnóstico</h2>
-      <div class="tagline">Regra de negócio · Decisão automática</div>
-      <p>
-        Cada pagamento rejeitado precisava de um analista para decidir o destino.
-        Mapeei as regras reais com a operação e transformei a decisão em quatro
-        desfechos determinísticos. O que o sistema não consegue afirmar, ele marca
-        para revisão humana — em vez de adivinhar.
-      </p>
-      <div class="nums">
-        <div><b>4</b><span>desfechos cobrindo a fila</span></div>
-        <div><b>100%</b><span>dos casos recebem destino</span></div>
-        <div><b>0</b><span>chutes: sem certeza, vai para revisão</span></div>
-      </div>
-      <div class="tags"><i class="tag">Regras de negócio</i><i class="tag">BRD</i><i class="tag">Modelagem de decisão</i></div>
+    <article class="item" data-t="ba proc">
+      <button class="cab" aria-expanded="false">
+        <svg class="chev" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="nome">Motor de diagnóstico<em>A decisão virou regra escrita, não opinião de plantão</em></span>
+        <span class="marcas"><b>4 desfechos</b><span>0 chutes</span></span>
+      </button>
+      <div class="corpo"><div><div class="dentro">
+        <p>Cada pagamento rejeitado exigia um analista para decidir o destino. Mapeei as regras
+        reais com a operação e transformei a decisão em quatro desfechos determinísticos. Quando
+        o sistema não consegue afirmar, manda para revisão humana em vez de adivinhar.</p>
+        <div class="rot"><span>Regra de negócio</span><span>BRD</span><span>Modelagem de decisão</span></div>
+      </div></div></div>
     </article>
 
-    <article class="card" data-tags="automacao processo">
-      <h2>Rodada da manhã</h2>
-      <div class="tagline">Automação ponta a ponta</div>
-      <p>
-        A operação começava o dia com uma hora de coleta manual em três sistemas.
-        Hoje a rodada roda sozinha antes de qualquer pessoa chegar, se recupera de
-        falhas sem intervenção e entrega o relatório pronto às 08:40.
-      </p>
-      <div class="nums">
-        <div><b>08:40</b><span>relatório na mesa, todo dia</span></div>
-        <div><b>10 min</b><span>ciclo do watchdog que se recupera sozinho</span></div>
-        <div><b>3</b><span>sistemas coletados sem operador</span></div>
-      </div>
-      <div class="tags"><i class="tag">Automação</i><i class="tag">Orquestração</i><i class="tag">Confiabilidade</i></div>
+    <article class="item" data-t="auto pmo ops">
+      <button class="cab" aria-expanded="false">
+        <svg class="chev" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="nome">Rodada da manhã<em>Três sistemas coletados antes de qualquer pessoa chegar</em></span>
+        <span class="marcas"><b>08:40</b><span>sem operador</span></span>
+      </button>
+      <div class="corpo"><div><div class="dentro">
+        <p>A operação começava o dia com uma hora de coleta manual. Hoje os robôs leem os três
+        sistemas sozinhos, se recuperam de falha por conta própria e o relatório está pronto às
+        08:40. O painel de status declara o que não sabe, em vez de fingir que está tudo verde.</p>
+        <div class="rot"><span>Orquestração</span><span>Confiabilidade</span><span>Rotina operacional</span></div>
+      </div></div></div>
     </article>
 
-    <article class="card" data-tags="dados processo painel">
-      <h2>Pipeline de rejeições</h2>
-      <div class="tagline">Extração → Diagnóstico → Painel</div>
-      <p>
-        O fluxo completo em uma linha só: extração dos arquivos de pagamento,
-        cruzamento com o extrato real, diagnóstico caso a caso e entrega na fila
-        que a equipe trabalha. Cada etapa deixa evidência do porquê da decisão.
-      </p>
-      <div class="nums">
-        <div><b>3</b><span>etapas encadeadas sem retrabalho</span></div>
-        <div><b>1</b><span>fonte única de verdade</span></div>
-        <div><b>D+0</b><span>rejeição tratada no mesmo dia</span></div>
-      </div>
-      <div class="tags"><i class="tag">ETL</i><i class="tag">Conciliação</i><i class="tag">BPMN</i></div>
+    <article class="item" data-t="tpm ops pmo">
+      <button class="cab" aria-expanded="false">
+        <svg class="chev" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="nome">Três painéis, três públicos<em>Operadora, operador e gestor querem densidades opostas</em></span>
+        <span class="marcas"><b>8 usuários</b><span>3 áreas</span></span>
+      </button>
+      <div class="corpo"><div><div class="dentro">
+        <p>Não é uma tela para todo mundo. A operadora executa um fluxo, o operador diagnostica e
+        precisa de densidade, o gestor só quer saber se precisa agir. Separei as três superfícies,
+        cada uma com o seu vocabulário, atrás de uma porta única com login, papéis e auditoria.</p>
+        <div class="rot"><span>Segmentação de público</span><span>Controle de acesso</span><span>Governança</span></div>
+      </div></div></div>
     </article>
 
-    <article class="card" data-tags="processo">
-      <h2>Todo caso corrigido vira regra</h2>
-      <div class="tagline">Método de trabalho</div>
-      <p>
-        Nenhuma correção morre no caso dela. Quando um erro é entendido, ele vira
-        regra escrita, é reproduzido e a fila inteira é varrida atrás do mesmo
-        padrão. É assim que a fila encolhe em vez de se repetir.
-      </p>
-      <div class="nums">
-        <div><b>4 passos</b><span>origem · regra · reproduzir · varrer</span></div>
-        <div><b>1×</b><span>o mesmo erro não volta duas vezes</span></div>
-        <div><b>∞</b><span>a base de regras só cresce</span></div>
-      </div>
-      <div class="tags"><i class="tag">Melhoria contínua</i><i class="tag">Documentação</i></div>
+    <article class="item" data-t="auto proc ba">
+      <button class="cab" aria-expanded="false">
+        <svg class="chev" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="nome">Conciliação de duplicidade<em>Acha a baixa duplicada, desfaz e refaz igual à fonte</em></span>
+        <span class="marcas"><b>2 sistemas</b><span>com evidência</span></span>
+      </button>
+      <div class="corpo"><div><div class="dentro">
+        <p>A conciliação que era feita na mão, comparando dois sistemas linha a linha. O robô lê os
+        valores do HTML, não da imagem da tela, porque errar um dígito escreve baixa errada num
+        sistema financeiro. Nenhum ajuste acontece sem evidência registrada do porquê.</p>
+        <div class="rot"><span>Conciliação</span><span>Risco operacional</span><span>Rastreabilidade</span></div>
+      </div></div></div>
     </article>
 
   </div>
-</main>
+</section>
 
-<footer class="wrap">
-  <h3>Vamos conversar</h3>
-  <p>
-    Aberto a posições de Analista de Negócios, Analista de Processos e
-    Analista de Dados — remoto ou híbrido.
-  </p>
-  <div class="links">
-    <a href="mailto:nobrecontato21@outlook.com">E-mail</a>
-    <a href="https://www.linkedin.com/in/paulo-nobre-/" target="_blank" rel="noopener">LinkedIn</a>
+<section class="w" id="metodo">
+  <div class="duas" style="margin-bottom:36px">
+    <h2>O mesmo caminho em todo caso</h2>
+    <p>Do primeiro robô ao último painel. É o que faz a fila encolher em vez de repetir o mesmo erro.</p>
+  </div>
+  <div class="passos">
+    <div class="passo"><span class="bola">1</span><strong>Origem</strong><p>Achar onde o erro nasce, não onde ele aparece.</p></div>
+    <div class="passo"><span class="bola">2</span><strong>Regra</strong><p>Escrever a regra do caso na linguagem da operação.</p></div>
+    <div class="passo"><span class="bola">3</span><strong>Reproduzir</strong><p>Provar a regra num caso real antes de confiar nela.</p></div>
+    <div class="passo"><span class="bola">4</span><strong>Varrer</strong><p>Rodar a regra na fila inteira, não só no caso que apareceu.</p></div>
+  </div>
+</section>
+
+<section class="w">
+  <div class="duas" style="margin-bottom:36px">
+    <h2>Automação sem documento vira caixa-preta</h2>
+    <p>Cada sistema sai com estes quatro documentos, mantidos junto do código.</p>
+  </div>
+  <div class="escrevo">
+    <div><b>Brief de produto</b><span>Público, propósito, posicionamento, restrições e princípios. Um por sistema.</span></div>
+    <div><b>Mapeamento do processo</b><span>O passo a passo manual antes de qualquer automação, com as regras de negócio explícitas.</span></div>
+    <div><b>Manual do operador</b><span>Escrito na ordem em que a pessoa trabalha, não na ordem em que o sistema funciona.</span></div>
+    <div><b>Registro de risco</b><span>O que é frágil, por que é aceitável hoje e qual condição torna inaceitável. Com data e motivo.</span></div>
+  </div>
+</section>
+
+<section class="w" id="tempo">
+  <div class="duas" style="margin-bottom:36px">
+    <h2>Cinco meses, o back office inteiro</h2>
+    <p>Do primeiro robô de extração até oito pessoas usando a plataforma em três áreas.</p>
+  </div>
+  <div class="tempo">
+    <div><i>set 2026</i><strong>8 pessoas usando, em três áreas</strong><p>Manual do operador escrito, dois treinamentos conduzidos.</p></div>
+    <div><i>ago 2026</i><strong>Painéis FIDC e acesso remoto</strong><p>Porta única com login, papéis e auditoria.</p></div>
+    <div><i>jun 2026</i><strong>Painel de rejeições em produção</strong><p>Diagnóstico, evidência e ação na mesma tela.</p></div>
+    <div><i>mai 2026</i><strong>Motor de diagnóstico</strong><p>Quatro desfechos determinísticos no lugar da decisão manual.</p></div>
+    <div><i>abr 2026</i><strong>Primeiro robô</strong><p>Extração das rejeições, até então copiada e colada à mão.</p></div>
+  </div>
+</section>
+
+<footer class="w" id="falar">
+  <div class="fim">
+    <h2>Vamos conversar</h2>
+    <p>Business Analyst, Product Operations, Technical Program Manager, Melhoria de Processos. Remoto ou híbrido.</p>
+    <div class="acoes">
+      <a class="bt p" href="mailto:nobrecontato21@outlook.com"><span class="roll" data-t="Mandar e-mail">Mandar e-mail</span></a>
+      <a class="bt s" href="https://www.linkedin.com/in/paulo-nobre-/" target="_blank" rel="noopener"><span class="roll" data-t="LinkedIn">LinkedIn</span></a>
+    </div>
+    <p class="aviso">
+      Os números desta página vêm de sistemas reais em produção. A tela mostrada no topo é uma
+      demonstração com dados inventados: nenhum dado de cliente, nome ou documento real aparece
+      aqui.
+    </p>
+  </div>
+  <div class="rodape">
+    <span>Paulo Nobre · 2026</span>
     <a href="https://github.com/nobre-analytics" target="_blank" rel="noopener">GitHub</a>
-    <a href="./en/" class="lang">English</a>
+    <a href="mailto:nobrecontato21@outlook.com">nobrecontato21@outlook.com</a>
   </div>
-  <p class="note">
-    Os números desta página vêm de sistemas reais em produção. Nenhum dado de
-    cliente, nome, documento ou captura de tela com informação pessoal é exibido
-    aqui — apenas métricas de processo e resultado.
-  </p>
 </footer>
 
 <script>
-/* Filtros */
-const chips=document.querySelectorAll('.chip');
-const cards=document.querySelectorAll('.card');
-chips.forEach(c=>c.addEventListener('click',()=>{
-  chips.forEach(x=>x.setAttribute('aria-pressed','false'));
-  c.setAttribute('aria-pressed','true');
-  const f=c.dataset.f;
-  cards.forEach(card=>{
-    const show = f==='all' || card.dataset.tags.split(' ').includes(f);
-    card.classList.toggle('hide',!show);
-  });
-}));
-
-/* Brilho lento do topo — discreto de propósito */
 (function(){
-  const cv=document.getElementById('glow');
-  if(!cv||window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const ctx=cv.getContext('2d');
-  let w,h,t=0;
-  const blobs=[
-    {x:.22,y:.30,r:.42,c:[74,222,155],a:.16,sx:.00021,sy:.00014},
-    {x:.74,y:.20,r:.36,c:[60,120,255],a:.13,sx:-.00017,sy:.00023},
-    {x:.52,y:.78,r:.46,c:[40,90,140],a:.11,sx:.00013,sy:-.00011}
-  ];
-  function size(){
-    const d=Math.min(devicePixelRatio||1,2);
-    w=cv.clientWidth; h=cv.clientHeight;
-    cv.width=w*d; cv.height=h*d; ctx.setTransform(d,0,0,d,0,0);
-  }
-  function frame(){
-    t++; ctx.clearRect(0,0,w,h);
-    for(const b of blobs){
-      const x=(b.x+Math.sin(t*b.sx*6)*.06)*w;
-      const y=(b.y+Math.cos(t*b.sy*6)*.05)*h;
-      const r=b.r*Math.max(w,h);
-      const g=ctx.createRadialGradient(x,y,0,x,y,r);
-      g.addColorStop(0,`rgba(${b.c[0]},${b.c[1]},${b.c[2]},${b.a})`);
-      g.addColorStop(1,'rgba(0,0,0,0)');
-      ctx.fillStyle=g; ctx.beginPath(); ctx.arc(x,y,r,0,6.284); ctx.fill();
+  const lista=document.getElementById('lista');
+  lista.classList.add('js');
+  lista.querySelectorAll('.cab').forEach(b=>{
+    b.addEventListener('click',()=>{
+      b.setAttribute('aria-expanded',String(b.getAttribute('aria-expanded')!=='true'));
+    });
+  });
+  const bts=[...document.querySelectorAll('.filtros button')];
+  const itens=[...lista.querySelectorAll('.item')];
+  bts.forEach(b=>b.addEventListener('click',()=>{
+    bts.forEach(x=>x.setAttribute('aria-pressed','false'));
+    b.setAttribute('aria-pressed','true');
+    const f=b.dataset.f;
+    itens.forEach(i=>{
+      const mostra = f==='tudo' || i.dataset.t.split(' ').includes(f);
+      i.hidden=!mostra;
+      if(!mostra) i.querySelector('.cab').setAttribute('aria-expanded','false');
+    });
+  }));
+
+  /* ---- movimento ---- */
+  const CALMO = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!CALMO){
+    /* Mask Text Reveal: dispara assim que a fonte estiver pronta */
+    const abrir=()=>document.body.classList.add('pronto');
+    (document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(()=>
+      requestAnimationFrame(()=>requestAnimationFrame(abrir)));
+    setTimeout(abrir,900);
+
+    /* Appear Text: títulos, colunas e blocos sobem ao entrar na tela */
+    const alvos=[...document.querySelectorAll('.duas > *, .passo, .escrevo, .tempo > div, .lista, .filtros, .prova .w > span, .fim')];
+    alvos.forEach((el,i)=>{el.classList.add('sobe');el.style.transitionDelay=(i%4)*70+'ms';});
+    const io=new IntersectionObserver(es=>es.forEach(e=>{
+      if(!e.isIntersecting)return;
+      e.target.classList.add('vis'); io.unobserve(e.target);
+    }),{rootMargin:'0px 0px -10% 0px',threshold:.12});
+    alvos.forEach(el=>io.observe(el));
+
+    /* a tela demonstrativa liga quando entra */
+    const dem=document.querySelector('.dem');
+    if(dem){
+      const io2=new IntersectionObserver(es=>es.forEach(e=>{
+        if(!e.isIntersecting)return;
+        e.target.classList.add('ligado'); io2.unobserve(e.target);
+      }),{threshold:.2});
+      io2.observe(dem);
     }
-    requestAnimationFrame(frame);
+
+    /* formas 3D com deslocamento leve na rolagem */
+    const formas=[...document.querySelectorAll('.forma')];
+    let pedido=false;
+    addEventListener('scroll',()=>{
+      if(pedido)return; pedido=true;
+      requestAnimationFrame(()=>{
+        const y=scrollY;
+        formas.forEach((f,i)=>{f.style.transform='translate3d(0,'+(y*(i?-.08:.12))+'px,0)';});
+        pedido=false;
+      });
+    },{passive:true});
+  } else {
+    document.body.classList.add('pronto');
+    document.querySelector('.dem')?.classList.add('ligado');
   }
-  addEventListener('resize',size); size(); frame();
 })();
 </script>
 </body>
