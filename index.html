@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light only">
+<meta name="supported-color-schemes" content="light">
 <title>Paulo Nobre · Analista de Negócios</title>
 <meta name="description" content="Analista de negócios. Mapeio processos de back office, redesenho o fluxo e unifico tudo numa plataforma interna.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23121110'/%3E%3Cpath d='M10 23V9h6a4.5 4.5 0 0 1 0 9h-6' stroke='%23E4007C' stroke-width='2.4' fill='none'/%3E%3Ccircle cx='23' cy='22.5' r='2.2' fill='%23FFC83D'/%3E%3C/svg%3E">
@@ -12,7 +14,8 @@
 <script>document.documentElement.className+=' anim';</script>
 <style>
 :root{
-  --papel:#F2F0EE; --branco:#fff; --creme:#EAE6E1;
+  color-scheme:light only;
+  --papel:#F2F0EE; --branco:#FCFBF9; --creme:#EAE6E1;
   --tinta:#121110; --tinta2:#57534E; --tinta3:#6B6560; --linha:#E1DCD6;
   --mag:#E4007C; --mag-txt:#C00068; --mag-esc:#A8005A;
   --amarelo:#FFC83D; --ciano:#4FD8E8;
@@ -109,10 +112,10 @@ nav .bt{padding:10px 18px;font-size:15px}
 .dem-linha .vl{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:12.5px;text-align:right}
 .tag{font-family:var(--mono);font-size:11px;letter-spacing:.06em;padding:4px 8px;border-radius:5px;
   text-align:center;font-weight:500}
-.t-ref{background:#FDE8F2;color:#A8005A}
-.t-emi{background:#E4F1FF;color:#14548F}
-.t-reb{background:#E9F7EC;color:#186B33}
-.t-rev{background:#FFF3D9;color:#8A5B00}
+.t-ref{background:#F7E3EC;color:#96004F}
+.t-emi{background:#E6E9EF;color:#2F3D54}
+.t-reb{background:#E7EDE6;color:#2C5236}
+.t-rev{background:#F5EBD8;color:#6E5111}
 @media(max-width:760px){
   .dem-kpi{grid-template-columns:1fr 1fr}
   .dem-kpi div:last-child{display:none}
@@ -233,11 +236,12 @@ footer.w{padding-top:0;padding-bottom:80px}
 
 /* Mask Text Reveal — a linha sobe de dentro de uma máscara */
 .mask{display:block;overflow:hidden}
-.anim .mask > span{transform:translateY(105%)}
+@keyframes sobeMask{from{transform:translateY(105%)}to{transform:none}}
+.anim .mask > span{animation:sobeMask .95s cubic-bezier(.16,.84,.3,1) backwards}
+.anim .mask:nth-of-type(2) > span{animation-delay:.1s}
 .mask > span{display:block;
   transition:transform .95s cubic-bezier(.16,.84,.3,1)}
-.pronto .mask > span{transform:none}
-.mask:nth-of-type(2) > span{transition-delay:.1s}
+
 
 /* Appear Text — títulos e blocos entrando ao rolar */
 .sobe{opacity:0;transform:translateY(22px);
@@ -251,24 +255,21 @@ footer.w{padding-top:0;padding-bottom:80px}
 .bt:hover .roll,.marca:hover .roll{transform:translateY(-100%)}
 
 /* a tela demonstrativa "liga" quando aparece */
-.anim .dem-linha,.anim .dem-kpi div,.anim .fila{opacity:0;transform:translateY(8px)}
+@keyframes aparece{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.anim .dem-linha,.anim .dem-kpi div,.anim .fila{animation:aparece .5s var(--curva) backwards}
 .dem-linha,.dem-kpi div,.fila{transition:opacity .5s var(--curva),transform .5s var(--curva)}
-.ligado .dem-linha,.ligado .dem-kpi div,.ligado .fila{opacity:1;transform:none}
-.ligado .dem-kpi div:nth-child(2){transition-delay:.07s}
-.ligado .dem-kpi div:nth-child(3){transition-delay:.14s}
-.ligado .fila:nth-child(2){transition-delay:.1s}
-.ligado .fila:nth-child(3){transition-delay:.15s}
-.ligado .fila:nth-child(4){transition-delay:.2s}
-.ligado .fila:nth-child(5){transition-delay:.25s}
-.ligado .dem-linha:nth-of-type(1){transition-delay:.26s}
-.ligado .dem-linha:nth-of-type(2){transition-delay:.33s}
-.ligado .dem-linha:nth-of-type(3){transition-delay:.4s}
-.ligado .dem-linha:nth-of-type(4){transition-delay:.47s}
-.ligado .dem-linha:nth-of-type(5){transition-delay:.54s}
 
-/* o ponto de "rodando" pulsa devagar */
-.vivo{animation:bat 2.6s ease-in-out infinite}
-@keyframes bat{0%,100%{opacity:1}50%{opacity:.35}}
+.anim .dem-kpi div:nth-child(2){transition-delay:.07s}
+.anim .dem-kpi div:nth-child(3){transition-delay:.14s}
+.anim .fila:nth-child(2){transition-delay:.1s}
+.anim .fila:nth-child(3){transition-delay:.15s}
+.anim .fila:nth-child(4){transition-delay:.2s}
+.anim .fila:nth-child(5){transition-delay:.25s}
+.anim .dem-linha:nth-of-type(1){transition-delay:.26s}
+.anim .dem-linha:nth-of-type(2){transition-delay:.33s}
+.anim .dem-linha:nth-of-type(3){transition-delay:.4s}
+.anim .dem-linha:nth-of-type(4){transition-delay:.47s}
+.anim .dem-linha:nth-of-type(5){transition-delay:.54s}
 
 /* as formas 3D deslizam um pouco com a rolagem */
 .forma{will-change:transform}
@@ -379,9 +380,9 @@ footer.w{padding-top:0;padding-bottom:80px}
     </div>
     <div>
       <p>
-        O painel mostrava a fila vazia e a operação acreditava nela. O problema não estava
-        na análise: estava na captura. Um conjunto inteiro de rejeições nunca entrava no
-        sistema, e ninguém tinha como saber.
+        O painel mostrava a fila vazia e a operação acreditava nela. A falha estava na
+        captura, antes de qualquer análise: um conjunto inteiro de rejeições nunca
+        entrava no sistema, e ninguém tinha como saber.
       </p>
       <p>
         Refiz o caminho do dado da origem até a tela, encontrei o ponto exato onde ele
@@ -438,8 +439,8 @@ footer.w{padding-top:0;padding-bottom:80px}
         <span class="marcas"><b>57s → 0,22s</b><span>1 operador</span></span>
       </button>
       <div class="corpo"><div><div class="dentro">
-        <p>Cada caso chega com o diagnóstico pronto, o histórico e o próximo passo. O painel não
-        só mostra: dispara a ação no sistema de origem e volta a marcar o próprio estado. Tirei
+        <p>Cada caso chega com o diagnóstico pronto, o histórico e o próximo passo. O painel
+        dispara a ação no sistema de origem e volta a marcar o próprio estado. Tirei
         4,3 MB do caminho crítico de abertura. O manual do operador foi escrito junto.</p>
         <div class="rot"><span>Product Ops</span><span>Performance</span><span>Documentação</span></div>
       </div></div></div>
@@ -553,7 +554,9 @@ footer.w{padding-top:0;padding-bottom:80px}
       <a class="bt s" href="https://www.linkedin.com/in/paulo-nobre-/" target="_blank" rel="noopener"><span class="roll" data-t="LinkedIn">LinkedIn</span></a>
     </div>
     <p class="aviso">
-      Os números desta página vêm de sistemas reais em produção. A tela mostrada no topo é uma
+      Este site não usa cookies, não tem analytics e não coleta nenhum dado de quem visita.
+      Nada do que você faz aqui é registrado. Os números desta página vêm de sistemas reais
+      em produção. A tela mostrada no topo é uma
       demonstração com dados inventados: nenhum dado de cliente, nome ou documento real aparece
       aqui.
     </p>
@@ -590,12 +593,6 @@ footer.w{padding-top:0;padding-bottom:80px}
   /* ---- movimento ---- */
   const CALMO = matchMedia('(prefers-reduced-motion: reduce)').matches;
   if(!CALMO){
-    /* Mask Text Reveal: dispara assim que a fonte estiver pronta */
-    const abrir=()=>document.body.classList.add('pronto');
-    (document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(()=>
-      requestAnimationFrame(()=>requestAnimationFrame(abrir)));
-    setTimeout(abrir,900);
-
     /* Appear Text: títulos, colunas e blocos sobem ao entrar na tela */
     const alvos=[...document.querySelectorAll('.duas > *, .passo, .escrevo, .tempo > div, .lista, .filtros, .prova .w > span, .fim')];
     alvos.forEach((el,i)=>{el.classList.add('sobe');el.style.transitionDelay=(i%4)*70+'ms';});
@@ -604,16 +601,6 @@ footer.w{padding-top:0;padding-bottom:80px}
       e.target.classList.add('vis'); io.unobserve(e.target);
     }),{rootMargin:'0px 0px -10% 0px',threshold:.12});
     alvos.forEach(el=>io.observe(el));
-
-    /* a tela demonstrativa liga quando entra */
-    const dem=document.querySelector('.dem');
-    if(dem){
-      const io2=new IntersectionObserver(es=>es.forEach(e=>{
-        if(!e.isIntersecting)return;
-        e.target.classList.add('ligado'); io2.unobserve(e.target);
-      }),{threshold:.2});
-      io2.observe(dem);
-    }
 
     /* formas 3D com deslocamento leve na rolagem */
     const formas=[...document.querySelectorAll('.forma')];
@@ -626,9 +613,6 @@ footer.w{padding-top:0;padding-bottom:80px}
         pedido=false;
       });
     },{passive:true});
-  } else {
-    document.body.classList.add('pronto');
-    document.querySelector('.dem')?.classList.add('ligado');
   }
 })();
 </script>
