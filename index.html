@@ -663,6 +663,30 @@ h2{font-size:clamp(30px,4.4vw,52px);line-height:1.02;font-weight:700;max-width:1
   .credenciais .selo i{margin-top:0}
 }
 .pessoal{color:var(--tinta3)}
+/* cartoes de certificacao, cada um com a cor da propria identidade */
+.certs{display:grid;grid-template-columns:repeat(auto-fit,minmax(252px,1fr));gap:12px;margin-top:6px}
+.cert{--ac:#6B6560;--acbg:rgba(107,101,96,.06);
+  position:relative;background:var(--branco);border:1px solid var(--linha);border-radius:var(--r-card);
+  padding:17px 18px 16px;box-shadow:var(--sombra);
+  transition:transform .24s var(--curva),box-shadow .24s var(--curva),
+    background .24s var(--curva),border-color .24s var(--curva)}
+.cert:hover,.cert:focus-within{transform:translateY(-3px);box-shadow:var(--sombra-hover);
+  background:var(--acbg);border-color:var(--ac)}
+.cert .marca-c{display:flex;align-items:center;gap:9px}
+.cert .ic{width:20px;height:20px;color:var(--tinta3);transition:color .24s var(--curva)}
+.cert:hover .ic,.cert:focus-within .ic{color:var(--ac)}
+.cert b{font-size:15.5px;font-weight:600;letter-spacing:-.015em;line-height:1.2;
+  transition:color .24s var(--curva)}
+.cert:hover b,.cert:focus-within b{color:var(--ac)}
+.cert i{font-style:normal;font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--tinta3);display:block;margin-top:3px}
+.cert p{margin-top:11px;font-size:14.5px;line-height:1.45;color:var(--tinta2)}
+.cert.verde{--ac:#0F6A42;--acbg:rgba(15,106,66,.09)}
+.cert.itau{--ac:#EC7000;--acbg:rgba(236,112,0,.10)}
+.cert.lean{--ac:#1B4C79;--acbg:rgba(27,76,121,.09)}
+.cert.branco{--ac:#8A837C;--acbg:#FFFFFF;background:rgba(252,251,249,.42);box-shadow:none}
+.cert.branco:hover,.cert.branco:focus-within{box-shadow:var(--sombra-hover)}
+@media(prefers-reduced-motion:reduce){.cert{transition:none}.cert:hover{transform:none}}
 .ficha{display:flex;align-items:center;gap:8px;font-size:14.5px;color:var(--tinta2)}
 .ficha .ic{color:var(--tinta3)}
 
@@ -1277,17 +1301,57 @@ dialog[open]{animation:entraD .3s var(--saida) backwards}
         <div><i>Formação</i><span><b>Data Science</b>, Univesp · 2025 a 2029<br>
           <b>Análise e Desenvolvimento de Sistemas</b>, Anhembi Morumbi · 2024 a 2026</span></div>
         <div><i>Certificações</i>
-          <div class="selos">
-            <span class="selo verde"><svg class="ic"><use href="#i-selo"/></svg>
-              <span><b>Green Belt</b><i>Six Sigma</i></span></span>
-            <span class="selo"><svg class="ic"><use href="#i-selo"/></svg>
-              <span><b>Lean</b><i>Melhoria de processos</i></span></span>
-            <span class="selo"><svg class="ic"><use href="#i-selo"/></svg>
-              <span><b>White Belt</b><i>Six Sigma</i></span></span>
-            <span class="selo"><svg class="ic"><use href="#i-selo"/></svg>
-              <span><b>Qualidade</b><i>Certificação</i></span></span>
-            <span class="selo"><svg class="ic"><use href="#i-selo"/></svg>
-              <span><b>AI Journey</b><i>Inteligência artificial</i></span></span>
+          <div class="certs">
+
+            <div class="cert verde" tabindex="0">
+              <span class="marca-c"><svg class="ic"><use href="#i-selo"/></svg>
+                <span><b>Green Belt</b><i>Lean Six Sigma</i></span></span>
+              <p>Conduzir o projeto de melhoria inteiro pelo DMAIC: medir o processo antes,
+                achar a causa, mudar e provar o ganho com dado, não com percepção.</p>
+            </div>
+
+            <div class="cert branco" tabindex="0">
+              <span class="marca-c"><svg class="ic"><use href="#i-selo"/></svg>
+                <span><b>White Belt</b><i>Lean Six Sigma</i></span></span>
+              <p>A base da linguagem: papéis, etapas e vocabulário comuns, para participar
+                de um projeto de melhoria sem precisar de tradução.</p>
+            </div>
+
+            <div class="cert lean" tabindex="0">
+              <span class="marca-c"><svg class="ic"><use href="#i-selo"/></svg>
+                <span><b>Lean</b><i>Melhoria de processos</i></span></span>
+              <p>Enxergar o fluxo e atacar desperdício e espera. É o que faz o lead time cair,
+                em vez de só distribuir o mesmo trabalho entre mais gente.</p>
+            </div>
+
+            <div class="cert" tabindex="0">
+              <span class="marca-c"><svg class="ic"><use href="#i-selo"/></svg>
+                <span><b>PCP</b><i>Planejamento e controle da produção</i></span></span>
+              <p>Capacidade, sequenciamento e fila: decidir o que entra, em que ordem e a que
+                ritmo, para a demanda caber no que a operação aguenta.</p>
+            </div>
+
+            <div class="cert" tabindex="0">
+              <span class="marca-c"><svg class="ic"><use href="#i-selo"/></svg>
+                <span><b>Qualidade</b><i>Gestão da qualidade</i></span></span>
+              <p>Padrão definido, não conformidade registrada e ação corretiva com causa escrita.
+                O que impede o erro de voltar pela mesma porta.</p>
+            </div>
+
+            <div class="cert" tabindex="0">
+              <span class="marca-c"><svg class="ic"><use href="#i-selo"/></svg>
+                <span><b>Gestão de fornecedores</b><i>Suprimentos</i></span></span>
+              <p>Seleção, contrato e acompanhamento de terceiro: acordar o nível de serviço,
+                medir contra ele e tratar o desvio antes que vire dependência.</p>
+            </div>
+
+            <div class="cert" tabindex="0">
+              <span class="marca-c"><svg class="ic"><use href="#i-selo"/></svg>
+                <span><b>AI Journey</b><i>Inteligência artificial</i></span></span>
+              <p>Onde modelo ajuda e onde ele atrapalha num processo financeiro, e por que
+                decisão que não se explica não entra em produção.</p>
+            </div>
+
           </div></div>
       </div>
 </section>
