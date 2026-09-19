@@ -846,8 +846,6 @@ dialog[open]{animation:entraD .3s var(--saida) backwards}
         <svg class="ic abrirIc"><use href="#i-menu"/></svg>
         <svg class="ic fecharIc"><use href="#i-x"/></svg>
       </button>
-
-      <a class="bt p" href="#falar"><span class="roll" data-t="Falar comigo">Falar comigo</span></a>
     </div>
   </div>
   <div class="menuMob" id="menuMob" hidden>
@@ -905,179 +903,13 @@ dialog[open]{animation:entraD .3s var(--saida) backwards}
       o fluxo e unifico tudo numa plataforma interna: da coleta do dado à ação executada
       no sistema de origem.
     </p>
-    <div class="acoes">
-      <a class="bt p" id="ctaTopo" href="#falar">Falar comigo <svg class="ic p seta"><use href="#i-seta"/></svg></a>
-      <a class="bt s" href="#construi"><span class="roll" data-t="Ver os projetos">Ver os projetos</span></a>
-    </div>
+
   </div>
 
-  <div class="palco" id="conteudo">
-    <h2 class="oculto">Demonstração da plataforma, com dados fictícios</h2>
-    <div class="moldura">
-      <div class="barra">
-        <span class="pastilha"></span><span class="pastilha"></span><span class="pastilha"></span>
-        <span class="url">plataforma-interna</span>
-        <span class="falso">dados fictícios</span>
-      </div>
 
-      <div class="dem">
-        <div class="dem-topo">
-          <span class="prod"><svg class="ic"><use href="#i-raio"/></svg><span id="nomeProduto">Painel de Rejeições</span></span>
-          <span class="rel">rodada de hoje · 08:40</span>
-        </div>
-
-        <div class="abas" role="tablist" aria-label="Telas da plataforma">
-          <button role="tab" id="t1" aria-controls="p1" aria-selected="true">
-            <svg class="ic"><use href="#i-painel"/></svg>Rejeições</button>
-          <button role="tab" id="t2" aria-controls="p2" aria-selected="false" tabindex="-1">
-            <svg class="ic"><use href="#i-relogio"/></svg>Rodada da manhã</button>
-          <button role="tab" id="t3" aria-controls="p3" aria-selected="false" tabindex="-1">
-            <svg class="ic"><use href="#i-balanca"/></svg>Conferência</button>
-        </div>
-
-        <div class="corpo-dem">
-          <div class="esqueleto" id="esq" hidden aria-hidden="true">
-            <div class="fileira"><span class="osso a"></span><span class="osso b"></span><span class="osso c"></span></div>
-            <div class="fileira"><span class="osso a"></span><span class="osso b"></span><span class="osso c"></span></div>
-            <div class="fileira"><span class="osso a"></span><span class="osso b"></span><span class="osso c"></span></div>
-            <div class="fileira"><span class="osso a"></span><span class="osso b"></span><span class="osso c"></span></div>
-            <div class="fileira"><span class="osso a"></span><span class="osso b"></span><span class="osso c"></span></div>
-          </div>
-
-          <!-- ABA 1 -->
-          <div class="painel" role="tabpanel" id="p1" aria-labelledby="t1">
-            <div class="dem-kpi">
-              <div><b class="destaque">18</b><span>falta tratar</span></div>
-              <div><b>96</b><span>tratados</span></div>
-              <div><b>114</b><span>total do dia</span></div>
-            </div>
-            <div class="dem-filas">
-              <button class="fila" data-f="tudo" aria-pressed="true">Todas 18</button>
-              <button class="fila" data-f="ref" aria-pressed="false">Refazer 7</button>
-              <button class="fila" data-f="emi" aria-pressed="false">Emitir 5</button>
-              <button class="fila" data-f="reb" aria-pressed="false">Reembolso 3</button>
-              <button class="fila" data-f="rev" aria-pressed="false">Revisar 3</button>
-              <span class="dica" id="dica">clique numa linha <svg class="ic p"><use href="#i-seta"/></svg></span>
-            </div>
-            <div class="linhas" id="linhas">
-              <button class="caso" data-v="ref"
-                data-doc="•••.418.___-••" data-verdito="REFAZER" data-classe="t-ref"
-                data-regra="Acordo quebrado com parcela original ainda em aberto."
-                data-evid="Acordo 25A|quebrado em 12/09;Original|em aberto;Saldo|R$ 1.284,00"
-                data-acao="Remontar o acordo pelo saldo, não pelo valor cheio.">
-                <span class="doc">•••.418.___-••</span>
-                <span class="qu">acordo quebrado, original em aberto</span>
-                <span class="vl">R$ 1.284,00</span>
-                <span class="tag t-ref">REFAZER</span></button>
-              <button class="caso" data-v="emi"
-                data-doc="•••.902.___-••" data-verdito="EMITIR" data-classe="t-emi"
-                data-regra="Acordo ativo com parcela vigente sem boleto emitido."
-                data-evid="Acordo 26|ativo;Parcela 3/6|vence 25/09;Boleto|não existe"
-                data-acao="Emitir o boleto da parcela vigente e devolver o código.">
-                <span class="doc">•••.902.___-••</span>
-                <span class="qu">acordo ativo, parcela sem boleto</span>
-                <span class="vl">R$ 640,50</span>
-                <span class="tag t-emi">EMITIR</span></button>
-              <button class="caso" data-v="reb"
-                data-doc="•••.137.___-••" data-verdito="REEMBOLSO" data-classe="t-reb"
-                data-regra="Mesma parcela baixada duas vezes, dentro da janela de 15 dias."
-                data-evid="Boleto|pago 11/09;Débito automático|pago 12/09;Diferença|1 dia"
-                data-acao="Estornar o débito automático e manter a baixa do boleto.">
-                <span class="doc">•••.137.___-••</span>
-                <span class="qu">baixa duplicada confirmada</span>
-                <span class="vl">R$ 2.115,90</span>
-                <span class="tag t-reb">REEMBOLSO</span></button>
-              <button class="caso" data-v="rev"
-                data-doc="•••.655.___-••" data-verdito="REVISAR" data-classe="t-rev"
-                data-regra="Sem correspondência no extrato. O sistema não afirma o que não consegue provar."
-                data-evid="Extrato|nenhum pagamento no dia;Valor informado|R$ 389,00;Confiança|baixa"
-                data-acao="Fila de revisão humana, com o motivo da dúvida escrito.">
-                <span class="doc">•••.655.___-••</span>
-                <span class="qu">sem correspondência no extrato</span>
-                <span class="vl">R$ 389,00</span>
-                <span class="tag t-rev">REVISAR</span></button>
-              <button class="caso" data-v="ref"
-                data-doc="•••.284.___-••" data-verdito="REFAZER" data-classe="t-ref"
-                data-regra="Acordo quebrado com parcela original ainda em aberto."
-                data-evid="Acordo 25B|quebrado em 09/09;Original|em aberto;Saldo|R$ 977,30"
-                data-acao="Remontar o acordo pelo saldo, não pelo valor cheio.">
-                <span class="doc">•••.284.___-••</span>
-                <span class="qu">acordo quebrado, original em aberto</span>
-                <span class="vl">R$ 977,30</span>
-                <span class="tag t-ref">REFAZER</span></button>
-              <p class="vazio" id="vazio" hidden>Nenhum caso nesta fila agora.</p>
-            </div>
-
-            <aside class="gaveta" id="gaveta" role="dialog" aria-label="Detalhe do caso" aria-hidden="true">
-              <button class="fecha" id="fechaGaveta" aria-label="Fechar o detalhe">
-                <svg class="ic p"><use href="#i-x"/></svg></button>
-              <h3 id="gVerdito">REFAZER</h3>
-              <p class="docg" id="gDoc">•••.418.___-••</p>
-              <div class="gv"><i>Regra aplicada</i><span id="gRegra"></span></div>
-              <div class="gv"><i>Evidência</i><div id="gEvid"></div></div>
-              <div class="gv"><i>Próximo passo</i><span id="gAcao"></span></div>
-              <span class="acao"><svg class="ic p"><use href="#i-recarrega"/></svg>Executar no sistema de origem</span>
-              <p class="nota">Botão desligado nesta demonstração. No sistema real, a ação roda no
-                sistema de origem e volta a marcar o próprio estado do caso.</p>
-            </aside>
-          </div>
-
-          <!-- ABA 2 -->
-          <div class="painel" role="tabpanel" id="p2" aria-labelledby="t2" hidden>
-            <div class="rodada">
-              <div class="coletor ok"><svg class="ic"><use href="#i-check-circ"/></svg>
-                <span><strong>Sistema de cobrança</strong><em>1.204 linhas lidas, dia anterior fechado</em></span>
-                <span class="hora">08:12</span></div>
-              <div class="coletor rep"><svg class="ic"><use href="#i-recarrega"/></svg>
-                <span><strong>Sistema de acordos</strong><em>primeira tentativa caiu na VPN, repetida sozinha</em></span>
-                <span class="hora">08:19</span></div>
-              <div class="coletor ok"><svg class="ic"><use href="#i-check-circ"/></svg>
-                <span><strong>Extrato bancário</strong><em>386 pagamentos conciliados</em></span>
-                <span class="hora">08:24</span></div>
-              <div class="regua" aria-hidden="true">
-                <span class="feito"></span>
-                <span class="marca-h" style="left:25%"></span><span class="marca-h" style="left:50%"></span>
-                <span class="marca-h" style="left:75%"></span>
-              </div>
-              <div class="horas" aria-hidden="true"><span>08:00</span><span>08:20</span><span>08:40</span></div>
-              <div class="fim-rodada"><svg class="ic"><use href="#i-email"/></svg>
-                Relatório da rodada enviado às 08:40, antes de qualquer pessoa chegar.</div>
-            </div>
-          </div>
-
-          <!-- ABA 3 -->
-          <div class="painel" role="tabpanel" id="p3" aria-labelledby="t3" hidden>
-            <div class="conf">
-              <div class="cab-conf"><div>Extrato do banco</div><div>Sistema de cobrança</div><div>Decisão</div></div>
-              <div class="par-linha">
-                <div class="fonte"><i>pago em 11/09</i><span class="vlr">R$ 2.115,90</span></div>
-                <div class="fonte b"><i>baixado 11/09 e 12/09</i><span class="vlr">2 baixas</span></div>
-                <div class="veredito"><span class="tag t-reb">REEMBOLSO</span></div>
-              </div>
-              <div class="par-linha">
-                <div class="fonte"><i>pago em 15/09</i><span class="vlr">R$ 604,00</span></div>
-                <div class="fonte b"><i>baixado 16/09</i><span class="vlr">1 baixa</span></div>
-                <div class="veredito"><span class="tag t-emi">CONFERE</span></div>
-              </div>
-              <div class="par-linha">
-                <div class="fonte"><i>pago em 16/09</i><span class="vlr">R$ 389,00</span></div>
-                <div class="fonte b"><i>sem baixa</i><span class="vlr dt">nada encontrado</span></div>
-                <div class="veredito"><span class="tag t-rev">REVISAR</span></div>
-              </div>
-              <div class="par-linha">
-                <div class="fonte"><i>pago em 16/09</i><span class="vlr">R$ 1.284,00</span></div>
-                <div class="fonte b"><i>baixado 18/09</i><span class="vlr dt">2 dias de diferença</span></div>
-                <div class="veredito"><span class="tag t-emi">CONFERE</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </header>
 
-<div class="prova">
+<div class="prova" id="conteudo">
   <div class="w">
     <span>em produção desde <b>abril de 2026</b></span>
     <span><b data-conta="8">8</b> pessoas usando, em 3 áreas</span>
@@ -1147,10 +979,6 @@ dialog[open]{animation:entraD .3s var(--saida) backwards}
 
   <div class="filtros">
     <button aria-pressed="true" data-f="tudo">Tudo</button>
-    <button aria-pressed="false" data-f="ba">Business Analysis</button>
-    <button aria-pressed="false" data-f="ops">Product Ops</button>
-    <button aria-pressed="false" data-f="tpm">Technical PM</button>
-    <button aria-pressed="false" data-f="proc">Melhoria de Processo</button>
     <button aria-pressed="false" data-f="auto">Automação</button>
     <button aria-pressed="false" data-f="pmo">PMO</button>
   </div>
@@ -1563,94 +1391,6 @@ dialog[open]{animation:entraD .3s var(--saida) backwards}
     });
   });});
 
-  /* ---------- demonstração: abas, esqueleto, filtros e gaveta ---------- */
-  var abas=[].slice.call(document.querySelectorAll('[role=tab]'));
-  var paineis=abas.map(function(t){return document.getElementById(t.getAttribute('aria-controls'));});
-  var esq=document.getElementById('esq'), nomeProd=document.getElementById('nomeProduto');
-  var nomes=['Painel de Rejeições','Rodada da Manhã','Conferência de Reembolso'];
-  var tempoEsq=null;
-
-  function troca(i,foco){
-    abas.forEach(function(t,k){
-      t.setAttribute('aria-selected',String(k===i));
-      t.tabIndex = k===i?0:-1;
-      paineis[k].hidden = k!==i;
-    });
-    nomeProd.textContent=nomes[i];
-    fechaGaveta();
-    if(foco) abas[i].focus();
-    if(CALMO) return;
-    clearTimeout(tempoEsq);
-    esq.hidden=false;
-    paineis[i].style.visibility='hidden';
-    tempoEsq=setTimeout(function(){
-      esq.hidden=true;
-      paineis[i].style.visibility='';
-    },420);
-  }
-  abas.forEach(function(t,i){
-    t.addEventListener('click',function(){troca(i);});
-    t.addEventListener('keydown',function(e){
-      var d = e.key==='ArrowRight'?1 : e.key==='ArrowLeft'?-1 : 0;
-      if(!d) return;
-      e.preventDefault();
-      troca((i+d+abas.length)%abas.length,true);
-    });
-  });
-
-  /* filas da aba 1 */
-  var filas=[].slice.call(document.querySelectorAll('.fila'));
-  var casos=[].slice.call(document.querySelectorAll('.caso'));
-  var vazio=document.getElementById('vazio');
-  filas.forEach(function(f){f.addEventListener('click',function(){
-    filas.forEach(function(x){x.setAttribute('aria-pressed','false');});
-    f.setAttribute('aria-pressed','true');
-    var q=f.dataset.f, n=0;
-    casos.forEach(function(c){
-      var ok = q==='tudo' || c.dataset.v===q;
-      c.hidden=!ok; if(ok) n++;
-    });
-    vazio.hidden = n>0;
-    fechaGaveta();
-  });});
-
-  /* gaveta do caso */
-  var gaveta=document.getElementById('gaveta');
-  var gFecha=document.getElementById('fechaGaveta');
-  var ultimoCaso=null;
-  function abreGaveta(c){
-    document.getElementById('gVerdito').textContent=c.dataset.verdito;
-    document.getElementById('gDoc').textContent=c.dataset.doc;
-    document.getElementById('gRegra').textContent=c.dataset.regra;
-    document.getElementById('gAcao').textContent=c.dataset.acao;
-    var alvo=document.getElementById('gEvid');
-    alvo.textContent='';
-    c.dataset.evid.split(';').forEach(function(par){
-      var p=par.split('|'), l=document.createElement('span');
-      l.className='par';
-      l.appendChild(document.createTextNode(p[0]));
-      var b=document.createElement('b'); b.textContent=p[1]; l.appendChild(b);
-      alvo.appendChild(l);
-    });
-    gaveta.classList.add('on');
-    gaveta.setAttribute('aria-hidden','false');
-    ultimoCaso=c;
-    gFecha.focus();
-  }
-  function fechaGaveta(){
-    if(!gaveta.classList.contains('on')) return;
-    gaveta.classList.remove('on');
-    gaveta.setAttribute('aria-hidden','true');
-    if(ultimoCaso){ultimoCaso.focus();ultimoCaso=null;}
-  }
-  var dica=document.getElementById('dica');
-  casos.forEach(function(c){c.addEventListener('click',function(){
-    if(dica){var d=dica;dica=null;d.style.opacity='0';setTimeout(function(){d.remove();},400);}
-    abreGaveta(c);
-  });});
-  gFecha.addEventListener('click',fechaGaveta);
-  addEventListener('keydown',function(e){if(e.key==='Escape')fechaGaveta();});
-
   /* ---------- faixa de idioma ---------- */
   var fechaIdioma=document.getElementById('fechaIdioma');
   if(fechaIdioma){
@@ -1766,23 +1506,7 @@ dialog[open]{animation:entraD .3s var(--saida) backwards}
   },{rootMargin:'-22% 0px -68% 0px'});
   ancoras.forEach(function(id){var el=document.getElementById(id);if(el)io4.observe(el);});
 
-  /* botão magnético (leve) */
-  var mag=document.getElementById('ctaTopo');
-  if(mag && matchMedia('(pointer:fine)').matches){
-    addEventListener('mousemove',function(e){
-      var r=mag.getBoundingClientRect();
-      var dx=e.clientX-(r.left+r.width/2), dy=e.clientY-(r.top+r.height/2);
-      var d=Math.hypot(dx,dy);
-      if(d<130){mag.style.transform='translate('+dx*.14+'px,'+dy*.16+'px)';}
-      else if(mag.style.transform){mag.style.transform='';}
-    },{passive:true});
-  }
 
-  /* as formas do topo param de flutuar quando saem da tela */
-  var hero=document.querySelector('.hero');
-  new IntersectionObserver(function(es){
-    hero.classList.toggle('parado',!es[0].isIntersecting);
-  },{threshold:0}).observe(document.querySelector('.palco'));
 
   /* formas do topo com deslocamento leve na rolagem */
   var formas=[].slice.call(document.querySelectorAll('.forma'));
