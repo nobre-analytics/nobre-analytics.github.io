@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Duplicate Payments Panel | Paulo Nobre</title>
+<meta name="description" content="A panel that finds duplicate payments, checks them against the statement and organizes the refund.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js');</script>
+<script src="../assets/vt.js"></script>
+<link rel="stylesheet" href="../assets/site.css">
+<style>
+
+.recon { padding: 22px; }
+.recon__head { display: grid; grid-template-columns: 1fr 44px 1fr; gap: 0; margin-bottom: 10px; color: var(--muted); font-size: .8125rem; font-weight: 600; }
+.recon__row { display: grid; grid-template-columns: 1fr 44px 1fr; align-items: center; margin-top: 10px; }
+.cell { padding: 12px 14px; border: 1px solid var(--line-2); border-radius: 10px; background: var(--bg-2); font-size: .875rem; line-height: 1.35; }
+.cell b { display: block; font-weight: 600; color: var(--text); font-variant-numeric: tabular-nums; }
+.cell span { color: var(--muted); font-size: .8125rem; }
+.link { position: relative; height: 2px; background: var(--line-2); margin: 0 4px; }
+.link::after { content: ""; position: absolute; right: -2px; top: -3px; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+.ok { color: var(--green); } .dup { color: var(--amber); } .rev { color: var(--cyan); }
+.link.ok { background: rgba(95,191,143,.6); } .link.dup { background: rgba(214,168,76,.7); } .link.rev { background: rgba(92,200,220,.5); }
+.chip { display: inline-flex; align-items: center; gap: 6px; margin-top: 6px; padding: 2px 8px; border-radius: 999px; font-size: .75rem; font-weight: 600; background: currentColor; }
+.chip i { font-style: normal; color: var(--bg); }
+.recon__cap { margin-top: 14px; }
+.cell.empty { border-style: dashed; color: var(--muted); }
+@media (prefers-reduced-motion: no-preference) {
+  .js .recon__row { opacity: 0; transform: translateX(-10px); animation: slidein .7s var(--ease) forwards; animation-delay: calc(var(--d) * 1ms + 650ms); }
+  .js .link { transform: scaleX(0); transform-origin: left; animation: grow .6s var(--ease) forwards; animation-delay: calc(var(--d) * 1ms + 950ms); }
+}
+@keyframes slidein { to { opacity: 1; transform: none; } }
+@keyframes grow { to { transform: scaleX(1); } }
+
+.rules { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 8px; }
+.rule { padding: 22px; }
+.rule__if { color: var(--muted); font-size: .875rem; }
+.rule__then { display: block; margin-top: 6px; font-size: 1.0625rem; font-weight: 600; }
+.rule__then em { font-style: normal; color: var(--amber); }
+
+.modes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.mode { padding: 24px; }
+.mode__who { color: var(--amber); font-weight: 600; font-size: .9375rem; }
+.mode h3 { margin-top: 6px; font-size: 1.25rem; letter-spacing: -0.015em; }
+.mode p { margin-top: 8px; color: var(--text-2); }
+
+.steps { list-style: none; counter-reset: s; display: grid; gap: 0; max-width: var(--read); }
+.steps li { counter-increment: s; display: grid; grid-template-columns: 40px 1fr; gap: 14px; padding: 16px 0; border-top: 1px solid var(--line); color: var(--text-2); }
+.steps li:last-child { border-bottom: 1px solid var(--line); }
+.steps li::before { content: counter(s); display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--amber); color: var(--amber); font-weight: 600; font-size: .875rem; }
+.steps strong { color: var(--text); font-weight: 600; }
+
+@media (max-width: 640px) {
+  .rules, .modes { grid-template-columns: 1fr; }
+  .recon { padding: 14px; }
+  .recon__head, .recon__row { grid-template-columns: 1fr 24px 1fr; }
+  .cell { padding: 10px; }
+}
+
+</style>
+</head>
+<body class="case case--pagamentos-em-duplicidade">
+<a class="skip" href="#conteudo">Skip to content</a>
+<div class="flares" aria-hidden="true"><div class="flare blue"></div><div class="flare cyan"></div><div class="flare amber"></div><div class="grain"></div></div>
+
+<div class="page">
+  <div class="wrap">
+    <nav class="topbar" aria-label="Navigation">
+      <a class="back" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg> All projects</a>
+      <span class="topbar__right"><span class="crumb">Project <b>02</b> of 04</span><span class="langs" role="group" aria-label="Language"><span class="langs__cur" aria-current="true">EN</span><a href="../pagamentos-em-duplicidade.html" hreflang="pt-BR" lang="pt-BR" title="Versão em português" data-lang-switch="pt-BR">PT</a></span></span>
+    </nav>
+
+    <main id="conteudo">
+      <header class="hero">
+        <div class="hero__grid">
+          <div>
+            <p class="hero__kicker" data-seq style="--i:0">Reconciliation and risk control</p>
+            <h1 data-seq style="--i:1">Duplicate Payments Panel</h1>
+            <p class="hero__lede" data-seq style="--i:2">Payments made twice are checked against the gateway statement before any refund. The original stays, the duplicate is refunded.</p>
+            <div class="facts" data-seq style="--i:3"><span class="fact">In production since Aug 2026</span><span class="fact">FIDC receivables fund</span><span class="fact">Python and Flask</span></div></div>
+          <div class="hero__visual" data-seq style="--i:4">
+            <figure class="panel recon">
+              <div class="recon__head" aria-hidden="true"><span>Collections system</span><span></span><span>Gateway statement</span></div>
+              <div class="recon__row" style="--d:0"><div class="cell"><b>Installment 03</b><span>CPF •••.482.917-•• · Pix</span></div><div class="link ok" aria-hidden="true"></div><div class="cell"><b>Credit confirmed</b><span class="chip ok"><i>Original kept</i></span></div></div>
+              <div class="recon__row" style="--d:140"><div class="cell"><b>Installment 03</b><span>same CPF · Boleto</span></div><div class="link dup" aria-hidden="true"></div><div class="cell"><b>Second credit</b><span class="chip dup"><i>Duplicate, refund</i></span></div></div>
+              <div class="recon__row" style="--d:280"><div class="cell"><b>Installment 07</b><span>CPF •••.130.554-•• · Boleto</span></div><div class="link rev" aria-hidden="true"></div><div class="cell empty"><b>No match in the statement</b><span class="chip rev"><i>Review</i></span></div></div>
+              <figcaption class="recon__cap note">Illustration, with fictitious data, of the matching the panel does.</figcaption>
+            </figure></div>
+        </div>
+      </header>
+
+      <div class="kpis" style="--n:3" data-reveal><div class="kpi"><div class="kpi__value">2 systems</div><div class="kpi__label">reconciled: collections and gateway statement</div></div><div class="kpi"><div class="kpi__value">2 modes</div><div class="kpi__label">on one screen: curation and operation</div></div><div class="kpi"><div class="kpi__value">Login and audit</div><div class="kpi__label">role-based access and a trail for every decision</div></div></div>
+    <section class="section" data-reveal>
+      <div class="section__head">
+        <p class="section__label">The challenge</p>
+        <div>
+          <h2>Customers who paid twice must get their money back, but only after the duplicate is proven.</h2>
+          <div class="section__body"><div class="prose"><p>A duplicate can only be refunded after it is confirmed in the payment gateway statement. Without that match, the risk goes both ways: <strong>refunding a payment that was legitimate</strong> or <strong>leaving the customer without the money</strong> they overpaid.</p></div></div>
+        </div>
+      </div>
+    </section>
+    <section class="section" data-reveal>
+      <div class="section__head">
+        <p class="section__label">How a duplicate is found</p>
+        <div>
+          <h2>The panel cross-checks both sources before any refund.</h2>
+          <div class="section__body"><ol class="steps">
+          <li><span>The panel matches payments in the <strong>collections system</strong> against the <strong>gateway statement</strong>, by the customer's CPF (tax ID).</span></li>
+          <li><span>When one installment has two credits, <strong>the original stays</strong> and <strong>the duplicate goes to refund</strong>.</span></li>
+          <li><span>Anything that does not match goes to <strong>review</strong>, or back to the rejections panel.</span></li>
+        </ol></div>
+        </div>
+      </div>
+    </section>
+    <section class="section" data-reveal>
+      <div class="section__head">
+        <p class="section__label">The refund rule</p>
+        <div>
+          <h2>The status of the agreement decides how the money goes back.</h2>
+          <div class="section__body"><div class="rules">
+          <div class="panel rule"><span class="rule__if">If the agreement is paid off</span><span class="rule__then">The customer gets a <em>direct refund</em>.</span></div>
+          <div class="panel rule"><span class="rule__if">If the agreement is still active</span><span class="rule__then">The customer chooses: a <em>refund</em> or a <em>discount</em> on the next installments.</span></div>
+        </div></div>
+        </div>
+      </div>
+    </section>
+    <section class="section" data-reveal>
+      <div class="section__head">
+        <p class="section__label">The solution</p>
+        <div>
+          <h2>One screen, two roles.</h2>
+          <div class="section__body"><div class="modes">
+          <div class="panel mode"><p class="mode__who">For the person who decides</p><h3>Curation mode</h3><p>Decides what goes into the refund batch and flags for review anything still in doubt.</p></div>
+          <div class="panel mode"><p class="mode__who">For the person who executes</p><h3>Operation mode</h3><p>Requests each refund and marks it as done, with the case history in view.</p></div>
+        </div></div>
+        </div>
+      </div>
+    </section>
+    <section class="section" aria-label="Panel screen">
+      <figure class="frame-wrap" data-reveal>
+        <div class="frame" style="--h:560px; --s:0.6">
+          <div class="frame__bar" aria-hidden="true"><span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__url">FIDC refunds · Duplicates</span></div>
+          <div class="frame__view"><iframe src="../demos/en/painel-fidc.html" title="Refunds panel with fictitious data" loading="lazy" tabindex="-1"></iframe></div>
+        </div>
+        <figcaption class="frame__cta">
+          <span class="note">Fictitious data: no name, CPF (tax ID), contract or amount is real.</span>
+          <a class="btn" href="../demos/en/painel-fidc.html">Open the full screen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        </figcaption>
+      </figure>
+    </section>
+    <section class="section" data-reveal>
+      <div class="section__head">
+        <p class="section__label">Governance</p>
+        <div>
+          <h2>Risk control built into the flow.</h2>
+          <div class="section__body"><ul class="list"><li><strong>A single sign-in</strong> for the FIDC panels.</li><li><strong>Role-based access</strong>: each person sees and does only what their role allows.</li><li><strong>Audit trail</strong> for every decision, with date and reason.</li></ul></div>
+        </div>
+      </div>
+    </section>
+    <section class="section" data-reveal>
+      <div class="section__head">
+        <p class="section__label">Technology and methods</p>
+        <div>
+          <h2>Data reconciliation with traceability.</h2>
+          <div class="section__body"><div class="stack"><span class="tag">Python</span><span class="tag">Flask</span><span class="tag">uv</span><span class="tag">HTML, CSS and JavaScript</span><span class="tag">Data reconciliation</span><span class="tag">Risk management</span></div></div>
+        </div>
+      </div>
+    </section>
+    </main>
+
+    <nav class="next" aria-label="Next project">
+      <a href="monitor-operacao.html">
+        <span><span class="next__label">Next project</span><span class="next__title">Operations Monitor</span></span>
+        <span class="next__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+    </nav>
+
+    <footer class="foot">
+      <span>© 2026 Paulo Nobre, São Paulo, Brazil</span>
+      <a href="index.html">Back to the project list</a>
+    </footer>
+  </div>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

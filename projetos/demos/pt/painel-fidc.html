@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reembolsos FIDC · Duplicidades</title>
+<meta name="description" content="Demonstração com dados fictícios do painel de reembolsos FIDC: pagamentos em duplicidade cruzados com o extrato do gateway, do pedido ao concluído.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23048A05'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='32' fill='%23ffffff' text-anchor='middle'%3EF%3C/text%3E%3Crect x='14' y='50' width='36' height='4' rx='2' fill='%23F5BF05'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<script>
+(function(){try{var t=localStorage.getItem("demo-tema");if(t==="dark")document.documentElement.setAttribute("data-theme","dark");}catch(e){}})();
+</script>
+<style>
+:root{
+  color-scheme:light;
+  --brand:#048A05; --brand-txt:#007131; --brand-soft:#E6F3E6; --brand-tint:#FAFAFA;
+  --ink:#333333; --ink-soft:#5A5A5A; --paper:#F3F3F3; --card:#FFFFFF; --line:#E6E6E6;
+  --red:#A8241A; --red-bg:#FBEDEC; --green:#0A7A43; --green-bg:#E6F4EC;
+  --amber:#8A6206; --amber-bg:#FBF3DC; --blue:#1F63B5; --blue-bg:#E8F0FA;
+  --acao:#F5BF05; --acao-2:#E0AE00; --acao-ink:#33321F;
+  --ring:rgba(51,51,51,.16); --surface-2:#F7F7F6;
+  --shade:0 1px 2px rgba(15,27,45,.05),0 2px 6px -2px rgba(15,27,45,.08);
+  --shade-2:0 4px 14px -4px rgba(15,27,45,.16);
+  --mono:"Cascadia Mono",Consolas,ui-monospace,monospace;
+  --ff-titulo:"Bree Serif",Georgia,serif;
+  --ff:"Open Sans",system-ui,"Segoe UI",sans-serif;
+}
+:root[data-theme=dark]{
+  color-scheme:dark;
+  --brand:#4CC95A; --brand-txt:#7EE08A; --brand-soft:#1E4A2C; --brand-tint:#1A4028;
+  --ink:#EAF5EC; --ink-soft:#AFC8B6; --paper:#0F2A1B; --card:#163624; --line:#2A5239;
+  --red:#FF9A90; --red-bg:#43282A; --green:#6FD99A; --green-bg:#1D4A30;
+  --amber:#F7CD6A; --amber-bg:#443A1C; --blue:#8CC0F5; --blue-bg:#1C3A4A;
+  --ring:rgba(234,245,236,.18); --surface-2:#1C402B;
+  --shade:0 1px 2px rgba(0,0,0,.3); --shade-2:0 6px 18px rgba(0,0,0,.35);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font:14.5px/1.5 var(--ff);background:var(--paper);color:var(--ink);-webkit-font-smoothing:antialiased;padding-bottom:40px}
+body.adm{padding-bottom:110px}
+button,input{font:inherit;color:inherit}
+::selection{background:var(--acao);color:var(--acao-ink)}
+:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+svg.i{width:16px;height:16px;flex:none}
+.hidden{display:none!important}
+
+.demo-faixa{background:#1C2A1F;color:#E6F3E6;font-size:12.5px;display:flex;align-items:center;justify-content:center;gap:10px;padding:6px 16px;text-align:center;flex-wrap:wrap}
+.demo-faixa b{background:var(--acao);color:var(--acao-ink);border-radius:3px;padding:0 7px;font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+
+header{background:var(--brand);color:#fff;padding:24px 28px 26px;border-bottom:4px solid var(--acao)}
+:root[data-theme=dark] header{background:#0A4D1C}
+.hrow{max-width:1280px;margin:0 auto;display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap}
+.htxt{flex:1;min-width:260px}
+header h1{font:400 25px/1.2 var(--ff-titulo)}
+header p{font-size:13px;opacity:.85;margin-top:5px}
+.hbtns{display:flex;gap:8px}
+.modebtn{border:1px solid rgba(255,255,255,.4);background:rgba(255,255,255,.10);color:#fff;border-radius:5px;padding:8px 15px;font-size:12.5px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:background .15s}
+.modebtn:hover{background:rgba(255,255,255,.22)}
+.modebtn:focus-visible{outline-color:#fff}
+
+.wrap{max-width:1280px;margin:0 auto;padding:0 24px}
+.legenda{max-width:1280px;margin:16px auto 0;padding:0 24px}
+.legenda div{display:inline-block;max-width:540px;background:var(--card);border-radius:7px;padding:11px 15px;font-size:12.5px;line-height:1.5;color:var(--ink-soft);box-shadow:var(--shade)}
+.legenda b{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--brand-txt);margin-bottom:2px}
+
+.progress{background:var(--card);border-radius:7px;padding:16px 20px;margin:16px auto;max-width:1232px;width:calc(100% - 48px);box-shadow:var(--shade)}
+.progress .row{display:flex;justify-content:space-between;font-size:14px;margin-bottom:8px;flex-wrap:wrap;gap:6px}
+.progress b{font-variant-numeric:tabular-nums}
+.bar{height:10px;background:var(--brand-soft);border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--brand);border-radius:99px;transition:width .4s ease-out}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:16px auto;max-width:1280px;padding:0 24px}
+.stat{background:var(--card);border-radius:7px;padding:12px 16px;box-shadow:var(--shade);border-top:3px solid var(--brand)}
+.stat b{display:block;font:400 25px/1.2 var(--ff-titulo);font-variant-numeric:tabular-nums}
+.stat span{font-size:11px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.06em;font-weight:700}
+.stat.red{border-top-color:var(--red)} .stat.red b{color:var(--red)}
+.stat.green{border-top-color:var(--green)} .stat.green b{color:var(--green)}
+.stat.amber{border-top-color:var(--acao)} .stat.amber b{color:var(--amber)}
+.stat.blue{border-top-color:var(--blue)} .stat.blue b{color:var(--blue)}
+
+.toolbar{display:flex;gap:8px;align-items:center;margin:4px 0 14px;flex-wrap:wrap}
+.chip{border:1px solid var(--ring);background:var(--card);border-radius:999px;padding:6px 15px;font-size:13px;cursor:pointer;font-weight:600;color:var(--ink-soft);transition:background .15s,color .15s,border-color .15s}
+.chip:hover:not(.on){border-color:var(--brand);color:var(--brand-txt);background:var(--brand-soft)}
+.chip.on{background:var(--brand);border-color:var(--brand);color:#fff}
+:root[data-theme=dark] .chip.on{color:#061206}
+.chip .n{font-variant-numeric:tabular-nums;opacity:.75;margin-left:4px}
+.toolbar .hint{margin-left:auto;font-size:12.5px;color:var(--ink-soft)}
+
+#cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:start;margin-top:4px}
+#cards > :not(.gcard){grid-column:1/-1}
+.gcard{background:var(--card);border-top:3px solid var(--red);border-radius:8px;box-shadow:var(--shade);padding:14px 16px 12px;display:flex;flex-direction:column;gap:8px;min-width:0;transition:box-shadow .16s}
+.gcard:hover{box-shadow:var(--shade-2)}
+.gcard.andamento{border-top-color:var(--blue)}
+.gcard.done{border-top-color:var(--green)}
+.gcard.removed{border-top-color:var(--ink-soft);opacity:.62}
+.g-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.g-chip{display:inline-flex;align-items:center;gap:7px;border-radius:99px;padding:3px 11px;font:700 11px/1.4 var(--ff);letter-spacing:.06em;text-transform:uppercase;border:1px solid transparent}
+button.g-chip{cursor:pointer}
+.g-chip::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.g-chip.dup{background:var(--red-bg);color:var(--red);border-color:color-mix(in srgb,var(--red) 30%,transparent)}
+.g-chip.rev{background:var(--amber-bg);color:var(--amber);border-color:color-mix(in srgb,var(--acao) 50%,transparent)}
+.g-chip.and{background:var(--blue-bg);color:var(--blue)}
+.g-chip.ok{background:var(--green-bg);color:var(--green)}
+.g-chip.rem{background:var(--surface-2);color:var(--ink-soft)}
+.g-sel{display:inline-flex;align-items:center;gap:7px;font-size:13px;color:var(--ink-soft);cursor:pointer}
+.g-sel input{width:17px;height:17px;accent-color:var(--brand)}
+.g-nome{font-weight:700;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.g-lin{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.g-cpf{font-size:17px;font-variant-numeric:tabular-nums}
+.g-val{font:400 20px var(--ff-titulo);color:var(--red);white-space:nowrap;font-variant-numeric:tabular-nums}
+.gcard.done .g-val{color:var(--ink-soft)}
+.g-datas{font-size:13.5px;color:var(--ink-soft);font-variant-numeric:tabular-nums}
+.g-gap{font-weight:700;color:var(--ink);white-space:nowrap}
+.g-tags{display:flex;gap:6px;flex-wrap:wrap}
+.g-tag{font-size:11px;font-weight:600;padding:1px 9px;border-radius:99px;background:var(--blue-bg);color:var(--blue);border:1px solid color-mix(in srgb,var(--blue) 30%,transparent)}
+.g-tag.alerta{background:var(--amber-bg);color:var(--amber);border-color:transparent}
+.g-corpo{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.g-corpo .pay:only-child{grid-column:1/-1}
+.pay{border:1px solid var(--line);border-radius:6px;padding:9px 11px;min-width:0}
+.pay .tag{font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;margin-bottom:4px}
+.pay.orig{border-color:color-mix(in srgb,var(--green) 30%,transparent);background:var(--green-bg)} .pay.orig .tag{color:var(--green)}
+.pay.dup{border-color:color-mix(in srgb,var(--red) 30%,transparent);background:var(--red-bg)} .pay.dup .tag{color:var(--red)}
+.pay.outro{background:var(--surface-2);border:1px dashed var(--ring)} .pay.outro .tag{color:var(--ink-soft)}
+.pay .v{font:400 16px var(--ff-titulo);font-variant-numeric:tabular-nums}
+.pay .d{font-size:12.5px;margin-top:1px;font-variant-numeric:tabular-nums}
+.pay .id{font-family:var(--mono);font-size:11px;color:var(--ink-soft);margin-top:5px;word-break:break-all}
+.devolvido-nota{padding:8px 11px;border-radius:6px;background:var(--blue-bg);color:var(--blue);font-size:12.5px;line-height:1.45}
+.g-acoes{display:flex;gap:6px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:10px;margin-top:2px}
+.act{border:1px solid var(--ring);background:var(--card);border-radius:5px;padding:6px 12px;font-size:12.5px;font-weight:600;cursor:pointer;color:var(--ink);transition:background .15s,border-color .15s;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.act:hover:not(:disabled){background:var(--surface-2);border-color:var(--brand)}
+.act.primary{background:var(--acao);border-color:var(--acao);color:var(--acao-ink);font-weight:700}
+.act.primary:hover:not(:disabled){background:var(--acao-2);border-color:var(--acao-2)}
+.act.good{background:var(--green-bg);border-color:color-mix(in srgb,var(--green) 35%,transparent);color:var(--green)}
+.act.warn{border-color:color-mix(in srgb,var(--red) 40%,transparent);color:var(--red)}
+.act.devolve{border-color:color-mix(in srgb,var(--blue) 40%,transparent);color:var(--blue)}
+.act.big{padding:9px 15px;font-size:13.5px}
+
+.finish{text-align:center;padding:30px;font:400 19px var(--ff-titulo);color:var(--brand-txt)}
+.empty{text-align:center;color:var(--ink-soft);padding:50px 0;font-size:14px}
+.hist{border-radius:7px;background:var(--card);overflow:hidden;box-shadow:var(--shade);margin-top:6px}
+.hist-cab{width:100%;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 16px;background:var(--surface-2);border:0;cursor:pointer;font-size:13px;font-weight:600;text-align:left}
+.hist-cab:hover{background:var(--brand-soft)}
+.hist-cab svg{transition:transform .15s}
+.hist.aberto .hist-cab svg{transform:rotate(90deg)}
+.hist-linha{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:baseline;padding:9px 16px;border-top:1px solid var(--line);font-size:12.5px}
+.hist-cpf{flex:1 1 240px}
+.hist-val{font-weight:700;font-variant-numeric:tabular-nums}
+.hist-dt{color:var(--ink-soft);font-variant-numeric:tabular-nums}
+
+.batchbar{position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:3px solid var(--acao);box-shadow:0 -6px 24px rgba(12,40,20,.13);padding:12px 24px;z-index:10}
+.batchbar .inner{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.batchbar .spacer{flex:1}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:10px 18px;border-radius:5px;font-size:13.5px;opacity:0;transition:opacity .25s;pointer-events:none;z-index:50;max-width:90vw}
+body.adm .toast{bottom:92px}
+.toast.show{opacity:1}
+footer.rodape{max-width:1280px;margin:28px auto 0;padding:16px 24px 8px;border-top:1px solid var(--line);display:flex;gap:16px;flex-wrap:wrap;align-items:center;font-size:12.5px;color:var(--ink-soft)}
+footer .marca{font:400 14px var(--ff-titulo);color:var(--brand-txt)}
+footer .links{display:flex;gap:14px;flex-wrap:wrap;margin-left:auto}
+footer a{color:var(--ink-soft)}
+footer a:hover{color:var(--brand-txt)}
+
+@media(max-width:900px){#cards{grid-template-columns:1fr}}
+@media(max-width:560px){
+  header{padding:18px 16px 20px} .wrap,.legenda,.stats{padding:0 14px}
+  .progress{width:calc(100% - 28px)}
+  .g-corpo{grid-template-columns:1fr}
+  .toolbar .hint{margin-left:0}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<style>.voltar-proj{color:inherit;font-weight:700;text-decoration:none;border-bottom:1px solid currentColor;opacity:.92;white-space:nowrap}.voltar-proj:hover{opacity:1}</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="i-lua" viewBox="0 0 16 16"><path d="M13 9.5A5.5 5.5 0 0 1 6.5 3a5.5 5.5 0 1 0 6.5 6.5z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></symbol>
+  <symbol id="i-sol" viewBox="0 0 16 16"><circle cx="8" cy="8" r="3" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.5v1.5M8 13v1.5M1.5 8H3M13 8h1.5M3.4 3.4l1 1M11.6 11.6l1 1M3.4 12.6l1-1M11.6 4.4l1-1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></symbol>
+  <symbol id="i-seta" viewBox="0 0 16 16"><path d="m6 3.5 4.5 4.5L6 12.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-copiar" viewBox="0 0 16 16"><rect x="5.5" y="5.5" width="8" height="8" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M10.5 3.5v-1h-8v8h1" fill="none" stroke="currentColor" stroke-width="1.4"/></symbol>
+  <symbol id="i-baixar" viewBox="0 0 16 16"><path d="M8 2.5v8M4.5 7 8 10.5 11.5 7M3 13.5h10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</defs></svg>
+
+<div class="demo-faixa"><a class="voltar-proj" href="../../index.html">← Todos os projetos</a> <b>Dados fictícios</b> Demonstração do painel de reembolsos FIDC. Nomes, CPFs, ids e valores foram inventados; nenhum botão grava nada.</div>
+
+<header>
+  <div class="hrow">
+    <div class="htxt">
+      <h1>Reembolsos FIDC · Pagamentos em duplicidade</h1>
+      <p id="subtitle"></p>
+    </div>
+    <div class="hbtns">
+      <button class="modebtn" id="modeBtn" type="button">Modo curadoria</button>
+      <button class="modebtn" id="temaBtn" type="button" aria-label="Alternar tema claro e escuro"><svg class="i"><use href="#i-lua"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<div class="legenda"><div><b>Horário de funcionamento</b>Das 08h às 18h, com pausa entre 12h30 e 13h30. Erro dentro do horário: avisar o responsável pelo painel.</div></div>
+
+<div class="progress" id="progressBox">
+  <div class="row"><span>Progresso</span><span><b id="pDone">0</b> de <b id="pTotal">0</b> concluídos · <b id="pAndamento">0</b> em andamento · restam <b id="pValor">R$ 0,00</b></span></div>
+  <div class="bar"><i id="pBar"></i></div>
+</div>
+
+<div class="stats hidden" id="statsBox">
+  <div class="stat"><b id="stTotal">0</b><span>Casos ativos</span></div>
+  <div class="stat red"><b id="stDup">0</b><span>Duplicidade</span></div>
+  <div class="stat blue"><b id="stAndamento">0</b><span>Em andamento</span></div>
+  <div class="stat green"><b id="stDone">0</b><span>Concluídos</span></div>
+  <div class="stat amber"><b id="stRev">0</b><span>Para revisão</span></div>
+  <div class="stat red"><b id="stValor">R$ 0,00</b><span>A reembolsar</span></div>
+</div>
+
+<div class="wrap">
+  <div class="toolbar hidden" id="filterBox"></div>
+  <div id="cards"></div>
+  <div class="finish hidden" id="finish">Todos os casos foram concluídos. Obrigado!</div>
+</div>
+
+<div class="batchbar hidden" id="batchBox">
+  <div class="inner">
+    <span><b id="selCount">0</b> casos no lote</span>
+    <span class="spacer"></span>
+    <button class="act primary big" type="button" id="btnCopiarLote"><svg class="i"><use href="#i-copiar"/></svg>Copiar lote (texto)</button>
+    <button class="act big" type="button" id="btnEvid"><svg class="i"><use href="#i-baixar"/></svg>Baixar evidências</button>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<footer class="rodape">
+  <span class="marca">Painel FIDC</span>
+  <span>Lote de 09/10/2026 · extrato até 09/10/2026 08:40</span>
+  <nav class="links"><a href="painel-rejeicoes.html">Rejeições de pagamento</a><a href="cerebro.html">Cérebro</a></nav>
+</footer>
+
+<script>
+"use strict";
+/* DADOS FICTÍCIOS: nomes, CPFs, ids de transação e valores inventados. */
+const brl = v => v.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+const gapTxt = g => g==null?"sem par":(g===0?"mesmo dia":(g===1?"1 dia":g+" dias"));
+const esc = s => String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const $ = s => document.getElementById(s);
+
+let semente = 7;
+const rnd = () => (semente = (semente*16807) % 2147483647) / 2147483647;
+const digitos = n => Array.from({length:n},()=>Math.floor(rnd()*10)).join("");
+function pg(valor, dt, tipo){ return {amount:valor, dt, source:(tipo==="pix"?"invoice/":"boleto/")+"6"+digitos(15), sid:digitos(28)}; }
+
+const BASE = [
+  ["Marina Toledo",      "482.917", 258.73, "2026-10-06 09:14:22","2026-10-06 18:02:10","boleto","boleto", "pend"],
+  ["Rafael Cunha",       "305.661", 412.90, "2026-10-05 10:41:07","2026-10-07 08:12:55","boleto","pix",    "pend"],
+  ["Beatriz Lemos",      "774.208", 187.45, "2026-10-07 07:55:31","2026-10-07 07:58:02","pix",   "pix",    "pend"],
+  ["Otávio Ramos",       "116.430", 331.20, "2026-10-04 14:20:48","2026-10-06 11:09:14","boleto","boleto", "pend", 3],
+  ["Juliana Prates",     "590.374",  96.88, "2026-10-08 08:03:19","2026-10-08 16:47:40","boleto","boleto", "pend"],
+  ["Caio Menezes",       "238.155", 524.60, "2026-10-03 09:30:00","2026-10-05 09:31:12","boleto","boleto", "andamento"],
+  ["Larissa Fontes",     "861.027", 143.15, "2026-10-07 13:12:44","2026-10-08 10:20:31","pix",   "boleto", "andamento"],
+  ["Diego Arantes",      "407.896", 275.00, "2026-10-06 06:58:12","2026-10-06 07:01:45","boleto","boleto", "pend"],
+  ["Patrícia Viana",     "953.612", 219.37, "2026-10-02 15:44:09","2026-10-04 08:15:27","boleto","pix",    "done"],
+  ["Henrique Sales",     "324.709", 160.80, "2026-10-05 11:11:11","2026-10-05 17:36:02","boleto","boleto", "done"],
+  ["Sofia Bastos",       "670.143", 389.55, "2026-10-08 09:25:50","2026-10-09 07:40:13","boleto","boleto", "pend"],
+  ["Gustavo Peixoto",    "145.882",  78.40, "2026-10-01 10:02:33","2026-10-03 10:03:01","pix",   "pix",    "done"],
+  ["Renata Quaresma",    "719.250", 302.10, "2026-10-08 12:00:41","2026-10-08 12:05:59","boleto","boleto", "andamento"],
+  ["Felipe Andrade",     "288.093", 133.33, "2026-10-07 08:45:10","2026-10-09 06:12:48","boleto","pix",    "pend"],
+];
+let CASES = BASE.map((b,i)=>{
+  const [nome,meio,v,d1,d2,t1,t2,st,todos] = b;
+  const o = pg(v,d1,t1), d = pg(v,d2,t2);
+  const gap = Math.round((new Date(d2.slice(0,10)) - new Date(d1.slice(0,10)))/864e5);
+  const extra = todos ? [pg(v,"2026-09-08 09:10:00","boleto")] : [];
+  return {idx:i, uid:"pg:"+i, nome, cpf:"•••."+meio+"-••", original:o, duplicado:d, gap, todos:[o,d,...extra], state:st, cls:"DUPLICIDADE", sel:true, devolvido:null};
+});
+// casos que só aparecem na curadoria
+CASES.push(
+  {idx:CASES.length, uid:"rv:1", nome:"Tiago Nogueira", cpf:"•••.530.418-••", original:pg(210.00,"2026-09-20 10:00:02","boleto"), duplicado:pg(210.00,"2026-10-06 09:58:37","boleto"), gap:16, todos:[], state:"pend", cls:"REVISAR", sel:false},
+  {idx:CASES.length+1, uid:"rv:2", nome:"Camila Rocha", cpf:"•••.902.664-••", original:null, duplicado:null, gap:null, todos:[], state:"pend", cls:"REVISAR", sel:false},
+  {idx:CASES.length+2, uid:"rm:1", nome:"André Moura", cpf:"•••.211.590-••", original:pg(99.90,"2026-10-01 08:00:00","boleto"), duplicado:pg(99.90,"2026-10-02 08:00:00","boleto"), gap:1, todos:[], state:"removed", cls:"DUPLICIDADE", sel:false},
+);
+CASES.forEach((c,i)=>{c.idx=i;});
+const HIST = [["Luana Barreto","•••.613.207-••",244.10,"02/10/2026"],["Marcos Teixeira","•••.380.952-••",118.75,"01/10/2026"],["Vitória Campos","•••.457.128-••",402.00,"30/09/2026"],
+  ["Bruno Saldanha","•••.096.334-••",65.40,"29/09/2026"],["Elisa Furtado","•••.742.581-••",199.99,"26/09/2026"],["Ícaro Damasceno","•••.268.719-••",310.45,"25/09/2026"]];
+
+let mode="op", filter="all", histAberto=false;
+const opCases = () => CASES.filter(c=>c.cls==="DUPLICIDADE" && c.sel && c.state!=="removed" && c.duplicado);
+const labelAvancar = st => st==="pend"?"Marcar como solicitado":st==="andamento"?"Concluir":"Reabrir";
+const tipo = p => !p?null:(p.source.startsWith("invoice")?"Pix":"Boleto");
+
+function toast(msg){const t=$("toast");t.textContent=msg;t.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove("show"),2800);}
+
+function cardGrade(c, admin){
+  const o=c.original, d=c.duplicado;
+  const el=document.createElement("article");
+  el.className="gcard"+(c.state==="done"?" done":"")+(c.state==="andamento"?" andamento":"")+(c.state==="removed"?" removed":"");
+  const chip = c.state==="removed"?["rem","Removido"]:c.state==="done"?["ok","Concluído"]:c.state==="andamento"?["and","Em andamento"]:c.cls==="REVISAR"?["rev","Revisar"]:["dup","Duplicidade"];
+  const tipos=[...new Set([tipo(o),tipo(d)].filter(Boolean))];
+  const acoes = c.state==="removed"
+    ? `<button class="act" data-a="restaurar">Restaurar</button>`
+    : `${c.devolvido?"":`<button class="act good" data-a="avancar">${labelAvancar(c.state)}</button>`}
+       ${c.state==="andamento"?`<button class="act" data-a="voltar">Voltar a pendente</button>`:""}
+       ${admin?`<button class="act warn" data-a="remover">Remover</button>${c.state!=="done"&&!c.devolvido?`<button class="act devolve" data-a="dev-refazer">Enviar para remontagem + baixa</button><button class="act devolve" data-a="dev-emitir">Mandar para baixa</button>`:""}`:""}`;
+  el.innerHTML=`
+    <div class="g-top">
+      ${admin&&c.state!=="removed"?`<button class="g-chip ${chip[0]}" data-a="cls" title="Clique para trocar Duplicidade e Revisar">${chip[1]}</button>`:`<span class="g-chip ${chip[0]}">${chip[1]}</span>`}
+      ${admin&&c.state!=="removed"?`<label class="g-sel"><input type="checkbox" data-a="sel" ${c.sel?"checked":""} ${c.state==="done"?"disabled":""}> no lote</label>`:""}
+    </div>
+    <div class="g-nome" title="${esc(c.nome)}">${esc(c.nome)}</div>
+    <div class="g-lin"><span class="g-cpf">${esc(c.cpf)}</span><span class="g-val">${d?brl(d.amount):"—"}</span></div>
+    <div class="g-lin g-datas"><span>${o?o.dt.slice(0,10).split("-").reverse().join("/"):"—"} → ${d?d.dt.slice(0,10).split("-").reverse().join("/"):"—"}</span><span class="g-gap">${gapTxt(c.gap)}</span></div>
+    <div class="g-tags">${tipos.map(t=>`<span class="g-tag">${t}</span>`).join("")}${c.todos&&c.todos.length>2?`<span class="g-tag alerta">${c.todos.length} pagamentos no período</span>`:""}</div>
+    ${c.devolvido?`<div class="devolvido-nota">Devolvido ao painel de rejeições: <b>${esc(c.devolvido)}</b>. Fica como concluído aqui quando o outro lado confirma.</div>`:""}
+    <div class="g-corpo">
+      ${o?`<div class="pay orig"><div class="tag">Original · mantido</div><div class="v">${brl(o.amount)}</div><div class="d">${o.dt}</div><div class="id">${o.source} · ${o.sid}</div></div>`:`<div class="pay"><div class="tag">Sem pagamento anterior no período</div></div>`}
+      ${d?`<div class="pay dup"><div class="tag">Duplicado · reembolsar</div><div class="v">${brl(d.amount)}</div><div class="d">${d.dt}</div><div class="id">${d.source} · ${d.sid}</div></div>`:`<div class="pay"><div class="tag">Sem lançamento no extrato: nada a reembolsar</div></div>`}
+      ${(c.todos||[]).slice(2).map(t=>`<div class="pay outro"><div class="tag">Outro pagamento · mantido</div><div class="v">${brl(t.amount)}</div><div class="d">${t.dt}</div><div class="id">${t.source} · ${t.sid}</div></div>`).join("")}
+    </div>
+    <div class="g-acoes">${acoes}</div>`;
+  el.dataset.idx=c.idx;
+  return el;
+}
+
+function filtrar(){
+  const f=filter;
+  return CASES.filter(c=>{
+    if(f==="all") return c.state!=="removed";
+    if(f==="pend") return c.state==="pend"&&c.cls==="DUPLICIDADE";
+    if(f==="andamento") return c.state==="andamento";
+    if(f==="done") return c.state==="done";
+    if(f==="REVISAR") return c.cls==="REVISAR"&&c.state!=="removed";
+    if(f==="removed") return c.state==="removed";
+    if(f==="devolvidos") return !!c.devolvido;
+    return true;
+  });
+}
+function chips(){
+  const n = k=>{const s=filter;filter=k;const r=filtrar().length;filter=s;return r;};
+  const L=[["all","Todos"],["pend","Pendentes"],["andamento","Em andamento"],["done","Concluídos"],["REVISAR","Revisar"],["removed","Removidos"],["devolvidos","Devolvidos"]];
+  $("filterBox").innerHTML = L.map(([k,r])=>`<button class="chip${filter===k?" on":""}" data-f="${k}" type="button">${r}<span class="n">${n(k)}</span></button>`).join("")
+    + `<span class="hint">Removidos e casos de revisão não aparecem no modo operação.</span>`;
+}
+function render(){
+  const isOp = mode==="op";
+  document.body.classList.toggle("adm",!isOp);
+  $("modeBtn").textContent = isOp?"Modo curadoria":"Modo operação";
+  $("progressBox").classList.toggle("hidden",!isOp);
+  $("statsBox").classList.toggle("hidden",isOp);
+  $("filterBox").classList.toggle("hidden",isOp);
+  $("batchBox").classList.toggle("hidden",isOp);
+  const box=$("cards"); box.innerHTML="";
+  let lista;
+  if(isOp){ const ordem=s=>s==="done"?2:s==="andamento"?1:0; lista=opCases().slice().sort((a,b)=>ordem(a.state)-ordem(b.state)); }
+  else { chips(); lista=filtrar(); }
+  if(!lista.length) box.innerHTML=`<div class="empty">Nenhum caso nesta categoria.</div>`;
+  lista.forEach(c=>box.appendChild(cardGrade(c,!isOp)));
+  box.appendChild(historico());
+  stats();
+}
+function historico(){
+  const h=document.createElement("div"); h.className="hist"+(histAberto?" aberto":"");
+  h.innerHTML=`<button class="hist-cab" type="button" data-a="hist"><span>Histórico de concluídos (<b>${HIST.length}</b>)</span><svg class="i"><use href="#i-seta"/></svg></button>
+    ${histAberto?HIST.map(x=>`<div class="hist-linha"><span class="hist-cpf">${esc(x[0])} · ${x[1]}</span><span class="hist-val">${brl(x[2])}</span><span class="hist-dt">concluído em ${x[3]}</span></div>`).join(""):""}`;
+  return h;
+}
+function stats(){
+  const op=opCases(), done=op.filter(c=>c.state==="done").length, and=op.filter(c=>c.state==="andamento").length;
+  $("pDone").textContent=done; $("pTotal").textContent=op.length; $("pAndamento").textContent=and;
+  $("pBar").style.width=(op.length?100*done/op.length:0)+"%";
+  const resta=op.filter(c=>c.state!=="done").reduce((s,c)=>s+c.duplicado.amount,0);
+  $("pValor").textContent=brl(resta);
+  $("finish").classList.toggle("hidden",!(mode==="op"&&op.length&&done===op.length));
+  const total=op.reduce((s,c)=>s+c.duplicado.amount,0);
+  $("subtitle").textContent = mode==="op"
+    ? `${op.length} casos confirmados · Total a reembolsar: ${brl(total)} · Lote de 09/10/2026`
+    : `Painel de curadoria · extrato de 09/09/2026 a 09/10/2026 · critério: linhas marcadas como FIDC na planilha`;
+  const ativos=CASES.filter(c=>c.state!=="removed");
+  $("stTotal").textContent=ativos.length;
+  $("stDup").textContent=ativos.filter(c=>c.cls==="DUPLICIDADE").length;
+  $("stAndamento").textContent=ativos.filter(c=>c.state==="andamento").length;
+  $("stDone").textContent=ativos.filter(c=>c.state==="done").length;
+  $("stRev").textContent=ativos.filter(c=>c.cls==="REVISAR").length;
+  $("stValor").textContent=brl(ativos.filter(c=>c.cls==="DUPLICIDADE"&&c.state!=="done"&&c.duplicado).reduce((s,c)=>s+c.duplicado.amount,0));
+  $("selCount").textContent=CASES.filter(c=>c.sel&&c.state!=="removed").length;
+}
+
+document.addEventListener("click",e=>{
+  const f=e.target.closest("[data-f]"); if(f){filter=f.dataset.f;render();return;}
+  const b=e.target.closest("[data-a]"); if(!b||b.dataset.a==="sel") return;
+  if(b.dataset.a==="hist"){histAberto=!histAberto;render();return;}
+  const c=CASES[+b.closest(".gcard").dataset.idx];
+  switch(b.dataset.a){
+    case "avancar": c.state=c.state==="pend"?"andamento":c.state==="andamento"?"done":"pend"; toast(c.state==="andamento"?"Reembolso solicitado: caso em andamento":c.state==="done"?"Caso concluído":"Caso reaberto"); break;
+    case "voltar": c.state="pend"; break;
+    case "remover": c.state="removed"; c.sel=false; toast("Removido: não caracteriza duplicidade"); break;
+    case "restaurar": c.state="pend"; toast("Caso restaurado"); break;
+    case "cls": c.cls=c.cls==="DUPLICIDADE"?"REVISAR":"DUPLICIDADE"; c.sel=c.cls==="DUPLICIDADE"; break;
+    case "dev-refazer": c.devolvido="REFAZER (remontar o acordo e dar baixa)"; toast("Devolvido ao painel de rejeições: REFAZER"); break;
+    case "dev-emitir": c.devolvido="EMITIR (emitir boleto e dar baixa)"; toast("Devolvido ao painel de rejeições: EMITIR"); break;
+  }
+  render();
+});
+document.addEventListener("change",e=>{
+  if(e.target.dataset.a!=="sel") return;
+  const c=CASES[+e.target.closest(".gcard").dataset.idx]; c.sel=e.target.checked; render();
+});
+$("modeBtn").addEventListener("click",()=>{mode=mode==="op"?"admin":"op";filter="all";render();window.scrollTo({top:0});});
+$("btnCopiarLote").addEventListener("click",()=>{
+  const lote=CASES.filter(c=>c.sel&&c.state!=="removed"&&c.duplicado);
+  const txt=lote.map(c=>`REEMBOLSO | ${c.nome}\nCPF: ${c.cpf}\nValor a reembolsar: ${brl(c.duplicado.amount)}\nPagamento duplicado: ${c.duplicado.dt} | ${c.duplicado.source}\nIntervalo entre pagamentos: ${gapTxt(c.gap)}`).join("\n\n");
+  (navigator.clipboard?navigator.clipboard.writeText("DADOS FICTÍCIOS\n\n"+txt):Promise.reject()).then(()=>toast(`Lote copiado: ${lote.length} casos`)).catch(()=>toast(`Lote pronto: ${lote.length} casos`));
+});
+$("btnEvid").addEventListener("click",()=>toast("Planilha de evidências gerada (demonstração: nenhum arquivo é baixado)"));
+function pintaTema(){const dk=document.documentElement.getAttribute("data-theme")==="dark";$("temaBtn").innerHTML=`<svg class="i"><use href="#${dk?"i-sol":"i-lua"}"/></svg>`;}
+$("temaBtn").addEventListener("click",()=>{
+  const dk=document.documentElement.getAttribute("data-theme")!=="dark";
+  document.documentElement.setAttribute("data-theme",dk?"dark":"light");
+  try{localStorage.setItem("demo-tema",dk?"dark":"light");}catch(e){}
+  pintaTema();
+});
+pintaTema();
+render();
+</script>
+</body>
+</html>

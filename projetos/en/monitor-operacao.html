@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Operations Monitor | Paulo Nobre</title>
+<meta name="description" content="A monitor for the operation's data bots: whether the morning closed, how much came in and what failed.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js');</script>
+<script src="../assets/vt.js"></script>
+<link rel="stylesheet" href="../assets/site.css">
+<style>
+
+.board { padding: 0; overflow: hidden; }
+.board__top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 20px; border-bottom: 1px solid var(--line); }
+.board__title { font-weight: 600; }
+.verdict { display: inline-flex; align-items: center; gap: 8px; padding: 4px 10px; border-radius: 999px; background: rgba(214,168,76,.14); color: var(--amber-2); font-size: .8125rem; font-weight: 600; }
+.pulse { width: 8px; height: 8px; border-radius: 50%; background: var(--amber); box-shadow: 0 0 0 0 rgba(214,168,76,.6); }
+@media (prefers-reduced-motion: no-preference) { .pulse { animation: pulse 2.4s ease-out infinite; } }
+@keyframes pulse { 70% { box-shadow: 0 0 0 8px rgba(214,168,76,0); } 100% { box-shadow: 0 0 0 0 rgba(214,168,76,0); } }
+.q3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-bottom: 1px solid var(--line); }
+.q3 div { padding: 16px 20px; }
+.q3 div + div { border-left: 1px solid var(--line); }
+.q3 span { display: block; color: var(--muted); font-size: .8125rem; }
+.q3 b { display: block; margin-top: 4px; font-size: 1.125rem; font-variant-numeric: tabular-nums; }
+.bots { list-style: none; }
+.bots li { display: grid; grid-template-columns: 12px 1fr auto; gap: 12px; align-items: center; padding: 12px 20px; border-top: 1px solid var(--line); font-size: .9375rem; }
+.bots li:first-child { border-top: 0; }
+.bots .st { width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
+.bots .st.fail { background: var(--red); }
+.bots time { color: var(--muted); font-size: .8125rem; font-variant-numeric: tabular-nums; }
+.bots .fail-txt { color: var(--red); font-size: .8125rem; font-weight: 600; }
+.board__cap { padding: 12px 20px 16px; border-top: 1px solid var(--line); }
+@media (prefers-reduced-motion: no-preference) {
+  .js .bots li { opacity: 0; animation: fadein .5s var(--ease) forwards; animation-delay: calc(var(--d) * 1ms + 700ms); }
+}
+@keyframes fadein { to { opacity: 1; } }
+
+.questions { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.question { padding: 26px 24px; }
+.question b { display: block; font-size: 1.375rem; letter-spacing: -0.02em; line-height: 1.2; }
+.question p { margin-top: 10px; color: var(--muted); }
+
+.fix { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin-top: 8px; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.fix div { padding: 22px; background: rgba(19,33,58,.6); }
+.fix div + div { border-left: 1px solid var(--line); }
+.fix span { color: var(--amber); font-weight: 600; font-size: .875rem; }
+.fix p { margin-top: 6px; color: var(--text-2); }
+
+@media (max-width: 760px) {
+  .questions, .fix { grid-template-columns: 1fr; }
+  .fix div + div { border-left: 0; border-top: 1px solid var(--line); }
+}
+@media (max-width: 420px) { .q3 div { padding: 12px; } .q3 b { font-size: 1rem; } }
+
+</style>
+</head>
+<body class="case case--monitor-operacao">
+<a class="skip" href="#conteudo">Skip to content</a>
+<div class="flares" aria-hidden="true"><div class="flare blue"></div><div class="flare cyan"></div><div class="flare amber"></div><div class="grain"></div></div>
+
+<div class="page">
+  <div class="wrap">
+    <nav class="topbar" aria-label="Navigation">
+      <a class="back" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg> All projects</a>
+      <span class="topbar__right"><span class="crumb">Project <b>03</b> of 04</span><span class="langs" role="group" aria-label="Language"><span class="langs__cur" aria-current="true">EN</span><a href="../monitor-operacao.html" hreflang="pt-BR" lang="pt-BR" title="Versão em português" data-lang-switch="pt-BR">PT</a></span></span>
+    </nav>
+
+    <main id="conteudo">
+      <header class="hero">
+        <div class="hero__grid">
+          <div>
+            <p class="hero__kicker" data-seq style="--i:0">Operations monitoring</p>
+            <h1 data-seq style="--i:1">Operations Monitor</h1>
+            <p class="hero__lede" data-seq style="--i:2">A monitor for the fleet of data bots. In seconds, it shows whether the morning closed, how much came in and what failed.</p>
+            <div class="facts" data-seq style="--i:3"><span class="fact">Bots before the workday</span><span class="fact">Browser access</span><span class="fact">Python</span></div></div>
+          <div class="hero__visual" data-seq style="--i:4">
+            <figure class="panel board">
+              <div class="board__top"><span class="board__title">This morning</span><span class="verdict"><span class="pulse" aria-hidden="true"></span>1 failure to handle</span></div>
+              <div class="q3"><div><span>Did the morning close?</span><b>Almost</b></div><div><span>How much came in?</span><b>R$ 48,210</b></div><div><span>What failed?</span><b>1 task</b></div></div>
+              <ul class="bots">
+                <li style="--d:0"><span class="st" aria-hidden="true"></span><span>Collections system</span><time>05:12</time></li>
+                <li style="--d:90"><span class="st" aria-hidden="true"></span><span>Payment gateway</span><time>05:26</time></li>
+                <li style="--d:180"><span class="st fail" aria-hidden="true"></span><span>Creditor file</span><span class="fail-txt">stopped at step 3</span></li>
+                <li style="--d:270"><span class="st" aria-hidden="true"></span><span>Email tasks</span><time>05:41</time></li>
+              </ul>
+              <figcaption class="board__cap note">Illustration with fictitious data.</figcaption>
+            </figure></div>
+        </div>
+      </header>
+
+      <div class="kpis" style="--n:3" data-reveal><div class="kpi"><div class="kpi__value">3 systems</div><div class="kpi__label">collected by bots before the workday starts</div></div><div class="kpi"><div class="kpi__value">8 people</div><div class="kpi__label">using the operation's tools, across 3 teams</div></div><div class="kpi"><div class="kpi__value">2 trainings</div><div class="kpi__label">delivered, with a written operator manual</div></div></div>
+    <section class="section" data-reveal>
+      <div class="section__head">
+        <p class="section__label">The challenge</p>
+        <div>
+          <h2>A failure during the night has to show up before the team starts.</h2>
+          <div class="section__body"><div class="prose"><p>The operation depends on bots that run before the workday. If one of them fails and nobody notices, the team starts the day working with incomplete data. The problem was not only running the bots, it was <strong>knowing, fast, whether the morning was ready</strong>.</p></div></div>
+        </div>
+      </div>
+    </section>
+    <section class="section" data-reveal>
+      <div class="section__head">
+        <p class="section__label">The approach</p>
+        <div>
+          <h2>I built the screen around the three questions the manager asks every morning.</h2>
+          <div class="section__body"><div class="questions">
+          <div class="panel question"><b>Did the morning close?</b><p>Every bot, task and source, with the time its data was saved.</p></div>
+          <div class="panel question"><b>How much came in?</b><p>Collections by channel and by days past due.</p></div>
+          <div class="panel question"><b>What failed?</b><p>The failed task opens a detail view that shows the step where it stopped.</p></div>
+        </div></div>
+        </div>
+      </div>
+    </section>
+    <section class="section" aria-label="Monitor screen">
+      <figure class="frame-wrap" data-reveal>
+        <div class="frame" style="--h:600px; --s:0.6">
+          <div class="frame__bar" aria-hidden="true"><span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__url">The Brain · Operations panel</span></div>
+          <div class="frame__view"><iframe src="../demos/en/cerebro.html" title="Operations monitor with fictitious data" loading="lazy" tabindex="-1"></iframe></div>
+        </div>
+        <figcaption class="frame__cta">
+          <span class="note">Fictitious data: no name, CPF (tax ID), contract or amount is real.</span>
+          <a class="btn" href="../demos/en/cerebro.html">Open the full screen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        </figcaption>
+      </figure>
+    </section>
+    <section class="section" data-reveal>
+      <div class="section__head">
+        <p class="section__label">The solution</p>
+        <div>
+          <h2>One screen for the verdict, the detail one click away.</h2>
+          <div class="section__body"><ul class="list"><li><strong>Status of every bot</strong>, task and source, with the time of the last save.</li><li><strong>Detail drawer</strong> that opens the failed task and shows the step that stopped.</li><li><strong>Quick navigation</strong> between sections with <span class="keys"><kbd>Ctrl</kbd><kbd>K</kbd></span>.</li><li><strong>Remote access</strong> in the browser, with nothing to install on the viewer's computer.</li></ul></div>
+        </div>
+      </div>
+    </section>
+    <section class="section" data-reveal>
+      <div class="section__head">
+        <p class="section__label">A matter of trust</p>
+        <div>
+          <h2>When the numbers are wrong, nobody comes back to the panel.</h2>
+          <div class="section__body"><div class="fix">
+          <div><span>Symptom</span><p>Payment and sequence values were sometimes shown wrong.</p></div>
+          <div><span>Root cause</span><p>A race condition: two updates were competing for the same data.</p></div>
+          <div><span>Fix</span><p>I fixed the order of the updates so the panel shows the right value.</p></div>
+        </div></div>
+        </div>
+      </div>
+    </section>
+    <section class="section" data-reveal>
+      <div class="section__head">
+        <p class="section__label">Technology and methods</p>
+        <div>
+          <h2>Automation with monitoring.</h2>
+          <div class="section__body"><div class="stack"><span class="tag">Python</span><span class="tag">Playwright</span><span class="tag">Data collection bots</span><span class="tag">Cloudflare Tunnel</span><span class="tag">HTML, CSS and JavaScript</span><span class="tag">Root cause analysis</span></div></div>
+        </div>
+      </div>
+    </section>
+    <section class="section" data-reveal>
+      <div class="section__head">
+        <p class="section__label">Also on mobile</p>
+        <div>
+          <h2>The same monitor got a version designed for the manager.</h2>
+          <div class="section__body"><a class="btn btn--ghost" href="monitor-operacao-celular.html">See the mobile version <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:16px;height:16px"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+        </div>
+      </div>
+    </section>
+    </main>
+
+    <nav class="next" aria-label="Next project">
+      <a href="monitor-operacao-celular.html">
+        <span><span class="next__label">Next project</span><span class="next__title">Operations Monitor (Mobile Version)</span></span>
+        <span class="next__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+    </nav>
+
+    <footer class="foot">
+      <span>© 2026 Paulo Nobre, São Paulo, Brazil</span>
+      <a href="index.html">Back to the project list</a>
+    </footer>
+  </div>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Projects | Paulo Nobre</title>
+<meta name="description" content="Tools I built for a collections and payments operation.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js');</script>
+<script src="../assets/vt.js"></script>
+<link rel="stylesheet" href="../assets/site.css">
+<style>
+  :root {
+    --bg: #0c1626;
+    --surface: #13213a;
+    --line: #22344f;
+    --text: #f3efe6;
+    --muted: #93a1b5;
+    --amber: #d6a84c;
+    --amber-soft: rgba(214, 168, 76, 0.10);
+    --ease: cubic-bezier(.22, .8, .24, 1);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { background: var(--bg); }
+
+  body {
+    min-height: 100vh;
+    min-height: 100svh;
+    display: grid;
+    place-items: center;
+    padding: 48px 16px;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Hanken Grotesk", system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  main { position: relative; z-index: 1; width: 100%; max-width: 680px; }
+
+  
+  .bar { position: fixed; top: 0; left: 0; right: 0; z-index: 2; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 24px 32px; }
+  .bar a { color: var(--text-2); text-decoration: none; font-weight: 500; font-size: .9375rem; }
+  .bar a:hover { color: var(--text); }
+  .bar__home { display: inline-flex; align-items: center; gap: 10px; padding: 8px 4px; }
+  .bar__home svg { width: 18px; height: 18px; transition: transform .4s var(--ease); }
+  .bar__home:hover svg { transform: translateX(-4px); }
+  @media (max-width: 520px) { .bar { position: absolute; padding: 16px; } body { padding-top: 88px; } }
+
+  /* Header */
+  header { text-align: center; margin-bottom: 40px; }
+
+  h1 {
+    font-size: clamp(2.5rem, 7vw, 3.5rem);
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    line-height: 1;
+  }
+
+  .lede {
+    margin: 16px auto 0;
+    max-width: 40ch;
+    color: var(--muted);
+    font-size: 1.0625rem;
+    line-height: 1.5;
+  }
+
+  .rule {
+    width: 48px;
+    height: 2px;
+    margin: 28px auto 0;
+    background: var(--amber);
+    transform-origin: center;
+  }
+
+  /* List */
+  .projects { list-style: none; border-top: 1px solid var(--line); }
+
+  .projects li { border-bottom: 1px solid var(--line); }
+
+  .project {
+    position: relative;
+    display: grid;
+    grid-template-columns: 3rem 1fr auto;
+    align-items: center;
+    gap: 16px;
+    padding: 24px 12px;
+    color: inherit;
+    text-decoration: none;
+    isolation: isolate;
+    border-radius: 2px;
+  }
+
+  /* Amber sweep behind the row */
+  .project::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(90deg, rgba(214, 168, 76, 0.13), rgba(214, 168, 76, 0.02) 85%);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .5s var(--ease);
+  }
+
+  /* Amber bar on the left edge */
+  .project::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 18%;
+    bottom: 18%;
+    width: 2px;
+    background: var(--amber);
+    transform: scaleY(0);
+    transition: transform .35s var(--ease);
+  }
+
+  .num {
+    font-size: .875rem;
+    font-weight: 600;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+    transition: color .3s var(--ease);
+  }
+
+  .body { min-width: 0; transition: transform .45s var(--ease); }
+
+  .title {
+    display: block;
+    font-size: clamp(1.1875rem, 3.2vw, 1.4375rem);
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    line-height: 1.25;
+  }
+
+  .desc {
+    display: block;
+    margin-top: 6px;
+    color: var(--muted);
+    font-size: .9375rem;
+    line-height: 1.45;
+  }
+
+  .go {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    color: var(--amber);
+    overflow: hidden;
+    transition: background .35s var(--ease), border-color .35s var(--ease), color .35s var(--ease);
+  }
+
+  .go svg { width: 18px; height: 18px; transition: transform .45s var(--ease); }
+
+  /* Hover and keyboard focus share one state */
+  .project:hover::before,
+  .project:focus-visible::before { transform: scaleX(1); }
+
+  .project:hover::after,
+  .project:focus-visible::after { transform: scaleY(1); }
+
+  .project:hover .num,
+  .project:focus-visible .num { color: var(--amber); }
+
+  .project:hover .body,
+  .project:focus-visible .body { transform: translateX(6px); }
+
+  .project:hover .go,
+  .project:focus-visible .go {
+    background: var(--amber);
+    border-color: var(--amber);
+    color: var(--bg);
+  }
+
+  .project:hover .go svg,
+  .project:focus-visible .go svg { animation: nudge .5s var(--ease); }
+
+  @keyframes nudge {
+    0%   { transform: translateX(0); }
+    45%  { transform: translateX(150%); }
+    46%  { transform: translateX(-150%); }
+    100% { transform: translateX(0); }
+  }
+
+  .project:focus { outline: none; }
+  .project:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
+
+  /* Dim the rows you are not pointing at (pointer devices only) */
+  @media (hover: hover) {
+    .projects:hover .project:not(:hover) .body { opacity: .6; }
+    .body { transition: transform .45s var(--ease), opacity .3s var(--ease); }
+  }
+
+
+  /* Entrance: one orchestrated sequence */
+  @media (prefers-reduced-motion: no-preference) {
+    .js header > * { opacity: 0; transform: translateY(12px); animation: rise .8s var(--ease) forwards; }
+    .js header h1 { animation-delay: .05s; }
+    .js header .lede { animation-delay: .15s; }
+    .js header .rule { transform: scaleX(0); opacity: 1; animation: draw .8s var(--ease) .3s forwards; }
+    .js .projects li { opacity: 0; transform: translateY(16px); animation: rise .7s var(--ease) forwards; }
+    .js .projects li:nth-child(1) { animation-delay: .35s; }
+    .js .projects li:nth-child(2) { animation-delay: .43s; }
+    .js .projects li:nth-child(3) { animation-delay: .51s; }
+    .js .projects li:nth-child(4) { animation-delay: .59s; }
+  }
+
+  @keyframes rise { to { opacity: 1; transform: none; } }
+  @keyframes draw { to { transform: scaleX(1); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; animation: none !important; }
+  }
+
+  /* Mobile */
+  @media (max-width: 520px) {
+    body { padding: 40px 16px; }
+    header { margin-bottom: 32px; }
+    .project { grid-template-columns: 2rem 1fr auto; gap: 12px; padding: 20px 4px; }
+    .go { width: 38px; height: 38px; }
+    .project:hover .body, .project:focus-visible .body { transform: translateX(3px); }
+  }
+</style>
+</head>
+<body>
+<div class="flares" aria-hidden="true">
+  <div class="flare blue"></div>
+  <div class="flare cyan"></div>
+  <div class="flare amber"></div>
+  <div class="grain"></div>
+</div>
+<nav class="bar" aria-label="Navigation"><a class="bar__home" href="../../?lang=en"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg> Portfolio</a><span class="langs" role="group" aria-label="Language"><span class="langs__cur" aria-current="true">EN</span><a href="../" hreflang="pt-BR" lang="pt-BR" title="Versão em português">PT</a></span></nav>
+<main>
+  <header>
+    <h1>Projects</h1>
+    <p class="lede">Tools I built for a collections and payments operation.</p>
+    <div class="rule" aria-hidden="true"></div>
+  </header>
+
+  <ol class="projects">
+    <li>
+      <a class="project" href="central-pagamentos-rejeitados.html">
+        <span class="num" aria-hidden="true">01</span>
+        <span class="body">
+          <span class="title">Rejected Payments Center</span>
+          <span class="desc">Classifies every rejected payment and points to the next action.</span>
+        </span>
+        <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+    </li>
+    <li>
+      <a class="project" href="pagamentos-em-duplicidade.html">
+        <span class="num" aria-hidden="true">02</span>
+        <span class="body">
+          <span class="title">Duplicate Payments Panel</span>
+          <span class="desc">Finds payments made twice and organizes the refund.</span>
+        </span>
+        <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+    </li>
+    <li>
+      <a class="project" href="monitor-operacao.html">
+        <span class="num" aria-hidden="true">03</span>
+        <span class="body">
+          <span class="title">Operations Monitor</span>
+          <span class="desc">Shows the status of the daily routines on a single screen.</span>
+        </span>
+        <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+    </li>
+    <li>
+      <a class="project" href="monitor-operacao-celular.html">
+        <span class="num" aria-hidden="true">04</span>
+        <span class="body">
+          <span class="title">Operations Monitor (Mobile Version)</span>
+          <span class="desc">The same monitor, designed for the manager to follow on a phone.</span>
+        </span>
+        <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+    </li>
+  </ol>
+</main>
+
+<script src="../assets/site.js"></script>
+</body>
+</html>
