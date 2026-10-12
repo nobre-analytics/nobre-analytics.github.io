@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Monitor da Operação (Versão Celular) | Paulo Nobre</title>
+<meta name="description" content="O monitor da operação redesenhado para o celular, com o veredito da manhã primeiro.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js');</script>
+<script src="assets/vt.js"></script>
+<link rel="stylesheet" href="assets/site.css">
+<style>
+
+.phone { position: relative; width: 300px; max-width: 100%; margin: 0 auto; padding: 12px; border-radius: 44px; background: linear-gradient(160deg, #22344f, #13213a); border: 1px solid var(--line-2); box-shadow: 0 40px 90px -40px rgba(0,0,0,.9), inset 0 0 0 1px rgba(255,255,255,.04); }
+.phone__screen { position: relative; height: 560px; border-radius: 34px; overflow: hidden; background: var(--bg); }
+.phone__screen iframe { max-width: none; position: absolute; left: 0; top: 0; border: 0; width: 375px; height: calc(560px / var(--ps)); transform: scale(var(--ps)); transform-origin: 0 0; }
+.phone__notch { position: absolute; left: 50%; top: 20px; z-index: 2; width: 84px; height: 22px; transform: translateX(-50%); border-radius: 999px; background: #070d18; }
+.phone { --ps: calc(276 / 375); }
+
+.compare { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: 28px; align-items: end; }
+.compare__label { margin-top: 14px; color: var(--muted); font-size: .9375rem; }
+.compare__label b { color: var(--text); font-weight: 600; }
+
+.principles { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.principle { padding: 24px; }
+.principle__n { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 10px; background: rgba(214,168,76,.14); color: var(--amber); font-weight: 700; }
+.principle b { display: block; margin-top: 14px; font-size: 1.125rem; letter-spacing: -0.015em; }
+.principle p { margin-top: 6px; color: var(--muted); }
+
+.related { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; padding: 24px; }
+.related p { color: var(--text-2); max-width: 46ch; }
+
+@media (max-width: 920px) {
+  .compare { grid-template-columns: 1fr; }
+  .compare > div:last-child { display: none; }
+  .principles { grid-template-columns: 1fr; }
+}
+@media (max-width: 380px) { .phone__screen { height: 500px; } .phone__screen iframe { height: calc(500px / var(--ps)); } }
+
+</style>
+</head>
+<body class="case case--monitor-operacao-celular">
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+<div class="flares" aria-hidden="true"><div class="flare blue"></div><div class="flare cyan"></div><div class="flare amber"></div><div class="grain"></div></div>
+
+<div class="page">
+  <div class="wrap">
+    <nav class="topbar" aria-label="Navegação">
+      <a class="back" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg> Todos os projetos</a>
+      <span class="crumb">Projeto <b>04</b> de 04</span>
+    </nav>
+
+    <main id="conteudo">
+      <header class="hero">
+        <div class="hero__grid">
+          <div>
+            <p class="hero__kicker" data-seq style="--i:0">Mobile first</p>
+            <h1 data-seq style="--i:1">Monitor da Operação (Versão Celular)</h1>
+            <p class="hero__lede" data-seq style="--i:2">O mesmo monitor, redesenhado para o celular. O veredito da manhã aparece primeiro, e o detalhe fica a um toque.</p>
+            <div class="facts" data-seq style="--i:3"><span class="fact">Pensado para o gestor</span><span class="fact">Tela de toque</span><span class="fact">Tema claro e escuro</span></div></div>
+          <div class="hero__visual" data-seq style="--i:4">
+            <div class="phone" role="img" aria-label="Monitor da operação aberto no celular">
+              
+              <div class="phone__screen"><iframe src="demos/cerebro-mobile.html" title="Monitor da operação no celular, com dados fictícios" tabindex="-1"></iframe></div>
+            </div></div>
+        </div>
+      </header>
+
+    <section class="section" data-reveal>
+      <div class="section__head">
+        <p class="section__label">O desafio</p>
+        <div>
+          <h2>O gestor quer o número da manhã antes de chegar no computador.</h2>
+          <div class="section__body"><div class="prose"><p>Na versão desktop, o monitor mostra todas as frentes ao mesmo tempo. No celular, esse volume de informação vira rolagem infinita. A pergunta mudou: em vez de <strong>"o que está acontecendo em tudo?"</strong>, passou a ser <strong>"preciso agir agora?"</strong>.</p></div></div>
+        </div>
+      </div>
+    </section>
+    <section class="section" data-reveal>
+      <div class="section__head">
+        <p class="section__label">Desktop e celular</p>
+        <div>
+          <h2>Não é a mesma tela encolhida. É outra hierarquia.</h2>
+          <div class="section__body"><div class="compare">
+          <div class="frame-desk">
+      <figure class="frame-wrap" >
+        <div class="frame" style="--h:430px; --s:0.5">
+          <div class="frame__bar" aria-hidden="true"><span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__url">Cérebro · desktop</span></div>
+          <div class="frame__view"><iframe src="demos/cerebro.html" title="Monitor desktop com dados fictícios" loading="lazy" tabindex="-1"></iframe></div>
+        </div>
+        <figcaption class="frame__cta">
+          <span class="note">Dados fictícios: nenhum nome, CPF, contrato ou valor é real.</span>
+          <a class="btn" href="demos/cerebro.html">Abrir a versão desktop <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        </figcaption>
+      </figure><p class="compare__label"><b>Desktop:</b> todas as frentes lado a lado, para análise.</p></div>
+          <div><div class="phone" style="--ps: calc(220 / 375); width: 244px"><div class="phone__screen" style="height:440px"><iframe src="demos/cerebro-mobile.html" title="Monitor no celular com dados fictícios" tabindex="-1" loading="lazy" style="height:calc(440px / (220 / 375))"></iframe></div></div><p class="compare__label" style="text-align:center"><b>Celular:</b> o veredito primeiro.</p></div>
+        </div></div>
+        </div>
+      </div>
+    </section>
+    <section class="section" data-reveal>
+      <div class="section__head">
+        <p class="section__label">Decisões de design</p>
+        <div>
+          <h2>Três escolhas guiaram a versão celular.</h2>
+          <div class="section__body"><ul class="principles">
+          <li class="panel principle"><span class="principle__n">1</span><b>Veredito primeiro</b><p>A primeira coisa na tela responde se a manhã fechou.</p></li>
+          <li class="panel principle"><span class="principle__n">2</span><b>Detalhe sob demanda</b><p>O resto da informação continua lá, um toque abaixo.</p></li>
+          <li class="panel principle"><span class="principle__n">3</span><b>Mudanças explicadas</b><p>Na demo, as notas ao lado do celular mostram o que mudou em relação ao desktop.</p></li>
+        </ul></div>
+        </div>
+      </div>
+    </section>
+    <section class="section" aria-label="Demo completa">
+      <div class="panel related" data-reveal>
+        <p>No computador, a demo mostra o celular com as notas de cada mudança. No celular, ela ocupa a tela inteira.</p>
+        <a class="btn" href="demos/cerebro-mobile.html">Abrir a demo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+      </div>
+    </section>
+    <section class="section" data-reveal>
+      <div class="section__head">
+        <p class="section__label">Projeto relacionado</p>
+        <div>
+          <h2>Esta tela é a versão móvel do Monitor da Operação.</h2>
+          <div class="section__body"><a class="btn btn--ghost" href="monitor-operacao.html">Ver o case do desktop <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:16px;height:16px"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+        </div>
+      </div>
+    </section>
+    <section class="section" data-reveal>
+      <div class="section__head">
+        <p class="section__label">Tecnologia e métodos</p>
+        <div>
+          <h2>Design responsivo de verdade.</h2>
+          <div class="section__body"><div class="stack"><span class="tag">Mobile first</span><span class="tag">Hierarquia de informação</span><span class="tag">HTML, CSS e JavaScript</span><span class="tag">Tema claro e escuro</span></div></div>
+        </div>
+      </div>
+    </section>
+    </main>
+
+    <nav class="next" aria-label="Próximo projeto">
+      <a href="central-pagamentos-rejeitados.html">
+        <span><span class="next__label">Próximo projeto</span><span class="next__title">Central de Pagamentos Rejeitados</span></span>
+        <span class="next__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+    </nav>
+
+    <footer class="foot">
+      <span>© 2026 Paulo Nobre, São Paulo</span>
+      <a href="index.html">Voltar para a lista de projetos</a>
+    </footer>
+  </div>
+</div>
+<script src="assets/site.js"></script>
+</body>
+</html>

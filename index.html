@@ -1,480 +1,284 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Live demos | Paulo Nobre</title>
-<meta name="description" content="Three tools from an automated collections operation, rebuilt with fictitious data: a monitor for the data bots, a rejected-payment panel and a refunds panel. Designed and built by Paulo Nobre.">
-<meta property="og:title" content="Live demos · Paulo Nobre">
-<meta property="og:description" content="Three working tools from a credit recovery operation, rebuilt with fictitious data. Open them in the browser, no login.">
-<meta name="theme-color" content="#0F1216">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%230F1216'/%3E%3Ctext x='16' y='21.5' font-family='Arial,sans-serif' font-size='13' font-weight='700' fill='%23C4A565' text-anchor='middle'%3EPN%3C/text%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Projetos</title>
+<meta name="description" content="Ferramentas que construí para uma operação de cobrança e pagamentos.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js');</script>
+<script src="assets/vt.js"></script>
+<link rel="stylesheet" href="assets/site.css">
 <style>
-/* ================= TOKENS (shared with the portfolio) ================= */
-:root{
-  --ink:#0F1216; --ink-2:#161A21; --ink-3:#1D222A;
-  --bone:#ECE7DE; --bone-2:#B4B8BD; --bone-3:#8E949B;
-  --brass:#C4A565; --brass-2:#D6BC85;
-  --paper:#EEE9E0; --paper-2:#F7F4EE; --type:#16191E; --type-2:#474C54; --type-3:#5A5F67; --brass-ink:#7A5E24;
-  --line-d:rgba(236,231,222,.12); --line-d2:rgba(236,231,222,.22);
-  --line-l:rgba(22,25,30,.12); --line-l2:rgba(22,25,30,.22);
-  --f:'Hanken Grotesk','Helvetica Neue',Arial,sans-serif;
-  /* type scale, ratio 1.25 */
-  --t-xs:.8rem; --t-sm:.9rem; --t-md:1rem; --t-lg:1.25rem; --t-xl:1.5625rem; --t-2xl:1.953rem; --t-3xl:2.441rem; --t-4xl:3.052rem;
-  /* spacing, 8px base */
-  --s1:8px; --s2:16px; --s3:24px; --s4:32px; --s5:48px; --s6:64px; --s7:96px; --s8:128px;
-  --maxw:1200px; --gut:clamp(20px,4.5vw,56px); --hdr:72px;
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:calc(var(--hdr) + 16px)}
-body{background:var(--ink);color:var(--bone);font:400 var(--t-md)/1.6 var(--f);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
-a{color:inherit}
-img,svg{display:block}
-[hidden]{display:none!important}
-.wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--gut)}
-.num{font-variant-numeric:tabular-nums lining-nums}
-:focus-visible{outline:2px solid var(--brass);outline-offset:3px;border-radius:2px}
-.skip{position:absolute;left:-9999px;top:8px;background:var(--brass);color:var(--ink);padding:10px 14px;font-weight:600;z-index:100}
-.skip:focus{left:12px}
+  :root {
+    --bg: #0c1626;
+    --surface: #13213a;
+    --line: #22344f;
+    --text: #f3efe6;
+    --muted: #93a1b5;
+    --amber: #d6a84c;
+    --amber-soft: rgba(214, 168, 76, 0.10);
+    --ease: cubic-bezier(.22, .8, .24, 1);
+  }
 
-/* ================= HEADER ================= */
-.hdr{position:sticky;top:0;z-index:40;height:var(--hdr);background:rgba(15,18,22,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line-d)}
-.hdr .wrap{height:100%;display:flex;align-items:center;gap:var(--s4)}
-.brand{display:flex;align-items:baseline;gap:10px;text-decoration:none;margin-right:auto;min-height:44px;align-items:center}
-.brand b{font-size:var(--t-lg);font-weight:500;letter-spacing:-.01em}
-.brand span{font-size:var(--t-xs);color:var(--bone-3);font-weight:500}
-.nav{display:flex;gap:var(--s3)}
-.nav a{position:relative;display:flex;align-items:center;min-height:44px;font-size:var(--t-sm);color:var(--bone-2);text-decoration:none;transition:color .15s}
-.nav a:hover{color:var(--bone)}
-.nav a[aria-current="page"]{color:var(--bone)}
-.nav a[aria-current="page"]::after{content:"";position:absolute;left:0;right:0;bottom:8px;height:2px;background:var(--brass)}
-.lang{display:flex;border:1px solid var(--line-d2);border-radius:4px;overflow:hidden}
-.lang button{background:none;border:0;color:var(--bone-2);font:600 var(--t-xs)/1 var(--f);letter-spacing:.06em;padding:0 12px;min-height:36px;min-width:44px;cursor:pointer;transition:background .15s,color .15s}
-.lang button:hover{color:var(--bone)}
-.lang button[aria-pressed="true"]{background:var(--bone);color:var(--ink)}
-.menu-btn{display:none;background:none;border:1px solid var(--line-d2);border-radius:4px;color:var(--bone);font:500 var(--t-sm)/1 var(--f);padding:0 14px;min-height:40px;cursor:pointer}
-.mnav{position:fixed;top:var(--hdr);left:0;right:0;z-index:39;background:var(--ink);border-bottom:1px solid var(--line-d);padding:8px var(--gut) 20px}
-.mnav a{display:flex;align-items:center;min-height:52px;border-bottom:1px solid var(--line-d);font-size:var(--t-lg);text-decoration:none}
-.mnav a[aria-current="page"]{color:var(--brass)}
-.mnav .lang{margin-top:18px;align-self:flex-start;display:inline-flex}
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* ================= HERO ================= */
-.hero{padding:var(--s7) 0 var(--s6)}
-.kicker{font-size:var(--t-sm);color:var(--brass);font-weight:500}
-.hero h1{font-size:clamp(2.1rem,4.4vw,var(--t-4xl));line-height:1.08;font-weight:500;letter-spacing:-.025em;max-width:22ch;margin-top:var(--s2);text-wrap:balance}
-.hero .lede{font-size:var(--t-lg);line-height:1.55;color:var(--bone-2);max-width:60ch;margin-top:var(--s3)}
-.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s3);margin-top:var(--s5);padding-top:var(--s3);border-top:1px solid var(--line-d)}
-.facts dt{font-size:var(--t-xs);color:var(--bone-3);font-weight:500}
-.facts dd{margin-top:4px;font-size:var(--t-md);color:var(--bone)}
+  html { background: var(--bg); }
 
-/* ================= FLOW (the one bold element) ================= */
-.flow-sec{padding:0 0 var(--s7)}
-.flow-cap{display:flex;justify-content:space-between;align-items:baseline;gap:var(--s2);flex-wrap:wrap;margin-bottom:var(--s3)}
-.flow-cap h2{font-size:var(--t-xl);font-weight:500;letter-spacing:-.015em}
-.flow-cap p{font-size:var(--t-sm);color:var(--bone-3);max-width:52ch}
-.flow{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--line-d2);background:var(--ink-2)}
-.flow li{position:relative;padding:var(--s3) var(--s3) var(--s3);border-right:1px solid var(--line-d)}
-.flow li:last-child{border-right:0}
-.flow li::after{content:"";position:absolute;right:-7px;top:34px;width:12px;height:12px;background:var(--ink-2);border-top:1px solid var(--line-d2);border-right:1px solid var(--line-d2);transform:rotate(45deg);z-index:1}
-.flow li:last-child::after{display:none}
-.flow .st{font-size:var(--t-xs);color:var(--bone-3);font-weight:500}
-.flow b{display:block;margin-top:6px;font-size:var(--t-lg);font-weight:500;letter-spacing:-.01em;line-height:1.25}
-.flow p{margin-top:6px;font-size:var(--t-sm);color:var(--bone-2);line-height:1.5}
-.flow a{display:inline-flex;align-items:center;min-height:32px;margin-top:10px;font-size:var(--t-sm);font-weight:500;color:var(--brass);text-decoration:none;border-bottom:1px solid rgba(196,165,101,.4)}
-.flow a:hover{border-bottom-color:var(--brass)}
-.flow li.src{background:var(--ink)}
-.flow li.src::after{background:var(--ink)}
-.flow li.src b{color:var(--bone-2)}
+  body {
+    min-height: 100vh;
+    min-height: 100svh;
+    display: grid;
+    place-items: center;
+    padding: 48px 16px;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Hanken Grotesk", system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
 
-/* ================= PROJECTS (paper section) ================= */
-.projects{background:var(--paper);color:var(--type);padding:var(--s7) 0}
-.projects .head{max-width:62ch;margin-bottom:var(--s6)}
-.projects .head h2{font-size:clamp(1.8rem,3vw,var(--t-3xl));font-weight:500;letter-spacing:-.02em;line-height:1.1}
-.projects .head p{margin-top:var(--s2);color:var(--type-2);font-size:var(--t-lg);line-height:1.55}
-.proj{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:var(--s5);align-items:start;padding:var(--s6) 0;border-top:1px solid var(--line-l2)}
-.proj:last-of-type{padding-bottom:0}
-.shots{display:grid;gap:var(--s2)}
-.shots.duo{grid-template-columns:minmax(0,1fr) 25%;align-items:start}
-.frame{position:relative;background:#fff;border:1px solid var(--line-l2);box-shadow:0 1px 2px rgba(22,25,30,.06),0 18px 40px -24px rgba(22,25,30,.35)}
-.frame .bar{display:flex;align-items:center;justify-content:space-between;gap:12px;height:30px;padding:0 12px;border-bottom:1px solid var(--line-l);background:var(--paper-2);font-size:var(--t-xs);color:var(--type-3)}
-.frame .bar span:last-child{white-space:nowrap}
-.frame .view{position:relative;overflow:hidden;aspect-ratio:16/10}
-.frame.phone .view{aspect-ratio:392/820}
-.frame iframe{position:absolute;top:0;left:0;border:0;transform-origin:0 0;pointer-events:none;background:#fff}
-.frame:not(.phone) iframe{width:1440px;height:900px}
-.frame.phone iframe{width:392px;height:820px}
-.cap{font-size:var(--t-xs);color:var(--type-3);margin-top:6px}
+  main { position: relative; z-index: 1; width: 100%; max-width: 680px; }
 
-.ptxt .role{font-size:var(--t-sm);color:var(--brass-ink);font-weight:600}
-.ptxt h3{font-size:clamp(1.55rem,2.4vw,var(--t-2xl));font-weight:500;letter-spacing:-.02em;line-height:1.15;margin-top:6px}
-.ptxt h3 a{text-decoration:none}
-.ptxt h3 a:hover{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px}
-.ptxt .sum{margin-top:var(--s2);color:var(--type-2);font-size:var(--t-lg);line-height:1.5}
-.pdl{margin-top:var(--s3);border-top:1px solid var(--line-l)}
-.pdl div{display:grid;grid-template-columns:96px minmax(0,1fr);gap:var(--s2);padding:12px 0;border-bottom:1px solid var(--line-l)}
-.pdl dt{font-size:var(--t-sm);color:var(--type-3);font-weight:500}
-.pdl dd{font-size:var(--t-md);color:var(--type);line-height:1.5}
-.pdl ul{list-style:none}
-.pdl li{position:relative;padding-left:16px}
-.pdl li+li{margin-top:4px}
-.pdl li::before{content:"";position:absolute;left:0;top:.7em;width:6px;height:1px;background:var(--type-3)}
-.kbd{display:inline-block;min-width:1.5em;padding:0 5px;border:1px solid var(--line-l2);border-bottom-width:2px;border-radius:3px;font-size:.85em;text-align:center;background:var(--paper-2)}
-.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:var(--s3)}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 20px;border-radius:4px;font:600 var(--t-md)/1 var(--f);text-decoration:none;border:1px solid transparent;transition:background .15s,border-color .15s,color .15s;cursor:pointer}
-.btn-dark{background:var(--type);color:var(--paper-2)}
-.btn-dark:hover{background:#2A2F37}
-.btn-line{border-color:var(--line-l2);color:var(--type)}
-.btn-line:hover{border-color:var(--type)}
-.related{margin-top:var(--s2);font-size:var(--t-sm);color:var(--type-2)}
-.related a{color:var(--brass-ink);font-weight:600;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+    /* Header */
+  header { text-align: center; margin-bottom: 40px; }
 
-/* glossary */
-.gloss{margin-top:var(--s7);padding-top:var(--s4);border-top:1px solid var(--line-l2);display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:var(--s5)}
-.gloss h2{font-size:var(--t-xl);font-weight:500;letter-spacing:-.015em;line-height:1.2}
-.gloss > div > p{margin-top:8px;color:var(--type-2);font-size:var(--t-sm)}
-.gloss dl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s3) var(--s4)}
-.gloss dt{font-weight:600}
-.gloss dd{margin-top:2px;color:var(--type-2);font-size:var(--t-sm);line-height:1.5}
+  h1 {
+    font-size: clamp(2.5rem, 7vw, 3.5rem);
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    line-height: 1;
+  }
 
-/* ================= FOOTER ================= */
-.foot{padding:var(--s7) 0 var(--s4);border-top:1px solid var(--line-d)}
-.foot-top{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:var(--s5);align-items:end}
-.foot h2{font-size:clamp(1.8rem,3.4vw,var(--t-3xl));font-weight:500;letter-spacing:-.02em;line-height:1.12;max-width:20ch}
-.foot .pos{margin-top:var(--s2);color:var(--bone-2);font-size:var(--t-lg);max-width:46ch}
-.foot .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:var(--s4)}
-.btn-brass{background:var(--brass);color:#15120B}
-.btn-brass:hover{background:var(--brass-2)}
-.btn-ghost{border-color:var(--line-d2);color:var(--bone)}
-.btn-ghost:hover{border-color:var(--bone)}
-.foot-nav{display:grid;grid-template-columns:1fr 1fr;gap:var(--s3)}
-.foot-nav h3{font-size:var(--t-xs);color:var(--bone-3);font-weight:500;margin-bottom:8px}
-.foot-nav ul{list-style:none}
-.foot-nav a{display:flex;align-items:center;min-height:36px;color:var(--bone-2);text-decoration:none;font-size:var(--t-md)}
-.foot-nav a:hover{color:var(--bone)}
-.foot-base{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:var(--s2);margin-top:var(--s6);padding-top:var(--s3);border-top:1px solid var(--line-d);font-size:var(--t-sm);color:var(--bone-3)}
-.foot-base a{color:var(--bone-2);text-decoration:none;display:inline-flex;align-items:center;min-height:44px}
-.foot-base a:hover{color:var(--bone)}
+  .lede {
+    margin: 16px auto 0;
+    max-width: 40ch;
+    color: var(--muted);
+    font-size: 1.0625rem;
+    line-height: 1.5;
+  }
 
-/* ================= RESPONSIVE ================= */
-@media (max-width:1024px){
-  .proj{grid-template-columns:1fr;gap:var(--s4)}
-  .ptxt{max-width:64ch}
-  .flow{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .flow li:nth-child(2){border-right:0}
-  .flow li:nth-child(-n+2){border-bottom:1px solid var(--line-d)}
-  .flow li:nth-child(2)::after{display:none}
-  .gloss{grid-template-columns:1fr;gap:var(--s3)}
-  .foot-top{grid-template-columns:1fr}
-}
-@media (max-width:760px){
-  :root{--hdr:64px}
-  .nav,.hdr .lang{display:none}
-  .menu-btn{display:inline-flex;align-items:center}
-  .brand span{display:none}
-  .hero{padding:var(--s6) 0 var(--s5)}
-  .hero .lede{font-size:var(--t-md)}
-  .facts{grid-template-columns:1fr;gap:var(--s2)}
-  .flow{grid-template-columns:1fr}
-  .flow li{border-right:0;border-bottom:1px solid var(--line-d)}
-  .flow li:last-child{border-bottom:0}
-  .flow li::after{right:auto;left:28px;top:auto;bottom:-7px;transform:rotate(135deg)}
-  .flow li:nth-child(2)::after{display:block}
-  .projects{padding:var(--s6) 0}
-  .projects .head{margin-bottom:var(--s4)}
-  .projects .head p,.ptxt .sum{font-size:var(--t-md)}
-  .proj{padding:var(--s5) 0}
-  .shots.duo{grid-template-columns:minmax(0,1fr) 30%}
-  .pdl div{grid-template-columns:1fr;gap:2px}
-  .actions .btn{flex:1 1 auto}
-  .gloss dl{grid-template-columns:1fr}
-  .foot{padding:var(--s6) 0 var(--s3)}
-  .foot .cta .btn{flex:1 1 100%}
-  .foot-base{flex-direction:column;align-items:flex-start;gap:4px}
-}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+  .rule {
+    width: 48px;
+    height: 2px;
+    margin: 28px auto 0;
+    background: var(--amber);
+    transform-origin: center;
+  }
+
+  /* List */
+  .projects { list-style: none; border-top: 1px solid var(--line); }
+
+  .projects li { border-bottom: 1px solid var(--line); }
+
+  .project {
+    position: relative;
+    display: grid;
+    grid-template-columns: 3rem 1fr auto;
+    align-items: center;
+    gap: 16px;
+    padding: 24px 12px;
+    color: inherit;
+    text-decoration: none;
+    isolation: isolate;
+    border-radius: 2px;
+  }
+
+  /* Amber sweep behind the row */
+  .project::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(90deg, rgba(214, 168, 76, 0.13), rgba(214, 168, 76, 0.02) 85%);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .5s var(--ease);
+  }
+
+  /* Amber bar on the left edge */
+  .project::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 18%;
+    bottom: 18%;
+    width: 2px;
+    background: var(--amber);
+    transform: scaleY(0);
+    transition: transform .35s var(--ease);
+  }
+
+  .num {
+    font-size: .875rem;
+    font-weight: 600;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+    transition: color .3s var(--ease);
+  }
+
+  .body { min-width: 0; transition: transform .45s var(--ease); }
+
+  .title {
+    display: block;
+    font-size: clamp(1.1875rem, 3.2vw, 1.4375rem);
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    line-height: 1.25;
+  }
+
+  .desc {
+    display: block;
+    margin-top: 6px;
+    color: var(--muted);
+    font-size: .9375rem;
+    line-height: 1.45;
+  }
+
+  .go {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    color: var(--amber);
+    overflow: hidden;
+    transition: background .35s var(--ease), border-color .35s var(--ease), color .35s var(--ease);
+  }
+
+  .go svg { width: 18px; height: 18px; transition: transform .45s var(--ease); }
+
+  /* Hover and keyboard focus share one state */
+  .project:hover::before,
+  .project:focus-visible::before { transform: scaleX(1); }
+
+  .project:hover::after,
+  .project:focus-visible::after { transform: scaleY(1); }
+
+  .project:hover .num,
+  .project:focus-visible .num { color: var(--amber); }
+
+  .project:hover .body,
+  .project:focus-visible .body { transform: translateX(6px); }
+
+  .project:hover .go,
+  .project:focus-visible .go {
+    background: var(--amber);
+    border-color: var(--amber);
+    color: var(--bg);
+  }
+
+  .project:hover .go svg,
+  .project:focus-visible .go svg { animation: nudge .5s var(--ease); }
+
+  @keyframes nudge {
+    0%   { transform: translateX(0); }
+    45%  { transform: translateX(150%); }
+    46%  { transform: translateX(-150%); }
+    100% { transform: translateX(0); }
+  }
+
+  .project:focus { outline: none; }
+  .project:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
+
+  /* Dim the rows you are not pointing at (pointer devices only) */
+  @media (hover: hover) {
+    .projects:hover .project:not(:hover) .body { opacity: .6; }
+    .body { transition: transform .45s var(--ease), opacity .3s var(--ease); }
+  }
+
+
+  /* Entrance: one orchestrated sequence */
+  @media (prefers-reduced-motion: no-preference) {
+    .js header > * { opacity: 0; transform: translateY(12px); animation: rise .8s var(--ease) forwards; }
+    .js header h1 { animation-delay: .05s; }
+    .js header .lede { animation-delay: .15s; }
+    .js header .rule { transform: scaleX(0); opacity: 1; animation: draw .8s var(--ease) .3s forwards; }
+    .js .projects li { opacity: 0; transform: translateY(16px); animation: rise .7s var(--ease) forwards; }
+    .js .projects li:nth-child(1) { animation-delay: .35s; }
+    .js .projects li:nth-child(2) { animation-delay: .43s; }
+    .js .projects li:nth-child(3) { animation-delay: .51s; }
+    .js .projects li:nth-child(4) { animation-delay: .59s; }
+  }
+
+  @keyframes rise { to { opacity: 1; transform: none; } }
+  @keyframes draw { to { transform: scaleX(1); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; animation: none !important; }
+  }
+
+  /* Mobile */
+  @media (max-width: 520px) {
+    body { padding: 40px 16px; }
+    header { margin-bottom: 32px; }
+    .project { grid-template-columns: 2rem 1fr auto; gap: 12px; padding: 20px 4px; }
+    .go { width: 38px; height: 38px; }
+    .project:hover .body, .project:focus-visible .body { transform: translateX(3px); }
+  }
 </style>
 </head>
-<body id="top">
-<a class="skip" href="#main" data-t="skip">Skip to content</a>
+<body>
+<div class="flares" aria-hidden="true">
+  <div class="flare blue"></div>
+  <div class="flare cyan"></div>
+  <div class="flare amber"></div>
+  <div class="grain"></div>
+</div>
+<main>
+  <header>
+    <h1>Projetos</h1>
+    <p class="lede">Ferramentas que construí para a operação de cobrança e pagamentos.</p>
+    <div class="rule" aria-hidden="true"></div>
+  </header>
 
-<header class="hdr">
-  <div class="wrap">
-    <a class="brand" href="../?lang=en" data-href="../" aria-label="Paulo Nobre, portfolio home"><b>Paulo Nobre</b><span>LSS Green Belt</span></a>
-    <nav class="nav" aria-label="Main">
-      <a href="../?lang=en" data-href="../" data-t="nPort">Portfolio</a>
-      <a href="../?lang=en#cases" data-href="../#cases" data-t="nCases">Cases</a>
-      <a href="./" aria-current="page" data-t="nDemos">Demos</a>
-      <a href="#contact" data-t="nContact">Contact</a>
-    </nav>
-    <div class="lang" role="group" aria-label="Language / Idioma">
-      <button type="button" data-lang="en" aria-pressed="true">EN</button>
-      <button type="button" data-lang="pt" aria-pressed="false">PT</button>
-    </div>
-    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mnav" data-t="menu">Menu</button>
-  </div>
-</header>
-<nav class="mnav" id="mnav" aria-label="Main, mobile" hidden>
-  <a href="../?lang=en" data-href="../" data-t="nPort">Portfolio</a>
-  <a href="../?lang=en#cases" data-href="../#cases" data-t="nCases">Cases</a>
-  <a href="./" aria-current="page" data-t="nDemos">Demos</a>
-  <a href="#contact" data-t="nContact">Contact</a>
-  <div class="lang" role="group" aria-label="Language / Idioma">
-    <button type="button" data-lang="en" aria-pressed="true">EN</button>
-    <button type="button" data-lang="pt" aria-pressed="false">PT</button>
-  </div>
-</nav>
-
-<main id="main">
-
-<section class="hero" aria-labelledby="h1">
-  <div class="wrap">
-    <p class="kicker" data-t="kicker">Live demos</p>
-    <h1 id="h1" data-t="h1">Three tools from one collections operation, rebuilt so you can use them</h1>
-    <p class="lede" data-t="lede">I designed and built these screens for the daily work of a credit recovery operation in Brazil. The real versions run on internal data, so these copies use made-up cases and open in your browser with no login.</p>
-    <dl class="facts">
-      <div><dt data-t="fRoleT">My role</dt><dd data-t="fRole">Process design, business rules and front end</dd></div>
-      <div><dt data-t="fDataT">Data</dt><dd data-t="fData">Fictitious. No name, CPF, contract or amount is real</dd></div>
-      <div><dt data-t="fRunT">Runs on</dt><dd data-t="fRun">Desktop and mobile, light and dark theme</dd></div>
-    </dl>
-  </div>
-</section>
-
-<section class="flow-sec" aria-labelledby="flowT">
-  <div class="wrap">
-    <div class="flow-cap">
-      <h2 id="flowT" data-t="flowT">How the three tools connect</h2>
-      <p data-t="flowD">Each morning, bots collect data from the operation's systems. The tools below take it from there, in this order.</p>
-    </div>
-    <ol class="flow">
-      <li class="src"><span class="st" data-t="s1n">Step 1</span><b data-t="s1t">Bots collect the data</b><p data-t="s1d">Collections system, payment gateway, creditor files and email tasks.</p></li>
-      <li><span class="st" data-t="s2n">Step 2</span><b data-t="s2t">The Brain checks the morning</b><p data-t="s2d">Did every bot run? How much came in? What failed?</p><a href="#brain" data-t="see">See the tool</a></li>
-      <li><span class="st" data-t="s3n">Step 3</span><b data-t="s3t">Rejections routes each payment</b><p data-t="s3d">A rule engine sends every rejected payment to the queue for its fix.</p><a href="#rejections" data-t="see">See the tool</a></li>
-      <li><span class="st" data-t="s4n">Step 4</span><b data-t="s4t">FIDC panel refunds duplicates</b><p data-t="s4d">Payments made twice are matched with the bank statement and refunded.</p><a href="#fidc" data-t="see">See the tool</a></li>
-    </ol>
-  </div>
-</section>
-
-<section class="projects" aria-labelledby="projT">
-  <div class="wrap">
-    <div class="head">
-      <h2 id="projT" data-t="projT">The tools</h2>
-      <p data-t="projD">Each one shows the problem it solves, what I built and a few things to try once it is open.</p>
-    </div>
-
-    <article class="proj" id="brain" aria-labelledby="t-brain">
-      <div class="shots duo">
-        <div>
-          <div class="frame" aria-hidden="true"><div class="bar"><span data-t="brainShot">The Brain, desktop</span></div><div class="view"><iframe data-src="cerebro.html" tabindex="-1" loading="lazy" title=""></iframe></div></div>
-        </div>
-        <div>
-          <div class="frame phone" aria-hidden="true"><div class="bar"><span data-t="mobShot">Mobile</span></div><div class="view"><iframe data-src="cerebro-mobile.html" tabindex="-1" loading="lazy" title=""></iframe></div></div>
-        </div>
-      </div>
-      <div class="ptxt">
-        <p class="role" data-t="b-role">Monitoring, on desktop and mobile</p>
-        <h3 id="t-brain"><a href="en/cerebro.html" data-href="cerebro.html" data-t="b-t">The Brain</a></h3>
-        <p class="sum" data-t="b-sum">A monitor for the fleet of data bots. It answers in seconds whether the morning closed, how much came in and what failed.</p>
-        <dl class="pdl">
-          <div><dt data-t="lProb">Problem</dt><dd data-t="b-prob">The operation depends on bots that run before the workday, and a failed run has to be spotted before people start working.</dd></div>
-          <div><dt data-t="lBuilt">Built</dt><dd data-t="b-built">One screen with every bot, task and source, each with the time its data was saved. A mobile redesign puts the verdict first.</dd></div>
-          <div><dt data-t="lTry">Try</dt><dd><ul><li data-t="b-try1">Open the failed task to see the step where it stopped</li><li data-th="b-try2">Press <span class="kbd">Ctrl</span> <span class="kbd">K</span> to jump between sections</li><li data-t="b-try3">On mobile, tap the notes beside the phone</li></ul></dd></div>
-        </dl>
-        <div class="actions">
-          <a class="btn btn-dark" href="en/cerebro.html" data-href="cerebro.html" data-t="b-open">Open the desktop view</a>
-          <a class="btn btn-line" href="en/cerebro-mobile.html" data-href="cerebro-mobile.html" data-t="b-open2">Open the mobile view</a>
-        </div>
-      </div>
-    </article>
-
-    <article class="proj" id="rejections" aria-labelledby="t-rej">
-      <div class="shots">
-        <div class="frame" aria-hidden="true"><div class="bar"><span data-t="rejShot">Rejections, dashboard</span></div><div class="view"><iframe data-src="painel-rejeicoes.html" tabindex="-1" loading="lazy" title=""></iframe></div></div>
-      </div>
-      <div class="ptxt">
-        <p class="role" data-t="r-role">Business rules for payment handling</p>
-        <h3 id="t-rej"><a href="en/painel-rejeicoes.html" data-href="painel-rejeicoes.html" data-t="r-t">Payment rejections</a></h3>
-        <p class="sum" data-t="r-sum">Every rejected payment arrives already diagnosed and lands in a queue named after the action it needs.</p>
-        <dl class="pdl">
-          <div><dt data-t="lProb">Problem</dt><dd data-t="r-prob">The destination of each payment depended on who was on duty, and every case became a ticket.</dd></div>
-          <div><dt data-t="lBuilt">Built</dt><dd data-t="r-built">Written rules with a recorded reason for every decision, queues by action, a write-off bot and a dashboard of the payment path.</dd></div>
-          <div><dt data-t="lTry">Try</dt><dd><ul><li data-t="r-try1">Open the Issue queue and run the write-off bot</li><li data-th="r-try2">Use Grind mode: <span class="kbd">J</span> next, <span class="kbd">K</span> back, <span class="kbd">X</span> done</li><li data-t="r-try3">Open the details of a case to see the engine rule</li></ul></dd></div>
-        </dl>
-        <div class="actions">
-          <a class="btn btn-dark" href="en/painel-rejeicoes.html" data-href="painel-rejeicoes.html" data-t="r-open">Open the Rejections panel</a>
-        </div>
-        <p class="related"><span data-t="rel">Related case:</span> <a href="../?lang=en#case/engine" data-href="../#case/engine" data-t="r-rel">From operational judgement to business rules</a></p>
-      </div>
-    </article>
-
-    <article class="proj" id="fidc" aria-labelledby="t-fidc">
-      <div class="shots">
-        <div class="frame" aria-hidden="true"><div class="bar"><span data-t="fidcShot">FIDC refunds, operation mode</span></div><div class="view"><iframe data-src="painel-fidc.html" tabindex="-1" loading="lazy" title=""></iframe></div></div>
-      </div>
-      <div class="ptxt">
-        <p class="role" data-t="f-role">Reconciliation and refunds</p>
-        <h3 id="t-fidc"><a href="en/painel-fidc.html" data-href="painel-fidc.html" data-t="f-t">FIDC refunds</a></h3>
-        <p class="sum" data-t="f-sum">Duplicate payments matched against the gateway statement: the original stays, the duplicate is refunded.</p>
-        <dl class="pdl">
-          <div><dt data-t="lProb">Problem</dt><dd data-t="f-prob">Customers who paid twice need a refund, but each duplicate has to be confirmed against the bank statement first.</dd></div>
-          <div><dt data-t="lBuilt">Built</dt><dd data-t="f-built">Two modes on one screen: curation for who decides what goes into the batch, operation for who requests and completes each refund.</dd></div>
-          <div><dt data-t="lTry">Try</dt><dd><ul><li data-t="f-try1">Switch to curation mode and change a case to Review</li><li data-t="f-try2">Send a case back to the rejections panel</li><li data-t="f-try3">Mark a refund as requested, then complete it</li></ul></dd></div>
-        </dl>
-        <div class="actions">
-          <a class="btn btn-dark" href="en/painel-fidc.html" data-href="painel-fidc.html" data-t="f-open">Open the FIDC panel</a>
-        </div>
-      </div>
-    </article>
-
-    <section class="gloss" id="gloss" aria-labelledby="glT">
-      <div><h2 id="glT">Brazilian terms on these screens</h2><p>The operation runs in Brazil, so a few local terms appear in the tools.</p></div>
-      <dl>
-        <div><dt>Boleto</dt><dd>A bank payment slip, one of the most common ways to pay bills in Brazil.</dd></div>
-        <div><dt>Pix</dt><dd>Brazil's instant payment system, run by the Central Bank.</dd></div>
-        <div><dt>CPF</dt><dd>The individual taxpayer ID. Always masked on these screens.</dd></div>
-        <div><dt>FIDC</dt><dd>A receivables investment fund that buys credit portfolios.</dd></div>
-      </dl>
-    </section>
-  </div>
-</section>
-
+  <ol class="projects">
+    <li>
+      <a class="project" href="central-pagamentos-rejeitados.html">
+        <span class="num" aria-hidden="true">01</span>
+        <span class="body">
+          <span class="title">Central de Pagamentos Rejeitados</span>
+          <span class="desc">Classifica cada pagamento rejeitado e indica a próxima ação.</span>
+        </span>
+        <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+    </li>
+    <li>
+      <a class="project" href="pagamentos-em-duplicidade.html">
+        <span class="num" aria-hidden="true">02</span>
+        <span class="body">
+          <span class="title">Painel para Pagamentos em Duplicidade</span>
+          <span class="desc">Encontra pagamentos em dobro e organiza o reembolso.</span>
+        </span>
+        <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+    </li>
+    <li>
+      <a class="project" href="monitor-operacao.html">
+        <span class="num" aria-hidden="true">03</span>
+        <span class="body">
+          <span class="title">Monitor da Operação</span>
+          <span class="desc">Mostra o status das rotinas diárias em uma única tela.</span>
+        </span>
+        <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+    </li>
+    <li>
+      <a class="project" href="monitor-operacao-celular.html">
+        <span class="num" aria-hidden="true">04</span>
+        <span class="body">
+          <span class="title">Monitor da Operação (Versão Celular)</span>
+          <span class="desc">O mesmo monitor, pensado para o gestor acompanhar pelo celular.</span>
+        </span>
+        <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+    </li>
+  </ol>
 </main>
 
-<footer class="foot" id="contact">
-  <div class="wrap">
-    <div class="foot-top">
-      <div>
-        <h2 data-t="ftH">Want to talk about how these were built?</h2>
-        <p class="pos" data-t="ftP">PMO and project delivery in process improvement and business transformation, based in São Paulo.</p>
-        <div class="cta">
-          <a class="btn btn-brass" href="mailto:nobrecontato21@outlook.com" data-t="ftMail">Email me</a>
-          <a class="btn btn-ghost" href="https://www.linkedin.com/in/paulo-nobre-/" target="_blank" rel="noopener" data-t="ftLi">LinkedIn</a>
-        </div>
-      </div>
-      <nav class="foot-nav" aria-label="Footer">
-        <div><h3 data-t="ftPort">Portfolio</h3><ul>
-          <li><a href="../?lang=en#cases" data-href="../#cases" data-t="nCases">Cases</a></li>
-          <li><a href="../?lang=en#career" data-href="../#career" data-t="ftExp">Experience</a></li>
-          <li><a href="../?lang=en#bring" data-href="../#bring" data-t="ftSkills">Skills</a></li>
-        </ul></div>
-        <div><h3 data-t="nDemos">Demos</h3><ul>
-          <li><a href="#brain" data-t="b-t">The Brain</a></li>
-          <li><a href="#rejections" data-t="r-t">Payment rejections</a></li>
-          <li><a href="#fidc" data-t="f-t">FIDC refunds</a></li>
-        </ul></div>
-      </nav>
-    </div>
-    <div class="foot-base">
-      <span data-t="copy">© 2026 Paulo Nobre, São Paulo, Brazil</span>
-      <span><a href="https://github.com/nobre-analytics" target="_blank" rel="noopener">GitHub</a></span>
-      <a href="#top" data-t="top">Back to top</a>
-    </div>
-  </div>
-</footer>
-
-<script>
-"use strict";
-/* Portuguese copy. English lives in the markup so the page reads well without JavaScript. */
-const PT = {
-  skip:"Pular para o conteúdo", nPort:"Portfólio", nCases:"Cases", nDemos:"Demos", nContact:"Contato", menu:"Menu",
-  kicker:"Demos ao vivo",
-  h1:"Três ferramentas de uma operação de cobrança, refeitas para você usar",
-  lede:"Desenhei e construí estas telas para o dia a dia de uma operação de recuperação de crédito. As versões reais rodam com dados internos, então estas cópias usam casos inventados e abrem no navegador, sem login.",
-  fRoleT:"Meu papel", fRole:"Desenho de processo, regras de negócio e front end",
-  fDataT:"Dados", fData:"Fictícios. Nenhum nome, CPF, contrato ou valor é real",
-  fRunT:"Funciona em", fRun:"Computador e celular, tema claro e escuro",
-  flowT:"Como as três ferramentas se conectam", flowD:"Toda manhã, robôs coletam os dados dos sistemas da operação. As ferramentas abaixo seguem a partir daí, nesta ordem.",
-  s1n:"Etapa 1", s1t:"Robôs coletam os dados", s1d:"Sistema de cobrança, gateway de pagamento, arquivos da credora e tarefas por e-mail.",
-  s2n:"Etapa 2", s2t:"O Cérebro confere a manhã", s2d:"Todos os robôs rodaram? Quanto entrou? O que falhou?",
-  s3n:"Etapa 3", s3t:"Rejeições direciona cada pagamento", s3d:"Um motor de regras manda cada pagamento rejeitado para a fila da sua correção.",
-  s4n:"Etapa 4", s4t:"O painel FIDC reembolsa duplicidades", s4d:"Pagamentos feitos duas vezes são cruzados com o extrato e reembolsados.",
-  see:"Ver a ferramenta",
-  projT:"As ferramentas", projD:"Cada uma mostra o problema que resolve, o que eu construí e algumas coisas para testar depois de abrir.",
-  lProb:"Problema", lBuilt:"Construí", lTry:"Teste",
-  brainShot:"Cérebro, computador", mobShot:"Celular",
-  "b-role":"Monitoramento, no computador e no celular", "b-t":"Cérebro",
-  "b-sum":"Um observador da frota de robôs de dados. Responde em segundos se a manhã fechou, quanto entrou e o que falhou.",
-  "b-prob":"A operação depende de robôs que rodam antes do expediente, e uma execução que falhou precisa ser vista antes de as pessoas começarem a trabalhar.",
-  "b-built":"Uma tela com cada robô, tarefa e fonte, sempre com a hora em que o dado foi gravado. O redesenho para celular coloca o veredito primeiro.",
-  "b-try1":"Abra a tarefa que falhou para ver a etapa onde ela parou",
-  "b-try2":'Aperte <span class="kbd">Ctrl</span> <span class="kbd">K</span> para pular entre as seções',
-  "b-try3":"No celular, toque nas notas ao lado do aparelho",
-  "b-open":"Abrir a versão de computador", "b-open2":"Abrir a versão de celular",
-  rejShot:"Rejeições, dashboard",
-  "r-role":"Regras de negócio para a tratativa de pagamentos", "r-t":"Rejeições de pagamento",
-  "r-sum":"Cada pagamento rejeitado chega diagnosticado e cai numa fila com o nome da ação que ele exige.",
-  "r-prob":"O destino de cada pagamento dependia de quem estava de plantão, e cada caso virava um ticket.",
-  "r-built":"Regras escritas com motivo registrado em cada decisão, filas por ação, um robô de baixa e um dashboard do caminho do pagamento.",
-  "r-try1":"Abra a fila Emitir e rode o robô de baixa",
-  "r-try2":'Use o modo Grind: <span class="kbd">J</span> próximo, <span class="kbd">K</span> anterior, <span class="kbd">X</span> concluir',
-  "r-try3":"Abra os detalhes de um caso para ver a regra do motor",
-  "r-open":"Abrir o painel de rejeições", rel:"Case relacionado:", "r-rel":"Da decisão operacional à regra de negócio",
-  fidcShot:"Reembolsos FIDC, modo operação",
-  "f-role":"Conciliação e reembolsos", "f-t":"Reembolsos FIDC",
-  "f-sum":"Pagamentos em duplicidade cruzados com o extrato do gateway: o original fica, o duplicado é reembolsado.",
-  "f-prob":"Quem pagou duas vezes precisa ser reembolsado, mas cada duplicidade tem que ser confirmada no extrato antes.",
-  "f-built":"Dois modos na mesma tela: curadoria para quem decide o que entra no lote, operação para quem solicita e conclui cada reembolso.",
-  "f-try1":"Mude para o modo curadoria e passe um caso para Revisar",
-  "f-try2":"Devolva um caso para o painel de rejeições",
-  "f-try3":"Marque um reembolso como solicitado e depois conclua",
-  "f-open":"Abrir o painel FIDC",
-  ftH:"Quer conversar sobre como estas telas foram feitas?",
-  ftP:"PMO e project delivery em melhoria de processos e transformação de negócio, em São Paulo.",
-  ftMail:"Mandar e-mail", ftLi:"LinkedIn", ftPort:"Portfólio", ftExp:"Experiência", ftSkills:"Competências",
-  copy:"© 2026 Paulo Nobre, São Paulo, Brasil", top:"Voltar ao topo",
-  title:"Demos ao vivo | Paulo Nobre"
-};
-const EN = {};
-document.querySelectorAll("[data-t]").forEach(n=>{ if(!(n.dataset.t in EN)) EN[n.dataset.t]=n.textContent; });
-document.querySelectorAll("[data-th]").forEach(n=>{ EN[n.dataset.th]=n.innerHTML; });
-EN.title = document.title;
-
-let lang = "en";
-function setLang(l){
-  lang = l==="pt" ? "pt" : "en";
-  const d = lang==="pt" ? PT : EN;
-  document.documentElement.lang = lang==="pt" ? "pt-BR" : "en";
-  document.querySelectorAll("[data-t]").forEach(n=>{ const v=d[n.dataset.t]; if(v!=null) n.textContent=v; });
-  document.querySelectorAll("[data-th]").forEach(n=>{ const v=d[n.dataset.th]; if(v!=null) n.innerHTML=v; });
-  document.title = d.title;
-  document.querySelectorAll("[data-lang]").forEach(b=>b.setAttribute("aria-pressed", String(b.dataset.lang===lang)));
-  /* links: demo files live in en/ and pt/, portfolio links carry the language */
-  document.querySelectorAll("a[data-href]").forEach(a=>{
-    const h=a.dataset.href;
-    if(h.startsWith("../")){ const [p,hash]=h.split("#"); a.href = p+"?lang="+lang+(hash?"#"+hash:""); }
-    else a.href = lang+"/"+h;
-  });
-  document.querySelectorAll("iframe[data-src]").forEach(f=>{ const s=lang+"/"+f.dataset.src; if(f.getAttribute("src")!==s) f.setAttribute("src",s); });
-  document.getElementById("gloss").hidden = lang==="pt";
-  try{ localStorage.setItem("pn-lang", lang); }catch(e){}
-  try{ const u=new URL(location.href); u.searchParams.set("lang",lang); history.replaceState(null,"",u); }catch(e){}
-}
-document.addEventListener("click",e=>{ const b=e.target.closest("[data-lang]"); if(b) setLang(b.dataset.lang); });
-
-/* mobile menu */
-const mbtn=document.querySelector(".menu-btn"), mnav=document.getElementById("mnav");
-function menu(open){ mbtn.setAttribute("aria-expanded",String(open)); mnav.hidden=!open; }
-mbtn.addEventListener("click",()=>menu(mnav.hidden));
-mnav.addEventListener("click",e=>{ if(e.target.closest("a")) menu(false); });
-document.addEventListener("keydown",e=>{ if(e.key==="Escape"&&!mnav.hidden){ menu(false); mbtn.focus(); } });
-addEventListener("resize",()=>{ if(innerWidth>760&&!mnav.hidden) menu(false); });
-
-/* previews: scale each live screen to the width of its frame */
-function scale(){
-  document.querySelectorAll(".frame .view").forEach(v=>{
-    const f=v.querySelector("iframe"); if(!f) return;
-    const w=parseFloat(getComputedStyle(f).width);
-    f.style.transform="scale("+(v.clientWidth/w)+")";
-  });
-}
-addEventListener("resize",scale);
-
-let ini=(location.search.match(/[?&]lang=(pt|en)\b/)||[])[1];
-if(!ini){ try{ ini=localStorage.getItem("pn-lang"); }catch(e){} }
-if(!ini) ini=(navigator.language||"en").toLowerCase().startsWith("pt")?"pt":"en";
-setLang(ini); scale();
-</script>
+<script src="assets/site.js"></script>
 </body>
 </html>
