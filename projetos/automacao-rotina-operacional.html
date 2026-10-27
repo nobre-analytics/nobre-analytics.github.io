@@ -1,52 +1,126 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Rotina da manhã sem disparos manuais · Case · Paulo Nobre</title>
 <meta name="description" content="Como a preparação da operação de cobrança passou a começar sozinha às 6h, com as etapas em sequência e uma pessoa acompanhando falhas. Com período e amostra das medições.">
-<link rel="canonical" href="https://nobre-analytics.github.io/projetos/automacao-rotina-operacional.html">
-<link rel="alternate" hreflang="pt-BR" href="https://nobre-analytics.github.io/projetos/automacao-rotina-operacional.html">
-<link rel="alternate" hreflang="en" href="https://nobre-analytics.github.io/projetos/en/automacao-rotina-operacional.html">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Rotina da manhã sem disparos manuais · Case · Paulo Nobre">
-<meta property="og:description" content="Como a preparação da operação de cobrança passou a começar sozinha às 6h, com as etapas em sequência e uma pessoa acompanhando falhas. Com período e amostra das medições.">
-<meta property="og:url" content="https://nobre-analytics.github.io/projetos/automacao-rotina-operacional.html">
-<meta property="og:locale" content="pt_BR">
-<meta property="og:site_name" content="Paulo Nobre">
-<meta name="twitter:card" content="summary_large_image">
-<meta property="og:image" content="https://nobre-analytics.github.io/static/img/og-pt.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta name="twitter:image" content="https://nobre-analytics.github.io/static/img/og-pt.png">
-<meta name="theme-color" content="#0B1220">
-<link rel="icon" href="../static/img/favicon.svg" type="image/svg+xml">
-<link rel="preload" href="../static/fonts/hanken-grotesk-latin-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../static/css/site.css">
-<script>document.documentElement.classList.add('js')</script>
+<script>document.documentElement.classList.add('js');</script>
+<script src="assets/vt.js"></script>
+<link rel="stylesheet" href="assets/site.css">
+<style>
+
+.tree { padding: 28px 24px 24px; }
+.tree svg { width: 100%; height: auto; overflow: visible; }
+.tree .node rect { fill: var(--surface-2); stroke: var(--line-2); }
+.tree .node.root rect { fill: rgba(224,122,107,.12); stroke: rgba(224,122,107,.55); }
+.tree .node.engine rect { fill: rgba(217,130,91,.12); stroke: var(--amber); }
+.tree text { fill: var(--text); font: 600 14px "Public Sans", system-ui, sans-serif; }
+.tree text.sub { fill: var(--muted); font-weight: 500; font-size: 12px; }
+.tree .edge { fill: none; stroke: var(--line-2); stroke-width: 1.5; }
+.tree .edge.hot { stroke: var(--amber); }
+.tree .out rect { fill: var(--bg-2); stroke: var(--line-2); }
+.tree .out circle { fill: var(--amber); }
+.tree .final rect { fill: rgba(217,130,91,.14); stroke: var(--amber); }
+.tree .final text { font-size: 15px; }
+.tree__cap { margin-top: 14px; }
+@media (prefers-reduced-motion: no-preference) {
+  .js .tree .edge { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 1s var(--ease) forwards; animation-delay: calc(var(--d, 0) * 1ms + 700ms); }
+  .js .tree .out { opacity: 0; animation: fadein .6s var(--ease) forwards; animation-delay: calc(var(--d, 0) * 1ms + 1100ms); }
+}
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@keyframes fadein { to { opacity: 1; } }
+
+.outcomes { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 28px; }
+.outcome { padding: 20px; }
+.outcome b { display: block; font-size: 1.0625rem; letter-spacing: -0.01em; }
+.outcome span { display: block; margin-top: 6px; color: var(--muted); font-size: .9375rem; line-height: 1.45; }
+
+.timeline { list-style: none; position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin-top: 8px; }
+.timeline::before { content: ""; position: absolute; left: 0; right: 0; top: 7px; height: 1px; background: var(--line-2); }
+.timeline li { position: relative; padding: 32px 24px 0 0; }
+.timeline li::before { content: ""; position: absolute; left: 0; top: 0; width: 15px; height: 15px; border-radius: 50%; background: var(--bg); border: 2px solid var(--amber); }
+.timeline time { color: var(--amber); font-weight: 600; font-size: .9375rem; }
+.timeline b { display: block; margin-top: 4px; font-size: 1.0625rem; }
+.timeline p { margin-top: 6px; color: var(--muted); font-size: .9375rem; line-height: 1.5; max-width: 30ch; }
+
+
+.quote { margin-top: 28px; padding: 24px 28px; border-left: 2px solid var(--amber); max-width: var(--read); }
+.quote p { font-size: 1.125rem; color: var(--text); line-height: 1.5; }
+.quote cite { display: block; margin-top: 10px; font-style: normal; color: var(--muted); font-size: .9375rem; }
+
+@media (max-width: 920px) { .outcomes { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) {
+  .timeline { grid-template-columns: 1fr; gap: 28px; }
+  .timeline::before { left: 7px; right: auto; top: 0; bottom: 0; width: 1px; height: auto; }
+  .timeline li { padding: 0 0 0 32px; }
+  .tree { padding: 20px 12px 16px; }
+}
+@media (max-width: 420px) { .outcomes { grid-template-columns: 1fr; } }
+
+</style>
+<link rel="canonical" href="https://nobre-analytics.github.io/projetos/automacao-rotina-operacional.html"><link rel="alternate" hreflang="pt-BR" href="https://nobre-analytics.github.io/projetos/automacao-rotina-operacional.html"><link rel="alternate" hreflang="en" href="https://nobre-analytics.github.io/projetos/en/automacao-rotina-operacional.html">
+<meta property="og:type" content="article"><meta property="og:title" content="Rotina da manhã sem disparos manuais · Case · Paulo Nobre"><meta property="og:description" content="Como a preparação da operação de cobrança passou a começar sozinha às 6h, com as etapas em sequência e uma pessoa acompanhando falhas. Com período e amostra das medições."><meta property="og:url" content="https://nobre-analytics.github.io/projetos/automacao-rotina-operacional.html"><meta property="og:image" content="https://nobre-analytics.github.io/static/img/og-pt.png"><meta name="twitter:card" content="summary_large_image"><link rel="icon" href="../static/img/favicon.svg" type="image/svg+xml">
 </head>
-<body>
+<body class="case case--automacao-rotina-operacional">
 <a class="skip" href="#conteudo">Pular para o conteúdo</a>
-<header class="hdr">
-  <div class="wrap hdr__in">
-    <a class="brand" href="../?lang=pt"><b>Paulo Nobre</b><span>Melhoria de processos e automação</span></a>
-    <nav class="nav" aria-label="Principal"><a href="../?lang=pt">Início</a><a href="./" aria-current="page">Projetos</a><a href="./#demos">Demos</a><a href="../?lang=pt#contato">Contato</a></nav>
-    <div class="lang" role="group" aria-label="Idioma"><a href="automacao-rotina-operacional.html" lang="pt-BR" hreflang="pt-BR" data-lang-link="pt" aria-current="true">PT</a><a href="en/automacao-rotina-operacional.html" lang="en" hreflang="en" data-lang-link="en">EN</a></div>
-    <button class="menu-btn" type="button" aria-expanded="false">Menu</button>
-  </div>
-</header>
-<main id="conteudo">
-<div class="case-hero"><div class="wrap">
-  <p class="crumb"><a href="../?lang=pt">Início</a> / <a href="./">Projetos</a> / Case 01</p>
-  <p class="eyebrow enter" style="margin-top:24px">Melhoria de processo e automação</p>
-  <h1 class="h1 enter d1">Como a rotina da manhã deixou de depender de disparos manuais</h1>
-  <p class="lede enter d2">A preparação da operação de cobrança dependia de uma pessoa disparar cada etapa, uma depois da outra. Reorganizei as etapas em uma sequência que começa sozinha às 6h e acompanhei o resultado nos registros de execução.</p>
-  <dl class="summary enter d3"><div><dt>Problema</dt><dd>A lista do discador precisa estar pronta antes das 8h, quando a equipe começa a ligar. Cada etapa só começava quando alguém disparava a anterior.</dd></div><div><dt>Minha participação</dt><dd>Mapeei o fluxo, medi as esperas e configurei a sequência na plataforma que já existia, com orientação do suporte do fornecedor.</dd></div><div><dt>O que mudou</dt><dd>A sequência começa por agendamento às 6h, as etapas rodam encadeadas e uma pessoa acompanha o resultado e as falhas.</dd></div><div><dt>Evidência</dt><dd>Antes: mediana de 07h30 em 29 dias. Depois: 3 registros detalhados, entre 06h22 e 06h57.<br><span class="ev ev--measured">Medido em registros · amostras diferentes</span></dd></div></dl>
-</div></div>
-<section class="case-sec" id="problema" aria-labelledby="problema-h"><div class="wrap case-grid"><div class="side"><p class="eyebrow">O problema</p></div><div class="main"><h2 class="h2 rv" id="problema-h">A preparação terminava perto das 8h, e qualquer espera empurrava o horário.</h2><div class="rv"><div class="prose"><p>A equipe de cobrança começa às 8h e precisa da lista do discador pronta para isso. Antes da mudança, todas as etapas da preparação dependiam de um disparo manual: alguém conferia se as tarefas do dia anterior tinham terminado, disparava a distribuição da carteira para as assessorias, esperava o fim e só então disparava a lista.</p><p>A rotina era uma das tarefas de uma equipe pequena de BackOffice, sem ninguém dedicado só a ela. Se a pessoa estava em outra atividade quando uma etapa terminava, a próxima ficava parada. Nos 29 dias observados entre 27/04 e 30/05/2026, a lista ficou pronta depois das 8h em 3 dias, e em 5 dias sobraram menos de 15 minutos até as 8h.</p></div><div class="compare"><div class="before"><h3>Antes: disparos manuais</h3><ol><li>Uma pessoa confere se as etapas anteriores terminaram</li><li>A pessoa dispara a distribuição da carteira</li><li>A próxima etapa espera alguém ver que a distribuição acabou</li><li>A pessoa dispara a lista do discador</li></ol></div><div class="after"><h3>Depois: sequência programada</h3><ol><li>A sequência começa sozinha às 6h</li><li>A distribuição da carteira roda</li><li>A lista do discador começa quando a distribuição termina</li><li>Uma pessoa acompanha o resultado e trata falhas</li></ol></div></div></div></div></div></section>
-<section class="case-sec" id="contribuicao" aria-labelledby="contribuicao-h"><div class="wrap case-grid"><div class="side"><p class="eyebrow">Minha contribuição</p></div><div class="main"><h2 class="h2 rv" id="contribuicao-h">Medi onde o tempo se perdia antes de mudar a rotina.</h2><div class="rv"><div class="prose"><p>A ferramenta não era o problema. O tempo se perdia na espera entre uma etapa e a próxima, enquanto ninguém disparava. Por isso a mudança foi encadear as tarefas e programar o início, e não tentar deixar cada tarefa mais rápida.</p></div><div class="contrib"><div class="me"><h3><i aria-hidden="true"></i>O que fiz diretamente</h3><ul><li>Mapeei as etapas, os horários e as dependências entre as tarefas.</li><li>Levantei os registros de execução e medi a espera entre a distribuição e a lista.</li><li>Configurei e validei o encadeamento e o agendamento das tarefas.</li><li>Defini o que acontece quando uma etapa falha: nova execução e, se não resolver, uma pessoa assume.</li><li>Acompanhei as execuções depois da mudança.</li></ul></div><div class="with"><h3><i aria-hidden="true"></i>Com outras pessoas</h3><ul><li>O suporte do fornecedor orientou o uso do recurso de encadeamento da plataforma.</li></ul></div><div class="dep"><h3><i aria-hidden="true"></i>Dependências externas</h3><ul><li>A plataforma de agendamento e o seu código são do fornecedor.</li><li>A equipe de BackOffice continua responsável por acompanhar a rotina.</li></ul></div></div></div></div></div></section>
-<section class="case-sec" id="como-funciona" aria-labelledby="como-funciona-h"><div class="wrap case-grid"><div class="side"><p class="eyebrow">Como funciona</p></div><div class="main"><h2 class="h2 rv" id="como-funciona-h">Início programado, etapas em sequência e uma pessoa acompanhando.</h2><div class="rv"><ol class="flow"><li><h3>Início programado</h3><p>A sequência começa às 6h, sem depender de alguém conectado para disparar.</p><span class="who who--auto">automático</span></li><li><h3>Distribuição da carteira</h3><p>A carteira do dia é enviada para as assessorias.</p><span class="who who--auto">automático</span></li><li><h3>Lista do discador</h3><p>Começa quando a distribuição termina, sem esperar um disparo.</p><span class="who who--auto">automático</span></li><li><h3>Acompanhamento</h3><p>Uma pessoa confere o resultado. Se uma etapa falha, ela roda de novo; se continuar falhando, a pessoa assume.</p><span class="who who--human">pessoa</span></li></ol><p class="small muted" style="margin-top:16px">O horário das 6h é o do disparo programado. Ele não é o horário em que alguém começa a trabalhar.</p></div></div></div></section>
-<section class="case-sec" id="o-que-mudou" aria-labelledby="o-que-mudou-h"><div class="wrap case-grid"><div class="side"><p class="eyebrow">O que mudou</p></div><div class="main"><h2 class="h2 rv" id="o-que-mudou-h">A sequência passou a começar sozinha, e a espera entre duas etapas caiu nos registros disponíveis.</h2><div class="rv"><div class="prose"><p>Nos três registros detalhados depois da mudança, a lista do discador ficou pronta antes das 7h, e a passagem entre a distribuição e a lista levou no máximo 2,2 minutos.</p></div><div class="evidence"><div class="evidence__head"><b>Lista do discador: antes e depois</b><span class="ev ev--measured">Medido em registros</span></div><div class="evidence__body"><figure class="chart"><div class="chart-scroll"><svg viewBox="0 0 720 206" role="img" aria-labelledby="chart-t-pt"><title id="chart-t-pt">Horário em que a lista do discador ficou pronta, antes e depois da sequência programada</title>
+<div class="flares" aria-hidden="true"><div class="flare blue"></div><div class="flare cyan"></div><div class="flare amber"></div><div class="grain"></div></div>
+
+<div class="page">
+  <div class="wrap">
+    <nav class="topbar" aria-label="Navegação">
+      <a class="back" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg> Todos os projetos</a>
+      <span class="topbar__right"><span class="crumb">Case <b>01</b> de 04</span><span class="langs" role="group" aria-label="Idioma"><span class="langs__cur" aria-current="true">PT</span><a href="en/automacao-rotina-operacional.html" hreflang="en" lang="en" title="English version" data-lang-switch="en">EN</a></span></span>
+    </nav>
+
+    <main id="conteudo">
+      <header class="hero">
+        <div class="hero__grid">
+          <div>
+            <p class="hero__kicker" data-seq style="--i:0">Melhoria de processo e automação</p>
+            <h1 data-seq style="--i:1">Como a rotina da manhã deixou de depender de disparos manuais</h1>
+            <p class="hero__lede" data-seq style="--i:2">A preparação da operação de cobrança dependia de uma pessoa disparar cada etapa, uma depois da outra. Reorganizei as etapas em uma sequência que começa sozinha às 6h e acompanhei o resultado nos registros de execução.</p>
+            <div class="facts" data-seq style="--i:3"><span class="fact">Sequência agendada às 6h</span><span class="fact">Plataforma já existente</span><span class="fact">Com orientação do fornecedor</span></div></div>
+          <div class="hero__visual" data-seq style="--i:4">
+            <figure class="panel" style="padding:22px 18px"><div class="flowrow"><span class="tag-r">Antes</span><span class="st ">Pessoa confere<small>etapas anteriores</small></span><span class="st ">Pessoa dispara<small>a distribuição</small></span><span class="st wait">Espera<small>até alguém ver o fim</small></span><span class="st ">Pessoa dispara<small>a lista do discador</small></span></div><div class="flowrow"><span class="tag-r">Depois</span><span class="st auto">Agendador<small>início às 6h</small></span><span class="st auto">Distribuição<small>da carteira</small></span><span class="st auto">Lista do discador<small>na sequência</small></span><span class="st ">Pessoa acompanha<small>resultado e falhas</small></span></div></figure></div>
+        </div>
+      </header>
+
+      <div class="kpis" style="--n:3" data-reveal><div class="kpi"><div class="kpi__value">7h30</div><div class="kpi__label">mediana de conclusão da lista do discador antes da mudança · 29 dias, abr e mai/2026</div></div><div class="kpi"><div class="kpi__value">3 de 29</div><div class="kpi__label">dias em que a lista ficou pronta depois das 8h, quando a operação começa</div></div><div class="kpi"><div class="kpi__value">6h22 a 6h57</div><div class="kpi__label">conclusão da lista nos 3 dias documentados depois da mudança</div></div></div>
+    <section class="section summary-sec" aria-label="Resumo" data-reveal><div class="cards4"><div class="panel"><b>Problema</b><span>A lista do discador precisa estar pronta antes das 8h, quando a equipe começa a ligar. Cada etapa só começava quando alguém disparava a anterior.</span></div><div class="panel"><b>Minha participação</b><span>Mapeei o fluxo, medi as esperas e configurei a sequência na plataforma que já existia, com orientação do suporte do fornecedor.</span></div><div class="panel"><b>O que mudou</b><span>A sequência começa por agendamento às 6h, as etapas rodam encadeadas e uma pessoa acompanha o resultado e as falhas.</span></div><div class="panel"><b>Evidência</b><span>Antes: mediana de 07h30 em 29 dias. Depois: 3 registros detalhados, entre 06h22 e 06h57.<br><span class="ev ev--measured">Medido em registros · amostras diferentes</span></span></div></div></section>
+    <section class="section" id="problema" data-reveal>
+      <div class="section__head">
+        <p class="section__label">O problema</p>
+        <div>
+          <h2>A preparação terminava perto das 8h, e qualquer espera empurrava o horário.</h2>
+          <div class="section__body"><div class="prose"><div class="prose"><p>A equipe de cobrança começa às 8h e precisa da lista do discador pronta para isso. Antes da mudança, todas as etapas da preparação dependiam de um disparo manual: alguém conferia se as tarefas do dia anterior tinham terminado, disparava a distribuição da carteira para as assessorias, esperava o fim e só então disparava a lista.</p><p>A rotina era uma das tarefas de uma equipe pequena de BackOffice, sem ninguém dedicado só a ela. Se a pessoa estava em outra atividade quando uma etapa terminava, a próxima ficava parada. Nos 29 dias observados entre 27/04 e 30/05/2026, a lista ficou pronta depois das 8h em 3 dias, e em 5 dias sobraram menos de 15 minutos até as 8h.</p></div></div><div class="compare"><div class="panel"><b class="c-h">Antes: disparos manuais</b><ol class="c-ol"><li>Uma pessoa confere se as etapas anteriores terminaram</li><li>A pessoa dispara a distribuição da carteira</li><li>A próxima etapa espera alguém ver que a distribuição acabou</li><li>A pessoa dispara a lista do discador</li></ol></div><div class="panel after"><b class="c-h">Depois: sequência programada</b><ol class="c-ol"><li>A sequência começa sozinha às 6h</li><li>A distribuição da carteira roda</li><li>A lista do discador começa quando a distribuição termina</li><li>Uma pessoa acompanha o resultado e trata falhas</li></ol></div></div></div>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="contribuicao" data-reveal>
+      <div class="section__head">
+        <p class="section__label">Minha contribuição</p>
+        <div>
+          <h2>Medi onde o tempo se perdia antes de mudar a rotina.</h2>
+          <div class="section__body"><div class="prose"><div class="prose"><p>A ferramenta não era o problema. O tempo se perdia na espera entre uma etapa e a próxima, enquanto ninguém disparava. Por isso a mudança foi encadear as tarefas e programar o início, e não tentar deixar cada tarefa mais rápida.</p></div></div><div class="contrib"><div class="panel c-col me"><b>O que fiz diretamente</b><ul class="list"><li>Mapeei as etapas, os horários e as dependências entre as tarefas.</li><li>Levantei os registros de execução e medi a espera entre a distribuição e a lista.</li><li>Configurei e validei o encadeamento e o agendamento das tarefas.</li><li>Defini o que acontece quando uma etapa falha: nova execução e, se não resolver, uma pessoa assume.</li><li>Acompanhei as execuções depois da mudança.</li></ul></div><div class="panel c-col with"><b>Com outras pessoas</b><ul class="list"><li>O suporte do fornecedor orientou o uso do recurso de encadeamento da plataforma.</li></ul></div><div class="panel c-col dep"><b>Dependências externas</b><ul class="list"><li>A plataforma de agendamento e o seu código são do fornecedor.</li><li>A equipe de BackOffice continua responsável por acompanhar a rotina.</li></ul></div></div></div>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="como-funciona" data-reveal>
+      <div class="section__head">
+        <p class="section__label">Como funciona</p>
+        <div>
+          <h2>Início programado, etapas em sequência e uma pessoa acompanhando.</h2>
+          <div class="section__body"><ol class="steps"><li><span><strong>Início programado.</strong> A sequência começa às 6h, sem depender de alguém conectado para disparar. <em class="who who--auto">automático</em></span></li><li><span><strong>Distribuição da carteira.</strong> A carteira do dia é enviada para as assessorias. <em class="who who--auto">automático</em></span></li><li><span><strong>Lista do discador.</strong> Começa quando a distribuição termina, sem esperar um disparo. <em class="who who--auto">automático</em></span></li><li><span><strong>Acompanhamento.</strong> Uma pessoa confere o resultado. Se uma etapa falha, ela roda de novo; se continuar falhando, a pessoa assume. <em class="who who--human">pessoa</em></span></li></ol><p class="small muted" style="margin-top:16px">O horário das 6h é o do disparo programado. Ele não é o horário em que alguém começa a trabalhar.</p></div>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="o-que-mudou" data-reveal>
+      <div class="section__head">
+        <p class="section__label">O que mudou</p>
+        <div>
+          <h2>A sequência passou a começar sozinha, e a espera entre duas etapas caiu nos registros disponíveis.</h2>
+          <div class="section__body"><div class="prose"><div class="prose"><p>Nos três registros detalhados depois da mudança, a lista do discador ficou pronta antes das 7h, e a passagem entre a distribuição e a lista levou no máximo 2,2 minutos.</p></div></div><div class="panel evidence"><div class="evidence__head"><b>Lista do discador: antes e depois</b><span class="ev ev--measured">Medido em registros</span></div><div class="evidence__body"><figure class="chart"><div class="chart-scroll"><svg viewBox="0 0 720 206" role="img" aria-labelledby="chart-t-pt"><title id="chart-t-pt">Horário em que a lista do discador ficou pronta, antes e depois da sequência programada</title>
 <line class="grid" x1="150.0" y1="34" x2="150.0" y2="176"/><text x="150.0" y="196" text-anchor="middle">06:00</text><line class="grid" x1="258.0" y1="34" x2="258.0" y2="176"/><text x="258.0" y="196" text-anchor="middle">06:30</text><line class="grid" x1="366.0" y1="34" x2="366.0" y2="176"/><text x="366.0" y="196" text-anchor="middle">07:00</text><line class="grid" x1="474.0" y1="34" x2="474.0" y2="176"/><text x="474.0" y="196" text-anchor="middle">07:30</text><line class="grid" x1="582.0" y1="34" x2="582.0" y2="176"/><text x="582.0" y="196" text-anchor="middle">08:00</text><line class="grid" x1="690.0" y1="34" x2="690.0" y2="176"/><text x="690.0" y="196" text-anchor="middle">08:30</text>
 <line class="ref" x1="150.0" y1="20" x2="150.0" y2="176"/><text x="155.0" y="26">disparo programado</text>
 <line class="ref" x1="582.0" y1="20" x2="582.0" y2="176"/><text x="577.0" y="26" text-anchor="end">equipe começa</text>
@@ -56,18 +130,52 @@
 <text x="396.0" y="77" text-anchor="end">07:10</text><text x="595.2" y="77">08:02</text>
 <text class="lbl" x="0" y="140">Depois</text><text class="sub" x="0" y="156">3 registros detalhados</text>
 <circle class="dot" cx="232.1" cy="140" r="6"><title>06:22</title></circle><circle class="dot" cx="290.3" cy="140" r="6"><title>06:38</title></circle><circle class="dot" cx="355.4" cy="140" r="6"><title>06:57</title></circle><text x="232.1" y="122" text-anchor="middle">06:22</text><text x="290.3" y="164" text-anchor="middle">06:38</text><text x="355.4" y="122" text-anchor="middle">06:57</text>
-</svg></div><figcaption>Faixa: menor e maior horário nos 29 dias anteriores. Traço: mediana. Pontos: os três registros detalhados depois da mudança (24/08, 14/09 e 16/10/2026). As amostras têm tamanhos diferentes.</figcaption></figure><div class="kpis"><div class="kpi"><b class="num">07h30</b><span>mediana do horário em que a lista ficou pronta antes da mudança</span><small>29 dias · 27/04 a 30/05/2026</small></div><div class="kpi"><b class="num">06h22 a 06h57</b><span>horário em que a lista ficou pronta nos registros depois da mudança</span><small>3 registros · 24/08, 14/09 e 16/10/2026</small></div><div class="kpi"><b class="num">0,1 a 2,2 min</b><span>espera entre o fim da distribuição e o início da lista, nos 3 registros depois</span><small>antes: mediana de 3,8 min, máximo de 41,1 min</small></div></div><div class="method-note"><b>Como ler estes números.</b><ul><li>As amostras são diferentes: 29 dias antes e apenas 3 registros detalhados depois. Os três registros mostram a direção da mudança, mas não bastam para afirmar um novo horário médio.</li><li>Os horários são do fim da lista do discador, não da rotina inteira. Em 24/08, uma etapa digital terminou às 08h11 e a tarefa principal ainda rodava depois das 08h12. Nos outros dois registros, a tarefa principal terminou às 07h00 e às 06h36.</li><li>A espera menor entre duas etapas não prova uma redução equivalente no tempo total de trabalho. As horas de trabalho humano não foram medidas.</li></ul><p style="margin-top:8px">Fonte: registros de execução da rotina, consolidados pelo autor.</p></div></div></div></div></div></div></section>
-<section class="case-sec" id="limitacoes" aria-labelledby="limitacoes-h"><div class="wrap case-grid"><div class="side"><p class="eyebrow">Limitações</p></div><div class="main"><h2 class="h2 rv" id="limitacoes-h">O que continua com pessoas e o que ainda não foi medido.</h2><div class="rv"><ul class="limits"><li class="human"><span>Uma pessoa continua acompanhando a rotina e tratando as falhas que a nova execução não resolve.</span><span class="who who--human">intervenção humana</span></li><li class=""><span>A comparação depois da mudança tem só três registros detalhados.</span><span></span></li><li class=""><span>A rotina tem outras etapas além da lista do discador, e elas nem sempre terminam antes das 8h.</span><span></span></li><li class=""><span>O ganho em horas de trabalho não foi medido.</span><span></span></li><li class=""><span>Os alertas por e-mail foram usados no passado, mas estão desativados na configuração mais recente.</span><span></span></li><li class=""><span>A data exata em que a mudança entrou em uso não está registrada aqui.</span><span></span></li></ul></div></div></div></section>
-<section class="case-sec" id="tecnico" aria-labelledby="tecnico-h"><div class="wrap case-grid"><div class="side"><p class="eyebrow">Detalhes técnicos</p></div><div class="main"><h2 class="h2 rv" id="tecnico-h">Uma mudança de processo usando um recurso que a plataforma já tinha.</h2><div class="rv"><details class="more-box"><summary><span>Tecnologias, termos e decisões de implementação<small>Para quem quer aprofundar</small></span></summary><div class="more-box__body tech-body"><div class="prose"><p><strong>Encadeamento de tarefas:</strong> cada tarefa começa automaticamente quando a anterior termina, sem um disparo manual entre elas. É um recurso da plataforma de agendamento do fornecedor; o trabalho foi configurar a sequência, as dependências e o comportamento em caso de falha.</p><p><strong>Medição:</strong> os horários vêm dos registros de execução de cada tarefa. A espera foi calculada entre o fim da distribuição e o início da lista.</p></div><ul class="tech"><li>Mapeamento de processo</li><li>Análise de dependências</li><li>Encadeamento de tarefas</li><li>Agendamento</li><li>Análise de registros</li></ul></div></details></div></div></div></section>
-<section class="case-sec" id="demonstracao" aria-labelledby="demonstracao-h"><div class="wrap case-grid"><div class="side"><p class="eyebrow">Demonstração</p></div><div class="main"><h2 class="h2 rv" id="demonstracao-h">Compare o fluxo manual com a sequência programada.</h2><div class="rv"><div class="demo-cta on-dark"><div><h3>Rotina da manhã: antes e depois</h3><p class="small" style="margin-top:8px">O que você pode explorar:</p><ul><li>Disparar cada etapa no modo manual e ver o relógio da simulação contar a espera.</li><li>Rodar a sequência programada e ligar uma falha para ver a nova tentativa e o encaminhamento para uma pessoa.</li><li>Comparar ações de uma pessoa, tempo de espera e encaminhamentos nos dois modos.</li></ul><p class="note"><b>Dados sintéticos.</b> Esta é uma demonstração interativa com dados sintéticos. Os registros e resultados são ilustrativos e não representam dados reais da operação.</p></div><div class="btns"><a class="btn btn--primary" href="demos/pt/rotina-matinal.html">Explorar a demonstração <span class="arr" aria-hidden="true">→</span></a></div></div><p class="small muted" style="margin-top:12px">Os tempos da demonstração são gerados pela simulação. Os horários medidos estão apenas na seção "O que mudou".</p></div></div></div></section>
-</main>
-<nav class="case-nav" aria-label="Navegação entre cases"><div class="wrap case-nav__in"><a class="prev" href="./"><small>← Todos os projetos</small><b>Projetos</b></a><a class="next" href="central-pagamentos-rejeitados.html"><small>Próximo case →</small><b>Como organizei e automatizei parte da análise de pagamentos rejeitados</b></a></div></nav>
-<footer class="foot" id="contato"><div class="wrap">
-  <h2>Vamos conversar</h2>
-  <p>Estou aberto a oportunidades em melhoria de processos, excelência operacional, PMO, operações de negócio e automação, inclusive em equipes remotas.</p>
-  <div class="actions on-dark"><a class="btn btn--primary" href="mailto:nobrecontato21@outlook.com">nobrecontato21@outlook.com</a><a class="btn btn--secondary" href="https://www.linkedin.com/in/paulo-nobre-/" rel="noopener">LinkedIn</a></div>
-  <div class="foot__base"><span>© 2026 Paulo Nobre · São Paulo, Brasil</span><a href="../?lang=pt">Página inicial</a><div class="lang" role="group" aria-label="Idioma"><a href="automacao-rotina-operacional.html" lang="pt-BR" data-lang-link="pt" aria-current="true">PT</a><a href="en/automacao-rotina-operacional.html" lang="en" data-lang-link="en">EN</a></div></div>
-</div></footer>
-<script src="../static/js/site.js" defer></script>
+</svg></div><figcaption>Faixa: menor e maior horário nos 29 dias anteriores. Traço: mediana. Pontos: os três registros detalhados depois da mudança (24/08, 14/09 e 16/10/2026). As amostras têm tamanhos diferentes.</figcaption></figure><div class="kpis"><div class="kpi"><b class="num">07h30</b><span>mediana do horário em que a lista ficou pronta antes da mudança</span><small>29 dias · 27/04 a 30/05/2026</small></div><div class="kpi"><b class="num">06h22 a 06h57</b><span>horário em que a lista ficou pronta nos registros depois da mudança</span><small>3 registros · 24/08, 14/09 e 16/10/2026</small></div><div class="kpi"><b class="num">0,1 a 2,2 min</b><span>espera entre o fim da distribuição e o início da lista, nos 3 registros depois</span><small>antes: mediana de 3,8 min, máximo de 41,1 min</small></div></div><div class="method-note"><b>Como ler estes números.</b><ul><li>As amostras são diferentes: 29 dias antes e apenas 3 registros detalhados depois. Os três registros mostram a direção da mudança, mas não bastam para afirmar um novo horário médio.</li><li>Os horários são do fim da lista do discador, não da rotina inteira. Em 24/08, uma etapa digital terminou às 08h11 e a tarefa principal ainda rodava depois das 08h12. Nos outros dois registros, a tarefa principal terminou às 07h00 e às 06h36.</li><li>A espera menor entre duas etapas não prova uma redução equivalente no tempo total de trabalho. As horas de trabalho humano não foram medidas.</li></ul><p style="margin-top:8px">Fonte: registros de execução da rotina, consolidados pelo autor.</p></div></div></div></div>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="limitacoes" data-reveal>
+      <div class="section__head">
+        <p class="section__label">Limitações</p>
+        <div>
+          <h2>O que continua com pessoas e o que ainda não foi medido.</h2>
+          <div class="section__body"><ul class="list"><li>Uma pessoa continua acompanhando a rotina e tratando as falhas que a nova execução não resolve. <em class="who who--human">intervenção humana</em></li><li>A comparação depois da mudança tem só três registros detalhados.</li><li>A rotina tem outras etapas além da lista do discador, e elas nem sempre terminam antes das 8h.</li><li>O ganho em horas de trabalho não foi medido.</li><li>Os alertas por e-mail foram usados no passado, mas estão desativados na configuração mais recente.</li><li>A data exata em que a mudança entrou em uso não está registrada aqui.</li></ul></div>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="tecnico" data-reveal>
+      <div class="section__head">
+        <p class="section__label">Detalhes técnicos</p>
+        <div>
+          <h2>Uma mudança de processo usando um recurso que a plataforma já tinha.</h2>
+          <div class="section__body"><details class="panel more-box"><summary>Tecnologias, termos e decisões de implementação<small>Para quem quer aprofundar</small></summary><div class="more-box__body"><div class="prose"><p><strong>Encadeamento de tarefas:</strong> cada tarefa começa automaticamente quando a anterior termina, sem um disparo manual entre elas. É um recurso da plataforma de agendamento do fornecedor; o trabalho foi configurar a sequência, as dependências e o comportamento em caso de falha.</p><p><strong>Medição:</strong> os horários vêm dos registros de execução de cada tarefa. A espera foi calculada entre o fim da distribuição e o início da lista.</p></div><div class="stack"><span class="tag">Mapeamento de processo</span><span class="tag">Análise de dependências</span><span class="tag">Encadeamento de tarefas</span><span class="tag">Agendamento</span><span class="tag">Análise de registros</span></div></div></details></div>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="demonstracao" data-reveal>
+      <div class="section__head">
+        <p class="section__label">Demonstração</p>
+        <div>
+          <h2>Compare o fluxo manual com a sequência programada.</h2>
+          <div class="section__body"><p class="demo-try">O que você pode explorar:</p><ul class="list"><li>Disparar cada etapa no modo manual e ver o relógio da simulação contar a espera.</li><li>Rodar a sequência programada e ligar uma falha para ver a nova tentativa e o encaminhamento para uma pessoa.</li><li>Comparar ações de uma pessoa, tempo de espera e encaminhamentos nos dois modos.</li></ul><figure class="frame-wrap"><div class="frame" style="--h:560px; --s:0.6"><div class="frame__bar" aria-hidden="true"><span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__url">Rotina da manhã: antes e depois</span></div><div class="frame__view"><iframe src="demos/pt/rotina-matinal.html" title="Rotina da manhã: antes e depois" loading="lazy" tabindex="-1"></iframe></div></div><figcaption class="frame__cta"><span class="note"><b class="syn-b">Dados sintéticos.</b> Esta é uma demonstração interativa com dados sintéticos. Os registros e resultados são ilustrativos e não representam dados reais da operação.</span><span class="cta-btns"><a class="btn" href="demos/pt/rotina-matinal.html">Explorar a demonstração <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></span></figcaption></figure><p class="small muted" style="margin-top:12px">Os tempos da demonstração são gerados pela simulação. Os horários medidos estão apenas na seção "O que mudou".</p></div>
+        </div>
+      </div>
+    </section>
+    </main>
+
+    <nav class="next" aria-label="Próximo case">
+      <a href="central-pagamentos-rejeitados.html">
+        <span><span class="next__label">Próximo case</span><span class="next__title">Como organizei e automatizei parte da análise de pagamentos rejeitados</span></span>
+        <span class="next__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+    </nav>
+
+    <footer class="foot">
+      <span>© 2026 Paulo Nobre, São Paulo</span>
+      <a href="index.html">Voltar para a lista de projetos</a>
+    </footer>
+  </div>
+</div>
+<script src="assets/site.js"></script>
 </body>
 </html>

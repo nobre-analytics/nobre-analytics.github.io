@@ -5,28 +5,31 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Cérebro no celular</title>
 <meta name="description" content="Demonstração com dados sintéticos do Cérebro redesenhado para o celular: o veredito da manhã na primeira tela, listas no lugar de tabelas e navegação ao alcance do polegar.">
-<meta name="theme-color" content="#115E59">
+<meta name="theme-color" content="#14403A">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23fff'/%3E%3Cpath d='M26.4 11.8A11 11 0 1 0 26.4 20.2' fill='none' stroke='%23048A05' stroke-width='3.4' stroke-linecap='round'/%3E%3Ccircle cx='26.4' cy='20.2' r='3.1' fill='%23F5BF05'/%3E%3C/svg%3E">
 <script>
 (function(){try{if(localStorage.getItem("demo-tema")==="dark")document.documentElement.setAttribute("data-tema","escuro");}catch(e){}})();
 </script>
 <style>
-@font-face{font-family:"Hanken Grotesk";font-style:normal;font-weight:300 800;font-display:swap;src:url("../../../static/fonts/hanken-grotesk-latin-var.woff2") format("woff2")}@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:400;font-display:swap;src:url("../../../static/fonts/ibm-plex-mono-latin-400-normal.woff2") format("woff2")}@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:500;font-display:swap;src:url("../../../static/fonts/ibm-plex-mono-latin-500-normal.woff2") format("woff2")}
+@font-face{font-family:"Source Serif 4";font-style:normal;font-weight:200 900;font-display:swap;src:url("../../../static/fonts/source-serif-4-latin-opsz.woff2") format("woff2")}
+@font-face{font-family:"Public Sans";font-style:normal;font-weight:100 900;font-display:swap;src:url("../../../static/fonts/public-sans-latin-wght.woff2") format("woff2")}
+
+
 
 :root{
   color-scheme:light;
-  --canvas:#F7F9FC; --surface:#FFFFFF; --sunken:#F8FAFC; --hover:#F0F7F6;
-  --border:#E2E8F0; --border-strong:#CBD5E1;
-  --text:#1E293B; --text-2:#334155; --text-3:#64748B;
-  --marca:#115E59; --marca-fundo:#115E59; --marca-texto:#115E59;
-  --destaque:#FBBF24; --destaque-ink:#33321F; --destaque-fundo:#F59E0B;
+  --canvas:#F4F0E8; --surface:#FFFFFF; --sunken:#FAF7F1; --hover:#F7EFE8;
+  --border:#E3DDD2; --border-strong:#CFC8BB;
+  --text:#1C2A27; --text-2:#3A4542; --text-3:#6E685E;
+  --marca:#14403A; --marca-fundo:#14403A; --marca-texto:#14403A;
+  --destaque:#E29A72; --destaque-ink:#33321F; --destaque-fundo:#D9825B;
   --warning:#8A6200; --danger:#C02B1D;
   --danger-soft:color-mix(in oklch,var(--danger) 8%,transparent);
-  --barra-fundo:#E2E8F0;
-  --palco:#EEF2F7; --palco-txt:#2B2F2A;
-  --f-titulo:"Hanken Grotesk",system-ui,sans-serif;
-  --f-ui:"Hanken Grotesk","Segoe UI",system-ui,sans-serif;
-  --f-cod:"IBM Plex Mono","Cascadia Mono",Consolas,ui-monospace,monospace;
+  --barra-fundo:#E3DDD2;
+  --palco:#EDE8DF; --palco-txt:#2B2F2A;
+  --f-titulo:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --f-ui:"Public Sans","Segoe UI",system-ui,sans-serif;
+  --f-cod:"Cascadia Mono",Consolas,ui-monospace,monospace;
   --elev-1:0 1px 3px rgb(31 38 31 / .07),0 6px 18px -10px rgb(31 38 31 / .18);
   --elev-2:0 -2px 6px rgb(31 38 31 / .06),0 -18px 40px -14px rgb(31 38 31 / .30);
   --curva:cubic-bezier(.2,0,0,1);
@@ -34,14 +37,14 @@
 }
 :root[data-tema=escuro]{
   color-scheme:dark;
-  --canvas:#0B1220; --surface:#191E17; --sunken:#131711; --hover:#1F2A1D;
-  --border:#1E293B; --border-strong:#334155;
-  --text:#F1F5F9; --text-2:#B8C2CF; --text-3:#94A3B8;
-  --marca:#115E59; --marca-fundo:#134E4A; --marca-texto:#2DD4BF;
-  --destaque-fundo:#D97706; --warning:#FBBF24; --danger:#F0655A;
+  --canvas:#0B1D1A; --surface:#191E17; --sunken:#131711; --hover:#1F2A1D;
+  --border:#1C2A27; --border-strong:#3A4542;
+  --text:#F2EEE6; --text-2:#BFB8AB; --text-3:#9A9387;
+  --marca:#14403A; --marca-fundo:#12352F; --marca-texto:#E8A07C;
+  --destaque-fundo:#B4532A; --warning:#E29A72; --danger:#F0655A;
   --danger-soft:color-mix(in oklch,var(--danger) 12%,transparent);
-  --barra-fundo:#1E293B;
-  --palco:#060A14; --palco-txt:#DCE3EC;
+  --barra-fundo:#1C2A27;
+  --palco:#06110F; --palco-txt:#DED8CC;
   --elev-1:0 1px 3px rgb(0 0 0 / .5),0 6px 18px -10px rgb(0 0 0 / .6);
   --elev-2:0 -2px 6px rgb(0 0 0 / .4),0 -18px 40px -14px rgb(0 0 0 / .7);
 }
@@ -59,10 +62,10 @@ svg.i{width:18px;height:18px;flex:none}
 
 /* ── palco (só na tela grande): aparelho + notas ── */
 .palco{min-height:100vh;display:grid;grid-template-columns:auto minmax(0,440px);gap:64px;align-items:center;justify-content:center;padding:40px 32px}
-.aparelho{width:392px;height:min(852px,calc(100vh - 64px));min-height:640px;border-radius:52px;background:#080D18;padding:12px;position:relative;
-  box-shadow:0 0 0 2px #1E293B,0 2px 4px rgb(0 0 0 / .2),0 30px 60px -20px rgb(20 30 20 / .55)}
+.aparelho{width:392px;height:min(852px,calc(100vh - 64px));min-height:640px;border-radius:52px;background:#081613;padding:12px;position:relative;
+  box-shadow:0 0 0 2px #1C2A27,0 2px 4px rgb(0 0 0 / .2),0 30px 60px -20px rgb(20 30 20 / .55)}
 .tela{width:100%;height:100%;border-radius:41px;overflow:hidden;position:relative;background:var(--canvas);isolation:isolate}
-.ilha{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:104px;height:30px;border-radius:16px;background:#080D18;z-index:60}
+.ilha{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:104px;height:30px;border-radius:16px;background:#081613;z-index:60}
 .barra-so{height:44px;background:var(--marca-fundo);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:6px 28px 0 34px;font-weight:700;font-size:14px;position:relative;z-index:5}
 .barra-so .sinais{display:flex;gap:6px;align-items:center}
 .barra-so .sinais i{display:block;background:#fff;border-radius:1px}
@@ -79,7 +82,7 @@ svg.i{width:18px;height:18px;flex:none}
 .nota-item span{font-size:13.5px;color:var(--text-2);line-height:1.5}
 .notas .rodape-n{margin-top:22px;font-size:13px;display:flex;gap:16px;flex-wrap:wrap}
 .notas a{color:var(--marca-texto);font-weight:700}
-.chip-demo{display:inline-block;background:var(--destaque);color:var(--destaque-ink);border-radius:3px;padding:1px 8px;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;vertical-align:middle}
+.chip-demo{color:#2A140B !important;display:inline-block;background:var(--destaque);color:var(--destaque-ink);border-radius:3px;padding:1px 8px;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;vertical-align:middle}
 
 /* ── o app ── */
 .rolagem{position:absolute;inset:44px 0 0 0;overflow-y:auto;overscroll-behavior:contain;padding-bottom:calc(var(--nav) + 24px);scrollbar-width:none}
@@ -156,7 +159,7 @@ details.mais summary > svg{transition:transform 140ms var(--curva)}
 .periodos{display:flex;gap:6px;overflow-x:auto;padding:2px 0 0;scrollbar-width:none;margin-top:12px}
 .periodos::-webkit-scrollbar{display:none}
 .periodos button{flex:none;height:36px;padding:0 14px;border-radius:18px;border:1px solid rgb(255 255 255 / .55);background:transparent;color:#fff;font-size:13px;font-weight:700;cursor:pointer}
-.periodos button[aria-pressed=true]{background:#fff;color:#115E59;border-color:#fff}
+.periodos button[aria-pressed=true]{background:#fff;color:#14403A;border-color:#fff}
 .grupo-pg{border-top:1px solid var(--border)}
 .grupo-pg summary{display:grid;grid-template-columns:minmax(0,1fr) auto 18px;gap:6px 12px;align-items:center;padding:12px 12px 12px 16px;min-height:64px}
 .grupo-pg summary:active{background:var(--hover)}

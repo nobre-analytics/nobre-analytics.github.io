@@ -1,120 +1,1569 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Paulo Nobre | Process improvement and automation</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Paulo Nobre | Process Improvement &amp; Automation</title>
 <meta name="description" content="Paulo Nobre, process analyst. I turn operational problems into clear processes, with rules, data and automation. Four case studies with evidence, limits and synthetic demos." data-meta-pt="Paulo Nobre, analista de processos. Transformo problemas da operação em processos claros, com regras, dados e automação. Quatro cases com evidências, limitações e demonstrações sintéticas." data-meta-en="Paulo Nobre, process analyst. I turn operational problems into clear processes, with rules, data and automation. Four case studies with evidence, limits and synthetic demos.">
-<link rel="canonical" href="https://nobre-analytics.github.io/">
-<link rel="alternate" hreflang="pt-BR" href="https://nobre-analytics.github.io/?lang=pt">
-<link rel="alternate" hreflang="en" href="https://nobre-analytics.github.io/?lang=en">
-<link rel="alternate" hreflang="x-default" href="https://nobre-analytics.github.io/">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Paulo Nobre | Process improvement and automation">
-<meta property="og:description" content="Paulo Nobre, process analyst. I turn operational problems into clear processes, with rules, data and automation. Four case studies with evidence, limits and synthetic demos.">
-<meta property="og:url" content="https://nobre-analytics.github.io/">
-<meta property="og:locale" content="en_US">
-<meta property="og:site_name" content="Paulo Nobre">
-<meta name="twitter:card" content="summary_large_image">
-<meta property="og:image" content="https://nobre-analytics.github.io/static/img/og-en.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta name="twitter:image" content="https://nobre-analytics.github.io/static/img/og-en.png">
-<meta name="theme-color" content="#0B1220">
-<link rel="icon" href="static/img/favicon.svg" type="image/svg+xml">
-<link rel="preload" href="static/fonts/hanken-grotesk-latin-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="static/css/site.css">
+<meta property="og:type" content="website"><meta property="og:title" content="Paulo Nobre | Process Improvement &amp; Automation"><meta property="og:description" content="I turn operational problems into clear processes, with rules, data and automation."><meta property="og:url" content="https://nobre-analytics.github.io/"><meta property="og:image" content="https://nobre-analytics.github.io/static/img/og-en.png"><meta name="twitter:card" content="summary_large_image"><link rel="canonical" href="https://nobre-analytics.github.io/"><link rel="alternate" hreflang="pt-BR" href="https://nobre-analytics.github.io/?lang=pt"><link rel="alternate" hreflang="en" href="https://nobre-analytics.github.io/?lang=en"><link rel="icon" href="static/img/favicon.svg" type="image/svg+xml"><meta name="theme-color" content="#0E2320">
 <script>document.documentElement.classList.add('js')</script>
+<style>
+@font-face{font-family:"Source Serif 4";font-style:normal;font-weight:200 900;font-display:swap;src:url("static/fonts/source-serif-4-latin-opsz.woff2") format("woff2")}
+@font-face{font-family:"Public Sans";font-style:normal;font-weight:100 900;font-display:swap;src:url("static/fonts/public-sans-latin-wght.woff2") format("woff2")}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:1ms!important;animation-iteration-count:1!important;transition-duration:1ms!important;scroll-behavior:auto!important}}
+/* v4: editorial serif for titles */
+h1,.h2,.card h3,.cs h1,.cs__next strong,.job__who h3,.foot__id,.principles p,.step h3,.bk .num{font-family:var(--fs);font-optical-sizing:auto}
+h1,.h2{font-weight:500;letter-spacing:-.015em}
+.hero h1{font-weight:500;letter-spacing:-.02em}
+.card h3,.step h3,.job__who h3{font-weight:600;letter-spacing:-.01em}
+.principles p{font-weight:400;letter-spacing:-.005em}
+.bk .num{font-weight:600}
+.label,.hero__pos,.brand__tag{font-family:var(--f)}
+/* ====== TOKENS ====== */
+:root{
+  --bg:#0E2320; --panel:#13302C; --panel2:#183833; --deep:#0A1A17;
+  --line:rgba(240,235,225,.10); --line2:rgba(240,235,225,.20);
+  --tx:#F0EBE1; --tx2:#B4BEB7; --tx3:#8C9893;
+  --acc:#D9825B; --acc-dim:rgba(217,130,91,.35);
+  --f:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--fs:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --maxw:1240px; --g:clamp(20px,5vw,64px); --sec:clamp(96px,11vw,160px);
+  --hdr:72px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:calc(var(--hdr) + env(safe-area-inset-top,0px))}
+body{background:var(--bg);color:var(--tx);font-family:var(--f);font-size:1.0625rem;line-height:1.6;-webkit-font-smoothing:antialiased;padding-bottom:env(safe-area-inset-bottom,0px)}
+body.lock{overflow:hidden}
+a{color:inherit}
+img{max-width:100%;display:block}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--g)}
+.num{font-variant-numeric:tabular-nums lining-nums}
+:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+.skip{position:absolute;left:-9999px}.skip:focus{left:16px;top:16px;background:var(--acc);color:var(--bg);padding:8px 12px;z-index:100}
+
+/* ====== TYPE ====== */
+.label{font-size:.72rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--tx3)}
+.label--acc{color:var(--acc)}
+.h2{font-size:clamp(2rem,3.8vw,3.25rem);line-height:1.06;font-weight:400;letter-spacing:-.025em;max-width:20ch}
+.lead{color:var(--tx2);max-width:58ch}
+.sec{padding:var(--sec) 0;border-top:1px solid var(--line)}
+.sec__head{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:20px 64px;align-items:end;margin-bottom:clamp(48px,6vw,80px)}
+.sec__head .label{grid-column:1/-1;margin-bottom:-2px}
+/* placeholder: anything you still need to fill in. Search the file for data-ph */
+[data-ph]{color:var(--tx3);border-bottom:1px dashed var(--tx3)}
+
+/* ====== BUTTONS / LINKS ====== */
+.btn{display:inline-flex;align-items:center;gap:10px;height:48px;padding:0 22px;font:500 .95rem/1 var(--f);text-decoration:none;border:1px solid var(--line2);color:var(--tx);background:none;cursor:pointer;transition:border-color .2s,background .2s}
+.btn:hover{border-color:var(--tx)}
+.btn--solid{background:var(--acc);border-color:var(--acc);color:#13201D}
+.btn--solid:hover{background:#E39A75;border-color:#E39A75}
+.link{display:inline-flex;align-items:center;gap:10px;border-bottom:1px solid var(--line2);padding-bottom:6px;font:500 .95rem/1.2 var(--f);text-decoration:none;background:none;border-top:0;border-left:0;border-right:0;color:var(--tx);cursor:pointer;transition:border-color .2s}
+.link:hover{border-bottom-color:var(--acc)}
+
+/* ====== HEADER ====== */
+.hdr{position:sticky;top:0;z-index:30;background:rgba(14,35,32,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid transparent;padding-top:env(safe-area-inset-top,0px);transition:border-color .3s}
+.hdr.scrolled{border-bottom-color:var(--line)}
+.hdr__in{display:flex;align-items:center;gap:32px;height:var(--hdr)}
+.brand{font-size:.8rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;margin-right:auto}
+.nav{display:flex;gap:clamp(18px,2.4vw,34px)}
+.nav a{font-size:.9rem;text-decoration:none;color:var(--tx2);padding:6px 0;position:relative;transition:color .2s}
+.nav a:hover{color:var(--tx)}
+.nav a.on{color:var(--tx)}
+.nav a.on::after{content:'';position:absolute;left:0;right:0;bottom:-2px;height:1px;background:var(--acc)}
+.lang{display:flex;border:1px solid var(--line2)}
+.lang button{background:none;border:0;color:var(--tx3);font:600 .68rem/1 var(--f);letter-spacing:.14em;padding:8px 10px;cursor:pointer}
+.lang button[aria-pressed="true"]{color:var(--bg);background:var(--tx)}
+.menu-btn{display:none;background:none;border:1px solid var(--line2);color:var(--tx);width:44px;height:40px;cursor:pointer;position:relative}
+.menu-btn i,.menu-btn i::before{position:absolute;left:13px;right:13px;height:1px;background:currentColor;content:'';transition:transform .25s}
+.menu-btn i{top:19px}.menu-btn i::before{left:0;right:0;top:-6px}
+.menu-btn i::after{content:'';position:absolute;left:0;right:0;top:6px;height:1px;background:currentColor;transition:transform .25s}
+.menu-btn[aria-expanded="true"] i{background:transparent}
+.menu-btn[aria-expanded="true"] i::before{transform:translateY(6px) rotate(45deg)}
+.menu-btn[aria-expanded="true"] i::after{transform:translateY(-6px) rotate(-45deg)}
+.mnav{position:fixed;left:0;right:0;top:calc(var(--hdr) + env(safe-area-inset-top,0px));bottom:0;background:var(--bg);z-index:29;padding:24px var(--g) calc(40px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.mnav a{font-size:1.9rem;letter-spacing:-.02em;text-decoration:none;padding:14px 0;border-bottom:1px solid var(--line)}
+.mnav a.on{color:var(--acc)}
+.mnav .lang{margin-top:auto;align-self:flex-start}
+.mnav .lang button{padding:12px 16px;font-size:.8rem}
+
+/* ====== HERO ====== */
+.hero{padding:clamp(56px,8vw,112px) 0 clamp(64px,8vw,104px)}
+.hero__grid{display:grid;grid-template-columns:minmax(0,1fr) clamp(240px,26vw,340px);grid-template-areas:"id pic" "head pic" "lede pic" "cta pic";column-gap:clamp(40px,7vw,112px);align-items:end}
+.hero__id{grid-area:id;margin-bottom:clamp(28px,4vw,40px)}
+.hero__name{font-size:.82rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase}
+.hero__pos{font-size:.95rem;color:var(--tx2);margin-top:8px}
+.hero__pos b{color:var(--acc);font-weight:500}
+.hero h1{grid-area:head;font-size:clamp(2.5rem,5.6vw,5.2rem);line-height:1.02;font-weight:400;letter-spacing:-.038em;max-width:15ch}
+.hero__lede{grid-area:lede;color:var(--tx2);max-width:54ch;margin-top:clamp(24px,3vw,36px);font-size:1.125rem}
+.hero__cta{grid-area:cta;display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
+.portrait{grid-area:pic;align-self:end}
+.portrait__frame{position:relative;aspect-ratio:4/5;background:var(--panel);border:1px solid var(--line);overflow:hidden}
+.portrait__frame::after{content:'';position:absolute;left:0;bottom:0;width:38%;height:3px;background:var(--acc)}
+.portrait__frame img{width:100%;height:100%;object-fit:cover;object-position:50% 20%}
+.portrait__mono{position:absolute;inset:0;display:grid;place-items:center;font-size:clamp(2.6rem,5vw,4.4rem);font-weight:300;letter-spacing:-.04em;color:var(--tx3)}
+.portrait figcaption{display:flex;justify-content:space-between;gap:12px;margin-top:12px;font-size:.8rem;color:var(--tx3)}
+
+/* ====== IMPACT DASHBOARD ====== */
+.dash{border:1px solid var(--line2);background:var(--panel)}
+.dash__bar{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:14px 24px;border-bottom:1px solid var(--line);background:var(--deep)}
+.dash__bar small{font-size:.8rem;color:var(--tx3)}
+.dash__grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr))}
+.kpi{padding:clamp(24px,3vw,36px) 24px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);position:relative}
+.kpi{border-bottom:0}
+.kpi:last-child{border-right:0}
+.kpi::before{content:'';position:absolute;left:24px;top:0;width:28px;height:2px;background:var(--acc)}
+.kpi__v{display:inline-block;font-size:clamp(2rem,3vw,2.8rem);font-weight:300;line-height:1;letter-spacing:-.03em}
+.kpi__v small{font-size:.42em;letter-spacing:0;margin-left:2px;color:var(--tx2)}
+.kpi__l{display:block;margin-top:14px;font-size:.95rem;color:var(--tx)}
+.kpi__s{display:block;margin-top:6px;font-size:.82rem;color:var(--tx3);line-height:1.45}
+
+/* ====== CASES ====== */
+.cases{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(20px,2.4vw,32px)}
+.card{display:flex;flex-direction:column;border:1px solid var(--line2);background:var(--panel)}
+.card__main{padding:clamp(28px,3vw,40px);flex:1;display:flex;flex-direction:column}
+.card h3{font-size:clamp(1.5rem,2.3vw,2.05rem);line-height:1.12;font-weight:400;letter-spacing:-.022em;margin:12px 0 28px;max-width:22ch}
+.card__row{display:grid;grid-template-columns:84px minmax(0,1fr);gap:12px 20px;padding:16px 0;border-top:1px solid var(--line)}
+.card__row p:not(.label){font-size:.98rem;color:var(--tx2)}
+.card__row .label{padding-top:4px}
+.card__impact{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;margin-top:auto;padding-top:24px;border-top:1px solid var(--line)}
+.card__impact b{font-size:clamp(2.1rem,3.2vw,2.8rem);font-weight:300;line-height:1;letter-spacing:-.03em;color:var(--acc)}
+.card__impact span{color:var(--tx2);font-size:.92rem;max-width:26ch;line-height:1.4}
+.card__impact--text span{max-width:none;color:var(--tx);font-size:.98rem}
+.card__kind{margin-bottom:10px}
+.card__foot{background:var(--deep);border-top:1px solid var(--line);padding:20px clamp(28px,3vw,40px)}
+.card__facts{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.card__facts b{display:block;font-weight:500;font-size:1.05rem}
+.card__facts span{display:block;font-size:.8rem;color:var(--tx3);line-height:1.35;margin-top:2px}
+.card__foot .link{margin-top:20px}
+
+/* ====== METHOD ====== */
+.method{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0 clamp(24px,3vw,48px);position:relative}
+.method__rail{position:absolute;left:0;right:0;top:0;height:1px;background:var(--line2)}
+.method__rail::after{content:'';position:absolute;left:0;top:0;height:1px;width:0;background:var(--acc);transition:width 1.6s cubic-bezier(.3,.7,.2,1)}
+.method.in .method__rail::after{width:100%}
+.step{padding-top:32px;position:relative}
+.step::before{content:'';position:absolute;top:-4px;left:0;width:9px;height:9px;background:var(--bg);border:1px solid var(--acc)}
+.step__n{font-size:.8rem;color:var(--tx3)}
+.step h3{font-size:clamp(1.5rem,2.2vw,2rem);font-weight:400;letter-spacing:-.02em;margin:8px 0 14px}
+.step p{color:var(--tx2);font-size:.96rem}
+.principles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(24px,3vw,48px);margin-top:clamp(56px,7vw,88px);padding-top:28px;border-top:1px solid var(--line)}
+.principles p{font-size:1.08rem;line-height:1.4;letter-spacing:-.01em}
+.principles p span{color:var(--tx2)}
+
+/* ====== CAREER ====== */
+.progress{display:flex;flex-wrap:wrap;gap:0;margin-bottom:clamp(40px,5vw,64px);border:1px solid var(--line)}
+.progress li{list-style:none;flex:1 1 0;min-width:140px;padding:14px 18px;font-size:.88rem;color:var(--tx2);border-right:1px solid var(--line);position:relative}
+.progress li:last-child{border-right:0;color:var(--tx);background:var(--panel)}
+.progress li span:first-child{display:block;font-size:.72rem;color:var(--tx3);margin-bottom:4px}
+.progress li:last-child span:first-child{color:var(--acc)}
+.tl{position:relative;border-left:1px solid var(--line2);margin-left:6px}
+.role{position:relative;padding:0 0 clamp(48px,6vw,72px) clamp(28px,4vw,56px);display:grid;grid-template-columns:minmax(0,3fr) minmax(0,8fr);gap:16px clamp(28px,4vw,64px)}
+.role::before{content:'';position:absolute;left:-6px;top:6px;width:11px;height:11px;background:var(--bg);border:1px solid var(--tx3)}
+.role--now::before{background:var(--acc);border-color:var(--acc)}
+.role__meta .label{display:block}
+.role__meta p{margin-top:8px;font-size:.92rem;color:var(--tx2)}
+.role__co{font-size:clamp(1.6rem,2.8vw,2.5rem);font-weight:400;letter-spacing:-.025em;line-height:1.05}
+.role--now .role__co{font-size:clamp(2rem,3.6vw,3.2rem)}
+.role__title{margin-top:8px;color:var(--acc);font-size:1rem}
+.role__desc{margin-top:18px;color:var(--tx2);max-width:62ch}
+.role__stage{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+.role__stage span{font-size:.76rem;border:1px solid var(--line2);padding:4px 10px;color:var(--tx2)}
+.acc-list{list-style:none;margin-top:24px;border-top:1px solid var(--line)}
+.acc-list li{display:grid;grid-template-columns:88px minmax(0,1fr);gap:16px;padding:12px 0;border-bottom:1px solid var(--line);font-size:.95rem}
+.acc-list time{color:var(--tx3)}
+.acc-list em{font-style:normal;color:var(--tx2)}
+.role__kpi{display:flex;align-items:baseline;gap:16px;margin-top:24px;padding:20px 22px;background:var(--panel);border:1px solid var(--line)}
+.role__kpi b{font-size:clamp(1.9rem,3vw,2.6rem);font-weight:300;letter-spacing:-.03em;line-height:1;color:var(--acc);white-space:nowrap}
+.role__kpi span{color:var(--tx2);font-size:.95rem}
+
+/* ====== PROJECT PORTFOLIO ====== */
+.pf__filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.pf__filters button{background:none;border:1px solid var(--line2);color:var(--tx2);font:500 .85rem/1 var(--f);padding:10px 14px;cursor:pointer}
+.pf__filters button[aria-pressed="true"]{border-color:var(--tx);color:var(--tx)}
+.pf{list-style:none;border-top:1px solid var(--line2)}
+.pf li{display:grid;grid-template-columns:110px minmax(0,1fr) minmax(0,220px);gap:8px 28px;padding:18px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.pf time{color:var(--tx3);font-size:.9rem}
+.pf b{font-weight:400;font-size:1.02rem}
+.pf small{display:block;color:var(--tx3);font-size:.86rem;margin-top:2px}
+.pf em{font-style:normal;color:var(--tx2);font-size:.88rem;text-align:right}
+
+/* ====== RECOMMENDATIONS ====== */
+.recs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(24px,3vw,48px)}
+.rec{border-top:1px solid var(--line2);padding-top:28px}
+.rec blockquote{font-size:clamp(1.12rem,1.6vw,1.3rem);line-height:1.5;letter-spacing:-.01em}
+.rec .tr{display:block;margin-top:12px;font-size:.8rem;color:var(--tx3)}
+.rec cite{display:block;font-style:normal;margin-top:22px;font-size:.9rem;color:var(--tx2)}
+.rec cite b{display:block;color:var(--tx);font-weight:500}
+.recs__cta{margin-top:clamp(40px,5vw,56px)}
+.note{display:block;margin-top:12px;font-size:.8rem;color:var(--tx3)}
+
+/* ====== WHAT I BRING + CREDENTIALS ====== */
+.bring{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(40px,6vw,96px)}
+.comp{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px clamp(20px,2.4vw,36px)}
+.comp h3{font-size:.72rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--acc);padding-bottom:14px;border-bottom:1px solid var(--line2)}
+.comp ul{list-style:none}
+.comp li{padding:14px 0;border-bottom:1px solid var(--line);font-size:1.02rem}
+.creds{border:1px solid var(--line2);background:var(--panel)}
+.creds__head{padding:24px 28px;border-bottom:1px solid var(--line);background:var(--deep)}
+.creds__head h3{font-size:1.5rem;font-weight:400;letter-spacing:-.02em;margin-top:6px}
+.cred{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 16px;padding:16px 28px;border-bottom:1px solid var(--line)}
+.cred:last-child{border-bottom:0}
+.cred b{font-weight:500}
+.cred small{color:var(--tx3);font-size:.85rem;grid-column:1}
+.cred em{font-style:normal;font-size:.78rem;color:var(--tx3);align-self:start;padding-top:3px}
+.cred__grp{padding:14px 28px 6px}
+.cred__two{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line)}
+.cred__two .cred{border-bottom:1px solid var(--line)}
+.cred__two .cred:nth-child(odd){border-right:1px solid var(--line)}
+.cred__two .cred:nth-last-child(-n+2){border-bottom:0}
+.cred__two .cred:nth-child(odd):nth-last-child(2){border-bottom:0}
+
+/* ====== STORY ====== */
+.story{max-width:760px}
+.story__txt p{color:var(--tx2);max-width:60ch;margin-top:22px}
+.story__txt p:first-child{margin-top:0;color:var(--tx);font-size:1.22rem;line-height:1.55}
+
+/* ====== BEYOND ====== */
+.beyond{padding:var(--sec) 0;border-top:1px solid var(--line);background:var(--deep);text-align:center}
+.beyond h2{font-size:clamp(2.6rem,6vw,5rem);line-height:1;font-weight:400;letter-spacing:-.04em}
+.beyond__sub{display:table;margin:18px auto 0;color:var(--acc);font-size:1.15rem}
+.beyond__ref{max-width:720px;margin:clamp(40px,5vw,56px) auto 0;text-align:left;border:1px dashed var(--acc-dim);padding:24px 28px}
+.beyond__ref p:not(.label){color:var(--tx2);font-size:.98rem;margin-top:12px}
+.draft-only{display:none}
+html.draft .draft-only{display:block}
+.beyond__body{max-width:720px;margin:clamp(40px,5vw,64px) auto 0;text-align:left;display:grid;gap:14px}
+.beyond__body div{border:1px dashed var(--line2);padding:20px 24px}
+.beyond__body .label{display:block;margin-bottom:8px}
+.beyond__body p:not(.label){color:var(--tx3);font-size:.95rem}
+
+/* ====== FOOTER ====== */
+.foot{padding:clamp(80px,10vw,128px) 0 clamp(32px,4vw,48px);border-top:1px solid var(--line)}
+.foot__name{font-size:clamp(3rem,9vw,7.5rem);line-height:.95;font-weight:400;letter-spacing:-.045em}
+.foot__grid{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:40px 64px;margin-top:clamp(36px,4vw,56px);align-items:end}
+.foot__pos{font-size:clamp(1.1rem,1.6vw,1.35rem);color:var(--tx2)}
+.foot__pos b{display:block;color:var(--tx);font-weight:400}
+.foot__links{display:flex;flex-direction:column;border-top:1px solid var(--line2)}
+.foot__links a{display:flex;justify-content:space-between;align-items:center;padding:18px 0;border-bottom:1px solid var(--line);text-decoration:none;font-size:1.05rem;transition:color .2s}
+.foot__links a:hover{color:var(--acc)}
+.foot__links small{color:var(--tx3);font-size:.85rem}
+.foot__base{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;margin-top:clamp(56px,7vw,88px);padding-top:24px;border-top:1px solid var(--line);font-size:.82rem;color:var(--tx3)}
+
+/* ====== CASE STUDY PAGE ====== */
+.cs{position:fixed;inset:0;z-index:50;background:var(--bg);overflow-y:auto;-webkit-overflow-scrolling:touch}
+.cs:focus{outline:none}
+.cs__bar{position:sticky;top:0;z-index:2;background:rgba(14,35,32,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px)}
+.cs__bar .wrap{display:flex;justify-content:space-between;align-items:center;height:64px;gap:16px}
+.cs__back{background:none;border:0;color:var(--tx);font:500 .95rem/1 var(--f);cursor:pointer;display:flex;align-items:center;gap:10px}
+.cs__count{font-size:.85rem;color:var(--tx3)}
+.cs__hero{padding:clamp(64px,9vw,120px) 0 clamp(48px,6vw,72px)}
+.cs__hero h1{font-size:clamp(2.4rem,5.4vw,4.8rem);line-height:1.03;font-weight:400;letter-spacing:-.036em;max-width:17ch;margin-top:20px}
+.cs__hero p:not(.label){color:var(--tx2);max-width:60ch;margin-top:28px;font-size:1.15rem}
+.cs__kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line2);border-bottom:1px solid var(--line)}
+.cs__kpis div{padding:28px 24px 28px 0}
+.cs__kpis div+div{padding-left:24px;border-left:1px solid var(--line)}
+.cs__kpis b{display:block;font-size:clamp(1.9rem,3.4vw,2.8rem);font-weight:300;line-height:1;letter-spacing:-.03em}
+.cs__kpis div:first-child b{color:var(--acc)}
+.cs__kpis span{display:block;margin-top:12px;color:var(--tx2);font-size:.9rem}
+.cs__body{padding:clamp(40px,6vw,80px) 0 clamp(64px,8vw,112px)}
+.blk{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,8fr);gap:16px clamp(28px,5vw,80px);padding:clamp(32px,4vw,48px) 0;border-bottom:1px solid var(--line)}
+.blk__txt{max-width:62ch}
+.blk__txt p{font-size:1.06rem}
+.blk__txt ul{list-style:none}
+.blk__txt li{padding:10px 0;border-bottom:1px solid var(--line)}
+.blk__txt li:first-child{padding-top:0}
+.blk--lesson .blk__txt p{font-size:clamp(1.3rem,2vw,1.7rem);line-height:1.3;letter-spacing:-.015em}
+.blk--draft{opacity:.55}
+.blk--draft .blk__txt p{border:1px dashed var(--line2);padding:14px 16px;font-size:.92rem;color:var(--tx3)}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tags span{border:1px solid var(--line2);padding:6px 12px;font-size:.88rem;color:var(--tx2)}
+.exhibit{padding:clamp(40px,5vw,64px) 0;border-bottom:1px solid var(--line)}
+.exhibit__cap{margin-bottom:28px}
+.flow{display:grid;grid-template-columns:120px minmax(0,1fr);gap:14px 24px;align-items:center}
+.flow + .flow{margin-top:22px}
+.flow__tag{font-size:.72rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--tx3)}
+.flow__steps{display:flex;flex-wrap:wrap}
+.fs{display:flex;align-items:center}
+.fs__box{border:1px solid var(--line2);padding:12px 16px;font-size:.92rem;line-height:1.35;min-height:48px;display:flex;align-items:center;background:var(--panel)}
+.fs__box--break{border-style:dashed;border-color:#B8564B;color:#E0968C;background:transparent}
+.fs__box--new{border-color:var(--acc)}
+.fs + .fs::before{content:'';width:22px;height:1px;background:var(--line2);flex:none}
+.bars{display:grid;gap:18px;max-width:760px}
+.bar{display:grid;grid-template-columns:120px minmax(0,1fr) 80px;gap:16px;align-items:center;font-size:.92rem}
+.bar i{display:block;height:14px;background:var(--line2)}
+.bar--after i{background:var(--acc);min-width:3px}
+.bar b{font-weight:400;text-align:right}
+.cs__next{padding:clamp(48px,6vw,72px) 0;border-top:1px solid var(--line2)}
+.cs__next button{background:none;border:0;color:var(--tx);cursor:pointer;text-align:left;font:inherit;display:block;width:100%}
+.cs__next strong{display:block;font-size:clamp(1.6rem,3vw,2.6rem);font-weight:400;letter-spacing:-.025em;line-height:1.1;margin-top:12px;max-width:22ch;transition:color .2s}
+.cs__next button:hover strong{color:var(--acc)}
+
+/* ====== REVEAL ====== */
+.js .rv{opacity:0;transform:translateY(14px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+
+/* ====== RESPONSIVE ====== */
+@media (max-width:1080px){
+  .dash__grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .kpi:nth-child(3){border-right:0}
+  .kpi:nth-child(-n+3){border-bottom:1px solid var(--line)}
+  .cases{grid-template-columns:1fr}
+  .comp{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .bring{grid-template-columns:1fr}
+  .principles{grid-template-columns:1fr 1fr}
+  .role{grid-template-columns:1fr}
+}
+@media (max-width:860px){
+  .nav,.hdr .lang{display:none}
+  .menu-btn{display:block}
+}
+@media (max-width:760px){
+  body{font-size:1rem}
+  .hero{padding-top:36px}
+  .hero__grid{grid-template-columns:minmax(0,1fr) 96px;grid-template-areas:"id pic" "head head" "lede lede" "cta cta";column-gap:20px;align-items:center}
+  .hero__id{margin-bottom:0}
+  .portrait{align-self:center}
+  .portrait figcaption{display:none}
+  .portrait__mono{font-size:1.9rem}
+  .hero h1{margin-top:32px;font-size:clamp(2.3rem,10.5vw,3.2rem)}
+  .hero__cta .btn{flex:1 1 auto;justify-content:center}
+  .dash__bar{padding:12px 18px}
+  .dash__grid{grid-template-columns:1fr 1fr}
+  .kpi{padding:24px 16px}
+  .kpi::before{left:16px}
+  .kpi:nth-child(n){border-right:0;border-bottom:1px solid var(--line)}
+  .kpi:first-child{grid-column:1/-1}
+  .kpi:nth-child(2),.kpi:nth-child(4){border-right:1px solid var(--line)}
+  .kpi:nth-child(4),.kpi:nth-child(5){border-bottom:0}
+  .kpi__v{font-size:2.1rem}
+  .dash__bar small{display:none}
+  .sec__head{grid-template-columns:1fr;gap:18px}
+  .card__row{grid-template-columns:1fr;gap:6px}
+  .card__facts{grid-template-columns:1fr;gap:10px}
+  .card__facts li{display:flex;align-items:baseline;gap:10px}
+  .card__facts span{margin-top:0}
+  .method{grid-template-columns:1fr;padding-left:28px}
+  .method__rail{left:4px;right:auto;bottom:0;width:1px;height:auto}
+  .method__rail::after{width:1px;height:0;transition:height 1.6s cubic-bezier(.3,.7,.2,1)}
+  .method.in .method__rail::after{height:100%}
+  .step{padding:0 0 40px}
+  .step::before{left:-28px;top:6px}
+  .principles{grid-template-columns:1fr}
+  .progress{flex-direction:column}
+  .progress li{border-right:0;border-bottom:1px solid var(--line);display:flex;gap:12px;align-items:baseline}
+  .progress li:last-child{border-bottom:0}
+  .progress li span:first-child{margin:0;min-width:24px}
+  .role{padding-left:24px}
+  .acc-list li{grid-template-columns:72px minmax(0,1fr)}
+  .role__kpi{flex-direction:column;gap:8px}
+  .pf li{grid-template-columns:1fr;gap:2px}
+  .pf em{text-align:left}
+  .recs{grid-template-columns:1fr}
+  .comp{grid-template-columns:1fr}
+  .cred__two{grid-template-columns:1fr}.cred__two .cred:nth-child(odd){border-right:0}.cred__two .cred{border-bottom:1px solid var(--line)!important}
+  .cred{padding:14px 20px}.creds__head,.cred__grp{padding-left:20px;padding-right:20px}
+  .story{grid-template-columns:1fr}
+  .foot__grid{grid-template-columns:1fr}
+  .cs__kpis{grid-template-columns:1fr}
+  .cs__kpis div,.cs__kpis div+div{padding:20px 0;border-left:0;border-top:1px solid var(--line);display:flex;align-items:baseline;gap:14px}
+  .cs__kpis div:first-child{border-top:0}
+  .cs__kpis span{margin-top:0}
+  .blk{grid-template-columns:1fr;gap:10px}
+  .flow{grid-template-columns:1fr}
+  .flow__steps,.fs{flex-direction:column;align-items:stretch}
+  .fs + .fs::before{width:1px;height:16px;margin-left:20px}
+  .bar{grid-template-columns:70px minmax(0,1fr) 60px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .rv{opacity:1;transform:none;transition:none}
+  .method__rail::after{transition:none}
+}
+
+/* ================= v3 OVERRIDES ================= */
+/* section themes: same palette, different surface */
+.paper{--bg:#F1ECE2;--panel:#F9F6F0;--panel2:#FCFAF6;--deep:#0E2320;--line:rgba(19,36,33,.12);--line2:rgba(19,36,33,.22);--tx:#132421;--tx2:#4A5652;--tx3:#5F6B66;--acc:#9A4A27;--acc-dim:rgba(154,74,39,.3);background:var(--bg);color:var(--tx);border-top:0}
+.light{--bg:#F7F3EC;--panel:#FFFFFF;--panel2:#FFFFFF;--deep:#0E2320;--line:rgba(19,36,33,.10);--line2:rgba(19,36,33,.18);--tx:#132421;--tx2:#4A5652;--tx3:#5F6B66;--acc:#9A4A27;--acc-dim:rgba(154,74,39,.3);background:var(--bg);color:var(--tx);border-top:0}
+.paper .btn--solid,.light .btn--solid{color:#FFF;background:#132421;border-color:#132421}
+.sec + .sec:not(.paper):not(.light){border-top:0}
+
+/* type scale, calmer */
+.h2{font-size:clamp(1.7rem,2.7vw,2.45rem);line-height:1.1;letter-spacing:-.02em}
+.sec__head--stack{display:block;max-width:760px}
+.sec__head--stack .h2{margin-top:14px}
+.sec__head--stack .lead{margin-top:18px}
+
+/* header: taller, brand with tag */
+:root{--hdr:92px}
+.hdr{background:rgba(14,35,32,.9)}
+.brand{font-size:1.3rem;font-weight:500;letter-spacing:-.01em;text-transform:none;display:flex;align-items:baseline;gap:12px}
+.brand__tag{font-size:.68rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--acc)}
+.nav a{font-size:.98rem}
+.lang{border-radius:999px;overflow:hidden}
+.lang button{padding:9px 14px}
+.lang button[aria-pressed="true"]{background:var(--acc);color:#13201D}
+
+/* hero: photo up, smaller type */
+.hero{padding:clamp(24px,3vw,40px) 0 clamp(64px,7vw,96px)}
+.hero__grid{grid-template-columns:minmax(0,1fr) clamp(260px,30vw,420px);grid-template-areas:"pos pic" "head pic" "lede pic" "cta pic";align-items:start;row-gap:0}
+.hero__pos{grid-area:pos;font-size:.78rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--acc);line-height:1.9;max-width:44ch;margin-top:8px}
+.hero h1{font-size:clamp(2.2rem,4.1vw,3.8rem);line-height:1.06;letter-spacing:-.032em;max-width:17ch;margin-top:24px}
+.hero__lede{font-size:clamp(1.05rem,1.3vw,1.2rem);line-height:1.6;margin-top:26px;max-width:56ch}
+.hero__cta{margin-top:34px}
+.portrait{align-self:start}
+.portrait__frame{border-radius:6px}
+.portrait__frame::after{display:none}
+
+/* impact band: full-bleed accent, no dividers */
+.band{background:var(--acc);color:#13201D}
+.band__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;padding-top:clamp(36px,4vw,52px);padding-bottom:clamp(36px,4vw,52px);text-align:center}
+.bk b{display:inline-block;font-size:clamp(2rem,3.4vw,3rem);font-weight:400;line-height:1;letter-spacing:-.03em}
+.bk span{display:block;margin-top:12px;font-size:.74rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+.band [data-ph]{color:rgba(19,32,29,.55);border-bottom-color:rgba(19,32,29,.45)}
+
+/* cases: 3 per row, compact */
+.cases{grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,1.8vw,24px)}
+.card{background:var(--panel);border-color:var(--line)}
+.card__main{padding:clamp(22px,2.2vw,30px)}
+.card h3{font-size:clamp(1.18rem,1.5vw,1.4rem);margin:10px 0 18px}
+.card__row{display:block;padding:12px 0}
+.card__row .label{padding:0 0 4px}
+.card__row p:not(.label){font-size:.92rem;line-height:1.55}
+.card__impact{padding-top:18px}
+.card__impact b{font-size:clamp(1.7rem,2.2vw,2.1rem)}
+.card__impact span{font-size:.85rem}
+.card__foot{background:#0E2320;border-top:0;padding:18px clamp(22px,2.2vw,30px)}
+.card__foot .card__facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+.card__facts b{color:#F0EBE1;font-size:1rem}
+.card__facts span{color:#98A49E}
+.card__foot .link{color:#F0EBE1;border-bottom-color:rgba(240,235,225,.25);margin-top:16px;font-size:.9rem}
+.card__foot .link:hover{border-bottom-color:#D9825B}
+
+/* career: table rows */
+.jobs{border-top:1px solid var(--line2)}
+.job{display:grid;grid-template-columns:150px minmax(0,4fr) minmax(0,6fr);gap:12px clamp(24px,3vw,48px);padding:26px 0;border-bottom:1px solid var(--line2);align-items:baseline}
+.job__when{font-weight:600;color:var(--acc);font-size:.95rem}
+.job__who h3{font-size:1.15rem;font-weight:600;letter-spacing:-.01em}
+.job__who h3 span{font-weight:400;color:var(--tx2)}
+.job__who p{color:var(--tx2);font-size:.95rem;margin-top:2px}
+.job__what{font-size:1rem;line-height:1.65}
+#career .note{margin-top:18px}
+
+/* project portfolio: two columns */
+.pf{display:grid;grid-template-columns:1fr 1fr;gap:0 clamp(28px,4vw,64px);border-top:0;list-style:none}
+.pf ul{list-style:none;border-top:1px solid var(--line2)}
+.pf li{display:grid;grid-template-columns:96px minmax(0,1fr);gap:4px 20px;padding:16px 0;border-bottom:1px solid var(--line2)}
+.pf time{color:var(--acc);font-weight:600;font-size:.92rem}
+.pf b{font-weight:400;font-size:1rem}
+.pf b i{font-style:normal;color:var(--tx2)}
+.pf small{display:block;color:var(--tx3);font-size:.85rem;margin-top:2px}
+
+/* recommendations: quote cards */
+.recs{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.rec{border:1px solid var(--line2);background:var(--panel);padding:30px 30px 28px;border-radius:6px;display:flex;flex-direction:column;border-top-width:1px}
+.rec__q{font-size:3rem;line-height:.6;color:var(--acc);height:28px}
+.rec blockquote{font-style:italic;font-size:1.08rem;line-height:1.6;margin-top:14px}
+.rec cite{margin-top:auto;padding-top:28px;font-size:.74rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);line-height:1.6}
+.rec .tr{margin-top:14px}
+.recs__cta{text-align:center}
+.recs__cta .btn{border-radius:6px}
+.recs__cta .note{margin-top:14px}
+
+/* what i bring: pills + credential cards */
+.bring{grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,88px)}
+.pills__grp{margin-top:34px;font-size:.72rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--tx3)}
+.pills{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.pills li{border:1px solid rgba(154,74,39,.28);background:#F9EDE3;border-radius:999px;padding:12px 18px;text-align:center;font-size:.95rem;line-height:1.3;display:flex;align-items:center;justify-content:center;min-height:48px}
+.pills--hard li{background:#fff;border-color:var(--line2)}
+.ccards{display:grid;gap:12px;margin-top:34px}
+.ccard{display:grid;grid-template-columns:52px minmax(0,1fr);gap:18px;align-items:center;padding:18px 20px;border:1px solid var(--line2);background:#fff;border-radius:6px}
+.ccard__ic{width:52px;height:52px;border-radius:6px;background:#0E2320;color:#D9825B;display:grid;place-items:center;font-size:.8rem;font-weight:600;letter-spacing:.04em}
+.ccard b{display:block;font-weight:600;font-size:1rem;line-height:1.35}
+.ccard small{display:block;color:var(--tx2);font-size:.88rem;margin-top:3px}
+.ccard--ph{border-style:dashed;background:transparent}
+
+/* beyond: centered editorial */
+.beyond{text-align:center;background:var(--bg)}
+.beyond__title{font-size:clamp(2.2rem,4.4vw,3.6rem);font-weight:400;letter-spacing:-.03em;line-height:1.05;margin:16px auto 0;display:table}
+.beyond__text{max-width:820px;margin:32px auto 0}
+.beyond__text p{font-size:1.15rem;line-height:1.75;color:var(--tx3);border:1px dashed var(--line2);padding:22px 26px}
+.beyond__ref{max-width:820px;margin:24px auto 0;text-align:center;border:1px dashed var(--acc-dim);padding:24px 28px}
+.beyond__ref p:not(.label){color:var(--tx2);font-size:1.05rem;line-height:1.75;margin-top:12px}
+.draft-only{display:none}
+html.draft .draft-only{display:block}
+
+/* footer: centred buttons */
+.foot{padding:clamp(72px,8vw,104px) 0 clamp(28px,3vw,40px);border-top:0;text-align:center}
+.foot__id{font-size:1.3rem;font-weight:500}
+.foot__id span{display:block;margin-top:6px;font-size:.72rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--acc)}
+.foot__btns{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:32px}
+.foot__btns .btn{height:54px;padding:0 26px;border-radius:6px;border-color:rgba(240,235,225,.7)}
+.foot__base{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;margin-top:clamp(56px,7vw,80px);padding-top:26px;border-top:1px solid var(--line);font-size:.86rem;color:var(--tx3);text-align:left}
+.foot__base a{color:var(--acc);text-decoration:none}
+.foot__base .lang{justify-self:end}
+
+@media (max-width:1080px){
+  .cases{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .bring{grid-template-columns:1fr}
+  .band__grid{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:32px}
+  .job{grid-template-columns:130px minmax(0,1fr)}
+  .job__what{grid-column:2}
+}
+@media (max-width:760px){
+  :root{--hdr:72px}
+  .brand{font-size:1.1rem}
+  .brand__tag{display:none}
+  .hero{padding-top:28px}
+  .hero__grid{grid-template-columns:minmax(0,1fr) 104px;grid-template-areas:"pos pic" "head head" "lede lede" "cta cta";align-items:center}
+  .hero__pos{font-size:.7rem;margin-top:0}
+  .hero h1{font-size:clamp(2rem,9vw,2.6rem);margin-top:26px}
+  .band__grid{grid-template-columns:1fr 1fr}
+  .bk:first-child{grid-column:1/-1}
+  .cases{grid-template-columns:1fr}
+  .job{grid-template-columns:1fr;gap:4px;padding:22px 0}
+  .job__what{grid-column:auto;margin-top:8px}
+  .pf{grid-template-columns:1fr}
+  .pf ul + ul{border-top:0}
+  .pf li{grid-template-columns:78px minmax(0,1fr)}
+  .pills{grid-template-columns:1fr}
+  .foot__btns .btn{width:100%;justify-content:center}
+  .foot__base{grid-template-columns:1fr;justify-items:center;text-align:center}
+  .foot__base .lang{justify-self:center}
+}
+p[data-ph],time[data-ph]{width:fit-content}
+.sec__head--stack .h2{max-width:none}
+.rec__q{font-size:4.2rem;line-height:1;height:40px;font-family:Georgia,serif}
+.hero__pos span{white-space:nowrap}
+@media (max-width:760px){ .card__foot .card__facts{grid-template-columns:1fr} }
+
+/* ================= v4 OVERRIDES ================= */
+/* tighter vertical rhythm everywhere */
+:root{--sec:clamp(56px,6vw,92px);--hdr:104px}
+.sec__head,.sec__head--stack{margin-bottom:clamp(28px,3vw,44px)}
+.h2{font-size:clamp(1.6rem,2.2vw,2.15rem)}
+body{font-size:1rem}
+
+/* header sits a bit lower */
+.hdr__in{height:var(--hdr);padding-top:14px}
+.brand{font-size:1.2rem}
+.nav a{font-size:.94rem}
+
+/* hero: compact so the impact band shows on first load */
+.hero{padding:clamp(8px,1.2vw,20px) 0 clamp(36px,3.6vw,56px)}
+.hero__grid{grid-template-columns:minmax(0,1fr) clamp(240px,22vw,340px);column-gap:clamp(40px,6vw,96px)}
+.hero__pos{font-size:.7rem;line-height:1.85;margin-top:4px}
+.hero h1{font-size:clamp(2rem,3.1vw,3rem);line-height:1.08;margin-top:18px;max-width:19ch}
+.hero__lede{font-size:clamp(.98rem,1.05vw,1.08rem);margin-top:20px;max-width:58ch}
+.hero__cta{margin-top:26px}
+.hero .btn{height:44px;padding:0 20px;font-size:.9rem}
+.band__grid{padding-top:clamp(26px,2.6vw,38px);padding-bottom:clamp(26px,2.6vw,38px)}
+.bk b{font-size:clamp(1.8rem,2.6vw,2.5rem)}
+.bk span{font-size:.68rem;margin-top:10px}
+
+/* cases: flatter cards */
+.card__main{padding:20px 22px 18px}
+.card h3{font-size:clamp(1.05rem,1.15vw,1.2rem);line-height:1.25;margin:8px 0 12px}
+.card__row{padding:9px 0}
+.card__row .label{font-size:.64rem;padding-bottom:2px}
+.card__row p:not(.label){font-size:.86rem;line-height:1.5}
+.card__impact{padding-top:12px;gap:12px}
+.card__impact b{font-size:clamp(1.45rem,1.7vw,1.75rem)}
+.card__impact span{font-size:.8rem}
+.card__foot{padding:14px 22px}
+.card__facts b{font-size:.92rem}
+.card__facts span{font-size:.74rem}
+.card__foot .link{margin-top:10px;font-size:.84rem;padding-bottom:4px}
+.card .label{font-size:.64rem}
+
+/* other sections, slightly denser */
+.job{padding:20px 0}
+.pf li{padding:12px 0}
+.rec{padding:24px 26px 22px}
+.pills li{min-height:42px;padding:9px 16px;font-size:.9rem}
+.ccard{padding:14px 18px}
+.method .step{padding-top:26px}
+.principles{margin-top:clamp(36px,4vw,56px)}
+
+/* story: decorative particle field on the right */
+#story{position:relative;overflow:hidden}
+#story .wrap{position:relative;z-index:1}
+.story-fx{position:absolute;top:0;right:0;bottom:0;width:min(52%,760px);pointer-events:none;z-index:0;-webkit-mask-image:linear-gradient(to left,#000 45%,transparent 100%);mask-image:linear-gradient(to left,#000 45%,transparent 100%);opacity:.9}
+.story-fx canvas{width:100%;height:100%;display:block}
+
+/* beyond: smaller title */
+.beyond__title{font-size:clamp(1.8rem,2.8vw,2.5rem)}
+.beyond__text p{font-size:1.02rem}
+
+@media (max-width:760px){
+  :root{--hdr:72px}
+  .hdr__in{padding-top:0}
+  .story-fx{width:100%;opacity:.35}
+}
+.hdr__in{transition:height .25s ease,padding .25s ease}
+.hdr.scrolled .hdr__in{height:68px;padding-top:0}
+html{scroll-padding-top:68px}
+:root{--sec:clamp(48px,5vw,80px)}
+.card h3{max-width:none}
+.hero__grid{grid-template-columns:minmax(0,1fr) clamp(220px,20vw,310px)}
+.beyond .beyond__title{font-size:clamp(1.8rem,2.8vw,2.5rem);line-height:1.1}
+/* v5: use the width, keep the band in the first view */
+.hero__grid{grid-template-columns:minmax(0,1fr) clamp(220px,19vw,290px);column-gap:clamp(40px,5vw,80px)}
+.hero__pos{max-width:none;line-height:1.6}
+.hero h1{max-width:26ch;font-size:clamp(2rem,2.9vw,2.8rem);margin-top:14px}
+.hero__lede{max-width:72ch;margin-top:16px}
+.hero__cta{margin-top:22px}
+.hero{padding-bottom:clamp(28px,2.8vw,44px)}
+.portrait__frame{aspect-ratio:5/6}
+@media (max-width:760px){
+  .hero__grid{grid-template-columns:minmax(0,1fr) 96px;column-gap:18px}
+  .hero__pos{line-height:1.8}
+  .portrait__frame{aspect-ratio:4/5}
+}
+/* v6: hero modelled on the reference proportions */
+@media (min-width:761px){
+  .hero{padding:clamp(4px,.8vw,12px) 0 clamp(40px,4vw,64px)}
+  .hero__grid{grid-template-columns:minmax(0,1fr) clamp(300px,31vw,450px);column-gap:clamp(40px,5vw,80px)}
+  .hero__pos{font-size:.74rem;letter-spacing:.22em;line-height:1.7;margin-top:0}
+  .hero__pos span{display:block}
+  .hero h1{font-size:clamp(2.4rem,3.7vw,3.6rem);line-height:1.08;max-width:21ch;margin-top:22px}
+  .hero__lede{font-size:clamp(1.02rem,1.2vw,1.18rem);line-height:1.6;max-width:58ch;margin-top:26px}
+  .hero__cta{margin-top:30px}
+  .hero .btn{height:52px;padding:0 28px;font-size:1rem;font-weight:600;border-radius:4px}
+  .portrait__frame{aspect-ratio:19/20;border-radius:8px}
+}
+@media (min-width:761px){
+  .hero h1{font-size:clamp(2.3rem,3.4vw,3.35rem);max-width:22ch;margin-top:20px}
+  .hero__lede{max-width:62ch;margin-top:22px}
+  .hero__cta{margin-top:26px}
+  .hero{padding-bottom:clamp(28px,3vw,48px)}
+}
+@media (min-width:761px){
+  .hero{padding-top:clamp(24px,2.4vw,40px);padding-bottom:clamp(52px,5vw,80px)}
+}
+/* v7: hero fills the first screen and leaves a thin strip of the next section visible */
+@media (min-width:761px){
+  .hero{min-height:calc(100vh - var(--hdr) - 22px);min-height:calc(100svh - var(--hdr) - 22px);display:flex;align-items:center;padding:clamp(16px,2.5vh,32px) 0}
+  .hero > .wrap{width:100%}
+  .hero__grid{grid-template-columns:minmax(0,1fr) min(31vw,450px,50vh)}
+  .hero h1{font-size:clamp(2.1rem,min(3.4vw,6vh),3.35rem)}
+  .hero__lede{margin-top:clamp(14px,2.4vh,22px)}
+  .hero__cta{margin-top:clamp(16px,2.8vh,26px)}
+  .hero h1{margin-top:clamp(12px,2.2vh,20px)}
+}
+
+/* ======================================================================
+   MOBILE SYSTEM (≤760px) : written last so it wins over earlier layers.
+   Scale: body 16/1.6 · lede 17 · h1 32 · h2 26 · h3 19 · labels 11.5 · min 13
+   Gutter 20px · section 64px · touch targets ≥ 48px
+   ====================================================================== */
+@media (max-width:760px){
+  :root{--g:20px;--sec:64px;--hdr:64px}
+  html{scroll-padding-top:64px}
+  body{font-size:16px;line-height:1.6;overflow-x:hidden}
+  .wrap{padding-left:var(--g);padding-right:var(--g)}
+
+  /* header */
+  .hdr__in,.hdr.scrolled .hdr__in{height:64px;padding-top:0;gap:12px}
+  .brand{font-size:1.06rem;gap:8px}
+  .brand__tag{display:inline;font-size:.6rem;letter-spacing:.14em}
+  .menu-btn{width:48px;height:44px}
+  .mnav{top:calc(64px + env(safe-area-inset-top,0px));padding-top:8px}
+  .mnav a{font-size:1.6rem;padding:16px 0}
+  .mnav .lang button{padding:14px 20px;font-size:.82rem}
+
+  /* hero: photo first, then the statement */
+  .hero{min-height:0;display:block;padding:12px 0 44px}
+  .hero__grid{display:flex;flex-direction:column;align-items:stretch}
+  .portrait{order:-1;width:100%;margin:0 0 26px}
+  .portrait__frame{aspect-ratio:4/3.4;border-radius:8px}
+  .portrait__frame img{object-position:50% 22%}
+  .hero__pos{font-size:.66rem;letter-spacing:.16em;line-height:1.75;margin:0}
+  .hero__pos span{display:block;white-space:normal}
+  .hero h1{font-size:2rem;line-height:1.12;letter-spacing:-.025em;max-width:none;margin-top:14px}
+  .hero__lede{font-size:1.0625rem;line-height:1.6;max-width:none;margin-top:16px}
+  .hero__cta{margin-top:24px}
+  .hero__cta .btn,.hero .btn{width:100%;height:52px;justify-content:center;font-size:1rem}
+
+  /* impact band */
+  .band__grid{grid-template-columns:1fr 1fr;gap:26px 16px;padding-top:34px;padding-bottom:34px}
+  .bk:first-child{grid-column:1/-1}
+  .bk b{font-size:2rem}
+  .bk:first-child b{font-size:2.5rem}
+  .bk span{font-size:.64rem;letter-spacing:.12em;line-height:1.45;margin-top:8px}
+
+  /* section heads */
+  .sec{padding:var(--sec) 0}
+  .sec__head,.sec__head--stack{margin-bottom:28px}
+  .label{font-size:.7rem;letter-spacing:.14em}
+  .h2,.sec__head--stack .h2{font-size:1.625rem;line-height:1.15;margin-top:10px}
+  .lead,.sec__head--stack .lead{font-size:1rem;line-height:1.6;margin-top:12px}
+
+  /* cases */
+  .cases{grid-template-columns:1fr;gap:16px}
+  .card__main{padding:22px 20px 20px}
+  .card .label{font-size:.66rem}
+  .card h3{font-size:1.19rem;line-height:1.25;margin:8px 0 14px}
+  .card__row{padding:12px 0}
+  .card__row p:not(.label){font-size:.95rem;line-height:1.55}
+  .card__impact{padding-top:16px;gap:10px}
+  .card__impact b{font-size:1.9rem}
+  .card__impact span{font-size:.88rem;max-width:none}
+  .card__foot{padding:16px 20px 6px}
+  .card__foot .card__facts{grid-template-columns:1fr 1fr;gap:12px}
+  .card__facts li{display:block}
+  .card__facts b{font-size:1rem}
+  .card__facts span{font-size:.8rem;margin-top:2px}
+  .card__foot .link{display:flex;justify-content:space-between;width:100%;min-height:48px;align-items:center;margin-top:8px;padding:0;border-bottom:0;border-top:1px solid rgba(242,236,214,.14);font-size:.95rem}
+
+  /* method */
+  .method{padding-left:26px}
+  .step{padding:0 0 32px}
+  .step h3{font-size:1.4rem;margin:4px 0 8px}
+  .step p{font-size:.98rem}
+  .principles{grid-template-columns:1fr;gap:0;margin-top:8px;padding-top:0;border-top:0}
+  .principles p{font-size:1.1rem;line-height:1.4;padding:18px 0;border-top:1px solid var(--line)}
+
+  /* career */
+  .job{grid-template-columns:1fr;gap:6px;padding:22px 0}
+  .job__when{font-size:.82rem;letter-spacing:.04em}
+  .job__who h3{font-size:1.12rem}
+  .job__who p{font-size:.92rem}
+  .job__what{font-size:.98rem;line-height:1.6;margin-top:6px}
+
+  /* project portfolio */
+  .pf{grid-template-columns:1fr}
+  .pf ul + ul{border-top:0}
+  .pf li{grid-template-columns:70px minmax(0,1fr);gap:2px 14px;padding:14px 0}
+  .pf time{font-size:.82rem}
+  .pf b{font-size:.98rem;line-height:1.4}
+  .pf small{font-size:.84rem}
+
+  /* recommendations */
+  .recs{grid-template-columns:1fr;gap:14px}
+  .rec{padding:22px 20px 20px}
+  .rec__q{font-size:3.2rem;height:30px}
+  .rec blockquote{font-size:1rem;line-height:1.6;margin-top:10px}
+  .rec cite{font-size:.66rem;padding-top:20px}
+  .recs__cta{margin-top:28px}
+  .recs__cta .btn{width:100%;min-height:52px;height:auto;padding:14px 18px;justify-content:center;text-align:center;line-height:1.3}
+  .recs__cta .note{font-size:.8rem;line-height:1.5;margin-top:12px}
+
+  /* what I bring: wrapping pills instead of a long column */
+  .bring{grid-template-columns:1fr;gap:48px}
+  .pills__grp{margin-top:24px;font-size:.66rem}
+  .pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .pills li{min-height:40px;padding:8px 14px;font-size:.9rem;flex:0 1 auto}
+  .ccards{margin-top:24px;gap:10px}
+  .ccard{grid-template-columns:44px minmax(0,1fr);gap:14px;padding:14px 16px}
+  .ccard__ic{width:44px;height:44px;font-size:.7rem}
+  .ccard b{font-size:.95rem}
+  .ccard small{font-size:.84rem}
+
+  /* story */
+  .story__txt p:first-child{font-size:1.12rem;line-height:1.55}
+  .story__txt p{font-size:1rem;line-height:1.65;margin-top:18px}
+  .story-fx{width:100%;opacity:.28}
+
+  /* beyond */
+  .beyond .beyond__title{font-size:1.75rem;line-height:1.15;display:block}
+  .beyond__text{margin-top:22px}
+  .beyond__text p{font-size:.98rem;line-height:1.65;padding:18px 18px}
+
+  /* footer */
+  .foot{padding:56px 0 calc(28px + env(safe-area-inset-bottom,0px))}
+  .foot__id{font-size:1.2rem}
+  .foot__btns{flex-direction:column;gap:10px;margin-top:26px}
+  .foot__btns .btn{width:100%;height:auto;min-height:52px;padding:14px 16px;justify-content:center;font-size:.95rem;overflow-wrap:anywhere}
+  .foot__base{grid-template-columns:1fr;justify-items:center;text-align:center;gap:14px;margin-top:40px;font-size:.82rem}
+  .foot__base .lang{justify-self:center}
+
+  /* case study page */
+  .cs__bar .wrap{height:56px}
+  .cs__back{min-height:48px}
+  .cs__hero{padding:36px 0 28px}
+  .cs__hero h1{font-size:1.9rem;line-height:1.12;margin-top:12px}
+  .cs__hero p:not(.label){font-size:1rem;margin-top:16px}
+  .cs__kpis{grid-template-columns:1fr}
+  .cs__kpis div,.cs__kpis div+div{padding:16px 0;border-left:0;border-top:1px solid var(--line);display:flex;align-items:baseline;gap:14px}
+  .cs__kpis div:first-child{border-top:0}
+  .cs__kpis b{font-size:1.8rem;min-width:96px}
+  .cs__kpis span{margin-top:0;font-size:.9rem}
+  .cs__body{padding:20px 0 48px}
+  .blk{grid-template-columns:1fr;gap:8px;padding:24px 0}
+  .blk__txt p{font-size:1rem}
+  .blk--lesson .blk__txt p{font-size:1.2rem}
+  .exhibit{padding:28px 0}
+  .flow{grid-template-columns:1fr;gap:10px}
+  .flow + .flow{margin-top:20px}
+  .flow__steps,.fs{flex-direction:column;align-items:stretch}
+  .fs__box{font-size:.92rem;min-height:44px}
+  .fs + .fs::before{width:1px;height:14px;margin-left:18px}
+  .bar{grid-template-columns:56px minmax(0,1fr) 56px;gap:10px;font-size:.85rem}
+  .cs__next strong{font-size:1.4rem}
+}
+/* very small phones */
+@media (max-width:374px){
+  .hero h1{font-size:1.8rem}
+  .bk b{font-size:1.75rem}
+  .brand__tag{display:none}
+}
+/* tablets: keep two columns but give text room */
+@media (min-width:761px) and (max-width:1080px){
+  .hero__pos span{white-space:normal}
+  .cases{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .nav{gap:18px}
+}
+@media (max-width:760px){
+  .bk span{font-size:.72rem}
+  .brand__tag{font-size:.66rem}
+  .foot .lang button,.hdr .lang button{padding:14px 18px}
+  .foot__base a{display:inline-flex;align-items:center;min-height:44px;padding:0 8px}
+}
+@media (max-width:760px){
+  .portrait{margin-bottom:22px}
+  .portrait__frame{aspect-ratio:3/2}
+  .portrait__frame img{object-position:50% 16%}
+  .hero h1{font-size:1.875rem;margin-top:12px}
+  .hero__lede{font-size:1rem;margin-top:14px}
+  .hero__cta{margin-top:20px}
+}
+/* mobile: cases become a swipeable row, portfolio collapses */
+.cases__nav,.pf__more{display:none}
+@media (max-width:760px){
+  .cases{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;margin:0 calc(var(--g) * -1);padding:2px var(--g) 6px;scroll-padding-left:var(--g);scrollbar-width:none}
+  .cases::-webkit-scrollbar{display:none}
+  .cases .card{flex:0 0 86%;scroll-snap-align:start}
+  .cases__nav{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px}
+  .cases__count{font-size:.85rem;color:var(--tx2)}
+  .cases__dots{display:flex;gap:6px}
+  .cases__dots i{width:18px;height:3px;background:var(--line2);transition:background .2s,width .2s}
+  .cases__dots i.on{background:var(--acc);width:28px}
+  .pf.pf--collapsed ul:first-child li:nth-child(n+7),.pf.pf--collapsed ul + ul{display:none}
+  .pf__more{display:flex;width:100%;min-height:50px;align-items:center;justify-content:center;margin-top:18px;background:none;border:1px solid var(--line2);color:var(--tx);font:500 .95rem/1 var(--f);border-radius:4px;cursor:pointer}
+}
+/* tablets held upright: no full-height hero, just comfortable padding */
+@media (min-width:761px) and (max-width:1080px) and (orientation:portrait){
+  .hero{min-height:0;padding:40px 0 64px}
+}
+/* v8: card footer holds only the read link */
+.card__impact{align-items:center}
+.card__impact b{position:relative;top:2px}
+.card__foot .link{margin-top:0}
+.step__lead{color:var(--tx)!important;font-weight:500;margin-bottom:8px}
+.principles__label{margin-top:clamp(48px,6vw,72px)}
+.principles__label + .principles{margin-top:16px}
+.cs__quote{padding:clamp(32px,4vw,48px) 0;border-bottom:1px solid var(--line)}
+.cs__quote blockquote{font-size:clamp(1.2rem,1.9vw,1.55rem);line-height:1.45;letter-spacing:-.01em;max-width:46ch;font-style:italic}
+.cs__quote figcaption{margin-top:16px;font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--acc)}
+/* v9: career tags, portfolio themes */
+.job__tag{display:inline-block;margin-top:8px;font-size:.68rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--acc)}
+.pf__tag{display:inline-block;margin-top:6px;font-size:.66rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--acc)}
+#career .progress{padding:0;margin-top:0}
+
+/* ================= v11: hero without photo, centered ================= */
+.hero__grid{display:flex!important;flex-direction:column;align-items:center;text-align:center;max-width:1160px;margin:0 auto}
+.hero__pos{max-width:none;margin:0}
+.hero__pos span{display:block}
+.hero h1{max-width:36ch;text-wrap:balance;margin-left:auto;margin-right:auto}
+.hero__lede{max-width:78ch;margin-left:auto;margin-right:auto}
+.hero__cta{justify-content:center}
+@media (min-width:761px){
+  .hero h1{font-size:clamp(2rem,3.1vw,3rem);line-height:1.12}
+  .hero__lede{font-size:clamp(1.05rem,1.25vw,1.22rem)}
+}
+@media (max-width:760px){
+  .hero{padding:40px 0 48px}
+  .hero__pos{font-size:.66rem}
+  .hero h1{font-size:1.95rem;margin-top:16px}
+}
+
+/* v11 fix: header is fixed, so shrinking it no longer changes page height (stops the jitter) */
+.hdr{position:fixed;top:0;left:0;right:0}
+body{padding-top:calc(var(--hdr) + env(safe-area-inset-top,0px))}
+</style>
 </head>
-<body data-i18n data-title-pt="Paulo Nobre | Melhoria de processos e automação" data-title-en="Paulo Nobre | Process improvement and automation">
-<a class="skip" href="#conteudo" data-pt="Pular para o conteúdo" data-en="Skip to content">Skip to content</a>
-<header class="hdr"><div class="wrap hdr__in">
-  <a class="brand" href="#conteudo"><b>Paulo Nobre</b><span data-pt="Melhoria de processos e automação" data-en="Process improvement and automation">Process improvement and automation</span></a>
-  <nav class="nav" data-aria-pt="Principal" data-aria-en="Main" aria-label="Main"><a href="#projetos" data-pt="Projetos" data-en="Projects">Projects</a><a href="#como-trabalho" data-pt="Como trabalho" data-en="How I work">How I work</a><a href="#experiencia" data-pt="Experiência" data-en="Experience">Experience</a><a href="#sobre" data-pt="Sobre" data-en="About">About</a><a href="#contato" data-pt="Contato" data-en="Contact">Contact</a></nav>
-  <div class="lang" role="group" aria-label="Idioma / Language"><button type="button" data-set-lang="pt" lang="pt-BR" aria-pressed="false">PT</button><button type="button" data-set-lang="en" lang="en" aria-pressed="false">EN</button></div>
-  <button class="menu-btn" type="button" aria-expanded="false">Menu</button>
-</div></header>
-<main id="conteudo">
-<section class="hero on-dark" aria-labelledby="hero-h">
-  <div class="wrap hero__grid">
-    <div>
-      <p class="eyebrow enter"><span data-pt="Process Improvement · Operational Excellence · Automação" data-en="Process Improvement · Operational Excellence · Automation">Process Improvement · Operational Excellence · Automation</span></p>
-      <h1 class="h1 enter d1" id="hero-h" data-pt="Transformo problemas da operação em processos claros, com regras, dados e automação." data-en="I turn operational problems into clear processes, with rules, data and automation.">I turn operational problems into clear processes, with rules, data and automation.</h1>
-      <p class="lede enter d2" data-pt="Sou analista de processos em uma operação de recuperação de crédito. Mapeio o fluxo, encontro a causa do problema e escrevo as regras. Automatizo onde faz sentido e deixo claro o que continua com pessoas." data-en="I am a process analyst in a credit recovery operation. I map the flow, find the cause of the problem and write the rules. I automate where it makes sense and make clear what stays with people.">I am a process analyst in a credit recovery operation. I map the flow, find the cause of the problem and write the rules. I automate where it makes sense and make clear what stays with people.</p>
-      <div class="actions enter d3"><a class="btn btn--primary" href="#projetos"><span data-pt="Ver os projetos" data-en="See the projects">See the projects</span> <span class="arr" aria-hidden="true">→</span></a><a class="btn btn--secondary" href="#contato"><span data-pt="Falar comigo" data-en="Get in touch">Get in touch</span></a></div>
-      <p class="hero__role enter d3"><b><span data-pt="Analista de Processos Pleno" data-en="Process Analyst (mid-level)">Process Analyst (mid-level)</span></b> · Simplic (Enova International) · São Paulo · Lean Six Sigma Green Belt</p>
+<body>
+<a class="skip" href="#main" data-pt="Pular para o conteúdo" data-en="Skip to content">Skip to content</a>
+
+<!-- ============ 1. HEADER ============ -->
+<header class="hdr" id="hdr">
+  <div class="wrap hdr__in">
+    <a class="brand" href="#main">Paulo Nobre <span class="brand__tag">LSS Green Belt</span></a>
+    <nav class="nav" aria-label="Main">
+      <a href="#cases" data-nav="cases" data-pt="Cases" data-en="Cases">Cases</a>
+      <a href="#career" data-nav="career" data-pt="Experiência" data-en="Experience">Experience</a>
+      <a href="projetos/" data-proj-link data-pt="Projetos" data-en="Projects">Projects</a>
+      <a href="#bring" data-nav="bring" data-pt="Competências" data-en="Skills">Skills</a>
+      <a href="#story" data-nav="story" data-pt="Minha história" data-en="My Story">My Story</a>
+      <a href="#contact" data-nav="contact" data-pt="Contato" data-en="Contact">Contact</a>
+    </nav>
+    <div class="lang" role="group" aria-label="Language / Idioma">
+      <button type="button" data-set-lang="en" aria-pressed="true">EN</button>
+      <button type="button" data-set-lang="pt" aria-pressed="false">PT</button>
     </div>
-    <figure class="method-map enter d2">
-      <p class="method-map__cap"><span data-pt="Exemplo de evidência · case 01" data-en="Evidence example · case 01">Evidence example · case 01</span></p>
-      <p style="color:var(--on-dark);font-weight:600;font-size:var(--t-sm)"><span data-pt="Horário em que a lista do discador ficou pronta" data-en="Time the dialer list was ready">Time the dialer list was ready</span></p>
-      <svg viewBox="0 0 340 150" role="img" aria-labelledby="hc-t" style="width:100%;height:auto;font-family:var(--mono);margin-top:12px"><title id="hc-t" data-pt="Lista do discador pronta: faixa de 07h10 a 08h02 em 29 dias antes, mediana 07h30; três registros depois, entre 06h22 e 06h57." data-en="Dialer list ready: range 07:10 to 08:02 over 29 days before, median 07:30; three records after, between 06:22 and 06:57.">Dialer list ready: range 07:10 to 08:02 over 29 days before, median 07:30; three records after, between 06:22 and 06:57.</title>
-<line x1="104.0" y1="18" x2="104.0" y2="122" stroke="rgba(203,213,225,.14)"/><text x="104.0" y="140" text-anchor="middle" fill="#94A3B8" font-size="10">06:00</text><line x1="146.8" y1="18" x2="146.8" y2="122" stroke="rgba(203,213,225,.14)"/><text x="146.8" y="140" text-anchor="middle" fill="#94A3B8" font-size="10">06:30</text><line x1="189.6" y1="18" x2="189.6" y2="122" stroke="rgba(203,213,225,.14)"/><text x="189.6" y="140" text-anchor="middle" fill="#94A3B8" font-size="10">07:00</text><line x1="232.4" y1="18" x2="232.4" y2="122" stroke="rgba(203,213,225,.14)"/><text x="232.4" y="140" text-anchor="middle" fill="#94A3B8" font-size="10">07:30</text><line x1="275.2" y1="18" x2="275.2" y2="122" stroke="rgba(203,213,225,.14)"/><text x="275.2" y="140" text-anchor="middle" fill="#94A3B8" font-size="10">08:00</text><line x1="318.0" y1="18" x2="318.0" y2="122" stroke="rgba(203,213,225,.14)"/><text x="318.0" y="140" text-anchor="middle" fill="#94A3B8" font-size="10">08:30</text>
-<line x1="275.2" y1="10" x2="275.2" y2="122" stroke="#94A3B8" stroke-dasharray="3 3"/>
-<text x="271.2" y="12" text-anchor="end" fill="#94A3B8" font-size="9.5">8h</text>
-<text x="0" y="44" fill="#F8FAFC" font-size="11" font-family="var(--f)" font-weight="600" data-pt="Antes" data-en="Before">Before</text><text x="0" y="58" fill="#94A3B8" font-size="9.5" data-pt="29 dias" data-en="29 days">29 days</text>
-<rect x="203.9" y="34" width="74.2" height="18" rx="3" fill="rgba(203,213,225,.35)"/>
-<line x1="232.4" y1="28" x2="232.4" y2="58" stroke="#F8FAFC" stroke-width="2"/>
-<text x="0" y="94" fill="#F8FAFC" font-size="11" font-family="var(--f)" font-weight="600" data-pt="Depois" data-en="After">After</text><text x="0" y="108" fill="#94A3B8" font-size="9.5" data-pt="3 registros" data-en="3 records">3 records</text>
-<circle cx="136.6" cy="96" r="5" fill="#5EEAD4" stroke="#0B1220" stroke-width="2"/><circle cx="159.6" cy="96" r="5" fill="#5EEAD4" stroke="#0B1220" stroke-width="2"/><circle cx="185.4" cy="96" r="5" fill="#5EEAD4" stroke="#0B1220" stroke-width="2"/>
-</svg>
-      <figcaption style="font-size:var(--t-xs);color:var(--on-dark-3);margin-top:8px"><span data-pt="Antes: faixa e mediana de 29 dias (27/04 a 30/05/2026). Depois: 3 registros detalhados. Amostras diferentes; o detalhe está no case." data-en="Before: range and median over 29 days (Apr 27 to May 30, 2026). After: 3 detailed records. Different sample sizes; the detail is in the case.">Before: range and median over 29 days (Apr 27 to May 30, 2026). After: 3 detailed records. Different sample sizes; the detail is in the case.</span></figcaption>
-      <a class="more" style="color:var(--teal-on-dark);margin-top:12px" href="projetos/en/automacao-rotina-operacional.html" data-href-pt="projetos/automacao-rotina-operacional.html" data-href-en="projetos/en/automacao-rotina-operacional.html"><span data-pt="Ver como foi medido" data-en="See how it was measured">See how it was measured</span> <span class="arr" aria-hidden="true">→</span></a>
-    </figure>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Menu"><i></i></button>
+  </div>
+</header>
+<div class="mnav" id="mnav" hidden>
+  <a href="#cases" data-nav="cases" data-pt="Cases" data-en="Cases">Cases</a>
+  <a href="#career" data-nav="career" data-pt="Experiência" data-en="Experience">Experience</a>
+      <a href="projetos/" data-proj-link data-pt="Projetos" data-en="Projects">Projects</a>
+  <a href="#bring" data-nav="bring" data-pt="Competências" data-en="Skills">Skills</a>
+  <a href="#story" data-nav="story" data-pt="Minha história" data-en="My Story">My Story</a>
+  <a href="#contact" data-nav="contact" data-pt="Contato" data-en="Contact">Contact</a>
+  <div class="lang" role="group" aria-label="Language / Idioma">
+    <button type="button" data-set-lang="en" aria-pressed="true">EN</button>
+    <button type="button" data-set-lang="pt" aria-pressed="false">PT</button>
+  </div>
+</div>
+
+<main id="main">
+
+<!-- ============ 2. HERO ============ -->
+<section class="hero">
+  <div class="wrap hero__grid">
+    <p class="hero__pos"><span>Process Improvement · Operational Excellence</span><span data-pt="Business analysis · Automação" data-en="Business analysis · Automation">Business analysis · Automation</span></p>
+    <h1 data-pt="Transformo problemas da operação em processos claros, com regras, dados e automação." data-en="I turn operational problems into clear processes, with rules, data and automation.">I turn operational problems into clear processes, with rules, data and automation.</h1>
+    <p class="hero__lede" data-pt="Sou analista de processos em uma operação de recuperação de crédito. Mapeio o fluxo, encontro a causa do problema e escrevo as regras. Automatizo onde faz sentido e deixo claro o que continua com pessoas." data-en="I am a process analyst in a credit recovery operation. I map the flow, find the cause of the problem and write the rules. I automate where it makes sense and make clear what stays with people.">I am a process analyst in a credit recovery operation. I map the flow, find the cause of the problem and write the rules. I automate where it makes sense and make clear what stays with people.</p>
+    <div class="hero__cta">
+      <a class="btn btn--solid" href="#cases" data-pt="Ver os cases" data-en="See the cases">See the cases</a>
+      <a class="btn" href="projetos/" data-proj-link data-pt="Projetos detalhados" data-en="Detailed projects">Detailed projects</a>
+      <a class="btn" href="#contact" data-pt="Entrar em contato" data-en="Get in touch">Get in touch</a>
+      <!-- Resume button: hidden until CONFIG.resumeUrl is set in the script. -->
+      <button class="btn" type="button" data-resume hidden data-pt="Baixar currículo" data-en="Download resume">Download resume</button>
+    </div>
   </div>
 </section>
-<section class="sec" id="projetos" aria-labelledby="proj-h"><div class="wrap">
-  <div class="sec-head"><p class="eyebrow rv"><span data-pt="Projetos" data-en="Projects">Projects</span></p>
-    <h2 class="h2 rv" id="proj-h" data-pt="Quatro problemas de operação, do diagnóstico ao resultado" data-en="Four operational problems, from diagnosis to result">Four operational problems, from diagnosis to result</h2>
-    <p class="lede rv" data-pt="Cada case mostra o problema, a minha parte no trabalho, como a solução funciona, o que mudou e o que continua com pessoas. A etiqueta indica o tipo de evidência." data-en="Each case shows the problem, my part in the work, how the solution works, what changed and what stays with people. The label shows the type of evidence.">Each case shows the problem, my part in the work, how the solution works, what changed and what stays with people. The label shows the type of evidence.</p></div>
-  <div class="projects" data-only="en"><article class="pcard rv"><div class="pcard__top"><span class="pcard__n">Case 01</span><span class="ev ev--measured">Measured from records</span></div><h3><a href="projetos/en/automacao-rotina-operacional.html">How the morning routine stopped depending on manual triggers</a></h3><dl><div><dt>Problem</dt><dd>The dialer list had to be ready before 8:00, but each step waited for someone to trigger the previous one.</dd></div><div><dt>My part</dt><dd>I measured the waits between steps and set up a sequence that starts on its own at 6:00, with a person monitoring failures.</dd></div><div><dt>Result</dt><dd>List ready between 06:22 and 06:57 in the 3 records after the change; before, a 07:30 median over 29 days.</dd></div></dl><div class="pcard__foot"><span class="more">Read the case <span class="arr" aria-hidden="true">→</span></span></div></article><article class="pcard rv"><div class="pcard__top"><span class="pcard__n">Case 02</span><span class="ev ev--qual">Qualitative result</span></div><h3><a href="projetos/en/central-pagamentos-rejeitados.html">How I organised and partly automated the analysis of rejected payments</a></h3><dl><div><dt>Problem</dt><dd>Where each rejected payment went depended on who analysed it, and the same case could be handled in different ways.</dd></div><div><dt>My part</dt><dd>I gathered the rules with the team and built the extraction, the rules that suggest the next step and the working panel.</dd></div><div><dt>Result</dt><dd>A recorded reason for every case; anything without enough evidence goes to a person for review.</dd></div></dl><div class="pcard__foot"><span class="more">Read the case <span class="arr" aria-hidden="true">→</span></span></div></article><article class="pcard rv"><div class="pcard__top"><span class="pcard__n">Case 03</span><span class="ev ev--qual">Qualitative result</span></div><h3><a href="projetos/en/pagamentos-em-duplicidade.html">How I started identifying duplicate payments before any refund</a></h3><dl><div><dt>Problem</dt><dd>A customer who pays the same instalment twice must get the money back, but only once the duplicate is proven.</dd></div><div><dt>My part</dt><dd>I designed the identification rules and built a panel that separates who builds the batch from who carries out the refund.</dd></div><div><dt>Result</dt><dd>Status and history for every case in one place. The decision and the payment stay with people.</dd></div></dl><div class="pcard__foot"><span class="more">Read the case <span class="arr" aria-hidden="true">→</span></span></div></article><article class="pcard rv"><div class="pcard__top"><span class="pcard__n">Case 04</span><span class="ev ev--qual">Qualitative result</span></div><h3><a href="projetos/en/monitor-operacao.html">How I made failures in the pre-workday routines visible</a></h3><dl><div><dt>Problem</dt><dd>When an overnight routine failed without anyone noticing, the team started the day with incomplete data.</dd></div><div><dt>My part</dt><dd>I built a screen that shows whether the morning closed and where a failure stopped, and fixed a bug that displayed wrong values.</dd></div><div><dt>Result</dt><dd>Failures visible with the step where they stopped. Includes a version for the manager’s phone.</dd></div></dl><div class="pcard__foot"><span class="more">Read the case <span class="arr" aria-hidden="true">→</span></span></div></article></div>
-  <div class="projects" data-only="pt" hidden><article class="pcard rv"><div class="pcard__top"><span class="pcard__n">Case 01</span><span class="ev ev--measured">Medido em registros</span></div><h3><a href="projetos/automacao-rotina-operacional.html">Como a rotina da manhã deixou de depender de disparos manuais</a></h3><dl><div><dt>Problema</dt><dd>A lista do discador precisava estar pronta antes das 8h, mas cada etapa esperava alguém disparar a anterior.</dd></div><div><dt>Minha parte</dt><dd>Medi as esperas entre as etapas e configurei uma sequência que começa sozinha às 6h, com uma pessoa acompanhando falhas.</dd></div><div><dt>Resultado</dt><dd>Lista pronta entre 06h22 e 06h57 nos 3 registros depois da mudança; antes, mediana de 07h30 em 29 dias.</dd></div></dl><div class="pcard__foot"><span class="more">Ler o case <span class="arr" aria-hidden="true">→</span></span></div></article><article class="pcard rv"><div class="pcard__top"><span class="pcard__n">Case 02</span><span class="ev ev--qual">Resultado qualitativo</span></div><h3><a href="projetos/central-pagamentos-rejeitados.html">Como organizei e automatizei parte da análise de pagamentos rejeitados</a></h3><dl><div><dt>Problema</dt><dd>O destino de cada pagamento rejeitado dependia de quem analisava, e o mesmo caso podia ter tratamentos diferentes.</dd></div><div><dt>Minha parte</dt><dd>Levantei as regras com a equipe e construí a extração, as regras que indicam o próximo passo e o painel de trabalho.</dd></div><div><dt>Resultado</dt><dd>Motivo registrado em cada caso; o que não tem evidência suficiente vai para revisão de uma pessoa.</dd></div></dl><div class="pcard__foot"><span class="more">Ler o case <span class="arr" aria-hidden="true">→</span></span></div></article><article class="pcard rv"><div class="pcard__top"><span class="pcard__n">Case 03</span><span class="ev ev--qual">Resultado qualitativo</span></div><h3><a href="projetos/pagamentos-em-duplicidade.html">Como passei a identificar pagamentos duplicados antes de qualquer reembolso</a></h3><dl><div><dt>Problema</dt><dd>Quem paga a mesma parcela duas vezes precisa receber de volta, mas só depois de a duplicidade estar comprovada.</dd></div><div><dt>Minha parte</dt><dd>Desenhei as regras de identificação e construí um painel que separa quem monta o lote de quem executa o reembolso.</dd></div><div><dt>Resultado</dt><dd>Estado e histórico de cada caso em um só lugar. A decisão e o pagamento continuam com pessoas.</dd></div></dl><div class="pcard__foot"><span class="more">Ler o case <span class="arr" aria-hidden="true">→</span></span></div></article><article class="pcard rv"><div class="pcard__top"><span class="pcard__n">Case 04</span><span class="ev ev--qual">Resultado qualitativo</span></div><h3><a href="projetos/monitor-operacao.html">Como tornei visíveis as falhas das rotinas que rodam antes do expediente</a></h3><dl><div><dt>Problema</dt><dd>Quando uma rotina de madrugada falhava sem ninguém perceber, a equipe começava o dia com dados incompletos.</dd></div><div><dt>Minha parte</dt><dd>Organizei uma tela que mostra se a manhã fechou e onde uma falha parou, e corrigi uma falha que exibia valores errados.</dd></div><div><dt>Resultado</dt><dd>Falhas visíveis com a etapa em que pararam. Inclui uma versão para o celular do gestor.</dd></div></dl><div class="pcard__foot"><span class="more">Ler o case <span class="arr" aria-hidden="true">→</span></span></div></article></div>
-  <div class="actions rv"><a class="btn btn--secondary" href="projetos/en/" data-href-pt="projetos/" data-href-en="projetos/en/"><span data-pt="Índice de projetos e demonstrações" data-en="Project index and demos">Project index and demos</span> <span class="arr" aria-hidden="true">→</span></a></div>
-</div></section>
-<section class="sec sec--white" id="como-trabalho" aria-labelledby="how-h"><div class="wrap">
-  <div class="sec-head"><p class="eyebrow rv"><span data-pt="Como trabalho" data-en="How I work">How I work</span></p>
-    <h2 class="h2 rv" id="how-h" data-pt="Primeiro o processo, depois a ferramenta" data-en="Process first, tools second">Process first, tools second</h2>
-    <p class="lede rv" data-pt="A automação é uma das formas de resolver um problema de operação, não o objetivo. É assim que conduzo uma melhoria." data-en="Automation is one way to solve an operational problem, not the goal. This is how I run an improvement.">Automation is one way to solve an operational problem, not the goal. This is how I run an improvement.</p></div>
-  <ol class="steps"><li class="rv"><span class="n">01</span><h3 data-pt="Entender o problema" data-en="Understand the problem">Understand the problem</h3><p data-pt="Mapeio o fluxo com quem executa e meço onde o tempo e o controle se perdem, antes de propor qualquer solução." data-en="I map the flow with the people who run it and measure where time and control are lost, before proposing any solution.">I map the flow with the people who run it and measure where time and control are lost, before proposing any solution.</p></li><li class="rv"><span class="n">02</span><h3 data-pt="Escrever as regras" data-en="Write the rules">Write the rules</h3><p data-pt="Transformo o que está na cabeça das pessoas em regras explícitas, com as exceções e quem decide cada uma." data-en="I turn what lives in people’s heads into explicit rules, with the exceptions and who decides each one.">I turn what lives in people’s heads into explicit rules, with the exceptions and who decides each one.</p></li><li class="rv"><span class="n">03</span><h3 data-pt="Automatizar o repetitivo" data-en="Automate the repetitive">Automate the repetitive</h3><p data-pt="Automatizo as etapas que seguem sempre a mesma regra e deixo claro o que continua com uma pessoa." data-en="I automate the steps that always follow the same rule and make clear what stays with a person.">I automate the steps that always follow the same rule and make clear what stays with a person.</p></li><li class="rv"><span class="n">04</span><h3 data-pt="Medir e sustentar" data-en="Measure and sustain">Measure and sustain</h3><p data-pt="Registro o que mudou, com período e amostra, documento o processo e defino o que fazer quando algo falha." data-en="I record what changed, with the period and sample, document the process and define what happens when something fails.">I record what changed, with the period and sample, document the process and define what happens when something fails.</p></li></ol>
-</div></section>
-<section class="sec" id="experiencia" aria-labelledby="exp-h"><div class="wrap">
-  <div class="sec-head"><p class="eyebrow rv"><span data-pt="Experiência" data-en="Experience">Experience</span></p>
-    <h2 class="h2 rv" id="exp-h" data-pt="Comecei na operação, e é dela que vêm os problemas que resolvo" data-en="I started in operations, and that is where the problems I solve come from">I started in operations, and that is where the problems I solve come from</h2></div>
-  <div class="jobs"><article class="job rv"><p class="job__when" data-pt="2026 – atual" data-en="2026 – present">2026 – present</p><div><h3>Simplic<span> · Enova International</span></h3><p class="job__role" data-pt="Analista de Processos Pleno" data-en="Process Analyst (mid-level)">Process Analyst (mid-level)</p><p class="job__what" data-pt="Trabalho na melhoria dos processos de uma operação de recuperação de crédito. Investigo problemas operacionais, organizo as regras, automatizo etapas repetitivas e acompanho o resultado com Operações, Tecnologia, gestão e fornecedores." data-en="I work on improving the processes of a credit recovery operation. I investigate operational problems, organise the rules, automate repetitive steps and follow the results with Operations, Technology, management and vendors.">I work on improving the processes of a credit recovery operation. I investigate operational problems, organise the rules, automate repetitive steps and follow the results with Operations, Technology, management and vendors.</p></div></article><article class="job rv"><p class="job__when" data-pt="2025" data-en="2025">2025</p><div><h3>Itaú Unibanco<span></span></h3><p class="job__role" data-pt="HR Business Partner (estágio) · Consultoria interna de pessoas" data-en="HR Business Partner (intern) · Internal people consulting">HR Business Partner (intern) · Internal people consulting</p><p class="job__what" data-pt="Organizei em modelo de PMO o controle das demandas de gestão de pessoas da rede de agências, o que facilitou o acompanhamento das mudanças de posição entre as equipes. Também trabalhei com people analytics e dados de alto volume." data-en="I organised the branch network’s people-management requests in a PMO model, which made it easier to track position changes across teams. I also worked with people analytics and high-volume data.">I organised the branch network’s people-management requests in a PMO model, which made it easier to track position changes across teams. I also worked with people analytics and high-volume data.</p></div></article><article class="job rv"><p class="job__when" data-pt="2024 – 2025" data-en="2024 – 2025">2024 – 2025</p><div><h3>Itaú Unibanco<span></span></h3><p class="job__role" data-pt="Collateral Management · Garantias Reais" data-en="Collateral Management · Notarial guarantees">Collateral Management · Notarial guarantees</p><p class="job__what" data-pt="Reestruturei o fluxo financeiro da operação de garantias reais." data-en="I restructured the financial flow of the notarial guarantees operation.">I restructured the financial flow of the notarial guarantees operation.</p></div></article><article class="job rv"><p class="job__when" data-pt="2022 – 2024" data-en="2022 – 2024">2022 – 2024</p><div><h3>Itaú Unibanco<span></span></h3><p class="job__role" data-pt="Customer Due Diligence" data-en="Customer Due Diligence">Customer Due Diligence</p><p class="job__what" data-pt="Processos de alto volume, dados e indicadores. Foi onde aprendi como a operação funciona na prática: restrições, passagens de uma área para outra e falhas recorrentes." data-en="High-volume processes, data and KPIs. This is where I learned how operations really work: constraints, handoffs between teams and recurring failures.">High-volume processes, data and KPIs. This is where I learned how operations really work: constraints, handoffs between teams and recurring failures.</p></div></article></div>
-  <div class="two" style="margin-top:56px">
-    <div><h3 class="h3 rv" data-pt="Outros trabalhos" data-en="Other work">Other work</h3><ul class="list rv" style="margin-top:16px"><li><time>2026</time><div><b><span data-pt="Mapeamento e documentação dos processos do BackOffice" data-en="Mapping and documenting BackOffice processes">Mapping and documenting BackOffice processes</span> <span class="muted" style="font-weight:450">· Simplic</span></b><small data-pt="Fluxos principais mapeados e documentados, como base para as automações." data-en="Main workflows mapped and documented, as the basis for the automations.">Main workflows mapped and documented, as the basis for the automations.</small></div></li><li><time>2026</time><div><b><span data-pt="Base de conhecimento da equipe" data-en="Team knowledge base">Team knowledge base</span> <span class="muted" style="font-weight:450">· Simplic</span></b><small data-pt="Processos documentados e compartilhados com a equipe." data-en="Processes documented and shared with the team.">Processes documented and shared with the team.</small></div></li><li><time>2026</time><div><b><span data-pt="Entrada de novos parceiros via API" data-en="Onboarding new partners via API">Onboarding new partners via API</span> <span class="muted" style="font-weight:450">· Simplic</span></b><small data-pt="Conduzi a criação, os testes e a entrada em produção de novos parceiros." data-en="I led the setup, testing and go-live of new partners.">I led the setup, testing and go-live of new partners.</small></div></li><li><time>2026</time><div><b><span data-pt="Conciliador de baixas duplicadas" data-en="Duplicate write-off reconciler">Duplicate write-off reconciler</span> <span class="muted" style="font-weight:450">· Simplic</span></b><small data-pt="Robô em Python que trata um pagamento registrado duas vezes no sistema de cobrança. Diferente do controle de pagamentos duplicados (case 03)." data-en="Python bot that handles a payment recorded twice in the collections system. Different from the duplicate payment control (case 03).">Python bot that handles a payment recorded twice in the collections system. Different from the duplicate payment control (case 03).</small><div style="margin-top:6px"><span class="ev ev--partial" data-pt="Execução parcial" data-en="Partially delivered">Partially delivered</span></div></div></li><li><time>2025</time><div><b><span data-pt="Demandas da rede de agências em modelo de PMO" data-en="Branch-network requests in a PMO model">Branch-network requests in a PMO model</span> <span class="muted" style="font-weight:450">· Itaú Unibanco</span></b><small data-pt="Consultoria interna de pessoas." data-en="Internal people consulting.">Internal people consulting.</small></div></li><li><time>2025</time><div><b><span data-pt="People analytics com dados de alto volume" data-en="People analytics on high-volume data">People analytics on high-volume data</span> <span class="muted" style="font-weight:450">· Itaú Unibanco</span></b><small data-pt="Apoio às decisões da consultoria de pessoas." data-en="Support for people consulting decisions.">Support for people consulting decisions.</small></div></li></ul></div>
-    <div id="outra-iniciativa"><h3 class="h3 rv" data-pt="Outra iniciativa: capacidade nos dias de pico" data-en="Another initiative: capacity on peak days">Another initiative: capacity on peak days</h3>
-      <div class="prose rv" style="margin-top:16px"><p data-pt="Nos dias de maior entrada de carteira, o processamento falhava e os clientes novos ficavam de fora, justamente nos dias de maior volume." data-en="On the days with the largest portfolio intake, processing failed and new customers were left out, exactly on the highest-volume days.">On the days with the largest portfolio intake, processing failed and new customers were left out, exactly on the highest-volume days.</p></div>
-      <details class="more-box rv" style="margin-top:16px"><summary><span data-pt="Diagnóstico, decisão e resultado" data-en="Diagnosis, decision and result">Diagnosis, decision and result</span></summary><div class="more-box__body prose">
-        <p data-pt="Acionei o time da plataforma de CRM para investigar as falhas nos picos. A revisão de desempenho mostrou a causa: a capacidade contratada estava abaixo da demanda real." data-en="I asked the CRM platform team to investigate the failures at peak times. The performance review showed the cause: contracted capacity was below real demand.">I asked the CRM platform team to investigate the failures at peak times. The performance review showed the cause: contracted capacity was below real demand.</p>
-        <p data-pt="Apresentei a causa e o impacto no negócio à diretoria, a ampliação foi aprovada e coordenei o ajuste com o time técnico em um dia de menor volume, sem interromper a operação." data-en="I presented the cause and the business impact to the director, the increase was approved, and I coordinated the change with the technical team on a low-volume day, without disrupting operations.">I presented the cause and the business impact to the director, the increase was approved, and I coordinated the change with the technical team on a low-volume day, without disrupting operations.</p>
-        <p data-pt="O conhecimento técnico de infraestrutura era do time da plataforma. Minha parte foi transformar a evidência em uma decisão de negócio. Depois do ajuste, o processamento deixou de falhar nos dias de produção intensa." data-en="The infrastructure expertise sat with the platform team. My part was turning the evidence into a business decision. After the change, processing stopped failing on heavy production days.">The infrastructure expertise sat with the platform team. My part was turning the evidence into a business decision. After the change, processing stopped failing on heavy production days.</p>
-        <p style="margin-top:12px"><span class="ev ev--qual" data-pt="Resultado qualitativo" data-en="Qualitative result">Qualitative result</span></p>
-      </div></details>
+
+<!-- ============ 3. IMPACT BAND ============ -->
+<section class="band" aria-label="Highlights">
+  <div class="wrap band__grid">
+    <div class="bk rv"><b class="num">4</b><span data-pt="Cases detalhados com demonstração interativa" data-en="Detailed case studies with interactive demos">Detailed case studies with interactive demos</span></div>
+    <div class="bk rv"><b class="num">Green Belt</b><span data-pt="Lean Six Sigma" data-en="Lean Six Sigma">Lean Six Sigma</span></div>
+    <div class="bk rv"><b class="num" data-pt="Desde 2022" data-en="Since 2022">Since 2022</b><span data-pt="Em operações financeiras e melhoria de processos" data-en="In financial operations and process improvement">In financial operations and process improvement</span></div>
+  </div>
+</section>
+
+<!-- ============ 4. CASES (cards rendered from CASES in the script) ============ -->
+<section class="sec paper" id="cases">
+  <div class="wrap">
+    <div class="sec__head sec__head--stack">
+      <p class="label label--acc rv">Cases</p>
+      <h2 class="h2 rv" data-pt="Quatro problemas de operação, do diagnóstico ao resultado" data-en="Four operational problems, from diagnosis to result">Four operational problems, from diagnosis to result</h2>
+      <p class="lead rv" data-pt="Cada case mostra o problema, a minha parte no trabalho, como a solução funciona, o que mudou e o que continua com pessoas. Cada um tem página detalhada e demonstração com dados sintéticos." data-en="Each case shows the problem, my part in the work, how the solution works, what changed and what stays with people. Each has a detailed page and a demo with synthetic data.">Each case shows the problem, my part in the work, how the solution works, what changed and what stays with people. Each has a detailed page and a demo with synthetic data.</p>
+    </div>
+    <div class="cases" id="caseList"></div>
+    <div class="cases__nav" aria-hidden="true"><span class="cases__count" id="caseCount"></span><span class="cases__dots" id="caseDots"></span></div>
+  </div>
+</section>
+
+<!-- ============ HOW I WORK (method + principles) ============ -->
+<section class="sec" id="method">
+  <div class="wrap">
+    <div class="sec__head">
+      <p class="label label--acc rv" data-pt="Como eu trabalho" data-en="How I work">How I work</p>
+      <h2 class="h2 rv" data-pt="Primeiro o processo, depois a ferramenta" data-en="Process first, tools second">Process first, tools second</h2>
+      <p class="lead rv" data-pt="A automação é uma das formas de resolver um problema de operação, não o objetivo. É assim que conduzo uma melhoria." data-en="Automation is one way to solve an operational problem, not the goal. This is how I run an improvement.">Automation is one way to solve an operational problem, not the goal. This is how I run an improvement.</p>
+    </div>
+    <div class="method" id="methodRow">
+      <span class="method__rail" aria-hidden="true"></span>
+      <div class="step"><span class="step__n num">01</span><h3 data-pt="Entender o problema" data-en="Understand the problem">Understand the problem</h3><p class="step__lead" data-pt="Primeiro, o problema real." data-en="Find the real problem first.">Find the real problem first.</p><p data-pt="Mapeio o fluxo com quem executa e meço onde o tempo e o controle se perdem, antes de propor qualquer solução." data-en="I map the flow with the people who run it and measure where time and control are lost, before proposing any solution.">I map the flow with the people who run it and measure where time and control are lost, before proposing any solution.</p></div>
+      <div class="step"><span class="step__n num">02</span><h3 data-pt="Escrever as regras" data-en="Write the rules">Write the rules</h3><p class="step__lead" data-pt="O que está na cabeça vira regra." data-en="What lives in heads becomes rules.">What lives in heads becomes rules.</p><p data-pt="Transformo o que está na cabeça das pessoas em regras explícitas, com as exceções e quem decide cada uma." data-en="I turn what lives in people’s heads into explicit rules, with the exceptions and who decides each one.">I turn what lives in people’s heads into explicit rules, with the exceptions and who decides each one.</p></div>
+      <div class="step"><span class="step__n num">03</span><h3 data-pt="Automatizar o repetitivo" data-en="Automate the repetitive">Automate the repetitive</h3><p class="step__lead" data-pt="Só o que segue sempre a mesma regra." data-en="Only what always follows the same rule.">Only what always follows the same rule.</p><p data-pt="Automatizo as etapas que seguem sempre a mesma regra e deixo claro o que continua com uma pessoa." data-en="I automate the steps that always follow the same rule and make clear what stays with a person.">I automate the steps that always follow the same rule and make clear what stays with a person.</p></div>
+      <div class="step"><span class="step__n num">04</span><h3 data-pt="Medir e sustentar" data-en="Measure and sustain">Measure and sustain</h3><p class="step__lead" data-pt="O resultado precisa durar." data-en="The result has to last.">The result has to last.</p><p data-pt="Registro o que mudou, com período e amostra, documento o processo e defino o que fazer quando algo falha." data-en="I record what changed, with the period and sample, document the process and define what happens when something fails.">I record what changed, with the period and sample, document the process and define what happens when something fails.</p></div>
+    </div>
+    <p class="label label--acc principles__label rv" data-pt="Minha visão" data-en="My view">My view</p>
+    <div class="principles">
+      <p class="rv" data-pt="Tecnologia é meio. <span>O resultado é um processo melhor.</span>" data-en="Technology is the means. <span>The result is a better process.</span>">Technology is the means. <span>The result is a better process.</span></p>
+      <p class="rv" data-pt="Automatizo para reduzir <span>dependência, risco e esforço manual.</span>" data-en="I automate to reduce <span>dependency, risk and manual effort.</span>">I automate to reduce <span>dependency, risk and manual effort.</span></p>
+      <p class="rv" data-pt="Todo projeto precisa de <span>um responsável, uma direção e um resultado mensurável.</span>" data-en="Every project needs <span>an owner, a direction and a result you can measure.</span>">Every project needs <span>an owner, a direction and a result you can measure.</span></p>
+      <p class="rv" data-pt="Processos bem estruturados <span>tornam resultados previsíveis e sustentáveis.</span>" data-en="Well-structured processes <span>make results predictable and sustainable.</span>">Well-structured processes <span>make results predictable and sustainable.</span></p>
     </div>
   </div>
-</div></section>
-<section class="sec sec--white" id="recomendacoes" aria-labelledby="rec-h"><div class="wrap">
-  <div class="sec-head"><p class="eyebrow rv"><span data-pt="Recomendações" data-en="Recommendations">Recommendations</span></p>
-    <h2 class="h2 rv" id="rec-h" data-pt="O que dizem pessoas que trabalharam comigo" data-en="What people who worked with me say">What people who worked with me say</h2></div>
-  <div class="recs"><figure class="rec rv"><blockquote data-pt="Paulo atuou como estagiário na equipe de consultoria interna de pessoas para a rede de agências, destaco como ponto forte a organização de demandas em modelo de PMO, o que facilitou nossas interfaces para acompanhamentos de projetos, além de sua contribuição com visão analítica, habilidade de people analytics, gestão de dados de alto volume." data-en="Paulo worked as an intern on the internal people consulting team for the branch network. I highlight as a key strength his organisation of demands in a PMO model, which made our project follow-up interfaces easier, along with his analytical view, people analytics skills and high-volume data management.">Paulo worked as an intern on the internal people consulting team for the branch network. I highlight as a key strength his organisation of demands in a PMO model, which made our project follow-up interfaces easier, along with his analytical view, people analytics skills and high-volume data management.</blockquote><figcaption><b>Silas Pereira Martins</b><span data-pt="HR Business Partner, Itaú" data-en="HR Business Partner, Itaú">HR Business Partner, Itaú</span><span class="tr" data-only="en" style="display:block;margin-top:4px">Translated from Portuguese. Original on LinkedIn.</span></figcaption></figure><figure class="rec rv"><blockquote data-pt="Tive a oportunidade de acompanhar este jovem profissional e posso afirmar que é protagonista em suas ações, responsável e dedicado, sempre atento aos aprendizados e comprometido com a evolução contínua." data-en="I had the opportunity to work alongside this young professional, and I can say he takes ownership of his actions, is responsible and dedicated, always attentive to learning and committed to continuous growth.">I had the opportunity to work alongside this young professional, and I can say he takes ownership of his actions, is responsible and dedicated, always attentive to learning and committed to continuous growth.</blockquote><figcaption><b>Flávia Kacelnikas</b><span data-pt="Coordenadora de Operações Cash Management, Itaú" data-en="Cash Management Operations Coordinator, Itaú">Cash Management Operations Coordinator, Itaú</span><span class="tr" data-only="en" style="display:block;margin-top:4px">Translated from Portuguese. Original on LinkedIn.</span></figcaption></figure></div>
-  <div class="actions rv"><a class="btn btn--secondary" href="https://www.linkedin.com/in/paulo-nobre-/details/recommendations/" rel="noopener"><span data-pt="Ler todas as recomendações no LinkedIn" data-en="Read all recommendations on LinkedIn">Read all recommendations on LinkedIn</span></a>
-    <p class="small muted" style="align-self:center" data-pt="Abre a seção de recomendações do meu perfil. É preciso estar conectado ao LinkedIn." data-en="Opens the recommendations section of my profile. You need to be signed in to LinkedIn.">Opens the recommendations section of my profile. You need to be signed in to LinkedIn.</p></div>
-</div></section>
-<section class="sec" id="competencias" aria-labelledby="sk-h"><div class="wrap two">
-  <div><p class="eyebrow rv"><span data-pt="Competências" data-en="Skills">Skills</span></p><h2 class="h2 rv" id="sk-h" style="margin-bottom:24px" data-pt="O que uso no dia a dia" data-en="What I use day to day">What I use day to day</h2><div class="grp rv"><h3 data-pt="Processos e melhoria contínua" data-en="Processes and continuous improvement">Processes and continuous improvement</h3><ul class="cols"><li data-pt="Mapeamento de processos" data-en="Process mapping">Process mapping</li><li data-pt="Análise de causa raiz" data-en="Root cause analysis">Root cause analysis</li><li data-pt="Lean Six Sigma e DMAIC" data-en="Lean Six Sigma and DMAIC">Lean Six Sigma and DMAIC</li><li data-pt="Regras de negócio e documentação (BRD)" data-en="Business rules and documentation (BRD)">Business rules and documentation (BRD)</li></ul></div><div class="grp rv"><h3 data-pt="Projetos e coordenação" data-en="Projects and coordination">Projects and coordination</h3><ul class="cols"><li data-pt="Demandas em modelo de PMO" data-en="Requests in a PMO model">Requests in a PMO model</li><li data-pt="Coordenação entre áreas" data-en="Cross-team coordination">Cross-team coordination</li><li data-pt="Levantamento de requisitos" data-en="Requirements gathering">Requirements gathering</li><li data-pt="Comunicação com a gestão" data-en="Communication with management">Communication with management</li></ul></div><div class="grp rv"><h3 data-pt="Dados e automação" data-en="Data and automation">Data and automation</h3><ul class="cols"><li data-pt="Excel e Power Query" data-en="Excel and Power Query">Excel and Power Query</li><li data-pt="Power BI" data-en="Power BI">Power BI</li><li data-pt="SQL" data-en="SQL">SQL</li><li data-pt="Python" data-en="Python">Python</li><li data-pt="APIs" data-en="APIs">APIs</li><li data-pt="n8n" data-en="n8n">n8n</li><li data-pt="IA aplicada ao trabalho" data-en="Applied AI at work">Applied AI at work</li></ul></div></div>
-  <div><p class="eyebrow rv"><span data-pt="Formação" data-en="Education">Education</span></p><h2 class="h2 rv" style="margin-bottom:24px" data-pt="Certificações e formação" data-en="Certifications and education">Certifications and education</h2><ul class="list rv edu"><li data-pt="&lt;b&gt;Lean Six Sigma Green Belt&lt;/b&gt; · White Belt e Lean também concluídos" data-en="&lt;b&gt;Lean Six Sigma Green Belt&lt;/b&gt; · White Belt and Lean also completed"><b>Lean Six Sigma Green Belt</b> · White Belt and Lean also completed</li><li data-pt="&lt;b&gt;Análise e Desenvolvimento de Sistemas&lt;/b&gt; · Anhembi Morumbi, em fase de conclusão" data-en="&lt;b&gt;Systems Analysis and Development&lt;/b&gt; · Anhembi Morumbi, final stage"><b>Systems Analysis and Development</b> · Anhembi Morumbi, final stage</li><li data-pt="&lt;b&gt;Ciência de Dados&lt;/b&gt; · Univesp, em curso" data-en="&lt;b&gt;Data Science&lt;/b&gt; · Univesp, in progress"><b>Data Science</b> · Univesp, in progress</li><li data-pt="&lt;b&gt;Qualidade, PCP e Gestão de fornecedores&lt;/b&gt; · certificações em gestão de operações" data-en="&lt;b&gt;Quality, production planning and supplier management&lt;/b&gt; · operations management certificates"><b>Quality, production planning and supplier management</b> · operations management certificates</li><li data-pt="&lt;b&gt;AI Journey&lt;/b&gt; · inteligência artificial aplicada" data-en="&lt;b&gt;AI Journey&lt;/b&gt; · applied artificial intelligence"><b>AI Journey</b> · applied artificial intelligence</li><li data-pt="&lt;b&gt;Idiomas&lt;/b&gt; · Português nativo · Inglês: intermediário (B1), em desenvolvimento contínuo" data-en="&lt;b&gt;Languages&lt;/b&gt; · Portuguese (native) · English: Intermediate (B1), actively improving"><b>Languages</b> · Portuguese (native) · English: Intermediate (B1), actively improving</li></ul></div>
-</div></section>
-<section class="sec sec--white" id="sobre" aria-labelledby="ab-h"><div class="wrap case-grid">
-  <div class="side"><p class="eyebrow"><span data-pt="Sobre" data-en="About">About</span></p></div>
-  <div><h2 class="h2 rv" id="ab-h" data-pt="Da operação à melhoria de processos" data-en="From operations to process improvement">From operations to process improvement</h2><div class="prose rv" style="margin-top:16px"><p data-pt="Entendo a operação porque comecei nela. No Itaú Unibanco, passei por Customer Due Diligence, Garantias Reais e consultoria interna de pessoas, sempre com processos de alto volume, dados e indicadores. Ali aprendi a olhar o processo antes da ferramenta." data-en="I understand operations because I started there. At Itaú Unibanco I worked in Customer Due Diligence, Collateral Management and internal people consulting, always with high-volume processes, data and KPIs. There I learned to look at the process before the tool.">I understand operations because I started there. At Itaú Unibanco I worked in Customer Due Diligence, Collateral Management and internal people consulting, always with high-volume processes, data and KPIs. There I learned to look at the process before the tool.</p><p data-pt="Na Simplic, o trabalho evoluiu de melhoria de processos para a condução de iniciativas: diagnosticar problemas, organizar as soluções, conectar Operações e Tecnologia e medir o resultado. A automação entra como meio, para tirar dependência manual e risco da operação." data-en="At Simplic, the work grew from process improvement into leading initiatives: diagnosing problems, organising solutions, connecting Operations and Technology, and measuring the result. Automation is a means to remove manual dependency and risk from the operation.">At Simplic, the work grew from process improvement into leading initiatives: diagnosing problems, organising solutions, connecting Operations and Technology, and measuring the result. Automation is a means to remove manual dependency and risk from the operation.</p><p data-pt="Meu próximo passo é aplicar essa experiência em ambientes de maior escala, em melhoria de processos, excelência operacional, PMO, operações de negócio e automação, inclusive em equipes internacionais e remotas." data-en="My next step is to apply this experience at a larger scale, in process improvement, operational excellence, PMO, business operations and automation, including international and remote teams.">My next step is to apply this experience at a larger scale, in process improvement, operational excellence, PMO, business operations and automation, including international and remote teams.</p></div></div>
-</div></section>
+</section>
+
+
+<!-- ============ 5. CAREER ============ -->
+<section class="sec light" id="career">
+  <div class="wrap">
+    <div class="sec__head sec__head--stack">
+      <p class="label label--acc rv" data-pt="Carreira" data-en="Career">Career</p>
+      <h2 class="h2 rv" data-pt="Comecei na operação, e é dela que vêm os problemas que resolvo" data-en="I started in operations, and that is where the problems I solve come from">I started in operations, and that is where the problems I solve come from</h2>
+      <p class="lead rv" data-pt="Cada etapa somou uma camada: operação, melhoria de processos, PMO e, hoje, processos com automação." data-en="Each step added a layer: operations, process improvement, PMO and, today, processes with automation.">Each step added a layer: operations, process improvement, PMO and, today, processes with automation.</p>
+    </div>
+    <ol class="progress rv" aria-label="Career progression">
+      <li><span class="num">01</span><span data-pt="Operações" data-en="Operations">Operations</span></li>
+      <li><span class="num">02</span><span data-pt="Melhoria de processos" data-en="Process improvement">Process improvement</span></li>
+      <li><span class="num">03</span><span>PMO</span></li>
+      <li><span class="num">04</span><span data-pt="Processos e automação" data-en="Processes &amp; automation">Processes &amp; automation</span></li>
+    </ol>
+    <div class="jobs">
+      <article class="job rv">
+        <p class="job__when" data-pt="2026 – atual" data-en="2026 – present">2026 – present</p>
+        <div class="job__who">
+          <h3>Simplic <span data-pt="· Enova International" data-en="· Enova International">· Enova International</span></h3>
+          <p data-pt="Analista de Processos Pleno · Melhoria de processos e automação" data-en="Process Analyst (mid-level) · Process improvement &amp; automation">Process Analyst (mid-level) · Process improvement &amp; automation</p>
+          <span class="job__tag" data-pt="Melhoria de processos · Automação" data-en="Process improvement · Automation">Process improvement · Automation</span>
+        </div>
+        <p class="job__what" data-pt="Trabalho na melhoria dos processos de uma operação de recuperação de crédito. Investigo problemas operacionais, organizo as regras, automatizo etapas repetitivas e acompanho o resultado com Operações, Tecnologia, gestão e fornecedores." data-en="I work on improving the processes of a credit recovery operation. I investigate operational problems, organise the rules, automate repetitive steps and follow the results with Operations, Technology, management and vendors.">I work on improving the processes of a credit recovery operation. I investigate operational problems, organise the rules, automate repetitive steps and follow the results with Operations, Technology, management and vendors.</p>
+      </article>
+      <article class="job rv">
+        <p class="job__when" data-pt="2025" data-en="2025">2025</p>
+        <div class="job__who">
+          <h3>Itaú Unibanco</h3>
+          <p data-pt="HR Business Partner (estágio) · Consultoria interna de pessoas" data-en="HR Business Partner (intern) · Internal people consulting">HR Business Partner (intern) · Internal people consulting</p>
+          <span class="job__tag">PMO</span>
+        </div>
+        <p class="job__what" data-pt="Organizei em modelo de PMO o controle das demandas de gestão de pessoas da rede de agências, o que facilitou o acompanhamento das mudanças de posição entre as equipes. Também trabalhei com people analytics e dados de alto volume. Foi aqui que minha prática de PMO começou." data-en="I organised the branch network’s people-management requests in a PMO model, which made it easier to track position changes across teams. I also worked with people analytics and high-volume data. This is where my PMO practice started.">I organised the branch network’s people-management requests in a PMO model, which made it easier to track position changes across teams. I also worked with people analytics and high-volume data. This is where my PMO practice started.</p>
+      </article>
+      <article class="job rv">
+        <p class="job__when" data-pt="2024 – 2025" data-en="2024 – 2025">2024 – 2025</p>
+        <div class="job__who">
+          <h3>Itaú Unibanco</h3>
+          <p data-pt="Collateral Management · Garantias Reais" data-en="Collateral Management · Notarial guarantees">Collateral Management · Notarial guarantees</p>
+          <span class="job__tag" data-pt="Melhoria de processos" data-en="Process improvement">Process improvement</span>
+        </div>
+        <p class="job__what" data-pt="Reestruturei o fluxo financeiro da operação de garantias reais." data-en="I restructured the financial flow of the notarial guarantees operation.">I restructured the financial flow of the notarial guarantees operation.</p>
+      </article>
+      <article class="job rv">
+        <p class="job__when" data-pt="2022 – 2024" data-en="2022 – 2024">2022 – 2024</p>
+        <div class="job__who">
+          <h3>Itaú Unibanco</h3>
+          <p>Customer Due Diligence</p>
+          <span class="job__tag" data-pt="Operações" data-en="Operations">Operations</span>
+        </div>
+        <p class="job__what" data-pt="Processos de alto volume, dados e indicadores. Foi onde aprendi como a operação funciona na prática: restrições, passagens de uma área para outra e falhas recorrentes." data-en="High-volume processes, data and KPIs. This is where I learned how operations really work: constraints, handoffs between teams and recurring failures.">High-volume processes, data and KPIs. This is where I learned how operations really work: constraints, handoffs between teams and recurring failures.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6. PROJECT PORTFOLIO (rendered from PROJECTS in the script) ============ -->
+<section class="sec paper" id="portfolio">
+  <div class="wrap">
+    <div class="sec__head sec__head--stack">
+      <p class="label label--acc rv" data-pt="Portfólio de projetos" data-en="Project portfolio">Project portfolio</p>
+      <h2 class="h2 rv" data-pt="Projetos selecionados em melhoria de processos e automação operacional" data-en="Selected projects in process improvement and operational automation">Selected projects in process improvement and operational automation</h2>
+      <p class="lead rv" data-pt="De 2024 até hoje. Fases de uma mesma solução aparecem juntas, e cada item está classificado pelo tipo de problema que resolveu." data-en="From 2024 to today. Phases of the same solution are grouped together, and each item is tagged by the type of problem it solved.">From 2024 to today. Phases of the same solution are grouped together, and each item is tagged by the type of problem it solved.</p>
+    </div>
+    <div class="pf pf--collapsed" id="pfList"></div>
+    <button class="pf__more" type="button" id="pfMore" aria-controls="pfList" aria-expanded="false"></button>
+  </div>
+</section>
+
+<!-- ============ 7. RECOMMENDATIONS ============ -->
+<section class="sec" id="recommendations">
+  <div class="wrap">
+    <div class="sec__head sec__head--stack">
+      <p class="label label--acc rv" data-pt="Recomendações" data-en="Recommendations">Recommendations</p>
+      <h2 class="h2 rv" data-pt="Quem trabalhou comigo" data-en="People who worked with me">People who worked with me</h2>
+    </div>
+    <div class="recs">
+      <figure class="rec rv">
+        <span class="rec__q" aria-hidden="true">“</span>
+        <blockquote data-quote data-pt="Paulo atuou como estagiário na equipe de consultoria interna de pessoas para a rede de agências, destaco como ponto forte a organização de demandas em modelo de PMO, o que facilitou nossas interfaces para acompanhamentos de projetos, além de sua contribuição com visão analítica, habilidade de people analytics, gestão de dados de alto volume." data-en="Paulo worked as an intern on the internal people consulting team for the branch network. I highlight as a key strength his organisation of demands in a PMO model, which made our project follow-up interfaces easier, along with his analytical view, people analytics skills and high-volume data management.">Paulo worked as an intern on the internal people consulting team for the branch network. I highlight as a key strength his organisation of demands in a PMO model, which made our project follow-up interfaces easier, along with his analytical view, people analytics skills and high-volume data management.</blockquote>
+        <span class="tr" data-pt="" data-en="Translated from Portuguese. Original on LinkedIn.">Translated from Portuguese. Original on LinkedIn.</span>
+        <cite data-pt="Silas Pereira Martins · HR Business Partner, Itaú" data-en="Silas Pereira Martins · HR Business Partner, Itaú">Silas Pereira Martins · HR Business Partner, Itaú</cite>
+      </figure>
+      <figure class="rec rv">
+        <span class="rec__q" aria-hidden="true">“</span>
+        <blockquote data-quote data-pt="Tive a oportunidade de acompanhar este jovem profissional e posso afirmar que é protagonista em suas ações, responsável e dedicado, sempre atento aos aprendizados e comprometido com a evolução contínua." data-en="I had the opportunity to work alongside this young professional, and I can say he takes ownership of his actions, is responsible and dedicated, always attentive to learning and committed to continuous growth.">I had the opportunity to work alongside this young professional, and I can say he takes ownership of his actions, is responsible and dedicated, always attentive to learning and committed to continuous growth.</blockquote>
+        <span class="tr" data-pt="" data-en="Translated from Portuguese. Original on LinkedIn.">Translated from Portuguese. Original on LinkedIn.</span>
+        <cite data-pt="Flávia Kacelnikas · Coordenadora de Operações Cash Management, Itaú" data-en="Flávia Kacelnikas · Cash Management Operations Coordinator, Itaú">Flávia Kacelnikas · Cash Management Operations Coordinator, Itaú</cite>
+      </figure>
+    </div>
+    <div class="recs__cta rv">
+      <a class="btn" href="https://www.linkedin.com/in/paulo-nobre-/details/recommendations/" target="_blank" rel="noopener" data-pt="Ler todas as recomendações no LinkedIn" data-en="Read all my recommendations on LinkedIn">Read all my recommendations on LinkedIn</a>
+      <small class="note" data-pt="Abre meu perfil no LinkedIn, na seção Recomendações (é preciso estar logado)." data-en="Opens my LinkedIn profile, in the Recommendations section (login required).">Opens my LinkedIn profile, in the Recommendations section (login required).</small>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 8 + 9. WHAT I BRING + CREDENTIALS ============ -->
+<section class="sec light" id="bring">
+  <div class="wrap bring">
+    <div>
+      <p class="label label--acc rv" data-pt="O que eu entrego" data-en="What I bring">What I bring</p>
+      <h2 class="h2 rv" data-pt="Competências principais" data-en="Core competencies">Core competencies</h2>
+      <p class="pills__grp rv" data-pt="Processos e coordenação" data-en="Processes &amp; coordination">Processes &amp; coordination</p>
+      <ul class="pills rv"><li data-pt="Mapeamento de processos" data-en="Process mapping">Process mapping</li><li data-pt="Análise de causa raiz" data-en="Root cause analysis">Root cause analysis</li><li data-pt="Regras de negócio e documentação" data-en="Business rules &amp; documentation">Business rules &amp; documentation</li><li data-pt="Demandas em modelo de PMO" data-en="Requests in a PMO model">Requests in a PMO model</li><li data-pt="Coordenação entre áreas" data-en="Cross-team coordination">Cross-team coordination</li><li data-pt="Levantamento de requisitos" data-en="Requirements gathering">Requirements gathering</li><li data-pt="Comunicação com a gestão" data-en="Communication with management">Communication with management</li><li data-pt="Redução de risco operacional" data-en="Operational risk reduction">Operational risk reduction</li></ul>
+      <p class="pills__grp rv" data-pt="Métodos e ferramentas" data-en="Methods &amp; tools">Methods &amp; tools</p>
+      <ul class="pills pills--hard rv"><li>Lean Six Sigma</li><li>DMAIC</li><li>Excel</li><li>Power Query</li><li>Power BI</li><li>SQL</li><li>Python</li><li>APIs</li><li>n8n</li><li data-pt="IA aplicada ao trabalho" data-en="Applied AI at work">Applied AI at work</li></ul>
+    </div>
+    <div id="credentials">
+      <p class="label label--acc rv" data-pt="Credenciais" data-en="Credentials">Credentials</p>
+      <h2 class="h2 rv" data-pt="Certificações e formação" data-en="Certifications &amp; education">Certifications &amp; education</h2>
+      <div class="ccards">
+        <div class="ccard rv"><span class="ccard__ic">LSS</span><div><b>Lean Six Sigma · Green Belt</b><small data-pt="White Belt e Lean também concluídos" data-en="White Belt and Lean also completed">White Belt and Lean also completed</small></div></div>
+        <div class="ccard rv"><span class="ccard__ic">EDU</span><div><b data-pt="Análise e Desenvolvimento de Sistemas" data-en="Systems Analysis &amp; Development">Systems Analysis &amp; Development</b><small data-pt="Anhembi Morumbi · Concluído (2024–2026)" data-en="Anhembi Morumbi · Completed (2024–2026)">Anhembi Morumbi · Completed (2024–2026)</small></div></div>
+        <div class="ccard rv"><span class="ccard__ic">EDU</span><div><b data-pt="Ciência de Dados" data-en="Data Science">Data Science</b><small data-pt="Univesp · Em curso" data-en="Univesp · In progress">Univesp · In progress</small></div></div>
+        <div class="ccard rv"><span class="ccard__ic">OPS</span><div><b data-pt="Qualidade · PCP · Gestão de fornecedores" data-en="Quality · Production planning &amp; control · Supplier management">Quality · Production planning &amp; control · Supplier management</b><small data-pt="Certificações em gestão de operações" data-en="Operations management certifications">Operations management certifications</small></div></div>
+        <div class="ccard rv"><span class="ccard__ic">AI</span><div><b>AI Journey</b><small data-pt="Inteligência artificial aplicada" data-en="Applied artificial intelligence">Applied artificial intelligence</small></div></div>
+        <div class="ccard rv"><span class="ccard__ic">LNG</span><div><b data-pt="Português nativo · Inglês: intermediário (B1), em desenvolvimento contínuo" data-en="Portuguese (native) · English: Intermediate (B1), actively improving">Portuguese (native) · English: Intermediate (B1), actively improving</b><small data-pt="Idiomas" data-en="Languages">Languages</small></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 10. MY STORY ============ -->
+<section class="sec" id="story">
+  <div class="story-fx" aria-hidden="true"><canvas id="storyFx"></canvas></div>
+  <div class="wrap">
+    <div class="sec__head">
+      <p class="label label--acc rv" data-pt="Minha história" data-en="My Story">My Story</p>
+      <h2 class="h2 rv" data-pt="Da operação à entrega" data-en="From operations to delivery">From operations to delivery</h2>
+    </div>
+    <div class="story">
+      <div class="story__txt rv">
+        <p data-pt="Entendo a operação porque comecei nela. No Itaú Unibanco, passei por Customer Due Diligence, Garantias Reais e consultoria interna de pessoas, sempre com processos de alto volume, dados e indicadores." data-en="I understand operations because I started there. At Itaú Unibanco I worked in Customer Due Diligence, Collateral Management and internal people consulting, always with high-volume processes, data and KPIs.">I understand operations because I started there. At Itaú Unibanco I worked in Customer Due Diligence, Collateral Management and internal people consulting, always with high-volume processes, data and KPIs.</p>
+        <p data-pt="Ali aprendi a olhar o processo antes da ferramenta." data-en="There I learned to look at the process before the tool.">There I learned to look at the process before the tool.</p>
+        <p data-pt="Na Simplic, o trabalho evoluiu de melhoria de processos para a condução de iniciativas: diagnosticar problemas, organizar as soluções, conectar Operações e Tecnologia e medir o resultado. A automação entra como meio, para tirar dependência manual e risco da operação." data-en="At Simplic, the work grew from process improvement into leading initiatives: diagnosing problems, organising solutions, connecting Operations and Technology, and measuring the result. Automation is a means to remove manual dependency and risk from the operation.">At Simplic, the work grew from process improvement into leading initiatives: diagnosing problems, organising solutions, connecting Operations and Technology, and measuring the result. Automation is a means to remove manual dependency and risk from the operation.</p>
+        <p data-pt="Meu próximo passo é aplicar essa experiência em ambientes de maior escala, em melhoria de processos, excelência operacional, PMO, operações de negócio e automação, inclusive em equipes internacionais e remotas." data-en="My next step is to apply this experience at a larger scale, in process improvement, operational excellence, PMO, business operations and automation, including international and remote teams.">My next step is to apply this experience at a larger scale, in process improvement, operational excellence, PMO, business operations and automation, including international and remote teams.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 </main>
-<footer class="foot on-dark" id="contato"><div class="wrap">
-  <h2 data-pt="Vamos conversar" data-en="Let's talk">Let's talk</h2>
-  <p data-pt="Estou aberto a oportunidades em melhoria de processos, excelência operacional, PMO, operações de negócio e automação, inclusive em equipes remotas." data-en="I am open to roles in process improvement, operational excellence, PMO, business operations and automation, including remote teams.">I am open to roles in process improvement, operational excellence, PMO, business operations and automation, including remote teams.</p>
-  <div class="actions"><a class="btn btn--primary" href="mailto:nobrecontato21@outlook.com">nobrecontato21@outlook.com</a><a class="btn btn--secondary" href="https://www.linkedin.com/in/paulo-nobre-/" rel="noopener">LinkedIn</a><a class="btn btn--secondary" href="https://github.com/nobre-analytics" rel="noopener">GitHub</a></div>
-  <div class="foot__base"><span data-pt="© 2026 Paulo Nobre · São Paulo, Brasil" data-en="© 2026 Paulo Nobre · São Paulo, Brazil">© 2026 Paulo Nobre · São Paulo, Brazil</span><div class="lang" role="group" aria-label="Idioma / Language"><button type="button" data-set-lang="pt" lang="pt-BR" aria-pressed="false">PT</button><button type="button" data-set-lang="en" lang="en" aria-pressed="false">EN</button></div></div>
-</div></footer>
-<script src="static/js/site.js" defer></script>
+
+<!-- ============ 12. FOOTER ============ -->
+<footer class="foot" id="contact">
+  <div class="wrap">
+    <p class="foot__id">Paulo Nobre <span>Process Improvement &amp; Automation</span></p>
+    <div class="foot__btns">
+      <a class="btn btn--solid" href="mailto:nobrecontato21@outlook.com">nobrecontato21@outlook.com</a>
+      <a class="btn" href="https://www.linkedin.com/in/paulo-nobre-/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn" href="projetos/" data-proj-link data-pt="Projetos" data-en="Projects">Projects</a>
+      <button class="btn" type="button" data-resume hidden data-pt="Baixar currículo" data-en="Download resume">Download resume</button>
+    </div>
+    <div class="foot__base">
+      <span data-pt="© 2026 Paulo Nobre · São Paulo, Brasil" data-en="© 2026 Paulo Nobre · São Paulo, Brazil">© 2026 Paulo Nobre · São Paulo, Brazil</span>
+      <a href="https://github.com/nobre-analytics" target="_blank" rel="noopener">GitHub</a>
+      <div class="lang" role="group" aria-label="Language / Idioma">
+        <button type="button" data-set-lang="en" aria-pressed="true">EN</button>
+        <button type="button" data-set-lang="pt" aria-pressed="false">PT</button>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- CASE STUDY PAGE (opened via #case/<id>) -->
+<div class="cs" id="cs" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="csTitle" hidden></div>
+<script>
+(function(){
+'use strict';
+
+/* ================= CONFIG: fill these in ================= */
+var CONFIG = {
+  resumeUrl: '',    // e.g. 'resumo-paulo.pdf'. While empty, the resume buttons stay hidden.
+  portraitUrl: '',  // e.g. 'paulo.jpg' or a data: URI. While empty, the PN monogram shows.
+  email: 'nobrecontato21@outlook.com'
+};
+/* Add ?draft to the URL to see empty case-study sections as placeholders. */
+var DRAFT = /[?&]draft\b/.test(location.search);
+if(DRAFT) document.documentElement.classList.add('draft');
+
+/* ================= CASES ================= */
+function L(pt,en){ return {pt:pt,en:en}; }
+var CASES = [
+{ id:'rotina', kind:L('Case principal · medido em registros','Core case · measured from records'),
+  page:L('projetos/automacao-rotina-operacional.html','projetos/en/automacao-rotina-operacional.html'),
+  ctx:L('Simplic · Melhoria de processo e automação','Simplic · Process improvement and automation'),
+  title:L('Como a rotina da manhã deixou de depender de disparos manuais','How the morning routine stopped depending on manual triggers'),
+  problem:L('A lista do discador precisava estar pronta antes das 8h, mas cada etapa esperava alguém disparar a anterior.','The dialer list had to be ready before 8:00, but each step waited for someone to trigger the previous one.'),
+  did:L('Medi as esperas entre as etapas e configurei, com orientação do suporte do fornecedor, uma sequência que começa sozinha às 6h, com uma pessoa acompanhando falhas.','I measured the waits between steps and, with guidance from the vendor’s support team, set up a sequence that starts on its own at 6:00, with a person monitoring failures.'),
+  metric:'', metricLabel:L('Lista pronta entre 06h22 e 06h57 nos 3 registros depois da mudança; antes, mediana de 07h30 em 29 dias.','List ready between 06:22 and 06:57 in the 3 records after the change; before, a 07:30 median over 29 days.'),
+  kpis:[]
+},
+{ id:'rejections', kind:L('Case principal · resultado qualitativo','Core case · qualitative result'),
+  page:L('projetos/central-pagamentos-rejeitados.html','projetos/en/central-pagamentos-rejeitados.html'),
+  ctx:L('Simplic · Regras de negócio e automação','Simplic · Business rules and automation'),
+  title:L('Como organizei e automatizei parte da análise de pagamentos rejeitados','How I organised and partly automated the analysis of rejected payments'),
+  problem:L('O destino de cada pagamento rejeitado dependia de quem analisava, e o mesmo caso podia ter tratamentos diferentes.','Where each rejected payment went depended on who analysed it, and the same case could be handled in different ways.'),
+  did:L('Levantei as regras com a equipe e construí a extração, as regras que indicam o próximo passo e o painel de trabalho.','I gathered the rules with the team and built the extraction, the rules that suggest the next step and the working panel.'),
+  metric:'', metricLabel:L('Motivo registrado em cada caso; o que não tem evidência suficiente vai para revisão de uma pessoa.','A recorded reason for every case; anything without enough evidence goes to a person for review.'),
+  kpis:[]
+},
+{ id:'duplicates', kind:L('Case principal · resultado qualitativo','Core case · qualitative result'),
+  page:L('projetos/pagamentos-em-duplicidade.html','projetos/en/pagamentos-em-duplicidade.html'),
+  ctx:L('Simplic · Conciliação e controle de risco','Simplic · Reconciliation and risk control'),
+  title:L('Como passei a identificar pagamentos duplicados antes de qualquer reembolso','How I started identifying duplicate payments before any refund'),
+  problem:L('Quem paga a mesma parcela duas vezes precisa receber de volta, mas só depois de a duplicidade estar comprovada.','A customer who pays the same instalment twice must get the money back, but only once the duplicate is proven.'),
+  did:L('Desenhei as regras de identificação e construí um painel que separa quem monta o lote de quem executa o reembolso.','I designed the identification rules and built a panel that separates who builds the batch from who carries out the refund.'),
+  metric:'', metricLabel:L('Estado e histórico de cada caso em um só lugar. A decisão e o pagamento continuam com pessoas.','Status and history for every case in one place. The decision and the payment stay with people.'),
+  kpis:[]
+},
+{ id:'monitor', kind:L('Case principal · resultado qualitativo','Core case · qualitative result'),
+  page:L('projetos/monitor-operacao.html','projetos/en/monitor-operacao.html'),
+  ctx:L('Simplic · Acompanhamento da operação','Simplic · Operations monitoring'),
+  title:L('Como tornei visíveis as falhas das rotinas que rodam antes do expediente','How I made failures in the pre-workday routines visible'),
+  problem:L('Quando uma rotina de madrugada falhava sem ninguém perceber, a equipe começava o dia com dados incompletos.','When an overnight routine failed without anyone noticing, the team started the day with incomplete data.'),
+  did:L('Organizei uma tela que mostra se a manhã fechou e onde uma falha parou, e corrigi uma falha que exibia valores errados. Inclui uma versão para o celular do gestor.','I built a screen that shows whether the morning closed and where a failure stopped, and fixed a bug that displayed wrong values. Includes a version for the manager’s phone.'),
+  metric:'', metricLabel:L('Falhas visíveis com a etapa em que pararam, e o caso passa para uma pessoa quando a nova tentativa não resolve.','Failures visible with the step where they stopped, and the case passes to a person when a retry does not fix it.'),
+  kpis:[]
+},
+{ id:'infra',
+  kind:L('Iniciativa relacionada · resultado qualitativo','Related initiative · qualitative result'),
+  ctx:L('Simplic · Diagnóstico e escalada','Simplic · Diagnosis and escalation'),
+  title:L('Como encontrei a causa das falhas nos dias de pico','How I found the cause of failures on peak days'),
+  problem:L('Nos dias de maior entrada de carteira, o processamento falhava e os clientes novos ficavam de fora, justamente nos dias de maior volume.','On the days with the largest portfolio intake, processing failed and new customers were left out, exactly on the highest-volume days.'),
+  did:L('Acionei o time da plataforma de CRM, que encontrou a causa: a capacidade contratada estava abaixo da demanda real. Levei a causa e o impacto no negócio à diretoria e coordenei o ajuste em um dia de menor volume.','I asked the CRM platform team to investigate, and they found the cause: contracted capacity was below real demand. I took the cause and the business impact to the director and coordinated the change on a low-volume day.'),
+  metric:'', metricLabel:L('Depois do ajuste, o processamento deixou de falhar nos dias de produção intensa, sem interromper a operação.','After the change, processing stopped failing on heavy production days, without disrupting operations.'),
+  kpis:[],
+  context:L('O processamento diário de carteira, que precisa absorver grandes volumes nos dias de entrada.','Daily portfolio processing, which must absorb large volumes on intake days.'),
+  challenge:L('O sistema falhava exatamente nos dias de maior volume. Sem uma causa clara, cada dia de pico era um risco operacional.','The system failed exactly on the highest-volume days. Without a clear cause, every peak day was an operational risk.'),
+  diagnosis:L('A revisão de desempenho mostrou onde o pico acontecia e onde o processamento se perdia: a capacidade contratada era muito menor do que o número de clientes em carteira.','The performance review showed where the peak happened and where processing was lost: contracted capacity was far below the number of customers in the portfolio.'),
+  role:L('Assumi o problema do diagnóstico à resolução: mostrei o risco para o negócio, pedi a revisão técnica, levei a evidência a quem decide e coordenei a implementação. O conhecimento técnico de infraestrutura era do time da plataforma de CRM; minha parte foi transformar a evidência em uma decisão de negócio.','I owned the problem from diagnosis to resolution: I framed the business risk, requested the technical review, took the evidence to the decision-maker and coordinated implementation. The infrastructure expertise sat with the CRM platform team; my part was turning the evidence into a business decision.'),
+  stakeholders:L('Time da plataforma de CRM, diretoria e time técnico.','CRM platform team, director and technical team.'),
+  approach:L('Começar pela evidência: localizar onde o pico quebra o processamento e só então levar uma causa clara, com o impacto no negócio, para quem pode decidir.','Start with evidence: find where the peak breaks processing, and only then take a clear cause, with its business impact, to the people who can decide.'),
+  execution:L('O time da plataforma de CRM conduziu a revisão de desempenho, apresentei a causa e o impacto à diretoria, o aumento foi aprovado e coordenei o ajuste com o time técnico.','The CRM platform team ran the performance review, I presented the cause and the impact to the director, the increase was approved and I coordinated the change with the technical team.'),
+  flow:{before:[['Entrada de carteira','Portfolio intake'],['Pico de volume','Volume peak'],['Capacidade insuficiente','Insufficient capacity','break'],['Só carteira do dia anterior','Previous day’s portfolio only']],
+        after:[['Entrada de carteira','Portfolio intake'],['Pico de volume','Volume peak'],['Capacidade ajustada','Right-sized capacity','new'],['Clientes novos processados','New customers processed']]},
+  solution:L('Aumento de infraestrutura dimensionado para o volume real de clientes processados.','An infrastructure increase sized to the real volume of customers processed.'),
+  tools:['Análise de causa raiz|Root cause analysis','Revisão de desempenho|Performance review','Coordenação entre áreas|Cross-team coordination','Escalada com evidência|Evidence-based escalation'],
+  results:[L('O processamento deixou de falhar nos dias de produção intensa.','Processing stopped failing on heavy production days.'),L('Ajuste feito em um dia de menor volume, sem interromper a operação.','Change made on a low-volume day, with no disruption to operations.')],
+  lessons:L('Antes de corrigir o sistema, confirme se ele tem capacidade para o volume que você pede dele. E leve à decisão a causa junto com o impacto no negócio.','Before fixing the system, confirm it has capacity for the volume you ask of it. And take the cause to the decision together with its business impact.')
+}
+];
+
+/* ================= PROJECT PORTFOLIO =================
+   Most recent first. a = the type of problem the project solved. */
+var PROJECTS = [
+  {y:L('2026','2026'), org:'Simplic', t:L('Rotina da manhã sem disparos manuais','Morning routine without manual triggers'), d:L('Sequência que começa sozinha às 6h; lista do discador pronta mais cedo nos registros disponíveis (case 01)','A sequence that starts on its own at 6:00; dialer list ready earlier in the available records (case 01)'), a:L('Automação','Automation')},
+  {y:L('2026','2026'), org:'Simplic', t:L('Análise de pagamentos rejeitados com regras escritas','Rejected payment analysis with written rules'), d:L('Extração, regras que indicam o próximo passo com motivo e painel de trabalho; regras ajustadas de jul a out/2026 (case 02)','Extraction, rules that suggest the next step with a reason, and a working panel; rules refined from Jul to Oct 2026 (case 02)'), a:L('Regras de negócio','Business rules')},
+  {y:L('ago 2026','Aug 2026'), org:'Simplic', t:L('Identificação de pagamentos duplicados antes do reembolso','Duplicate payments identified before refund'), d:L('Batimento com o extrato do gateway e papéis separados para decidir e executar (case 03)','Matching against the gateway statement, with separate roles for deciding and executing (case 03)'), a:L('Controle de risco','Risk control')},
+  {y:L('2026','2026'), org:'Simplic', t:L('Monitor das rotinas antes do expediente','Monitor for pre-workday routines'), d:L('Estado das rotinas, a etapa em que uma falha parou e uma versão para celular (case 04)','Routine status, the step where a failure stopped, and a mobile version (case 04)'), a:L('Monitoramento','Monitoring')},
+  {y:L('2026','2026'), org:'Simplic', t:L('Capacidade nos dias de pico','Capacity on peak days'), d:L('Diagnóstico, escalada à diretoria e ajuste de infraestrutura sem interromper a operação','Diagnosis, escalation to the director and an infrastructure change without disrupting operations'), a:L('Diagnóstico','Diagnosis')},
+  {y:L('2026','2026'), org:'Simplic', t:L('Mapeamento e documentação dos processos do BackOffice','Mapping and documenting BackOffice processes'), d:L('Fluxos principais mapeados e documentados, como base para as automações','Main workflows mapped and documented, as the basis for the automations'), a:L('Melhoria de processos','Process improvement')},
+  {y:L('2026','2026'), org:'Simplic', t:L('Base de conhecimento da equipe','Team knowledge base'), d:L('Processos documentados e compartilhados com a equipe','Processes documented and shared with the team'), a:L('Gestão do conhecimento','Knowledge management')},
+  {y:L('2026','2026'), org:'Simplic', t:L('Entrada de novos parceiros via API','Onboarding new partners via API'), d:L('Conduzi a criação, os testes e a entrada em produção de novos parceiros','I led the setup, testing and go-live of new partners'), a:L('Implantação','Implementation')},
+  {y:L('2026','2026'), org:'Simplic', t:L('Conciliador de baixas duplicadas','Duplicate write-off reconciler'), d:L('Robô em Python que trata um pagamento registrado duas vezes no sistema de cobrança. Execução parcial; diferente do case 03','Python bot that handles a payment recorded twice in the collections system. Partially delivered; different from case 03'), a:L('Conciliação','Reconciliation')},
+  {y:L('2025','2025'), org:'Itaú Unibanco', t:L('Demandas da rede de agências em modelo de PMO','Branch-network requests in a PMO model'), d:L('Consultoria interna de pessoas','Internal people consulting'), a:L('PMO','PMO')},
+  {y:L('2025','2025'), org:'Itaú Unibanco', t:L('People analytics com dados de alto volume','People analytics on high-volume data'), d:L('Apoio às decisões da consultoria de pessoas','Support for people consulting decisions'), a:L('Dados e analytics','Data & analytics')},
+  {y:L('2024','2024'), org:'Itaú Unibanco', t:L('Reestruturação do fluxo financeiro de Garantias','Collateral financial flow restructuring'), d:L('Operação de garantias reais','Notarial guarantees operation'), a:L('Melhoria de processos','Process improvement')}
+];
+
+/* ================= state + helpers ================= */
+var lang = 'en', pfFilter = 'all';
+function t(v){ return v == null ? '' : (typeof v === 'string' ? v : v[lang]); }
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function pair(s){ var p = s.split('|'); return lang === 'en' && p[1] ? p[1] : p[0]; }
+var UI = {
+  challenge:L('Problema','Problem'), action:L('O que fiz','What I did'), impact:L('Impacto','Impact'),
+  read:L('Ler o caso completo','Read the full case'), readPage:L('Ver o case detalhado e a demonstração','See the case study and demo'), back:L('Todos os cases','All cases'), next:L('Próximo caso','Next case'),
+  before:L('Antes','Before'), after:L('Depois','After'), exhibit:L('Antes e depois','Before and after'),
+  draft:L('A escrever.','To be written.'), all:L('Todos','All'),
+  sec:{context:L('Contexto','Context'),challenge:L('Problema de negócio','Business problem'),diagnosis:L('Diagnóstico','Diagnosis'),role:L('Meu papel','My role'),approach:L('Abordagem','Approach'),solution:L('Solução','Solution'),stakeholders:L('Áreas envolvidas','People involved'),execution:L('Execução','Execution'),tools:L('Métodos e ferramentas','Methods & tools'),results:L('Resultados','Results'),lessons:L('Aprendizado','Lessons learned')}
+};
+function metricText(c){ return lang === 'en' && c.metricEn ? c.metricEn : c.metric; }
+function kv(k){ return lang==='en' && k[2] ? k[2] : k[0]; }
+
+/* ================= case cards ================= */
+function renderCards(){
+  var h = '';
+  CASES.forEach(function(c){
+    var facts = c.kpis.filter(function(k){ return kv(k) !== metricText(c); }).map(function(k){ return '<li><b class="num">'+esc(kv(k))+'</b><span>'+esc(t(k[1]))+'</span></li>'; }).join('');
+    h += '<article class="card rv in">'
+      + '<div class="card__main">'+(c.kind?'<p class="label label--acc card__kind">'+esc(t(c.kind))+'</p>':'')+'<h3>'+esc(t(c.title))+'</h3>'
+      + '<div class="card__row"><p class="label">'+t(UI.challenge)+'</p><p>'+esc(t(c.problem))+'</p></div>'
+      + '<div class="card__row"><p class="label">'+t(UI.action)+'</p><p>'+esc(t(c.did))+'</p></div>'
+      + '<div class="card__impact'+(metricText(c)?'':' card__impact--text')+'">'+(metricText(c)?'<b class="num">'+esc(metricText(c))+'</b>':'')+'<span>'+esc(t(c.metricLabel))+'</span></div></div>'
+      + '<div class="card__foot"><a class="link" href="'+(c.page?esc(t(c.page)):'#case/'+c.id)+'">'+t(c.page?UI.readPage:UI.read)+' <span aria-hidden="true">→</span></a></div>'
+      + '</article>';
+  });
+  document.getElementById('caseList').innerHTML = h;
+}
+
+/* ================= project portfolio ================= */
+function renderPortfolio(){
+  var rows = PROJECTS.map(function(p){
+    return '<li><time>'+esc(t(p.y))+'</time><div><b>'+esc(t(p.t))+' <i>· '+esc(p.org)+'</i></b><small>'+esc(t(p.d))+'</small><span class="pf__tag">'+esc(t(p.a))+'</span></div></li>';
+  });
+  var half = Math.ceil(rows.length/2);
+  document.getElementById('pfList').innerHTML = '<ul>'+rows.slice(0,half).join('')+'</ul><ul>'+rows.slice(half).join('')+'</ul>';
+}
+
+/* ================= case page ================= */
+var cs = document.getElementById('cs'), current = null, lastFocus = null;
+
+function flowRow(tag, steps){
+  var s = steps.map(function(st){
+    var k = st[2] ? ' fs__box--'+st[2] : '';
+    return '<div class="fs"><div class="fs__box'+k+'">'+esc(lang==='en'?st[1]:st[0])+'</div></div>';
+  }).join('');
+  return '<div class="flow"><span class="flow__tag">'+tag+'</span><div class="flow__steps">'+s+'</div></div>';
+}
+function exhibit(c){
+  if(c.flow){
+    return '<div class="exhibit"><div class="exhibit__cap"><span class="label label--acc">'+t(UI.exhibit)+'</span></div>'
+      + flowRow(t(UI.before), c.flow.before) + flowRow(t(UI.after), c.flow.after) + '</div>';
+  }
+  if(c.bars){
+    var max = c.bars.before[1], pct = function(v){ return Math.max(v/max*100, 0.6).toFixed(2)+'%'; };
+    var aLbl = lang==='en' && c.bars.after[2] ? c.bars.after[2] : c.bars.after[0];
+    return '<div class="exhibit"><div class="exhibit__cap"><span class="label label--acc">'+t(UI.exhibit)+'</span></div><div class="bars">'
+      + '<div class="bar"><span class="flow__tag">'+t(UI.before)+'</span><i style="width:100%"></i><b class="num">'+c.bars.before[0]+'</b></div>'
+      + '<div class="bar bar--after"><span class="flow__tag">'+t(UI.after)+'</span><i style="width:'+pct(c.bars.after[1])+'"></i><b class="num">'+aLbl+'</b></div>'
+      + '</div></div>';
+  }
+  return '';
+}
+function block(key, html, extra){
+  var has = html && html.length;
+  if(!has && !DRAFT) return '';
+  var body = has ? html : '<p>'+t(UI.draft)+'</p>';
+  return '<section class="blk'+(has?'':' blk--draft')+(extra||'')+'"><p class="label">'+t(UI.sec[key])+'</p><div class="blk__txt">'+body+'</div></section>';
+}
+function p(v){ return v ? '<p>'+esc(t(v))+'</p>' : ''; }
+
+function modalCases(){ return CASES.filter(function(x){ return !x.page; }); }
+function renderCase(c){
+  var M = modalCases(), i = M.indexOf(c), nx = M[(i+1) % M.length];
+  var kpis = c.kpis.map(function(k){ return '<div><b class="num">'+esc(lang==='en'&&k[2]?k[2]:k[0])+'</b><span>'+esc(t(k[1]))+'</span></div>'; }).join('');
+  var tools = '<div class="tags">'+c.tools.map(function(x){ return '<span>'+esc(pair(x))+'</span>'; }).join('')+'</div>';
+  var results = '<ul>'+c.results.map(function(r){ return '<li>'+esc(t(r))+'</li>'; }).join('')+'</ul>';
+  cs.innerHTML =
+    '<div class="cs__bar"><div class="wrap"><button class="cs__back" type="button" data-close><span aria-hidden="true">←</span> '+t(UI.back)+'</button><span class="cs__count num">'+String(i+1).padStart(2,'0')+' / '+String(M.length).padStart(2,'0')+'</span></div></div>'
+  + '<article><header class="cs__hero"><div class="wrap"><p class="label label--acc">'+esc(t(c.ctx))+'</p><h1 id="csTitle">'+esc(t(c.title))+'</h1><p>'+esc(t(c.problem))+'</p></div></header>'
+  + '<div class="wrap">'+(kpis?'<div class="cs__kpis">'+kpis+'</div>':'')
+  + '<div class="cs__body">'
+  +   block('context', p(c.context)) + block('challenge', p(c.challenge)) + block('diagnosis', p(c.diagnosis))
+  +   exhibit(c)
+  +   block('role', p(c.role)) + block('stakeholders', p(c.stakeholders)) + block('approach', p(c.approach))
+  +   block('execution', p(c.execution)) + block('solution', p(c.solution)) + block('results', results)
+  +   block('tools', tools) + block('lessons', p(c.lessons), ' blk--lesson')
+  +   (c.quote ? '<figure class="cs__quote"><blockquote lang="'+(lang==='en'?'en':'pt-BR')+'">“'+esc(t(c.quote.text))+'”</blockquote><figcaption>'+esc(t(c.quote.who))+(lang==='en'&&c.quote.tr?' · Translated from Portuguese':'')+'</figcaption></figure>' : '')
+  + '</div>'
+  + '<div class="cs__next"><button type="button" data-go="'+nx.id+'"><span class="label">'+t(UI.next)+'</span><strong>'+esc(t(nx.title))+' <span aria-hidden="true">→</span></strong></button></div>'
+  + '</div></article>';
+}
+
+function openCase(id){
+  var ALIAS = {engine:'rejections', routine:'rotina'}; if(ALIAS[id]) id = ALIAS[id];
+  var c = CASES.filter(function(x){ return x.id === id; })[0];
+  if(!c){ closeCase(true); return; }
+  if(c.page){ location.replace(t(c.page)); return; }
+  if(!current) lastFocus = document.activeElement;
+  current = c; renderCase(c);
+  cs.hidden = false; cs.scrollTop = 0; document.body.classList.add('lock');
+  document.title = t(c.title) + ' | Paulo Nobre';
+  cs.focus({preventScroll:true});
+}
+function closeCase(silent){
+  if(!current && cs.hidden) return;
+  current = null; cs.hidden = true; cs.innerHTML = ''; document.body.classList.remove('lock');
+  document.title = 'Paulo Nobre | Process Improvement & Automation';
+  if(!silent){
+    var w = document.getElementById('cases');
+    if(lastFocus && document.contains(lastFocus)) lastFocus.focus({preventScroll:true});
+    if(w) w.scrollIntoView({block:'start'});
+  }
+}
+function route(){
+  var m = location.hash.match(/^#case\/([\w-]+)/);
+  if(m) openCase(m[1]); else closeCase(false);
+}
+cs.addEventListener('click', function(e){
+  if(e.target.closest('[data-close]')){ location.hash = 'cases'; return; }
+  var g = e.target.closest('[data-go]');
+  if(g){ location.hash = 'case/' + g.getAttribute('data-go'); }
+});
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape' && current) location.hash = 'cases';
+});
+window.addEventListener('hashchange', route);
+
+/* ================= language ================= */
+var nodes = document.querySelectorAll('[data-pt][data-en]');
+function setLang(l){
+  lang = l;
+  document.documentElement.setAttribute('data-lang', l);
+  document.documentElement.lang = (l === 'pt') ? 'pt-BR' : 'en';
+  nodes.forEach(function(n){ n.innerHTML = n.getAttribute('data-' + l); });
+  var md = document.querySelector('meta[name="description"]');
+  if(md) md.setAttribute('content', md.getAttribute('data-meta-' + l));
+  document.querySelectorAll('[data-set-lang]').forEach(function(b){
+    b.setAttribute('aria-pressed', String(b.getAttribute('data-set-lang') === l));
+  });
+  document.querySelectorAll('.tr').forEach(function(s){ s.hidden = !s.textContent.trim(); });
+  document.querySelectorAll('[data-quote]').forEach(function(q){ q.lang = l === 'pt' ? 'pt-BR' : 'en'; });
+  applyResume();
+  renderCards(); renderPortfolio();
+  if(window.__mobileUi) window.__mobileUi();
+  if(current) renderCase(current);
+  document.querySelectorAll('[data-proj-link]').forEach(function(a){ a.setAttribute('href', l === 'en' ? 'projetos/en/' : 'projetos/'); });
+  try{ localStorage.setItem('pn-lang', l); }catch(e){}
+}
+document.addEventListener('click', function(e){
+  var b = e.target.closest('[data-set-lang]'); if(b) setLang(b.getAttribute('data-set-lang'));
+});
+
+/* ================= resume + portrait ================= */
+function applyResume(){
+  document.querySelectorAll('[data-resume]').forEach(function(b){
+    b.hidden = !CONFIG.resumeUrl;
+    if(CONFIG.resumeUrl && !b.dataset.bound){
+      b.dataset.bound = '1';
+      b.style.cursor = 'pointer';
+      b.addEventListener('click', function(){ window.open(CONFIG.resumeUrl, '_blank', 'noopener'); });
+    }
+  });
+}
+if(CONFIG.portraitUrl){
+  var im = document.getElementById('portraitImg');
+  im.src = CONFIG.portraitUrl; im.hidden = false;
+  var mono = document.querySelector('.portrait__mono'); if(mono) mono.hidden = true;
+}
+
+/* ================= header: scrolled state, mobile menu, active section ================= */
+var hdr = document.getElementById('hdr'), mbtn = document.querySelector('.menu-btn'), mnav = document.getElementById('mnav');
+var isScrolled = false;
+function onScroll(){
+  /* hysteresis: different on/off points so the state never flips back and forth */
+  var y = window.scrollY;
+  if(!isScrolled && y > 40){ isScrolled = true; hdr.classList.add('scrolled'); }
+  else if(isScrolled && y < 4){ isScrolled = false; hdr.classList.remove('scrolled'); }
+}
+window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+function setMenu(open){
+  mbtn.setAttribute('aria-expanded', String(open)); mnav.hidden = !open;
+  document.body.classList.toggle('lock', open);
+}
+mbtn.addEventListener('click', function(){ setMenu(mnav.hidden); });
+mnav.addEventListener('click', function(e){ if(e.target.closest('a')) setMenu(false); });
+document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && !mnav.hidden) setMenu(false); });
+window.addEventListener('resize', function(){ if(window.innerWidth > 860 && !mnav.hidden) setMenu(false); });
+
+var navMap = {cases:'cases', method:'cases', career:'career', portfolio:'career', recommendations:'career', bring:'bring', story:'story', contact:'contact'};
+var navLinks = document.querySelectorAll('[data-nav]');
+function markNav(key){ navLinks.forEach(function(a){ var on = a.getAttribute('data-nav') === key; a.classList.toggle('on', on); if(on) a.setAttribute('aria-current','true'); else a.removeAttribute('aria-current'); }); }
+if('IntersectionObserver' in window){
+  var secIo = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting) markNav(navMap[e.target.id] || ''); });
+  }, {rootMargin:'-45% 0px -50% 0px', threshold:0});
+  Object.keys(navMap).forEach(function(id){ var el = document.getElementById(id); if(el) secIo.observe(el); });
+  var heroIo = new IntersectionObserver(function(entries){ if(entries[0].isIntersecting) markNav(''); }, {rootMargin:'-45% 0px -50% 0px'});
+  heroIo.observe(document.querySelector('.hero'));
+}
+
+
+/* ================= story background: rotated particle wave, slow and subtle =================
+   Runs only while the section is on screen; static for prefers-reduced-motion. */
+(function(){
+  var cv = document.getElementById('storyFx'); if(!cv || !cv.getContext) return;
+  var ctx = cv.getContext('2d');
+  var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, L, S, hz, vx, dpr, bg, parts = [], running = false, raf = 0, last = 0, t0 = performance.now();
+  var gold = '217,130,91', ivory = '240,235,225';
+  function rnd(seed){ return function(){ seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }; }
+
+  function setup(){
+    var r = cv.getBoundingClientRect(); dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = Math.max(1, r.width); H = Math.max(1, r.height);
+    cv.width = W * dpr; cv.height = H * dpr;
+    L = H; S = W; hz = S*0.42; vx = L*0.5;
+    /* static layer: grid + glow, drawn once per resize */
+    bg = document.createElement('canvas'); bg.width = cv.width; bg.height = cv.height;
+    var b = bg.getContext('2d');
+    b.setTransform(dpr,0,0,dpr,0,0); b.translate(0,H); b.rotate(-Math.PI/2);
+    b.lineWidth = 1;
+    for(var i=1;i<=14;i++){ var tt=i/14, y=hz+(S-hz)*tt*tt; b.strokeStyle='rgba('+gold+','+(0.05+0.18*tt)+')'; b.beginPath(); b.moveTo(0,y); b.lineTo(L,y); b.stroke(); }
+    for(var k=-18;k<=18;k++){ b.strokeStyle='rgba('+gold+','+(0.16-Math.abs(k)*0.006)+')'; b.beginPath(); b.moveTo(vx+k*2,hz); b.lineTo(vx+k*(L/12),S); b.stroke(); }
+    /* particles: fixed attributes, position animated */
+    var R = rnd(7); parts = [];
+    var strands = 6, per = Math.round(L*(still ? 2.6 : 1.9));
+    for(var s=0;s<strands;s++){
+      for(var p=0;p<per;p++){
+        var x = R()*L, d = Math.abs(x - vx)/L, a = (0.22 + 0.7*R()) * (1 - d*1.1);
+        if(a <= 0) continue;
+        parts.push({x:x, s:s, j:(R()-0.5), a:a, z:(R()<0.1?1.8:1.1), c:(R()<0.25?ivory:gold), sp:0.4+R()*0.6});
+      }
+    }
+  }
+
+  function frame(time){
+    var t = (time - t0) / 1000;
+    ctx.setTransform(1,0,0,1,0,0); ctx.clearRect(0,0,cv.width,cv.height);
+    ctx.drawImage(bg,0,0);
+    ctx.setTransform(dpr,0,0,dpr,0,0); ctx.translate(0,H); ctx.rotate(-Math.PI/2);
+    /* glow breathes very gently */
+    var pulse = still ? 1 : 0.9 + 0.1*Math.sin(t*0.8);
+    var g = ctx.createRadialGradient(vx,hz,0,vx,hz,S*0.55*pulse);
+    g.addColorStop(0,'rgba(255,228,210,.85)'); g.addColorStop(.04,'rgba(240,170,130,.5)'); g.addColorStop(.18,'rgba('+gold+',.18)'); g.addColorStop(1,'rgba('+gold+',0)');
+    ctx.fillStyle = g; ctx.fillRect(0,0,L,S);
+    for(var i=0;i<parts.length;i++){
+      var q = parts[i];
+      /* particles drift slowly along the ribbon and the wave phase shifts */
+      var x = still ? q.x : (q.x + t*6*q.sp) % L;
+      var env = 0.35 + 0.65*Math.sin(Math.PI*x/L);
+      var amp = S*(0.07 + q.s*0.018), fr = 2*Math.PI/(L*(0.42 + q.s*0.05));
+      var ph = q.s*0.9 + (still ? 0 : t*0.35);
+      var y = hz - S*0.03 + Math.sin(x*fr + ph)*amp*env + q.j*S*0.035*env;
+      ctx.fillStyle = 'rgba('+q.c+','+q.a.toFixed(3)+')';
+      ctx.fillRect(x, y, q.z, q.z);
+    }
+  }
+
+  function loop(time){
+    if(!running) return;
+    if(time - last > 33){ last = time; frame(time); }  /* ~30 fps is plenty for slow motion */
+    raf = requestAnimationFrame(loop);
+  }
+  function start(){ if(still || running) return; running = true; raf = requestAnimationFrame(loop); }
+  function stop(){ running = false; cancelAnimationFrame(raf); }
+
+  setup(); frame(performance.now());
+  if(!still && 'IntersectionObserver' in window){
+    new IntersectionObserver(function(e){ e[0].isIntersecting ? start() : stop(); }).observe(cv);
+  }
+  document.addEventListener('visibilitychange', function(){ if(document.hidden) stop(); });
+  var tmr; window.addEventListener('resize', function(){ clearTimeout(tmr); tmr = setTimeout(function(){ setup(); frame(performance.now()); }, 150); });
+})();
+
+
+/* ================= mobile helpers: case swipe indicator + portfolio toggle ================= */
+(function(){
+  var row = document.getElementById('caseList'), cnt = document.getElementById('caseCount'), dots = document.getElementById('caseDots');
+  function paint(){
+    var cards = row.querySelectorAll('.card'); if(!cards.length) return;
+    var w = cards[0].getBoundingClientRect().width + 12;
+    var i = Math.min(cards.length - 1, Math.max(0, Math.round(row.scrollLeft / w)));
+    cnt.textContent = (lang === 'pt' ? 'Deslize · ' : 'Swipe · ') + (i + 1) + ' / ' + cards.length;
+    if(dots.children.length !== cards.length) dots.innerHTML = Array(cards.length + 1).join('<i></i>');
+    [].forEach.call(dots.children, function(d, k){ d.classList.toggle('on', k === i); });
+  }
+  row.addEventListener('scroll', function(){ window.requestAnimationFrame(paint); }, {passive:true});
+  window.addEventListener('resize', paint);
+  var pf = document.getElementById('pfList'), more = document.getElementById('pfMore');
+  function label(){
+    var open = !pf.classList.contains('pf--collapsed');
+    more.textContent = open ? (lang === 'pt' ? 'Mostrar menos' : 'Show less') : (lang === 'pt' ? 'Ver todos os ' : 'See all ') + PROJECTS.length + (lang === 'pt' ? ' projetos' : ' projects');
+    more.setAttribute('aria-expanded', String(open));
+  }
+  more.addEventListener('click', function(){ pf.classList.toggle('pf--collapsed'); label(); if(pf.classList.contains('pf--collapsed')) pf.scrollIntoView({block:'start'}); });
+  window.__mobileUi = function(){ paint(); label(); };
+  paint(); label();
+})();
+
+/* ================= init ================= */
+var saved = null;
+var qLang = (location.search.match(/[?&]lang=(pt|en)\b/) || [])[1];
+if(qLang) saved = qLang;
+else { try{ saved = localStorage.getItem('pn-lang'); }catch(e){} }
+if(!saved) saved = (navigator.language || 'en').toLowerCase().indexOf('pt') === 0 ? 'pt' : 'en';
+setLang(saved);
+route();
+
+var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var targets = document.querySelectorAll('.rv:not(.in), #methodRow');
+if(reduce || !('IntersectionObserver' in window)){
+  targets.forEach(function(el){ el.classList.add('in'); });
+}else{
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:.12, rootMargin:'0px 0px -6% 0px'});
+  targets.forEach(function(el){ io.observe(el); });
+}
+})();
+</script>
 </body>
 </html>

@@ -1,63 +1,175 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Pagamentos duplicados identificados antes do reembolso · Case · Paulo Nobre</title>
 <meta name="description" content="Um painel que confronta o sistema de cobrança com o extrato do gateway para identificar quem pagou a mesma parcela duas vezes e organizar os casos para análise de reembolso. A decisão e o pagamento continuam com pessoas.">
-<link rel="canonical" href="https://nobre-analytics.github.io/projetos/pagamentos-em-duplicidade.html">
-<link rel="alternate" hreflang="pt-BR" href="https://nobre-analytics.github.io/projetos/pagamentos-em-duplicidade.html">
-<link rel="alternate" hreflang="en" href="https://nobre-analytics.github.io/projetos/en/pagamentos-em-duplicidade.html">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Pagamentos duplicados identificados antes do reembolso · Case · Paulo Nobre">
-<meta property="og:description" content="Um painel que confronta o sistema de cobrança com o extrato do gateway para identificar quem pagou a mesma parcela duas vezes e organizar os casos para análise de reembolso. A decisão e o pagamento continuam com pessoas.">
-<meta property="og:url" content="https://nobre-analytics.github.io/projetos/pagamentos-em-duplicidade.html">
-<meta property="og:locale" content="pt_BR">
-<meta property="og:site_name" content="Paulo Nobre">
-<meta name="twitter:card" content="summary_large_image">
-<meta property="og:image" content="https://nobre-analytics.github.io/static/img/og-pt.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta name="twitter:image" content="https://nobre-analytics.github.io/static/img/og-pt.png">
-<meta name="theme-color" content="#0B1220">
-<link rel="icon" href="../static/img/favicon.svg" type="image/svg+xml">
-<link rel="preload" href="../static/fonts/hanken-grotesk-latin-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../static/css/site.css">
-<script>document.documentElement.classList.add('js')</script>
+<script>document.documentElement.classList.add('js');</script>
+<script src="assets/vt.js"></script>
+<link rel="stylesheet" href="assets/site.css">
+<style>
+
+.recon { padding: 22px; }
+.recon__head { display: grid; grid-template-columns: 1fr 44px 1fr; gap: 0; margin-bottom: 10px; color: var(--muted); font-size: .8125rem; font-weight: 600; }
+.recon__row { display: grid; grid-template-columns: 1fr 44px 1fr; align-items: center; margin-top: 10px; }
+.cell { padding: 12px 14px; border: 1px solid var(--line-2); border-radius: 10px; background: var(--bg-2); font-size: .875rem; line-height: 1.35; }
+.cell b { display: block; font-weight: 600; color: var(--text); font-variant-numeric: tabular-nums; }
+.cell span { color: var(--muted); font-size: .8125rem; }
+.link { position: relative; height: 2px; background: var(--line-2); margin: 0 4px; }
+.link::after { content: ""; position: absolute; right: -2px; top: -3px; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+.ok { color: var(--green); } .dup { color: var(--amber); } .rev { color: var(--cyan); }
+.link.ok { background: #8FD1AE; } .link.dup { background: #D9825B; } .link.rev { background: #9CCFC4; }
+.chip { display: inline-flex; align-items: center; gap: 6px; margin-top: 6px; padding: 2px 8px; border-radius: 999px; font-size: .75rem; font-weight: 600; background: currentColor; }
+.chip i { font-style: normal; color: var(--bg); }
+.recon__cap { margin-top: 14px; }
+.cell.empty { border-style: dashed; color: var(--muted); }
+@media (prefers-reduced-motion: no-preference) {
+  .js .recon__row { opacity: 0; transform: translateX(-10px); animation: slidein .7s var(--ease) forwards; animation-delay: calc(var(--d) * 1ms + 650ms); }
+  .js .link { transform: scaleX(0); transform-origin: left; animation: grow .6s var(--ease) forwards; animation-delay: calc(var(--d) * 1ms + 950ms); }
+}
+@keyframes slidein { to { opacity: 1; transform: none; } }
+@keyframes grow { to { transform: scaleX(1); } }
+
+.rules { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 8px; }
+.rule { padding: 22px; }
+.rule__if { color: var(--muted); font-size: .875rem; }
+.rule__then { display: block; margin-top: 6px; font-size: 1.0625rem; font-weight: 600; }
+.rule__then em { font-style: normal; color: var(--amber); }
+
+.modes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.mode { padding: 24px; }
+.mode__who { color: var(--amber); font-weight: 600; font-size: .9375rem; }
+.mode h3 { margin-top: 6px; font-size: 1.25rem; letter-spacing: -0.015em; }
+.mode p { margin-top: 8px; color: var(--text-2); }
+
+.steps { list-style: none; counter-reset: s; display: grid; gap: 0; max-width: var(--read); }
+.steps li { counter-increment: s; display: grid; grid-template-columns: 40px 1fr; gap: 14px; padding: 16px 0; border-top: 1px solid var(--line); color: var(--text-2); }
+.steps li:last-child { border-bottom: 1px solid var(--line); }
+.steps li::before { content: counter(s); display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--amber); color: var(--amber); font-weight: 600; font-size: .875rem; }
+.steps strong { color: var(--text); font-weight: 600; }
+
+@media (max-width: 640px) {
+  .rules, .modes { grid-template-columns: 1fr; }
+  .recon { padding: 14px; }
+  .recon__head, .recon__row { grid-template-columns: 1fr 24px 1fr; }
+  .cell { padding: 10px; }
+}
+
+</style>
+<link rel="canonical" href="https://nobre-analytics.github.io/projetos/pagamentos-em-duplicidade.html"><link rel="alternate" hreflang="pt-BR" href="https://nobre-analytics.github.io/projetos/pagamentos-em-duplicidade.html"><link rel="alternate" hreflang="en" href="https://nobre-analytics.github.io/projetos/en/pagamentos-em-duplicidade.html">
+<meta property="og:type" content="article"><meta property="og:title" content="Pagamentos duplicados identificados antes do reembolso · Case · Paulo Nobre"><meta property="og:description" content="Um painel que confronta o sistema de cobrança com o extrato do gateway para identificar quem pagou a mesma parcela duas vezes e organizar os casos para análise de reembolso. A decisão e o pagamento continuam com pessoas."><meta property="og:url" content="https://nobre-analytics.github.io/projetos/pagamentos-em-duplicidade.html"><meta property="og:image" content="https://nobre-analytics.github.io/static/img/og-pt.png"><meta name="twitter:card" content="summary_large_image"><link rel="icon" href="../static/img/favicon.svg" type="image/svg+xml">
 </head>
-<body>
+<body class="case case--pagamentos-em-duplicidade">
 <a class="skip" href="#conteudo">Pular para o conteúdo</a>
-<header class="hdr">
-  <div class="wrap hdr__in">
-    <a class="brand" href="../?lang=pt"><b>Paulo Nobre</b><span>Melhoria de processos e automação</span></a>
-    <nav class="nav" aria-label="Principal"><a href="../?lang=pt">Início</a><a href="./" aria-current="page">Projetos</a><a href="./#demos">Demos</a><a href="../?lang=pt#contato">Contato</a></nav>
-    <div class="lang" role="group" aria-label="Idioma"><a href="pagamentos-em-duplicidade.html" lang="pt-BR" hreflang="pt-BR" data-lang-link="pt" aria-current="true">PT</a><a href="en/pagamentos-em-duplicidade.html" lang="en" hreflang="en" data-lang-link="en">EN</a></div>
-    <button class="menu-btn" type="button" aria-expanded="false">Menu</button>
+<div class="flares" aria-hidden="true"><div class="flare blue"></div><div class="flare cyan"></div><div class="flare amber"></div><div class="grain"></div></div>
+
+<div class="page">
+  <div class="wrap">
+    <nav class="topbar" aria-label="Navegação">
+      <a class="back" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg> Todos os projetos</a>
+      <span class="topbar__right"><span class="crumb">Case <b>03</b> de 04</span><span class="langs" role="group" aria-label="Idioma"><span class="langs__cur" aria-current="true">PT</span><a href="en/pagamentos-em-duplicidade.html" hreflang="en" lang="en" title="English version" data-lang-switch="en">EN</a></span></span>
+    </nav>
+
+    <main id="conteudo">
+      <header class="hero">
+        <div class="hero__grid">
+          <div>
+            <p class="hero__kicker" data-seq style="--i:0">Conciliação e controle de risco</p>
+            <h1 data-seq style="--i:1">Como passei a identificar pagamentos duplicados antes de qualquer reembolso</h1>
+            <p class="hero__lede" data-seq style="--i:2">Construí um painel que confronta os pagamentos do sistema de cobrança com o extrato do gateway e organiza os casos de clientes que pagaram a mesma parcela duas vezes. A decisão e o reembolso continuam com pessoas.</p>
+            <div class="facts" data-seq style="--i:3"><span class="fact">Em uso desde ago/2026</span><span class="fact">Fundo FIDC</span><span class="fact">Python e Flask</span></div></div>
+          <div class="hero__visual" data-seq style="--i:4">
+            <figure class="panel recon">
+              <div class="recon__head" aria-hidden="true"><span>Sistema de cobrança</span><span></span><span>Extrato do gateway</span></div>
+              <div class="recon__row" style="--d:0"><div class="cell"><b>Parcela 03</b><span>CPF DEMO-C01 · Pix</span></div><div class="link ok" aria-hidden="true"></div><div class="cell"><b>Crédito confirmado</b><span class="chip ok"><i>Original mantido</i></span></div></div>
+              <div class="recon__row" style="--d:140"><div class="cell"><b>Parcela 03</b><span>mesmo CPF · Boleto</span></div><div class="link dup" aria-hidden="true"></div><div class="cell"><b>Segundo crédito</b><span class="chip dup"><i>Duplicado: candidato a reembolso</i></span></div></div>
+              <div class="recon__row" style="--d:280"><div class="cell"><b>Parcela 07</b><span>CPF DEMO-C02 · Boleto</span></div><div class="link rev" aria-hidden="true"></div><div class="cell empty"><b>Sem par no extrato</b><span class="chip rev"><i>Revisar</i></span></div></div>
+              <figcaption class="recon__cap note">Ilustração com dados sintéticos do batimento que o painel faz.</figcaption>
+            </figure></div>
+        </div>
+      </header>
+
+      <div class="kpis" style="--n:3" data-reveal><div class="kpi"><div class="kpi__value">2 fontes</div><div class="kpi__label">confrontadas: sistema de cobrança e extrato do gateway</div></div><div class="kpi"><div class="kpi__value">2 papéis</div><div class="kpi__label">separados: quem decide o lote e quem executa</div></div><div class="kpi"><div class="kpi__value">Estado por caso</div><div class="kpi__label">pendente, solicitado, concluído, removido ou devolvido</div></div></div>
+    <section class="section summary-sec" aria-label="Resumo" data-reveal><div class="cards4"><div class="panel"><b>Problema</b><span>Quem pagou duas vezes precisa receber de volta, mas só depois de a duplicidade estar comprovada. Sem esse batimento, havia risco de devolver um pagamento legítimo ou de deixar o cliente sem o valor.</span></div><div class="panel"><b>Minha participação</b><span>Desenhei as regras de identificação e construí o painel, com papéis separados para montar o lote e para executar.</span></div><div class="panel"><b>O que mudou</b><span>Cada caso tem estado e histórico em um só lugar: identificado, em curadoria, solicitado e concluído.</span></div><div class="panel"><b>Evidência</b><span>Em uso desde agosto de 2026. Nenhum valor ou contagem de casos é publicado.<br><span class="ev ev--qual">Resultado qualitativo</span></span></div></div></section>
+    <section class="section" id="problema" data-reveal>
+      <div class="section__head">
+        <p class="section__label">O problema</p>
+        <div>
+          <h2>Devolver dinheiro exige prova, não só a suspeita de duplicidade.</h2>
+          <div class="section__body"><div class="prose"><div class="prose"><p>Às vezes o cliente paga a mesma parcela duas vezes, por exemplo por Pix e por boleto. Ele tem direito ao valor pago a mais, mas a devolução só pode acontecer depois de confirmar que os dois créditos existem e se referem à mesma parcela.</p><p>Este caso é diferente do conciliador de baixas duplicadas, outra iniciativa, que trata um único pagamento registrado duas vezes no sistema de cobrança. Aqui houve dois pagamentos de verdade.</p></div></div></div>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="contribuicao" data-reveal>
+      <div class="section__head">
+        <p class="section__label">Minha contribuição</p>
+        <div>
+          <h2>Separei classificar, aprovar e pagar.</h2>
+          <div class="section__body"><div class="prose"><div class="prose"><p>A principal decisão foi não deixar a ferramenta decidir sobre dinheiro. O painel identifica e organiza; uma pessoa aprova o lote; o pagamento acontece fora da ferramenta.</p></div></div><div class="contrib"><div class="panel c-col me"><b>O que fiz diretamente</b><ul class="list"><li>Desenhei as regras que identificam possíveis duplicidades a partir dos pagamentos e das rejeições.</li><li>Construí o painel, com os modos de curadoria e de operação.</li><li>Defini os controles que reduzem o risco de devolver o pagamento errado.</li><li>Registrei a evidência de cada caso, para que a decisão possa ser conferida depois.</li></ul></div><div class="panel c-col dep"><b>Dependências externas</b><ul class="list"><li>A aprovação do lote e o pagamento do reembolso são feitos pelas pessoas responsáveis.</li><li>Os dados vêm do sistema de cobrança e do extrato do gateway de pagamento.</li></ul></div></div></div>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="como-funciona" data-reveal>
+      <div class="section__head">
+        <p class="section__label">Como funciona</p>
+        <div>
+          <h2>Uma tela, dois papéis e um estado claro para cada caso.</h2>
+          <div class="section__body"><ol class="steps"><li><span><strong>Batimento.</strong> O painel compara o sistema de cobrança com o extrato do gateway, para o mesmo cliente e a mesma parcela. <em class="who who--auto">automático</em></span></li><li><span><strong>Identificação.</strong> Com dois créditos para a mesma parcela, o original é mantido e o segundo vira candidato a reembolso. <em class="who who--auto">automático</em></span></li><li><span><strong>Revisão.</strong> O que não fecha no batimento vai para revisão ou volta para a análise de rejeições. <em class="who who--human">pessoa</em></span></li><li><span><strong>Curadoria.</strong> Quem decide monta o lote: mantém, marca para revisão ou remove cada caso. <em class="who who--human">pessoa</em></span></li><li><span><strong>Operação.</strong> Quem executa solicita cada reembolso e marca o andamento até a conclusão. <em class="who who--human">pessoa</em></span></li></ol><div class="prose" style="margin-top:20px"><div class="prose"><p>A situação do acordo define como o valor volta: com o acordo liquidado, o cliente recebe o reembolso; com o acordo ativo, ele pode escolher entre o reembolso e o abatimento nas próximas parcelas.</p></div></div></div>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="o-que-mudou" data-reveal>
+      <div class="section__head">
+        <p class="section__label">O que mudou</p>
+        <div>
+          <h2>Cada etapa tem um estado diferente, e só a última significa dinheiro devolvido.</h2>
+          <div class="section__body"><div class="prose"><div class="prose"><p>Antes, o caso dependia de conferências separadas. Agora, ele tem estado e histórico em um só lugar, e quem decide e quem executa trabalham na mesma tela, com papéis diferentes.</p></div></div><div class="compare"><div class="panel"><b class="c-h">Ainda não é reembolso</b><ol class="c-ol"><li><strong>Identificado:</strong> o batimento encontrou um segundo crédito para a mesma parcela.</li><li><strong>Em curadoria:</strong> quem decide mantém o caso no lote, marca para revisão ou remove.</li></ol></div><div class="panel after"><b class="c-h">Em execução por pessoas</b><ol class="c-ol"><li><strong>Solicitado:</strong> quem executa pediu o reembolso, e o caso está em andamento.</li><li><strong>Concluído:</strong> as pessoas responsáveis fizeram o reembolso, e o caso é encerrado no painel.</li></ol></div></div><div class="panel evidence"><div class="evidence__head"><b>Como o resultado foi avaliado</b><span class="ev ev--qual">Resultado qualitativo</span></div><div class="evidence__body"><div class="method-note" style="margin-top:0;border-top:0;padding-top:0"><div class="prose"><p>O resultado é qualitativo: os casos passaram a ter estado e histórico em um só lugar. Casos identificados ou em andamento não são reembolsos pagos, e não há registro comprovado de valores devolvidos por este fluxo. Por isso nenhum valor ou contagem é publicado.</p></div></div></div></div></div>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="limitacoes" data-reveal>
+      <div class="section__head">
+        <p class="section__label">Limitações</p>
+        <div>
+          <h2>O que o painel não faz.</h2>
+          <div class="section__body"><ul class="list"><li>O painel não transfere dinheiro e não aprova reembolsos sozinho.</li><li>A decisão sobre o lote e a execução do reembolso são de pessoas. <em class="who who--human">intervenção humana</em></li><li>A regra de pareamento aparece aqui simplificada, como descrição de negócio.</li><li>A versão usada no navegador e a versão local têm formas de acesso diferentes, por isso não descrevo um modelo único de autenticação.</li></ul></div>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="tecnico" data-reveal>
+      <div class="section__head">
+        <p class="section__label">Detalhes técnicos</p>
+        <div>
+          <h2>Conciliação de dados com rastreabilidade.</h2>
+          <div class="section__body"><details class="panel more-box"><summary>Tecnologias, termos e decisões de implementação<small>Para quem quer aprofundar</small></summary><div class="more-box__body"><div class="prose"><p><strong>Batimento:</strong> comparação linha a linha entre duas fontes, aqui o sistema de cobrança e o extrato do gateway, para encontrar o que aparece nas duas, só em uma ou duas vezes.</p><p><strong>Curadoria e operação:</strong> dois modos da mesma tela. Na curadoria, uma pessoa decide o que entra no lote; na operação, outra pessoa executa e registra o andamento.</p></div><div class="stack"><span class="tag">Python</span><span class="tag">Flask</span><span class="tag">uv</span><span class="tag">HTML, CSS e JavaScript</span><span class="tag">Conciliação de dados</span><span class="tag">Controle de risco</span></div></div></details></div>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="demonstracao" data-reveal>
+      <div class="section__head">
+        <p class="section__label">Demonstração</p>
+        <div>
+          <h2>Monte um lote de reembolso com dados sintéticos.</h2>
+          <div class="section__body"><p class="demo-try">O que você pode explorar:</p><ul class="list"><li>Alternar entre a curadoria e a operação para ver os dois papéis.</li><li>Manter, revisar ou remover casos do lote.</li><li>Acompanhar o estado de cada caso até a conclusão, sem nenhum dinheiro envolvido.</li></ul><figure class="frame-wrap"><div class="frame" style="--h:560px; --s:0.6"><div class="frame__bar" aria-hidden="true"><span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__url">Painel de pagamentos duplicados</span></div><div class="frame__view"><iframe src="demos/pt/painel-fidc.html" title="Painel de pagamentos duplicados" loading="lazy" tabindex="-1"></iframe></div></div><figcaption class="frame__cta"><span class="note"><b class="syn-b">Dados sintéticos.</b> Esta é uma demonstração interativa com dados sintéticos. Os registros e resultados são ilustrativos e não representam dados reais da operação.</span><span class="cta-btns"><a class="btn" href="demos/pt/painel-fidc.html">Explorar a demonstração <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></span></figcaption></figure></div>
+        </div>
+      </div>
+    </section>
+    </main>
+
+    <nav class="next" aria-label="Próximo case">
+      <a href="monitor-operacao.html">
+        <span><span class="next__label">Próximo case</span><span class="next__title">Como tornei visíveis as falhas das rotinas que rodam antes do expediente</span></span>
+        <span class="next__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+    </nav>
+
+    <footer class="foot">
+      <span>© 2026 Paulo Nobre, São Paulo</span>
+      <a href="index.html">Voltar para a lista de projetos</a>
+    </footer>
   </div>
-</header>
-<main id="conteudo">
-<div class="case-hero"><div class="wrap">
-  <p class="crumb"><a href="../?lang=pt">Início</a> / <a href="./">Projetos</a> / Case 03</p>
-  <p class="eyebrow enter" style="margin-top:24px">Conciliação e controle de risco</p>
-  <h1 class="h1 enter d1">Como passei a identificar pagamentos duplicados antes de qualquer reembolso</h1>
-  <p class="lede enter d2">Construí um painel que confronta os pagamentos do sistema de cobrança com o extrato do gateway e organiza os casos de clientes que pagaram a mesma parcela duas vezes. A decisão e o reembolso continuam com pessoas.</p>
-  <dl class="summary enter d3"><div><dt>Problema</dt><dd>Quem pagou duas vezes precisa receber de volta, mas só depois de a duplicidade estar comprovada. Sem esse batimento, havia risco de devolver um pagamento legítimo ou de deixar o cliente sem o valor.</dd></div><div><dt>Minha participação</dt><dd>Desenhei as regras de identificação e construí o painel, com papéis separados para montar o lote e para executar.</dd></div><div><dt>O que mudou</dt><dd>Cada caso tem estado e histórico em um só lugar: identificado, em curadoria, solicitado e concluído.</dd></div><div><dt>Evidência</dt><dd>Em uso desde agosto de 2026. Nenhum valor ou contagem de casos é publicado.<br><span class="ev ev--qual">Resultado qualitativo</span></dd></div></dl>
-</div></div>
-<section class="case-sec" id="problema" aria-labelledby="problema-h"><div class="wrap case-grid"><div class="side"><p class="eyebrow">O problema</p></div><div class="main"><h2 class="h2 rv" id="problema-h">Devolver dinheiro exige prova, não só a suspeita de duplicidade.</h2><div class="rv"><div class="prose"><p>Às vezes o cliente paga a mesma parcela duas vezes, por exemplo por Pix e por boleto. Ele tem direito ao valor pago a mais, mas a devolução só pode acontecer depois de confirmar que os dois créditos existem e se referem à mesma parcela.</p><p>Este caso é diferente do conciliador de baixas duplicadas, outra iniciativa, que trata um único pagamento registrado duas vezes no sistema de cobrança. Aqui houve dois pagamentos de verdade.</p></div><figure class="figure match"><div class="match__head" aria-hidden="true"><span>Sistema de cobrança</span><span>Extrato do gateway</span><span>Resultado</span></div><div class="match__row"><span>CLIENTE-EXEMPLO-01 · parcela 03</span><span>Pix · crédito confirmado</span><span class="ev ev--measured">Original mantido</span></div><div class="match__row"><span>CLIENTE-EXEMPLO-01 · parcela 03</span><span>Boleto · segundo crédito</span><span class="ev ev--demo">Candidato a reembolso</span></div><div class="match__row"><span>CLIENTE-EXEMPLO-02 · parcela 07</span><span>Sem par no extrato</span><span class="ev ev--qual">Revisar</span></div><figcaption>Ilustração com dados sintéticos do batimento que o painel faz.</figcaption></figure></div></div></div></section>
-<section class="case-sec" id="contribuicao" aria-labelledby="contribuicao-h"><div class="wrap case-grid"><div class="side"><p class="eyebrow">Minha contribuição</p></div><div class="main"><h2 class="h2 rv" id="contribuicao-h">Separei classificar, aprovar e pagar.</h2><div class="rv"><div class="prose"><p>A principal decisão foi não deixar a ferramenta decidir sobre dinheiro. O painel identifica e organiza; uma pessoa aprova o lote; o pagamento acontece fora da ferramenta.</p></div><div class="contrib"><div class="me"><h3><i aria-hidden="true"></i>O que fiz diretamente</h3><ul><li>Desenhei as regras que identificam possíveis duplicidades a partir dos pagamentos e das rejeições.</li><li>Construí o painel, com os modos de curadoria e de operação.</li><li>Defini os controles que reduzem o risco de devolver o pagamento errado.</li><li>Registrei a evidência de cada caso, para que a decisão possa ser conferida depois.</li></ul></div><div class="dep"><h3><i aria-hidden="true"></i>Dependências externas</h3><ul><li>A aprovação do lote e o pagamento do reembolso são feitos pelas pessoas responsáveis.</li><li>Os dados vêm do sistema de cobrança e do extrato do gateway de pagamento.</li></ul></div></div></div></div></div></section>
-<section class="case-sec" id="como-funciona" aria-labelledby="como-funciona-h"><div class="wrap case-grid"><div class="side"><p class="eyebrow">Como funciona</p></div><div class="main"><h2 class="h2 rv" id="como-funciona-h">Uma tela, dois papéis e um estado claro para cada caso.</h2><div class="rv"><ol class="flow"><li><h3>Batimento</h3><p>O painel compara o sistema de cobrança com o extrato do gateway, para o mesmo cliente e a mesma parcela.</p><span class="who who--auto">automático</span></li><li><h3>Identificação</h3><p>Com dois créditos para a mesma parcela, o original é mantido e o segundo vira candidato a reembolso.</p><span class="who who--auto">automático</span></li><li><h3>Revisão</h3><p>O que não fecha no batimento vai para revisão ou volta para a análise de rejeições.</p><span class="who who--human">pessoa</span></li><li><h3>Curadoria</h3><p>Quem decide monta o lote: mantém, marca para revisão ou remove cada caso.</p><span class="who who--human">pessoa</span></li><li><h3>Operação</h3><p>Quem executa solicita cada reembolso e marca o andamento até a conclusão.</p><span class="who who--human">pessoa</span></li></ol><div class="prose" style="margin-top:20px"><p>A situação do acordo define como o valor volta: com o acordo liquidado, o cliente recebe o reembolso; com o acordo ativo, ele pode escolher entre o reembolso e o abatimento nas próximas parcelas.</p></div></div></div></div></section>
-<section class="case-sec" id="o-que-mudou" aria-labelledby="o-que-mudou-h"><div class="wrap case-grid"><div class="side"><p class="eyebrow">O que mudou</p></div><div class="main"><h2 class="h2 rv" id="o-que-mudou-h">Cada etapa tem um estado diferente, e só a última significa dinheiro devolvido.</h2><div class="rv"><div class="prose"><p>Antes, o caso dependia de conferências separadas. Agora, ele tem estado e histórico em um só lugar, e quem decide e quem executa trabalham na mesma tela, com papéis diferentes.</p></div><div class="compare"><div class="before"><h3>Ainda não é reembolso</h3><ol><li><strong>Identificado:</strong> o batimento encontrou um segundo crédito para a mesma parcela.</li><li><strong>Em curadoria:</strong> quem decide mantém o caso no lote, marca para revisão ou remove.</li></ol></div><div class="after"><h3>Em execução por pessoas</h3><ol><li><strong>Solicitado:</strong> quem executa pediu o reembolso, e o caso está em andamento.</li><li><strong>Concluído:</strong> as pessoas responsáveis fizeram o reembolso, e o caso é encerrado no painel.</li></ol></div></div><div class="evidence"><div class="evidence__head"><b>Como o resultado foi avaliado</b><span class="ev ev--qual">Resultado qualitativo</span></div><div class="evidence__body"><div class="method-note" style="margin-top:0;border-top:0;padding-top:0"><p>O resultado é qualitativo: os casos passaram a ter estado e histórico em um só lugar. Casos identificados ou em andamento não são reembolsos pagos, e não há registro comprovado de valores devolvidos por este fluxo. Por isso nenhum valor ou contagem é publicado.</p></div></div></div></div></div></div></section>
-<section class="case-sec" id="limitacoes" aria-labelledby="limitacoes-h"><div class="wrap case-grid"><div class="side"><p class="eyebrow">Limitações</p></div><div class="main"><h2 class="h2 rv" id="limitacoes-h">O que o painel não faz.</h2><div class="rv"><ul class="limits"><li class=""><span>O painel não transfere dinheiro e não aprova reembolsos sozinho.</span><span></span></li><li class="human"><span>A decisão sobre o lote e a execução do reembolso são de pessoas.</span><span class="who who--human">intervenção humana</span></li><li class=""><span>A regra de pareamento aparece aqui simplificada, como descrição de negócio.</span><span></span></li><li class=""><span>A versão usada no navegador e a versão local têm formas de acesso diferentes, por isso não descrevo um modelo único de autenticação.</span><span></span></li></ul></div></div></div></section>
-<section class="case-sec" id="tecnico" aria-labelledby="tecnico-h"><div class="wrap case-grid"><div class="side"><p class="eyebrow">Detalhes técnicos</p></div><div class="main"><h2 class="h2 rv" id="tecnico-h">Conciliação de dados com rastreabilidade.</h2><div class="rv"><details class="more-box"><summary><span>Tecnologias, termos e decisões de implementação<small>Para quem quer aprofundar</small></span></summary><div class="more-box__body tech-body"><div class="prose"><p><strong>Batimento:</strong> comparação linha a linha entre duas fontes, aqui o sistema de cobrança e o extrato do gateway, para encontrar o que aparece nas duas, só em uma ou duas vezes.</p><p><strong>Curadoria e operação:</strong> dois modos da mesma tela. Na curadoria, uma pessoa decide o que entra no lote; na operação, outra pessoa executa e registra o andamento.</p></div><ul class="tech"><li>Python</li><li>Flask</li><li>uv</li><li>HTML, CSS e JavaScript</li><li>Conciliação de dados</li><li>Controle de risco</li></ul></div></details></div></div></div></section>
-<section class="case-sec" id="demonstracao" aria-labelledby="demonstracao-h"><div class="wrap case-grid"><div class="side"><p class="eyebrow">Demonstração</p></div><div class="main"><h2 class="h2 rv" id="demonstracao-h">Monte um lote de reembolso com dados sintéticos.</h2><div class="rv"><div class="demo-cta on-dark"><div><h3>Painel de pagamentos duplicados</h3><p class="small" style="margin-top:8px">O que você pode explorar:</p><ul><li>Alternar entre a curadoria e a operação para ver os dois papéis.</li><li>Manter, revisar ou remover casos do lote.</li><li>Acompanhar o estado de cada caso até a conclusão, sem nenhum dinheiro envolvido.</li></ul><p class="note"><b>Dados sintéticos.</b> Esta é uma demonstração interativa com dados sintéticos. Os registros e resultados são ilustrativos e não representam dados reais da operação.</p></div><div class="btns"><a class="btn btn--primary" href="demos/pt/painel-fidc.html">Explorar a demonstração <span class="arr" aria-hidden="true">→</span></a></div></div></div></div></div></section>
-</main>
-<nav class="case-nav" aria-label="Navegação entre cases"><div class="wrap case-nav__in"><a class="prev" href="central-pagamentos-rejeitados.html"><small>← Case anterior</small><b>Como organizei e automatizei parte da análise de pagamentos rejeitados</b></a><a class="next" href="monitor-operacao.html"><small>Próximo case →</small><b>Como tornei visíveis as falhas das rotinas que rodam antes do expediente</b></a></div></nav>
-<footer class="foot" id="contato"><div class="wrap">
-  <h2>Vamos conversar</h2>
-  <p>Estou aberto a oportunidades em melhoria de processos, excelência operacional, PMO, operações de negócio e automação, inclusive em equipes remotas.</p>
-  <div class="actions on-dark"><a class="btn btn--primary" href="mailto:nobrecontato21@outlook.com">nobrecontato21@outlook.com</a><a class="btn btn--secondary" href="https://www.linkedin.com/in/paulo-nobre-/" rel="noopener">LinkedIn</a></div>
-  <div class="foot__base"><span>© 2026 Paulo Nobre · São Paulo, Brasil</span><a href="../?lang=pt">Página inicial</a><div class="lang" role="group" aria-label="Idioma"><a href="pagamentos-em-duplicidade.html" lang="pt-BR" data-lang-link="pt" aria-current="true">PT</a><a href="en/pagamentos-em-duplicidade.html" lang="en" data-lang-link="en">EN</a></div></div>
-</div></footer>
-<script src="../static/js/site.js" defer></script>
+</div>
+<script src="assets/site.js"></script>
 </body>
 </html>

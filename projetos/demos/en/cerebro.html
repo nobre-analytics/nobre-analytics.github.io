@@ -5,28 +5,31 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Brain · Operations Panel</title>
 <meta name="description" content="Demo with synthetic data of The Brain: the monitor of the collector bot fleet. It tells you in seconds whether the morning closed, how much came in and what failed.">
-<meta name="theme-color" content="#115E59">
+<meta name="theme-color" content="#14403A">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23fff'/%3E%3Cpath d='M26.4 11.8A11 11 0 1 0 26.4 20.2' fill='none' stroke='%23048A05' stroke-width='3.4' stroke-linecap='round'/%3E%3Ccircle cx='26.4' cy='20.2' r='3.1' fill='%23F5BF05'/%3E%3C/svg%3E">
 <script>
 (function(){try{if(localStorage.getItem("demo-tema")==="dark")document.documentElement.setAttribute("data-tema","escuro");}catch(e){}})();
 </script>
 <style>
-@font-face{font-family:"Hanken Grotesk";font-style:normal;font-weight:300 800;font-display:swap;src:url("../../../static/fonts/hanken-grotesk-latin-var.woff2") format("woff2")}@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:400;font-display:swap;src:url("../../../static/fonts/ibm-plex-mono-latin-400-normal.woff2") format("woff2")}@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:500;font-display:swap;src:url("../../../static/fonts/ibm-plex-mono-latin-500-normal.woff2") format("woff2")}
+@font-face{font-family:"Source Serif 4";font-style:normal;font-weight:200 900;font-display:swap;src:url("../../../static/fonts/source-serif-4-latin-opsz.woff2") format("woff2")}
+@font-face{font-family:"Public Sans";font-style:normal;font-weight:100 900;font-display:swap;src:url("../../../static/fonts/public-sans-latin-wght.woff2") format("woff2")}
+
+
 
 :root{
   color-scheme:light;
-  --canvas:#F7F9FC; --surface:#FFFFFF; --sunken:#F8FAFC; --hover:#F0F7F6;
-  --border:#E2E8F0; --border-strong:#CBD5E1;
-  --text:#1E293B; --text-2:#334155; --text-3:#64748B;
-  --marca:#115E59; --marca-fundo:#115E59; --marca-texto:#115E59;
-  --destaque:#FBBF24; --destaque-ink:#33321F; --destaque-fundo:#F59E0B;
+  --canvas:#F4F0E8; --surface:#FFFFFF; --sunken:#FAF7F1; --hover:#F7EFE8;
+  --border:#E3DDD2; --border-strong:#CFC8BB;
+  --text:#1C2A27; --text-2:#3A4542; --text-3:#6E685E;
+  --marca:#14403A; --marca-fundo:#14403A; --marca-texto:#14403A;
+  --destaque:#E29A72; --destaque-ink:#33321F; --destaque-fundo:#D9825B;
   --warning:#8A6200; --danger:#C02B1D;
   --danger-soft:color-mix(in oklch,var(--danger) 8%,transparent);
   --warning-soft:color-mix(in oklch,var(--destaque) 22%,transparent);
-  --barra:#64748B; --barra-fundo:#E2E8F0;
-  --f-titulo:"Hanken Grotesk",system-ui,sans-serif;
-  --f-ui:"Hanken Grotesk","Segoe UI",system-ui,sans-serif;
-  --f-cod:"IBM Plex Mono","Cascadia Mono",Consolas,ui-monospace,monospace;
+  --barra:#6E685E; --barra-fundo:#E3DDD2;
+  --f-titulo:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --f-ui:"Public Sans","Segoe UI",system-ui,sans-serif;
+  --f-cod:"Cascadia Mono",Consolas,ui-monospace,monospace;
   --elev-1:0 1px 3px rgb(31 38 31 / .07),0 6px 18px -10px rgb(31 38 31 / .18);
   --elev-2:0 2px 6px rgb(31 38 31 / .10),0 20px 44px -14px rgb(31 38 31 / .28);
   --curva:cubic-bezier(.2,0,0,1);
@@ -34,13 +37,13 @@
 }
 :root[data-tema=escuro]{
   color-scheme:dark;
-  --canvas:#0B1220; --surface:#191E17; --sunken:#131711; --hover:#1F2A1D;
-  --border:#1E293B; --border-strong:#334155;
-  --text:#F1F5F9; --text-2:#B8C2CF; --text-3:#94A3B8;
-  --marca:#115E59; --marca-fundo:#134E4A; --marca-texto:#2DD4BF;
-  --destaque-fundo:#D97706; --warning:#FBBF24; --danger:#F0655A;
+  --canvas:#0B1D1A; --surface:#191E17; --sunken:#131711; --hover:#1F2A1D;
+  --border:#1C2A27; --border-strong:#3A4542;
+  --text:#F2EEE6; --text-2:#BFB8AB; --text-3:#9A9387;
+  --marca:#14403A; --marca-fundo:#12352F; --marca-texto:#E8A07C;
+  --destaque-fundo:#B4532A; --warning:#E29A72; --danger:#F0655A;
   --danger-soft:color-mix(in oklch,var(--danger) 12%,transparent);
-  --barra:#94A3B8; --barra-fundo:#1E293B;
+  --barra:#9A9387; --barra-fundo:#1C2A27;
   --elev-1:0 1px 3px rgb(0 0 0 / .5),0 6px 18px -10px rgb(0 0 0 / .6);
   --elev-2:0 2px 6px rgb(0 0 0 / .55),0 20px 44px -14px rgb(0 0 0 / .7);
 }
@@ -184,7 +187,7 @@ svg.i{width:15px;height:15px;flex:none}
 .segmento button[aria-pressed=true]{background:var(--marca);color:#fff}
 .banda .segmento{background:rgb(255 255 255 / .16)}
 .banda .segmento button{color:#fff}
-.banda .segmento button[aria-pressed=true]{background:#fff;color:#115E59}
+.banda .segmento button[aria-pressed=true]{background:#fff;color:#14403A}
 
 /* batimento */
 .bat{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
