@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Projetos | Paulo Nobre</title>
-<meta name="description" content="Ferramentas que construí para uma operação de cobrança e pagamentos.">
+<meta name="description" content="Quatro cases de uma operação de cobrança e pagamentos, com demonstrações interativas em dados sintéticos.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -228,6 +228,27 @@
     .go { width: 38px; height: 38px; }
     .project:hover .body, .project:focus-visible .body { transform: translateX(3px); }
   }
+
+  /* v2: groups, evidence line, demo catalogue */
+  .group-h { margin: 56px 0 14px; color: var(--amber); font-size: .9375rem; font-weight: 600; letter-spacing: .01em; }
+  .group-h:first-of-type { margin-top: 0; }
+  .group-p { color: var(--muted); font-size: .9375rem; line-height: 1.5; margin: -6px 0 16px; }
+  .ev { display: block; margin-top: 8px; color: var(--amber); font-size: .8125rem; line-height: 1.4; }
+  .projects li.ext .num { color: var(--amber); }
+  .project.static { cursor: default; grid-template-columns: 2.5rem 1fr; }
+  .project.static::before, .project.static::after { display: none; }
+  .demos { list-style: none; display: grid; gap: 12px; }
+  .demo { border: 1px solid var(--line); border-radius: 12px; padding: 18px 18px 16px; background: rgba(19,33,58,.55); }
+  .demo h3 { font-size: 1.0625rem; font-weight: 600; letter-spacing: -0.01em; }
+  .demo dl { display: grid; grid-template-columns: 7.5rem 1fr; gap: 6px 12px; margin-top: 10px; font-size: .875rem; line-height: 1.45; }
+  .demo dt { color: var(--muted); }
+  .demo dd { color: var(--text); }
+  .demo .links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+  .demo .links a { color: var(--amber); font-weight: 600; font-size: .875rem; text-decoration: none; border-bottom: 1px solid rgba(214,168,76,.35); }
+  .demo .links a:hover { border-bottom-color: var(--amber); }
+  .syn { display: inline-block; margin-top: 10px; padding: 2px 8px; border-radius: 4px; background: #2B2416; color: #F3E9D2; font-size: .75rem; font-weight: 600; letter-spacing: .04em; }
+  @media (max-width: 520px) { .demo dl { grid-template-columns: 1fr; gap: 2px; } .demo dd { margin-bottom: 6px; } }
+  @media (prefers-reduced-motion: no-preference) { .js .projects li:nth-child(5) { animation-delay: .67s; } }
 </style>
 </head>
 <body>
@@ -241,52 +262,93 @@
 <main>
   <header>
     <h1>Projetos</h1>
-    <p class="lede">Ferramentas que construí para a operação de cobrança e pagamentos.</p>
+    <p class="lede">Quatro cases de uma operação de cobrança e pagamentos. Cada um mostra o problema, a minha responsabilidade, como a solução funciona e o tipo de evidência disponível.</p>
     <div class="rule" aria-hidden="true"></div>
   </header>
 
+  <h2 class="group-h">Cases principais</h2>
   <ol class="projects">
     <li>
-      <a class="project" href="central-pagamentos-rejeitados.html">
+      <a class="project" href="automacao-rotina-operacional.html">
         <span class="num" aria-hidden="true">01</span>
         <span class="body">
+          <span class="title">Automação da Rotina Operacional Matinal</span>
+          <span class="desc">Sequência agendada no lugar de disparos manuais em cadeia, para a lista do discador ficar pronta antes da operação.</span>
+          <span class="ev">Evidência: horários registrados · 29 dias antes, 3 dias depois</span>
+        </span>
+        <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+    </li>
+    <li>
+      <a class="project" href="central-pagamentos-rejeitados.html">
+        <span class="num" aria-hidden="true">02</span>
+        <span class="body">
           <span class="title">Central de Pagamentos Rejeitados</span>
-          <span class="desc">Classifica cada pagamento rejeitado e indica a próxima ação.</span>
+          <span class="desc">Motor de regras que classifica cada rejeição, registra o motivo e manda exceções para revisão.</span>
+          <span class="ev">Evidência: regras e demonstração · resultado qualitativo</span>
         </span>
         <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </a>
     </li>
     <li>
       <a class="project" href="pagamentos-em-duplicidade.html">
-        <span class="num" aria-hidden="true">02</span>
+        <span class="num" aria-hidden="true">03</span>
         <span class="body">
-          <span class="title">Painel para Pagamentos em Duplicidade</span>
-          <span class="desc">Encontra pagamentos em dobro e organiza o reembolso.</span>
+          <span class="title">Controle de Pagamentos em Duplicidade</span>
+          <span class="desc">Identifica e organiza pagamentos em dobro para análise humana de reembolso, sem mover dinheiro.</span>
+          <span class="ev">Evidência: controles e demonstração · sem valores publicados</span>
         </span>
         <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </a>
     </li>
     <li>
       <a class="project" href="monitor-operacao.html">
-        <span class="num" aria-hidden="true">03</span>
+        <span class="num" aria-hidden="true">04</span>
         <span class="body">
           <span class="title">Monitor da Operação</span>
-          <span class="desc">Mostra o status das rotinas diárias em uma única tela.</span>
+          <span class="desc">Estado das rotinas automáticas, falhas, novas tentativas e encaminhamento para uma pessoa.</span>
+          <span class="ev">Evidência: recursos implementados e demonstração · resultado qualitativo</span>
         </span>
         <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </a>
     </li>
-    <li>
+    <li class="ext">
       <a class="project" href="monitor-operacao-celular.html">
-        <span class="num" aria-hidden="true">04</span>
+        <span class="num" aria-hidden="true">04+</span>
         <span class="body">
-          <span class="title">Monitor da Operação (Versão Celular)</span>
-          <span class="desc">O mesmo monitor, pensado para o gestor acompanhar pelo celular.</span>
+          <span class="title">Monitor da Operação: versão para celular</span>
+          <span class="desc">Extensão de interface do case 04: o veredito da manhã primeiro, o detalhe sob demanda.</span>
+          <span class="ev">Não é contada como projeto separado</span>
         </span>
         <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </a>
     </li>
   </ol>
+
+  <h2 class="group-h">Outra iniciativa</h2>
+  <ol class="projects">
+    <li><div class="project static"><span class="num" aria-hidden="true">·</span><span class="body"><span class="title">Conciliador de baixas duplicadas</span><span class="desc">Robô em Python que trata pagamentos com baixa registrada duas vezes no sistema de cobrança. Execução parcial; é um projeto diferente do controle de duplicidades.</span></span></div></li>
+  </ol>
+
+  <h2 class="group-h" id="demos">Demonstrações interativas</h2>
+  <p class="group-p">Telas recriadas com dados sintéticos, para você testar o funcionamento. Os registros e resultados são ilustrativos e não representam dados reais da operação.</p>
+  <ul class="demos">
+    <li class="demo"><h3>Rotina matinal: antes e depois</h3><dl><dt>Problema</dt><dd>Disparos manuais em sequência atrasavam a lista do discador.</dd><dt>O que testar</dt><dd>Dispare cada etapa no modo manual, depois rode a sequência agendada e simule uma falha com nova tentativa.</dd><dt>Case</dt><dd>01 · Rotina matinal</dd></dl>
+      <span class="syn">Dados sintéticos</span>
+      <div class="links"><a href="demos/pt/rotina-matinal.html">Abrir a demonstração</a><a href="automacao-rotina-operacional.html">Ver o case</a></div></li>
+    <li class="demo"><h3>Painel de rejeições</h3><dl><dt>Problema</dt><dd>Cada rejeição precisava de um destino com motivo, sem palpite.</dd><dt>O que testar</dt><dd>Abra as filas, veja a regra aplicada em cada caso, rode o robô de baixa e use o modo foco (J, K, X).</dd><dt>Case</dt><dd>02 · Central de Pagamentos Rejeitados</dd></dl>
+      <span class="syn">Dados sintéticos</span>
+      <div class="links"><a href="demos/pt/painel-rejeicoes.html">Abrir a demonstração</a><a href="central-pagamentos-rejeitados.html">Ver o case</a></div></li>
+    <li class="demo"><h3>Painel de duplicidades (FIDC)</h3><dl><dt>Problema</dt><dd>Reembolso só depois de provar a duplicidade.</dd><dt>O que testar</dt><dd>Alterne entre curadoria e operação, monte o lote e acompanhe o estado de cada caso.</dd><dt>Case</dt><dd>03 · Controle de Pagamentos em Duplicidade</dd></dl>
+      <span class="syn">Dados sintéticos</span>
+      <div class="links"><a href="demos/pt/painel-fidc.html">Abrir a demonstração</a><a href="pagamentos-em-duplicidade.html">Ver o case</a></div></li>
+    <li class="demo"><h3>Monitor da operação (computador)</h3><dl><dt>Problema</dt><dd>Uma falha de madrugada precisa aparecer antes do expediente.</dd><dt>O que testar</dt><dd>Abra a tarefa com falha, veja a etapa em que parou, os alertas e o estado depois da nova tentativa.</dd><dt>Case</dt><dd>04 · Monitor da Operação</dd></dl>
+      <span class="syn">Dados sintéticos</span>
+      <div class="links"><a href="demos/pt/cerebro.html">Abrir a demonstração</a><a href="monitor-operacao.html">Ver o case</a></div></li>
+    <li class="demo"><h3>Monitor da operação (celular)</h3><dl><dt>Problema</dt><dd>O gestor quer o veredito da manhã no celular.</dd><dt>O que testar</dt><dd>Navegue pelas abas da base, abra o detalhe na folha que sobe e compare com a versão de computador.</dd><dt>Case</dt><dd>04+ · Versão para celular</dd></dl>
+      <span class="syn">Dados sintéticos</span>
+      <div class="links"><a href="demos/pt/cerebro-mobile.html">Abrir a demonstração</a><a href="monitor-operacao-celular.html">Ver o case</a></div></li>
+  </ul>
 </main>
 
 <script src="assets/site.js"></script>

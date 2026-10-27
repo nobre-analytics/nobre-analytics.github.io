@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Projects | Paulo Nobre</title>
-<meta name="description" content="Tools I built for a collections and payments operation.">
+<meta name="description" content="Four case studies from a collections and payments operation, with interactive demos using synthetic data.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -228,6 +228,27 @@
     .go { width: 38px; height: 38px; }
     .project:hover .body, .project:focus-visible .body { transform: translateX(3px); }
   }
+
+  /* v2: groups, evidence line, demo catalogue */
+  .group-h { margin: 56px 0 14px; color: var(--amber); font-size: .9375rem; font-weight: 600; letter-spacing: .01em; }
+  .group-h:first-of-type { margin-top: 0; }
+  .group-p { color: var(--muted); font-size: .9375rem; line-height: 1.5; margin: -6px 0 16px; }
+  .ev { display: block; margin-top: 8px; color: var(--amber); font-size: .8125rem; line-height: 1.4; }
+  .projects li.ext .num { color: var(--amber); }
+  .project.static { cursor: default; grid-template-columns: 2.5rem 1fr; }
+  .project.static::before, .project.static::after { display: none; }
+  .demos { list-style: none; display: grid; gap: 12px; }
+  .demo { border: 1px solid var(--line); border-radius: 12px; padding: 18px 18px 16px; background: rgba(19,33,58,.55); }
+  .demo h3 { font-size: 1.0625rem; font-weight: 600; letter-spacing: -0.01em; }
+  .demo dl { display: grid; grid-template-columns: 7.5rem 1fr; gap: 6px 12px; margin-top: 10px; font-size: .875rem; line-height: 1.45; }
+  .demo dt { color: var(--muted); }
+  .demo dd { color: var(--text); }
+  .demo .links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+  .demo .links a { color: var(--amber); font-weight: 600; font-size: .875rem; text-decoration: none; border-bottom: 1px solid rgba(214,168,76,.35); }
+  .demo .links a:hover { border-bottom-color: var(--amber); }
+  .syn { display: inline-block; margin-top: 10px; padding: 2px 8px; border-radius: 4px; background: #2B2416; color: #F3E9D2; font-size: .75rem; font-weight: 600; letter-spacing: .04em; }
+  @media (max-width: 520px) { .demo dl { grid-template-columns: 1fr; gap: 2px; } .demo dd { margin-bottom: 6px; } }
+  @media (prefers-reduced-motion: no-preference) { .js .projects li:nth-child(5) { animation-delay: .67s; } }
 </style>
 </head>
 <body>
@@ -241,52 +262,93 @@
 <main>
   <header>
     <h1>Projects</h1>
-    <p class="lede">Tools I built for a collections and payments operation.</p>
+    <p class="lede">Four case studies from a collections and payments operation. Each one shows the problem, my responsibility, how the solution works and the type of evidence available.</p>
     <div class="rule" aria-hidden="true"></div>
   </header>
 
+  <h2 class="group-h">Core case studies</h2>
   <ol class="projects">
     <li>
-      <a class="project" href="central-pagamentos-rejeitados.html">
+      <a class="project" href="automacao-rotina-operacional.html">
         <span class="num" aria-hidden="true">01</span>
         <span class="body">
-          <span class="title">Rejected Payments Center</span>
-          <span class="desc">Classifies every rejected payment and points to the next action.</span>
+          <span class="title">Morning Operations Routine Automation</span>
+          <span class="desc">A scheduled sequence instead of chained manual triggers, so the dialer list is ready before operations start.</span>
+          <span class="ev">Evidence: recorded times · 29 days before, 3 days after</span>
+        </span>
+        <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+    </li>
+    <li>
+      <a class="project" href="central-pagamentos-rejeitados.html">
+        <span class="num" aria-hidden="true">02</span>
+        <span class="body">
+          <span class="title">Rejected Payments Decision Engine</span>
+          <span class="desc">A rules engine that classifies each rejection, records the reason and sends exceptions to review.</span>
+          <span class="ev">Evidence: rules and demo · qualitative result</span>
         </span>
         <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </a>
     </li>
     <li>
       <a class="project" href="pagamentos-em-duplicidade.html">
-        <span class="num" aria-hidden="true">02</span>
+        <span class="num" aria-hidden="true">03</span>
         <span class="body">
-          <span class="title">Duplicate Payments Panel</span>
-          <span class="desc">Finds payments made twice and organizes the refund.</span>
+          <span class="title">Duplicate Payment Controls</span>
+          <span class="desc">Finds and organizes duplicate payments for human refund review, without moving money.</span>
+          <span class="ev">Evidence: controls and demo · no amounts published</span>
         </span>
         <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </a>
     </li>
     <li>
       <a class="project" href="monitor-operacao.html">
-        <span class="num" aria-hidden="true">03</span>
+        <span class="num" aria-hidden="true">04</span>
         <span class="body">
           <span class="title">Operations Monitor</span>
-          <span class="desc">Shows the status of the daily routines on a single screen.</span>
+          <span class="desc">Status of automated routines, failures, retries and hand-off to a person.</span>
+          <span class="ev">Evidence: implemented features and demo · qualitative result</span>
         </span>
         <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </a>
     </li>
-    <li>
+    <li class="ext">
       <a class="project" href="monitor-operacao-celular.html">
-        <span class="num" aria-hidden="true">04</span>
+        <span class="num" aria-hidden="true">04+</span>
         <span class="body">
-          <span class="title">Operations Monitor (Mobile Version)</span>
-          <span class="desc">The same monitor, designed for the manager to follow on a phone.</span>
+          <span class="title">Operations Monitor: mobile version</span>
+          <span class="desc">A UX extension of case 04: the morning verdict first, details on demand.</span>
+          <span class="ev">Not counted as a separate project</span>
         </span>
         <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </a>
     </li>
   </ol>
+
+  <h2 class="group-h">Other initiative</h2>
+  <ol class="projects">
+    <li><div class="project static"><span class="num" aria-hidden="true">·</span><span class="body"><span class="title">Duplicate write-off reconciler</span><span class="desc">A Python bot that handles payments written off twice in the collections system. Partially executed; a different project from the duplicate payment controls.</span></span></div></li>
+  </ol>
+
+  <h2 class="group-h" id="demos">Interactive demos</h2>
+  <p class="group-p">Screens recreated with synthetic data so you can try how they work. All records and results are illustrative and do not represent actual operational data.</p>
+  <ul class="demos">
+    <li class="demo"><h3>Morning routine: before and after</h3><dl><dt>Problem</dt><dd>Chained manual triggers delayed the dialer list.</dd><dt>What to try</dt><dd>Trigger each step in manual mode, then run the scheduled sequence and simulate a failure with a retry.</dd><dt>Case</dt><dd>01 · Morning routine</dd></dl>
+      <span class="syn">Synthetic data</span>
+      <div class="links"><a href="../demos/en/rotina-matinal.html">Open the demo</a><a href="automacao-rotina-operacional.html">See the case</a></div></li>
+    <li class="demo"><h3>Rejections panel</h3><dl><dt>Problem</dt><dd>Every rejection needed a destination with a reason, not a guess.</dd><dt>What to try</dt><dd>Open the queues, see the rule applied to each case, run the write-off bot and use focus mode (J, K, X).</dd><dt>Case</dt><dd>02 · Rejected Payments Decision Engine</dd></dl>
+      <span class="syn">Synthetic data</span>
+      <div class="links"><a href="../demos/en/painel-rejeicoes.html">Open the demo</a><a href="central-pagamentos-rejeitados.html">See the case</a></div></li>
+    <li class="demo"><h3>Duplicates panel (FIDC)</h3><dl><dt>Problem</dt><dd>Refund only after the duplicate is proven.</dd><dt>What to try</dt><dd>Switch between curation and operation, build the batch and track the status of each case.</dd><dt>Case</dt><dd>03 · Duplicate Payment Controls</dd></dl>
+      <span class="syn">Synthetic data</span>
+      <div class="links"><a href="../demos/en/painel-fidc.html">Open the demo</a><a href="pagamentos-em-duplicidade.html">See the case</a></div></li>
+    <li class="demo"><h3>Operations monitor (desktop)</h3><dl><dt>Problem</dt><dd>A failure during the night has to show up before the workday.</dd><dt>What to try</dt><dd>Open the failed task, see the step where it stopped, the alerts and the status after the retry.</dd><dt>Case</dt><dd>04 · Operations Monitor</dd></dl>
+      <span class="syn">Synthetic data</span>
+      <div class="links"><a href="../demos/en/cerebro.html">Open the demo</a><a href="monitor-operacao.html">See the case</a></div></li>
+    <li class="demo"><h3>Operations monitor (mobile)</h3><dl><dt>Problem</dt><dd>Managers want the morning verdict on their phone.</dd><dt>What to try</dt><dd>Move through the bottom tabs, open the detail sheet and compare with the desktop version.</dd><dt>Case</dt><dd>04+ · Mobile version</dd></dl>
+      <span class="syn">Synthetic data</span>
+      <div class="links"><a href="../demos/en/cerebro-mobile.html">Open the demo</a><a href="monitor-operacao-celular.html">See the case</a></div></li>
+  </ul>
 </main>
 
 <script src="../assets/site.js"></script>

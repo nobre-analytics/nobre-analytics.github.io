@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Brain · Operations Panel</title>
-<meta name="description" content="Demo with fictitious data of The Brain: the monitor of the collector bot fleet. It tells you in seconds whether the morning closed, how much came in and what failed.">
+<meta name="description" content="Demo with synthetic data of The Brain: the monitor of the collector bot fleet. It tells you in seconds whether the morning closed, how much came in and what failed.">
 <meta name="theme-color" content="#048A05">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23fff'/%3E%3Cpath d='M26.4 11.8A11 11 0 1 0 26.4 20.2' fill='none' stroke='%23048A05' stroke-width='3.4' stroke-linecap='round'/%3E%3Ccircle cx='26.4' cy='20.2' r='3.1' fill='%23F5BF05'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -243,6 +243,7 @@ svg.i{width:15px;height:15px;flex:none}
 <style>.voltar-proj{color:inherit;font-weight:700;text-decoration:none;border-bottom:1px solid currentColor;opacity:.92;white-space:nowrap}.voltar-proj:hover{opacity:1}</style>
 </head>
 <body>
+<div class="synthetic-banner" role="note" style="background:#2B2416;color:#F3E9D2;font:500 12.5px/1.45 system-ui,-apple-system,Segoe UI,sans-serif;padding:7px 16px;text-align:center;border-bottom:1px solid #6B5A33"><b style="letter-spacing:.06em;text-transform:uppercase;font-size:11px;margin-right:8px">Synthetic data</b>This is an interactive demonstration using synthetic data. All records and results are illustrative and do not represent actual operational data.</div>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
   <symbol id="i-hoje" viewBox="0 0 16 16"><path d="M2.5 3.5h11M2.5 8h11M2.5 12.5h7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></symbol>
   <symbol id="i-pagamentos" viewBox="0 0 16 16"><path d="M2.5 13.5V9M6.2 13.5V5.5M9.8 13.5V7.5M13.5 13.5v-11" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></symbol>
@@ -260,8 +261,8 @@ svg.i{width:15px;height:15px;flex:none}
 </defs></svg>
 
 <div class="faixa-atencao"><div class="int">
-  <span class="vivo" role="status">live · now</span>
-  <span class="dir"><a class="voltar-proj" href="../../en/index.html">← All projects</a><span class="demo">Fictitious data</span><span class="esconde">Synced now</span><span class="esconde" id="emExecucao">No collector running</span></span>
+  <span class="vivo" role="status">Simulation</span>
+  <span class="dir"><a class="voltar-proj" href="../../en/monitor-operacao.html">← Back to the case</a><span class="demo">Synthetic data</span><span class="esconde">Demo</span><span class="esconde" id="emExecucao">No collector running</span></span>
 </div></div>
 
 <header class="topo"><div class="int">
@@ -272,8 +273,8 @@ svg.i{width:15px;height:15px;flex:none}
   <nav class="menu" aria-label="Sections">
     <a class="nav-item" href="#hoje" data-secao="hoje"><svg class="i"><use href="#i-hoje"/></svg><span class="nav-rot">Today</span><span class="nav-conta alerta">1</span></a>
     <a class="nav-item" href="#pagamentos" data-secao="pagamentos"><svg class="i"><use href="#i-pagamentos"/></svg><span class="nav-rot">Payments</span></a>
-    <a class="nav-item" href="#rejeicoes" data-secao="rejeicoes"><svg class="i"><use href="#i-rejeicoes"/></svg><span class="nav-rot">Rejections</span><span class="nav-conta">28</span></a>
-    <a class="nav-item" href="#jiras" data-secao="jiras"><svg class="i"><use href="#i-jiras"/></svg><span class="nav-rot">Jira</span></a>
+    <a class="nav-item" href="#rejeicoes" data-secao="rejeicoes"><svg class="i"><use href="#i-rejeicoes"/></svg><span class="nav-rot">Rejections</span><span class="nav-conta">23</span></a>
+    <a class="nav-item" href="#jiras" data-secao="jiras"><svg class="i"><use href="#i-jiras"/></svg><span class="nav-rot">Tickets</span></a>
     <a class="nav-item" href="#controles" data-secao="controles"><svg class="i"><use href="#i-controles"/></svg><span class="nav-rot">Collection and alerts</span></a>
   </nav>
   <div class="topo-meio">
@@ -285,10 +286,11 @@ svg.i{width:15px;height:15px;flex:none}
 </div></header>
 
 <main id="conteudo">
+<h1 style="position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap">Operations monitor · demo with synthetic data</h1>
 <!-- TODAY -->
 <section class="secao" id="s-hoje">
   <div class="banda com-faixa"><div class="int">
-    <div class="secao-cab"><div><h2>Today</h2><p>Friday, Oct 9, 2026</p></div></div>
+    <div class="secao-cab"><div><h2>Today</h2><p>Thursday, Mar 5, 2026 · simulation</p></div></div>
     <div class="faixa" id="faixaHoje"></div>
   </div></div>
   <div class="int corpo">
@@ -303,18 +305,18 @@ svg.i{width:15px;height:15px;flex:none}
 <!-- PAYMENTS -->
 <section class="secao" id="s-pagamentos" hidden>
   <div class="banda com-faixa"><div class="int">
-    <div class="secao-cab"><div><h2>Payment write-offs</h2><p>Source: collections system, write-off report. Snapshot of Oct 8, extracted today at 07:41.</p>
+    <div class="secao-cab"><div><h2>Payments</h2><p>Simulation: snapshot of Mar 4, with made-up amounts.</p>
       <div class="acoes"><div class="segmento" role="group" aria-label="Density"><button type="button" aria-pressed="true" data-dens="conf">Comfortable</button><button type="button" aria-pressed="false" data-dens="comp">Compact</button></div><button class="btn btn-primario" type="button" id="btnRodar">Run now</button></div></div></div>
     <div class="faixa" id="faixaPg"></div>
   </div></div>
   <div class="int corpo">
     <div class="periodo">
-      <label><span class="rotulo">Start</span><input type="date" value="2026-10-08"></label>
-      <label><span class="rotulo">End</span><input type="date" value="2026-10-09"></label>
+      <label><span class="rotulo">Start</span><input type="date" value="2026-03-04"></label>
+      <label><span class="rotulo">End</span><input type="date" value="2026-03-05"></label>
       <div><span class="rotulo" style="display:block;color:var(--text-3);margin-bottom:4px">Shortcuts</span>
-        <div class="segmento" role="group" aria-label="Period shortcuts"><button type="button" aria-pressed="true">Oct 8 to today</button><button type="button" aria-pressed="false">Oct 8 only</button><button type="button" aria-pressed="false">7 days</button><button type="button" aria-pressed="false">This month</button></div></div>
+        <div class="segmento" role="group" aria-label="Period shortcuts"><button type="button" aria-pressed="true">Mar 4 to today</button><button type="button" aria-pressed="false">Mar 4 only</button><button type="button" aria-pressed="false">7 days</button><button type="button" aria-pressed="false">This month</button></div></div>
     </div>
-    <div class="folha"><div class="folha-cab"><h3>Channel and days past due</h3><span class="meta">Oct 8 to Oct 9, 2026</span></div>
+    <div class="folha"><div class="folha-cab"><h3>Channel and days past due</h3><span class="meta">Mar 4 to Mar 5, 2026</span></div>
       <div class="tabela-rola"><table class="tabela" id="tabPg"></table></div></div>
     <div class="grade-2 mt">
       <div class="folha"><div class="folha-cab"><h3>Collections by channel</h3><span class="meta">top 10</span></div><div id="barCanal"></div></div>
@@ -332,19 +334,19 @@ svg.i{width:15px;height:15px;flex:none}
   </div></div>
   <div class="int corpo"><div class="grade-2">
     <div class="folha"><div class="folha-cab"><h3>Recent days</h3><span class="meta">by rejection date</span></div><div class="tabela-rola"><table class="tabela" id="tabRej"></table></div></div>
-    <div class="folha"><div class="folha-cab"><h3>Where the open work is</h3><span class="meta">28 open cases</span></div><div id="barRej"></div></div>
+    <div class="folha"><div class="folha-cab"><h3>Where the open work is</h3><span class="meta">23 open cases</span></div><div id="barRej"></div></div>
   </div></div>
 </section>
 
 <!-- JIRA -->
 <section class="secao" id="s-jiras" hidden>
-  <div class="banda"><div class="int"><div class="secao-cab"><div><h2>Jira</h2><p>Assigned tickets and batches of processing errors.</p></div></div></div></div>
+  <div class="banda"><div class="int"><div class="secao-cab"><div><h2>Tickets</h2><p>A ticket queue read by a collector (simulation).</p></div></div></div></div>
   <div class="int corpo">
-    <div class="nota aviso"><strong>Jira connection waiting for the service account.</strong> Until the API token exists, collection returns zero tickets. The numbers below do not describe the real queue.</div>
-    <div class="folha mt"><div class="folha-cab"><h3>What the collection brought</h3><span class="meta">last read 16:00</span></div>
+    <div class="nota aviso"><strong>Simulated unavailable source.</strong> When collection cannot read the source, the panel says so instead of showing zero as if it were real data.</div>
+    <div class="folha mt"><div class="folha-cab"><h3>What the collection brought</h3><span class="meta">last read 06:35</span></div>
       <table class="tabela"><thead><tr><th>Queue</th><th class="num">Open</th><th class="num">Assigned to me</th><th>Status</th></tr></thead><tbody>
-      <tr><td>Processing errors</td><td class="num">0</td><td class="num">0</td><td><span class="st parado">No reliable data</span></td></tr>
-      <tr><td>Refunds</td><td class="num">0</td><td class="num">0</td><td><span class="st parado">No reliable data</span></td></tr>
+      <tr><td>Queue A</td><td class="num">0</td><td class="num">0</td><td><span class="st parado">No reliable data</span></td></tr>
+      <tr><td>Queue B</td><td class="num">0</td><td class="num">0</td><td><span class="st parado">No reliable data</span></td></tr>
       </tbody></table></div>
   </div>
 </section>
@@ -359,7 +361,7 @@ svg.i{width:15px;height:15px;flex:none}
 </section>
 </main>
 
-<footer class="rodape"><div class="int"><span>The Brain, monitor of the collector fleet · demo with fictitious data</span><span class="dir"><span>version 2026.10.09</span><a href="cerebro-mobile.html">Mobile version</a></span></div></footer>
+<footer class="rodape"><div class="int"><span>The Brain, monitor of the collector fleet · demo with synthetic data</span><span class="dir"><span>demo version</span><a href="cerebro-mobile.html">Mobile version</a></span></div></footer>
 
 <div class="veu" id="veu" hidden></div>
 <aside class="detalhe" id="detalhe" role="dialog" aria-modal="true" aria-labelledby="detTitulo" hidden>
@@ -371,7 +373,7 @@ svg.i{width:15px;height:15px;flex:none}
 
 <script>
 "use strict";
-/* DADOS FICTÍCIOS. Códigos de tarefa, canais, assessorias e valores foram inventados. */
+/* SYNTHETIC DATA (simulation). Collectors, tasks, channels, times and amounts were created for this demo. */
 const $ = s => document.querySelector(s);
 const brl = v => v.toLocaleString("en-US",{style:"currency",currency:"BRL"});
 const mil = v => "R$"+Math.round(v/1000).toLocaleString("en-US")+"k";
@@ -379,31 +381,29 @@ const esc = s => String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&
 function aviso(m){const a=$("#aviso");a.textContent=m;a.classList.add("on");clearTimeout(aviso.t);aviso.t=setTimeout(()=>a.classList.remove("on"),2600);}
 
 const COLETORES = [
-  {st:"ok", nome:"Payment write-offs", cod:"baixa_pagamentos", ult:"07:41 · 108.8 s", prox:"14:00", hoje:true, obs:""},
-  {st:"ok", nome:"Gateway payments", cod:"gateway_pagamentos", ult:"08:51 · 22.4 s", prox:"09:00", hoje:true, obs:""},
-  {st:"ok", nome:"Email tasks", cod:"tarefas_email", ult:"07:41 · 6.1 s", prox:"10:20", hoje:true, obs:""},
-  {st:"ok", nome:"Credit rehabilitation", cod:"reabilitacao", ult:"14:49 · 41.0 s", prox:"Mon 14:00", hoje:true, obs:""},
-  {st:"ok", nome:"Rejections", cod:"rejeicoes_hist", ult:"16:00 · 3.2 s", prox:"18:00", hoje:true, obs:""},
-  {st:"alerta", nome:"Jira", cod:"jiras", ult:"16:00 · 1.9 s", prox:"Mon 08:00", hoje:false, obs:"Service account pending"},
+  {st:"ok", nome:"Payment collection", cod:"DEMO_COLETA_PAG", ult:"06:10 · 40 s", prox:"12:00", hoje:true, obs:""},
+  {st:"ok", nome:"Gateway collection", cod:"DEMO_COLETA_GW", ult:"06:20 · 15 s", prox:"10:00", hoje:true, obs:""},
+  {st:"ok", nome:"Rejection collection", cod:"DEMO_COLETA_REJ", ult:"06:28 · 5 s", prox:"12:30", hoje:true, obs:""},
+  {st:"alerta", nome:"Ticket collection", cod:"DEMO_COLETA_CHM", ult:"06:35 · 2 s", prox:"13:00", hoje:false, obs:"Source unavailable in the simulation: a person needs to check"},
 ];
 const TAREFAS = [
-  {cod:"CARGA_DIA", dias:"Tuesday to Friday", ok:true, etapas:6, fim:"05:43", lista:["Opens the daily load","Validates the layout","Imports contracts","Imports instalments","Recalculates balances","Closes the batch"]},
-  {cod:"AMOSTRA", dias:"Monday to Saturday", ok:true, etapas:1, fim:"03:01", lista:["Generates the check sample"]},
-  {cod:"REPASSE_AUT", dias:"Tuesday to Saturday", ok:false, etapas:17, fim:"06:12", falhou:12, lista:Array.from({length:17},(_,i)=>["Reads the transfer file","Splits by agency","Checks CPF","Checks contract","Applies the transfer rule","Groups by channel","Calculates commission","Saves the batch","Sends return A","Sends return B","Checks balance","Sends return C","Reconciles","Closes the transfer","Archives","Notifies","Finishes"][i])},
-  {cod:"DISTRIB_DIG", dias:"Monday", ok:null, etapas:3, fim:"", lista:["Distributes the digital portfolio","Checks","Closes"]},
+  {cod:"DEMO_TAREFA_A", dias:"Monday to Friday", ok:true, etapas:5, fim:"05:50", lista:["Opens the sample batch", "Validates the file", "Imports records", "Checks totals", "Closes the batch"]},
+  {cod:"DEMO_TAREFA_B", dias:"every day", ok:true, etapas:1, fim:"05:10", lista:["Generates the check sample"]},
+  {cod:"DEMO_TAREFA_C", dias:"Monday to Saturday", ok:false, etapas:8, fim:"06:12", falhou:5, lista:["Reads the input file", "Validates the format", "Splits by group", "Checks identifiers", "Applies the rules", "Saves the batch", "Sends the return", "Closes the run"]},
+  {cod:"DEMO_TAREFA_D", dias:"Monday", ok:null, etapas:3, fim:"", lista:["Prepares the distribution", "Checks", "Closes"]},
 ];
-const REAB = [["Bureau A",[["REAB_A_DISP","trigger","14:00"],["REAB_A_ENV","send","14:13"]]],["Bureau B",[["REAB_B_RET","return","14:16"],["REAB_B_ENV","send","14:49"]]]];
+const REAB = [["Partner A",[["DEMO_PARC_A1","send","06:00"],["DEMO_PARC_A2","return","06:05"]]],["Partner B",[["DEMO_PARC_B1","send","06:10"],["DEMO_PARC_B2","return","06:15"]]]];
 
 function ind(rot,val,sub,forma,falha){return `<div class="ind${falha?" falha":""}"><div class="ind-rot rotulo">${forma?`<span class="forma ${forma}"></span>`:""}${rot}</div><div class="ind-val">${val}</div><div class="ind-sub">${sub}</div></div>`;}
 
 function pintaHoje(){
   const falhas = TAREFAS.filter(t=>t.ok===false).length;
   $("#faixaHoje").innerHTML =
-    ind("Collected today","R$1,742k","ref. Oct 8 · R$1,742,318.90","") +
+    ind("Collected today","R$48k","ref. Mar 4 · R$48,000.00 · simulation","") +
     ind("Checklist",`3<small>/4</small>`,falhas?`${falhas} failed`:"all up","falha",!!falhas) +
-    ind("Gateway","Received","Oct 9 · 08:51","ok") +
-    ind("Collectors",`5<small>/6</small>`,"with today's data","ok") +
-    ind("Pending rejections","28","across 63 days · 99% done","anel");
+    ind("Gateway","Received","Mar 5 · 06:50","ok") +
+    ind("Collectors",`3<small>/4</small>`,"with today's data","ok") +
+    ind("Pending rejections","23","across 12 days · simulation","anel");
   const ok = COLETORES.filter(c=>c.hoje).length;
   $("#procMeta").textContent = `${COLETORES.length} enabled · ${ok} with today's data`;
   const rot = {ok:"Done",alerta:"Alert",falha:"Failed"};
@@ -411,33 +411,30 @@ function pintaHoje(){
 
   const tarefas = `<div class="folha"><div class="folha-cab"><h3>Collections system tasks</h3><span class="acoes"><button class="btn btn-primario" type="button" data-verificar="tarefas"><svg class="i"><use href="#i-girar"/></svg>Check now</button></span></div>
     ${TAREFAS.map((t,i)=>`<div class="tarefa" data-abre="tar:${i}" tabindex="0" role="button"><span class="ponto${t.ok===false?" falha":""}" ${t.ok===null?'style="background:transparent;border:2px solid var(--border-strong)"':""}></span>
-      <div><div class="t-cod">${t.cod}</div><div class="t-sub">${t.dias} · read at 07:41</div></div>
+      <div><div class="t-cod">${t.cod}</div><div class="t-sub">${t.dias} · read at 06:40</div></div>
       <div class="t-res">${t.ok===null?`<b style="color:var(--text-3)">Does not run today</b><span>next Monday</span>`:`<b class="${t.ok?"":"falhou"}">${t.ok?"Worked":"Failed"}</b><span>${t.ok?t.etapas+" steps · finished at "+t.fim:"stopped at step "+t.falhou+" of "+t.etapas}</span>`}</div>
       <svg class="i"><use href="#i-seta"/></svg></div>`).join("")}</div>`;
-  const gateway = `<div class="folha"><div class="folha-cab"><h3>Gateway: payments received</h3><span class="meta">Oct 9, 2026 · read at 08:51</span><span class="acoes"><button class="btn btn-primario" type="button" data-verificar="gateway"><svg class="i"><use href="#i-girar"/></svg>Check now</button></span></div>
+  const gateway = `<div class="folha"><div class="folha-cab"><h3>Gateway: payments received</h3><span class="meta">Mar 5, 2026 · read at 06:50</span><span class="acoes"><button class="btn btn-primario" type="button" data-verificar="gateway"><svg class="i"><use href="#i-girar"/></svg>Check now</button></span></div>
     <table class="tabela"><thead><tr><th>Method</th><th>Status</th></tr></thead><tbody>
-      <tr><td>Boleto</td><td><span class="st ok">Received</span><span class="cod" style="font-family:var(--f-ui)">412 boletos · last 08:46</span></td></tr>
-      <tr><td>Automatic Pix</td><td><span class="st ok">Received</span><span class="cod" style="font-family:var(--f-ui)">5,918 Pix · R$2,104,377.60</span></td></tr></tbody></table></div>`;
-  const reab = `<div class="folha"><div class="folha-cab"><h3>Credit rehabilitation</h3><span class="meta">4/4 done</span><span class="acoes"><button class="btn btn-primario" type="button" data-verificar="reab"><svg class="i"><use href="#i-girar"/></svg>Check now</button></span></div>
+      <tr><td>Boleto</td><td><span class="st ok">Received</span><span class="cod" style="font-family:var(--f-ui)">120 boletos · last 06:45</span></td></tr>
+      <tr><td>Automatic Pix</td><td><span class="st ok">Received</span><span class="cod" style="font-family:var(--f-ui)">260 Pix · R$18,400.00</span></td></tr></tbody></table></div>`;
+  const reab = `<div class="folha"><div class="folha-cab"><h3>Partner tasks (simulation)</h3><span class="meta">4/4 done</span><span class="acoes"><button class="btn btn-primario" type="button" data-verificar="reab"><svg class="i"><use href="#i-girar"/></svg>Check now</button></span></div>
     <table class="tabela"><thead><tr><th>Task</th><th>Status</th></tr></thead><tbody>
     ${REAB.map(([g,ts])=>`<tr class="sub"><td colspan="2">${g}</td></tr>`+ts.map(t=>`<tr><td><b class="cod" style="color:var(--text);font-weight:700">${t[0]}</b><span class="t-sub">${g}, ${t[1]}</span></td><td><span class="st ok">Done at ${t[2]}</span></td></tr>`).join("")).join("")}</tbody></table>
-    <p class="t-sub" style="margin-top:10px">Read on Oct 9 at 15:02.</p></div>`;
-  const bat = `<div class="folha"><div class="folha-cab"><h3>Reconciliation with the creditor</h3><span class="meta">every two weeks, always on Saturdays</span></div>
-    <div class="bat"><div><small class="rotulo">Last</small><span class="bat-data num">Sep 26</span></div><div><small class="rotulo">Next</small><span class="bat-data num">Oct 10</span><small>tomorrow, Saturday</small></div>
+    <p class="t-sub" style="margin-top:10px">Simulation.</p></div>`;
+  const bat = `<div class="folha"><div class="folha-cab"><h3>Periodic check with the creditor</h3><span class="meta">simulation</span></div>
+    <div class="bat"><div><small class="rotulo">Last</small><span class="bat-data num">Feb 26</span></div><div><small class="rotulo">Next</small><span class="bat-data num">Mar 12</span><small>next week</small></div>
     <button class="btn btn-primario" type="button" id="btnBatimento" style="margin-left:auto">Log today's reconciliation</button></div>
-    <p class="t-sub" style="margin-top:12px">The schedule skips intake days (1st, 5th business day, 15th, 20th, 30th) and the day after. Each entry is saved on the server with author and time.</p></div>`;
+    <p class="t-sub" style="margin-top:12px">In the tool, each entry is recorded with author and time. In the simulation, nothing is saved.</p></div>`;
   const susp = `<div class="folha"><div class="folha-cab"><h3>Suspended sources</h3><span class="meta">waiting for the source to come back</span></div>
-    <table class="tabela"><tbody><tr><td><span class="st parado">Suspended</span></td><td><b>Sequential file</b><br><span class="t-sub">Creditor SFTP. The report stopped being published after the model change; it comes back once the source is restored.</span></td></tr></tbody></table></div>`;
+    <table class="tabela"><tbody><tr><td><span class="st parado">Suspended</span></td><td><b>Sample source</b><br><span class="t-sub">Suspended in the simulation to show the state. It comes back once the source is restored.</span></td></tr></tbody></table></div>`;
   $("#cartoesHoje").innerHTML = tarefas + gateway + reab + bat + susp;
 }
 
 /* pagamentos */
-const FAIXAS = ["Current","1 to 3 days","4 days","5 to 30 days","31 to 60 days","Over 60 days"];
-const CANAIS = [ // grupo, canal, total recebido (R$), peso por faixa de atraso. DADOS FICTÍCIOS
-  ["CallCenter","CENTRAL_A",301418.65,[60,70,18,90,28,35]],["CallCenter","CENTRAL_B",211205.12,[0,0,1,180,30,0.2]],["CallCenter","CENTRAL_C",38690.40,[0,0.9,0,0.4,38,0.2]],
-  ["Agencies","ASS_NORTE",69311.27,[0,0,0,0,1.3,68]],["Agencies","ASS_ATLAS",31702.88,[0,0,0,0,0.7,31]],["Agencies","ASS_PRISMA",29688.15,[0,0,0,0,0.7,29]],
-  ["Portals","PORTAL_PROPRIO",612437.90,[310,0,350,175,36,74]],["Portals","MARKETPLACE_A",268915.33,[55,300,2,11,14,19]],["Portals","BUREAU_NEG",189577.61,[0,5.4,0,6.5,29,290]],["Portals","QUITA_FACIL",30604.22,[0,1.9,0,0.6,2.6,34]],["Portals","LINK_PORTAL",2412.00,[0,0,0,0,0,2.4]],
-  ["Others","PARCEIRO_X",471790.48,[0,360,37,79,3.7,0.85]],["Others","BOLETAGEM",9018.73,[0,0,0,0,8.2,0.76]],["Others","INTERNO",600.37,[0.22,0,0,0,0,0.38]],
+const FAIXAS = ["Current", "1 to 30 days", "31 to 60 days", "61 to 90 days", "Over 90 days"];
+const CANAIS = [ // grupo, canal, total (R$), peso por faixa de atraso. DADOS SINTÉTICOS, SIMULAÇÃO
+  ["CallCenter","CANAL_A1",9000.00,[40, 30, 15, 10, 5]],["CallCenter","CANAL_A2",6000.00,[10, 40, 30, 15, 5]],["Agencies","ASSESSORIA_A",4000.00,[0, 10, 30, 30, 30]],["Agencies","ASSESSORIA_B",3000.00,[0, 5, 25, 35, 35]],["Portals","PORTAL_1",12000.00,[50, 25, 15, 5, 5]],["Portals","PORTAL_2",7000.00,[30, 40, 20, 5, 5]],["Others","PARCEIRO_1",5500.00,[20, 40, 20, 10, 10]],["Others","OUTROS",1500.00,[10, 20, 30, 20, 20]],
 ];
 function porFaixa(total,peso){ const s=peso.reduce((a,b)=>a+b,0); const v=peso.map(p=>Math.round(100*total*p/s)/100); const dif=Math.round(100*(total-v.reduce((a,b)=>a+b,0)))/100; v[v.findLastIndex(x=>x>0)]=Math.round(100*(v[v.findLastIndex(x=>x>0)]+dif))/100; return v; }
 const DADOS = ["CallCenter","Agencies","Portals","Others"].map(g=>[g,CANAIS.filter(c=>c[0]===g).map(c=>[c[1],porFaixa(c[2],c[3])])]);
@@ -445,7 +442,7 @@ const somaArr = a => a.reduce((x,y)=>x+y,0);
 function pintaPg(){
   const totG = DADOS.map(([g,cs])=>[g, FAIXAS.map((_,i)=>somaArr(cs.map(c=>c[1][i])))]);
   const geral = FAIXAS.map((_,i)=>somaArr(totG.map(t=>t[1][i]))), total = somaArr(geral);
-  $("#faixaPg").innerHTML = ind("Total collected",mil(total),"Oct 8 to Oct 9, 2026","") + totG.map(([g,v])=>{const t=somaArr(v);return ind(g,mil(t),brl(t)+" · "+(100*t/total).toFixed(1)+"%","");}).join("");
+  $("#faixaPg").innerHTML = ind("Total collected",mil(total),"Mar 4 to Mar 5, 2026 · simulation","") + totG.map(([g,v])=>{const t=somaArr(v);return ind(g,mil(t),brl(t)+" · "+(100*t/total).toFixed(1)+"%","");}).join("");
   const cel = v => v?brl(v):"·";
   let h = `<thead><tr><th>Channel</th>${FAIXAS.map(f=>`<th class="num">${f}</th>`).join("")}<th class="num">Total</th></tr></thead><tbody>`;
   DADOS.forEach(([g,cs],gi)=>{
@@ -463,25 +460,25 @@ function pintaPg(){
 }
 
 function pintaRej(){
-  $("#faixaRej").innerHTML = ind("Pending","28","R$10,841.57 stuck","anel") + ind("Handled this month","331","92% of what needs action","ok") + ind("Rejected this month",mil(265024.06),"612 cases","") + ind("Library","63 days","4,912 cases","");
-  const dias=[["10-09",41,33,8],["10-08",57,48,9],["10-07",52,45,7],["10-06",60,56,4],["10-05",14,14,0],["10-04",6,6,0],["10-03",71,71,0]];
+  $("#faixaRej").innerHTML = ind("Pending","23","R$4,941.30 stuck","anel") + ind("Handled this month","18","41% of what needs action","ok") + ind("Rejected this month",mil(9613.30),"47 cases","") + ind("Library","12 days","260 synthetic cases","");
+  const dias=[["03-05",9,0,9],["03-04",10,2,8],["03-03",7,2,5],["03-02",3,2,1]];
   $("#tabRej").innerHTML = `<thead><tr><th>Day</th><th class="num">Cases</th><th class="num">Handled</th><th class="num">Pending</th><th>Status</th></tr></thead><tbody>`+
     dias.map(d=>`<tr><td>2026-${d[0]}</td><td class="num">${d[1]}</td><td class="num">${d[2]}</td><td class="num">${d[3]}</td><td><span class="st ${d[3]?"alerta":"ok"}">${d[3]?"Open":"Closed"}</span></td></tr>`).join("")+`</tbody>`;
-  const f=[["Open at creditor",10,2634.06],["Direct debit refund",5,1070.13],["Issue",4,639.33],["Redo",3,967.15],["Payoff",2,4780.66],["Proposal",2,199.20],["Early payment",1,223.70],["Open Jira",1,327.34]];
+  const f=[["Open at creditor", 5, 830.0], ["Issue", 4, 369.9], ["Redo", 3, 469.5], ["Direct debit refund", 3, 380.4], ["Payoff", 2, 2220.0], ["Proposal", 2, 115.0], ["Manual review", 2, 226.5], ["Early payment", 1, 130.0], ["Open Jira", 1, 200.0]];
   const mx=Math.max(...f.map(x=>x[2]));
   $("#barRej").innerHTML = f.map(x=>`<div class="bar-lin"><span>${x[0]}</span><span class="bar-trilho"><i style="width:${100*x[2]/mx}%;background:var(--destaque)"></i></span><span class="pct num">${x[1]}</span><span class="v num">${brl(x[2])}</span></div>`).join("");
 }
 
 function pintaCtl(){
-  $("#faixaCtl").innerHTML = ind("Active collectors","6","5 with today's data","ok") + ind("Watchdog","every 10 min","last at 17:30","ok") + ind("Alerts today","1","Jira without a service account","falha",true) + ind("Morning report","08:40","sent by email","ok");
-  const ag = [["baixa_pagamentos","07:30 and 14:00","Mon to Fri"],["gateway_pagamentos","07:30 and 09:00","Mon to Sat"],["tarefas_email","until 10:20, every 20 min","Mon to Sat"],["rejeicoes_hist","every 2 h","every day"],["jiras","08:00, 12:00 and 16:00","Mon to Fri"],["reabilitacao","14:00 to 15:00","Mon to Fri"]];
+  $("#faixaCtl").innerHTML = ind("Collectors (simulation)","4","3 with today's data","ok") + ind("Watchdog","periodic","simulation","ok") + ind("With a person","2","after automatic retries","falha",true) + ind("Recovered","1","automatic retry","ok");
+  const ag = [["DEMO_COLETA_PAG", "06:00 and 12:00", "Mon to Fri"], ["DEMO_COLETA_GW", "06:15 and 10:00", "Mon to Fri"], ["DEMO_COLETA_REJ", "06:25 and 12:30", "Mon to Fri"], ["DEMO_COLETA_CHM", "06:35 and 13:00", "Mon to Fri"]];
   $("#cartoesCtl").innerHTML =
-    `<div class="folha"><div class="folha-cab"><h3>Collector schedule</h3><span class="meta">the scheduler runs them, not the screen</span></div><table class="tabela"><thead><tr><th>Collector</th><th>Time</th><th>Days</th></tr></thead><tbody>${ag.map(a=>`<tr><td><span class="cod" style="color:var(--text)">${a[0]}</span></td><td>${a[1]}</td><td>${a[2]}</td></tr>`).join("")}</tbody></table></div>`+
+    `<div class="folha"><div class="folha-cab"><h3>Collector schedule</h3><span class="meta">simulation: illustrative schedule</span></div><table class="tabela"><thead><tr><th>Collector</th><th>Time</th><th>Days</th></tr></thead><tbody>${ag.map(a=>`<tr><td><span class="cod" style="color:var(--text)">${a[0]}</span></td><td>${a[1]}</td><td>${a[2]}</td></tr>`).join("")}</tbody></table></div>`+
     `<div class="folha"><div class="folha-cab"><h3>Watchdog</h3><span class="meta">restarts whatever went down</span></div><table class="tabela"><tbody>
-      <tr><td>The Brain</td><td><span class="st ok">Up</span></td><td class="num">17:30</td></tr><tr><td>Panel server</td><td><span class="st ok">Up</span></td><td class="num">17:30</td></tr><tr><td>Public tunnel</td><td><span class="st ok">Up</span></td><td class="num">17:30</td></tr><tr><td>Bot browser</td><td><span class="st ok">Free</span></td><td class="num">17:30</td></tr></tbody></table></div>`+
-    `<div class="folha"><div class="folha-cab"><h3>Email alerts</h3><span class="meta">1 today</span></div><table class="tabela"><tbody>
-      <tr class="falhou"><td><span class="st alerta">Alert</span></td><td>Jira: collection without a service account<span class="t-sub" style="display:block">16:00 · owner notified</span></td></tr>
-      <tr><td><span class="st ok">Resolved</span></td><td>REPASSE_AUT stopped at step 12<span class="t-sub" style="display:block">06:15 · reopened at 07:02</span></td></tr></tbody></table></div>`;
+      <tr><td>The Brain</td><td><span class="st ok">Up</span></td><td class="num">06:40</td></tr><tr><td>Panel server</td><td><span class="st ok">Up</span></td><td class="num">06:40</td></tr><tr><td>Bot browser</td><td><span class="st ok">Free</span></td><td class="num">06:40</td></tr></tbody></table></div>`+
+    `<div class="folha"><div class="folha-cab"><h3>Alerts on the panel</h3><span class="meta">simulation</span></div><table class="tabela"><tbody>
+      <tr class="falhou"><td><span class="st alerta">With a person</span></td><td>Ticket collection: source unavailable<span class="t-sub" style="display:block">06:35 · waiting for a check</span></td></tr><tr class="falhou"><td><span class="st alerta">With a person</span></td><td>DEMO_TAREFA_C stopped at step 5<span class="t-sub" style="display:block">06:12 · the automatic retry also failed</span></td></tr>
+      <tr><td><span class="st ok">Recovered</span></td><td>DEMO_TAREFA_A failed at step 2<span class="t-sub" style="display:block">05:40 · automatic retry at 05:45 succeeded</span></td></tr></tbody></table></div>`;
 }
 
 /* navegação */
@@ -490,7 +487,7 @@ function irPara(sec){
   if(!SECOES.includes(sec)) sec="hoje";
   SECOES.forEach(x=>{ $("#s-"+x).hidden = x!==sec; });
   document.querySelectorAll(".nav-item").forEach(a=>{ if(a.dataset.secao===sec) a.setAttribute("aria-current","page"); else a.removeAttribute("aria-current"); });
-  document.title = ({hoje:"Today",pagamentos:"Payments",rejeicoes:"Rejections",jiras:"Jira",controles:"Collection and alerts"})[sec]+" · The Brain";
+  document.title = ({hoje:"Today",pagamentos:"Payments",rejeicoes:"Rejections",jiras:"Tickets",controles:"Collection and alerts"})[sec]+" · The Brain";
   window.scrollTo({top:0});
 }
 addEventListener("hashchange",()=>irPara(location.hash.slice(1)));
@@ -498,10 +495,10 @@ addEventListener("hashchange",()=>irPara(location.hash.slice(1)));
 /* detalhe */
 function abrirDetalhe(chave){
   const [tipo,i]=chave.split(":"); let t,sub,corpo;
-  if(tipo==="tar"){ const x=TAREFAS[i]; t=x.cod; sub=x.dias+" · read at 07:41";
+  if(tipo==="tar"){ const x=TAREFAS[i]; t=x.cod; sub=x.dias+" · read at 06:40 (simulation)";
     corpo = x.ok===null ? `<p class="nota">This task only runs on Mondays. No run is expected today.</p>` :
-      `<p class="nota ${x.ok?"":"aviso"}">${x.ok?`Worked: ${x.etapas} steps, finished at ${x.fim}.`:`Failed at step ${x.falhou} of ${x.etapas}. The watchdog reopened it at 07:02 and the alert was sent.`}</p>`+
-      `<div class="mt">${x.lista.map((e,k)=>`<div class="etapa ${x.falhou===k+1?"falhou":""}"><span class="n">${k+1}</span><span>${x.falhou===k+1?"<b>"+e+"</b>":e}</span><span class="h">${x.falhou&&k+1>x.falhou?"did not run":x.falhou===k+1?"error 06:12":"ok"}</span></div>`).join("")}</div>`; }
+      `<p class="nota ${x.ok?"":"aviso"}">${x.ok?`Worked: ${x.etapas} steps, finished at ${x.fim}.`:`Failed at step ${x.falhou} of ${x.etapas}. Simulation: the automatic retry also failed, so the case went to a person.`}</p>`+
+      `<div class="mt">${x.lista.map((e,k)=>`<div class="etapa ${x.falhou===k+1?"falhou":""}"><span class="n">${k+1}</span><span>${x.falhou===k+1?"<b>"+e+"</b>":e}</span><span class="h">${x.falhou&&k+1>x.falhou?"did not run":x.falhou===k+1?"error (simulation)":"ok"}</span></div>`).join("")}</div>`; }
   else { const x=COLETORES[i]; t=x.nome; sub=x.cod;
     corpo = `<table class="tabela"><tbody><tr><td>Status</td><td>${x.st==="ok"?"Done":"Alert"}</td></tr><tr><td>Last run</td><td>${x.ult}</td></tr><tr><td>Next</td><td>${x.prox}</td></tr><tr><td>Today's data</td><td>${x.hoje?"Yes":"No"}</td></tr><tr><td>Note</td><td>${esc(x.obs||"Nothing to note")}</td></tr></tbody></table>
       <p class="nota mt">The panel mirrors what the bot saved, with the time it saved it. It does not recalculate anything.</p>`; }
@@ -514,7 +511,7 @@ document.addEventListener("click",e=>{
   const a=e.target.closest("[data-abre]"); if(a){abrirDetalhe(a.dataset.abre);return;}
   const v=e.target.closest("[data-verificar]"); if(v){ v.disabled=true; v.lastChild.textContent="Checking"; setTimeout(()=>{v.disabled=false;v.lastChild.textContent="Check now";aviso("Checked now: nothing changed since the last read");},1400); return; }
   if(e.target.closest("#btnBatimento")){ aviso("Reconciliation logged today at "+new Date().toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"})+" (demo)"); return; }
-  if(e.target.closest("#btnRodar")){ const b=$("#btnRodar"); b.disabled=true; b.textContent="Running"; $("#emExecucao").textContent="Payment write-offs running"; setTimeout(()=>{b.disabled=false;b.textContent="Run now";$("#emExecucao").textContent="No collector running";aviso("Collection finished in 4 s (demo)");},4000); return; }
+  if(e.target.closest("#btnRodar")){ const b=$("#btnRodar"); b.disabled=true; b.textContent="Running"; $("#emExecucao").textContent="Payment collection running (simulation)"; setTimeout(()=>{b.disabled=false;b.textContent="Run now";$("#emExecucao").textContent="No collector running";aviso("Collection finished in 4 s (demo)");},4000); return; }
   const sg=e.target.closest(".segmento button"); if(sg){ sg.parentElement.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",b===sg)); if(sg.dataset.dens) document.querySelectorAll(".tabela").forEach(t=>t.style.fontSize=sg.dataset.dens==="comp"?"12px":""); }
 });
 document.addEventListener("keydown",e=>{

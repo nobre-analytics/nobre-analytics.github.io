@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>FIDC Refunds · Duplicate Payments</title>
-<meta name="description" content="Demo with fictitious data of the FIDC refunds panel: duplicate payments matched against the gateway statement, from request to completion.">
+<meta name="description" content="Demo with synthetic data of the FIDC refunds panel: duplicate payments matched against the gateway statement, from request to completion.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23048A05'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='32' fill='%23ffffff' text-anchor='middle'%3EF%3C/text%3E%3Crect x='14' y='50' width='36' height='4' rx='2' fill='%23F5BF05'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -180,7 +180,7 @@ footer a:hover{color:var(--brand-txt)}
   <symbol id="i-baixar" viewBox="0 0 16 16"><path d="M8 2.5v8M4.5 7 8 10.5 11.5 7M3 13.5h10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 </defs></svg>
 
-<div class="demo-faixa"><a class="voltar-proj" href="../../en/index.html">← All projects</a> <b>Fictitious data</b> Demo of the FIDC refunds panel. Names, CPFs (Brazilian tax IDs), IDs and amounts are made up; no button saves anything.</div>
+<div class="demo-faixa synthetic-banner" role="note"><a class="voltar-proj" href="../../en/pagamentos-em-duplicidade.html">← Back to the case</a> <b>Synthetic data</b> This is an interactive demonstration using synthetic data. All records and results are illustrative and do not represent actual operational data.</div>
 
 <header>
   <div class="hrow">
@@ -195,7 +195,7 @@ footer a:hover{color:var(--brand-txt)}
   </div>
 </header>
 
-<div class="legenda"><div><b>Operating hours</b>8 am to 6 pm, with a break from 12:30 to 1:30 pm. Errors during operating hours: notify the panel owner.</div></div>
+<div class="legenda"><div><b>Simulation</b>Cases, customers and amounts are made up. The buttons only change the status on this screen; nothing is saved and no refund is requested.</div></div>
 
 <div class="progress" id="progressBox">
   <div class="row"><span>Progress</span><span><b id="pDone">0</b> of <b id="pTotal">0</b> completed · <b id="pAndamento">0</b> in progress · <b id="pValor">R$0.00</b> remaining</span></div>
@@ -229,13 +229,13 @@ footer a:hover{color:var(--brand-txt)}
 
 <footer class="rodape">
   <span class="marca">FIDC Panel</span>
-  <span>Batch of Oct 9, 2026 · statement up to Oct 9, 2026 08:40</span>
+  <span>Simulation · DEMO batch · synthetic statement</span>
   <nav class="links"><a href="painel-rejeicoes.html">Payment rejections</a><a href="cerebro.html">The Brain</a></nav>
 </footer>
 
 <script>
 "use strict";
-/* DADOS FICTÍCIOS: nomes, CPFs, ids de transação e valores inventados. */
+/* DADOS SINTÉTICOS: nomes, CPFs, ids de transação e valores inventados. */
 const brl = v => v.toLocaleString("en-US",{style:"currency",currency:"BRL"});
 const gapTxt = g => g==null?"no pair":(g===0?"same day":(g===1?"1 day":g+" days"));
 const esc = s => String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -244,45 +244,45 @@ const $ = s => document.getElementById(s);
 let semente = 7;
 const rnd = () => (semente = (semente*16807) % 2147483647) / 2147483647;
 const digitos = n => Array.from({length:n},()=>Math.floor(rnd()*10)).join("");
-function pg(valor, dt, tipo){ return {amount:valor, dt, source:(tipo==="pix"?"invoice/":"boleto/")+"6"+digitos(15), sid:digitos(28)}; }
+let nTx = 0;
+function pg(valor, dt, tipo){ nTx++; return {amount:valor, dt, source:(tipo==="pix"?"DEMO-PIX-":"DEMO-BOL-")+String(nTx).padStart(4,"0"), sid:"DEMO-TX-"+String(nTx).padStart(4,"0")}; }
 
 const BASE = [
-  ["Marina Toledo",      "482.917", 258.73, "2026-10-06 09:14:22","2026-10-06 18:02:10","boleto","boleto", "pend"],
-  ["Rafael Cunha",       "305.661", 412.90, "2026-10-05 10:41:07","2026-10-07 08:12:55","boleto","pix",    "pend"],
-  ["Beatriz Lemos",      "774.208", 187.45, "2026-10-07 07:55:31","2026-10-07 07:58:02","pix",   "pix",    "pend"],
-  ["Otávio Ramos",       "116.430", 331.20, "2026-10-04 14:20:48","2026-10-06 11:09:14","boleto","boleto", "pend", 3],
-  ["Juliana Prates",     "590.374",  96.88, "2026-10-08 08:03:19","2026-10-08 16:47:40","boleto","boleto", "pend"],
-  ["Caio Menezes",       "238.155", 524.60, "2026-10-03 09:30:00","2026-10-05 09:31:12","boleto","boleto", "andamento"],
-  ["Larissa Fontes",     "861.027", 143.15, "2026-10-07 13:12:44","2026-10-08 10:20:31","pix",   "boleto", "andamento"],
-  ["Diego Arantes",      "407.896", 275.00, "2026-10-06 06:58:12","2026-10-06 07:01:45","boleto","boleto", "pend"],
-  ["Patrícia Viana",     "953.612", 219.37, "2026-10-02 15:44:09","2026-10-04 08:15:27","boleto","pix",    "done"],
-  ["Henrique Sales",     "324.709", 160.80, "2026-10-05 11:11:11","2026-10-05 17:36:02","boleto","boleto", "done"],
-  ["Sofia Bastos",       "670.143", 389.55, "2026-10-08 09:25:50","2026-10-09 07:40:13","boleto","boleto", "pend"],
-  ["Gustavo Peixoto",    "145.882",  78.40, "2026-10-01 10:02:33","2026-10-03 10:03:01","pix",   "pix",    "done"],
-  ["Renata Quaresma",    "719.250", 302.10, "2026-10-08 12:00:41","2026-10-08 12:05:59","boleto","boleto", "andamento"],
-  ["Felipe Andrade",     "288.093", 133.33, "2026-10-07 08:45:10","2026-10-09 06:12:48","boleto","pix",    "pend"],
+  ["Customer DEMO-01", "DEMO-C01", 120.00, "2026-03-03 09:10:00","2026-03-03 15:40:00","boleto","boleto", "pend"],
+  ["Customer DEMO-02", "DEMO-C02", 210.00, "2026-03-02 10:20:00","2026-03-04 08:30:00","boleto","pix", "pend"],
+  ["Customer DEMO-03", "DEMO-C03", 85.50, "2026-03-04 08:00:00","2026-03-04 08:05:00","pix","pix", "pend"],
+  ["Customer DEMO-04", "DEMO-C04", 160.00, "2026-03-01 14:00:00","2026-03-03 11:00:00","boleto","boleto", "pend", 3],
+  ["Customer DEMO-05", "DEMO-C05", 64.90, "2026-03-05 08:15:00","2026-03-05 16:35:00","boleto","boleto", "pend"],
+  ["Customer DEMO-06", "DEMO-C06", 300.00, "2026-03-01 09:30:00","2026-03-02 09:35:00","boleto","boleto", "andamento"],
+  ["Customer DEMO-07", "DEMO-C07", 95.00, "2026-03-03 13:00:00","2026-03-04 10:00:00","pix","boleto", "andamento"],
+  ["Customer DEMO-08", "DEMO-C08", 140.00, "2026-03-04 07:00:00","2026-03-04 07:04:00","boleto","boleto", "pend"],
+  ["Customer DEMO-09", "DEMO-C09", 110.00, "2026-02-27 15:00:00","2026-03-01 08:15:00","boleto","pix", "done"],
+  ["Customer DEMO-10", "DEMO-C10", 75.00, "2026-03-02 11:00:00","2026-03-02 17:30:00","boleto","boleto", "done"],
+  ["Customer DEMO-11", "DEMO-C11", 230.00, "2026-03-05 09:20:00","2026-03-05 11:40:00","boleto","boleto", "pend"],
+  ["Customer DEMO-12", "DEMO-C12", 50.00, "2026-02-26 10:00:00","2026-02-28 10:05:00","pix","pix", "done"],
+  ["Customer DEMO-13", "DEMO-C13", 180.00, "2026-03-04 12:00:00","2026-03-04 12:06:00","boleto","boleto", "andamento"],
+  ["Customer DEMO-14", "DEMO-C14", 99.00, "2026-03-03 08:40:00","2026-03-05 06:50:00","boleto","pix", "pend"],
 ];
 let CASES = BASE.map((b,i)=>{
-  const [nome,meio,v,d1,d2,t1,t2,st,todos] = b;
+  const [nome,cpf,v,d1,d2,t1,t2,st,todos] = b;
   const o = pg(v,d1,t1), d = pg(v,d2,t2);
   const gap = Math.round((new Date(d2.slice(0,10)) - new Date(d1.slice(0,10)))/864e5);
-  const extra = todos ? [pg(v,"2026-09-08 09:10:00","boleto")] : [];
-  return {idx:i, uid:"pg:"+i, nome, cpf:"•••."+meio+"-••", original:o, duplicado:d, gap, todos:[o,d,...extra], state:st, cls:"DUPLICIDADE", sel:true, devolvido:null};
+  const extra = todos ? [pg(v,"2026-02-10 09:00:00","boleto")] : [];
+  return {idx:i, uid:"pg:"+i, nome, cpf, original:o, duplicado:d, gap, todos:[o,d,...extra], state:st, cls:"DUPLICIDADE", sel:true, devolvido:null};
 });
 // casos que só aparecem na curadoria
 CASES.push(
-  {idx:CASES.length, uid:"rv:1", nome:"Tiago Nogueira", cpf:"•••.530.418-••", original:pg(210.00,"2026-09-20 10:00:02","boleto"), duplicado:pg(210.00,"2026-10-06 09:58:37","boleto"), gap:16, todos:[], state:"pend", cls:"REVISAR", sel:false},
-  {idx:CASES.length+1, uid:"rv:2", nome:"Camila Rocha", cpf:"•••.902.664-••", original:null, duplicado:null, gap:null, todos:[], state:"pend", cls:"REVISAR", sel:false},
-  {idx:CASES.length+2, uid:"rm:1", nome:"André Moura", cpf:"•••.211.590-••", original:pg(99.90,"2026-10-01 08:00:00","boleto"), duplicado:pg(99.90,"2026-10-02 08:00:00","boleto"), gap:1, todos:[], state:"removed", cls:"DUPLICIDADE", sel:false},
+  {idx:CASES.length, uid:"rv:1", nome:"Customer DEMO-15", cpf:"DEMO-C15", original:pg(130.00,"2026-02-12 10:00:00","boleto"), duplicado:pg(130.00,"2026-03-03 10:00:00","boleto"), gap:19, todos:[], state:"pend", cls:"REVISAR", sel:false},
+  {idx:CASES.length+1, uid:"rv:2", nome:"Customer DEMO-16", cpf:"DEMO-C16", original:null, duplicado:null, gap:null, todos:[], state:"pend", cls:"REVISAR", sel:false},
+  {idx:CASES.length+2, uid:"rm:1", nome:"Customer DEMO-17", cpf:"DEMO-C17", original:pg(60.00,"2026-03-01 08:00:00","boleto"), duplicado:pg(60.00,"2026-03-02 08:00:00","boleto"), gap:1, todos:[], state:"removed", cls:"DUPLICIDADE", sel:false},
 );
 CASES.forEach((c,i)=>{c.idx=i;});
-const HIST = [["Luana Barreto","•••.613.207-••",244.10,"2026-10-02"],["Marcos Teixeira","•••.380.952-••",118.75,"2026-10-01"],["Vitória Campos","•••.457.128-••",402.00,"2026-09-30"],
-  ["Bruno Saldanha","•••.096.334-••",65.40,"2026-09-29"],["Elisa Furtado","•••.742.581-••",199.99,"2026-09-26"],["Ícaro Damasceno","•••.268.719-••",310.45,"2026-09-25"]];
+const HIST = [["Customer DEMO-H1","DEMO-H01",90.00,"2026-02-28"],["Customer DEMO-H2","DEMO-H02",120.00,"2026-02-27"],["Customer DEMO-H3","DEMO-H03",45.00,"2026-02-26"],["Customer DEMO-H4","DEMO-H04",150.00,"2026-02-25"],["Customer DEMO-H5","DEMO-H05",70.00,"2026-02-24"],["Customer DEMO-H6","DEMO-H06",200.00,"2026-02-23"]];
 
 let mode="op", filter="all", histAberto=false;
 const opCases = () => CASES.filter(c=>c.cls==="DUPLICIDADE" && c.sel && c.state!=="removed" && c.duplicado);
 const labelAvancar = st => st==="pend"?"Mark as requested":st==="andamento"?"Complete":"Reopen";
-const tipo = p => !p?null:(p.source.startsWith("invoice")?"Pix":"Boleto");
+const tipo = p => !p?null:(p.source.startsWith("DEMO-PIX")?"Pix":"Boleto");
 
 function toast(msg){const t=$("toast");t.textContent=msg;t.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove("show"),2800);}
 
@@ -309,7 +309,7 @@ function cardGrade(c, admin){
     ${c.devolvido?`<div class="devolvido-nota">Returned to the rejections panel: <b>${esc(c.devolvido)}</b>. It is marked completed here once the other side confirms.</div>`:""}
     <div class="g-corpo">
       ${o?`<div class="pay orig"><div class="tag">Original · kept</div><div class="v">${brl(o.amount)}</div><div class="d">${o.dt}</div><div class="id">${o.source} · ${o.sid}</div></div>`:`<div class="pay"><div class="tag">No earlier payment in the period</div></div>`}
-      ${d?`<div class="pay dup"><div class="tag">Duplicate · refund</div><div class="v">${brl(d.amount)}</div><div class="d">${d.dt}</div><div class="id">${d.source} · ${d.sid}</div></div>`:`<div class="pay"><div class="tag">Not in the statement: nothing to refund</div></div>`}
+      ${d?`<div class="pay dup"><div class="tag">Duplicate · refund candidate</div><div class="v">${brl(d.amount)}</div><div class="d">${d.dt}</div><div class="id">${d.source} · ${d.sid}</div></div>`:`<div class="pay"><div class="tag">Not in the statement: nothing to refund</div></div>`}
       ${(c.todos||[]).slice(2).map(t=>`<div class="pay outro"><div class="tag">Other payment · kept</div><div class="v">${brl(t.amount)}</div><div class="d">${t.dt}</div><div class="id">${t.source} · ${t.sid}</div></div>`).join("")}
     </div>
     <div class="g-acoes">${acoes}</div>`;
@@ -368,8 +368,8 @@ function stats(){
   $("finish").classList.toggle("hidden",!(mode==="op"&&op.length&&done===op.length));
   const total=op.reduce((s,c)=>s+c.duplicado.amount,0);
   $("subtitle").textContent = mode==="op"
-    ? `${op.length} confirmed cases · Total to refund: ${brl(total)} · Batch of Oct 9, 2026`
-    : `Curation panel · statement from Sep 9 to Oct 9, 2026 · rule: rows flagged as FIDC in the spreadsheet`;
+    ? `${op.length} confirmed cases · Total to refund: ${brl(total)} · DEMO batch (simulation)`
+    : `Curation panel · synthetic statement from Feb 1 to Mar 5, 2026 · cases flagged for the duplicates workflow`;
   const ativos=CASES.filter(c=>c.state!=="removed");
   $("stTotal").textContent=ativos.length;
   $("stDup").textContent=ativos.filter(c=>c.cls==="DUPLICIDADE").length;
@@ -404,7 +404,7 @@ $("modeBtn").addEventListener("click",()=>{mode=mode==="op"?"admin":"op";filter=
 $("btnCopiarLote").addEventListener("click",()=>{
   const lote=CASES.filter(c=>c.sel&&c.state!=="removed"&&c.duplicado);
   const txt=lote.map(c=>`REFUND | ${c.nome}\nCPF: ${c.cpf}\nAmount to refund: ${brl(c.duplicado.amount)}\nDuplicate payment: ${c.duplicado.dt} | ${c.duplicado.source}\nTime between payments: ${gapTxt(c.gap)}`).join("\n\n");
-  (navigator.clipboard?navigator.clipboard.writeText("FICTITIOUS DATA\n\n"+txt):Promise.reject()).then(()=>toast(`Batch copied: ${lote.length} cases`)).catch(()=>toast(`Batch ready: ${lote.length} cases`));
+  (navigator.clipboard?navigator.clipboard.writeText("SYNTHETIC DATA\n\n"+txt):Promise.reject()).then(()=>toast(`Batch copied: ${lote.length} cases`)).catch(()=>toast(`Batch ready: ${lote.length} cases`));
 });
 $("btnEvid").addEventListener("click",()=>toast("Evidence spreadsheet generated (demo: no file is downloaded)"));
 function pintaTema(){const dk=document.documentElement.getAttribute("data-theme")==="dark";$("temaBtn").innerHTML=`<svg class="i"><use href="#${dk?"i-sol":"i-lua"}"/></svg>`;}

@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Rejected Payments Center | Paulo Nobre</title>
-<meta name="description" content="A rules engine that diagnoses rejected payments and organizes the work by action.">
+<title>Rejected Payments Decision Engine | Paulo Nobre</title>
+<meta name="description" content="A rules engine that classifies rejected payments, records the reason and routes exceptions to review.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -71,7 +71,7 @@
   <div class="wrap">
     <nav class="topbar" aria-label="Navigation">
       <a class="back" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg> All projects</a>
-      <span class="topbar__right"><span class="crumb">Project <b>01</b> of 04</span><span class="langs" role="group" aria-label="Language"><span class="langs__cur" aria-current="true">EN</span><a href="../central-pagamentos-rejeitados.html" hreflang="pt-BR" lang="pt-BR" title="Versão em português" data-lang-switch="pt-BR">PT</a></span></span>
+      <span class="topbar__right"><span class="crumb">Case <b>02</b> of 04</span><span class="langs" role="group" aria-label="Language"><span class="langs__cur" aria-current="true">EN</span><a href="../central-pagamentos-rejeitados.html" hreflang="pt-BR" lang="pt-BR" title="Versão em português" data-lang-switch="pt-BR">PT</a></span></span>
     </nav>
 
     <main id="conteudo">
@@ -79,101 +79,125 @@
         <div class="hero__grid">
           <div>
             <p class="hero__kicker" data-seq style="--i:0">Business rules and automation</p>
-            <h1 data-seq style="--i:1">Rejected Payments Center</h1>
-            <p class="hero__lede" data-seq style="--i:2">A rules engine diagnoses every rejected payment and sends the case to the queue for the action it needs. The decision no longer depends on who is on duty.</p>
-            <div class="facts" data-seq style="--i:3"><span class="fact">Delivered Oct 2026</span><span class="fact">Collections operation</span><span class="fact">Python and Flask</span></div></div>
+            <h1 data-seq style="--i:1">Rejected Payments Decision Engine</h1>
+            <p class="hero__lede" data-seq style="--i:2">A rules engine classifies every rejected payment and points to the next action, with the reason for the decision recorded. Anything without enough evidence goes to review instead of getting a guessed destination.</p>
+            <div class="facts" data-seq style="--i:3"><span class="fact">Rules evolved Jul to Oct 2026</span><span class="fact">Collections operation</span><span class="fact">Python and Flask</span></div></div>
           <div class="hero__visual" data-seq style="--i:4">
             <figure class="panel tree">
-              <svg viewBox="0 0 460 362" role="img" aria-labelledby="tree-t">
-                <title id="tree-t">A rejected payment goes through the rules engine, moves to one of four queues (Redo, Reissue, Refund or Review), and all of them end in automated handling.</title>
+              <svg viewBox="0 0 460 374" role="img" aria-labelledby="tree-t">
+                <title id="tree-t">A rejected payment goes through the rules engine and gets one of four kinds of handling: automated action, action by a person, manual review or already resolved. Every case keeps the reason for the decision.</title>
                 <path class="edge hot" pathLength="1" style="--d:0" d="M230 58 V96"/>
                 <path class="edge" pathLength="1" style="--d:200" d="M230 152 V176 H62 V206"/>
                 <path class="edge" pathLength="1" style="--d:280" d="M230 176 H174 V206"/>
                 <path class="edge" pathLength="1" style="--d:280" d="M230 176 H286 V206"/>
                 <path class="edge" pathLength="1" style="--d:200" d="M230 176 H398 V206"/>
                 <g class="node root"><rect x="130" y="10" width="200" height="48" rx="10"/><text x="230" y="39" text-anchor="middle">Rejected payment</text></g>
-                <g class="node engine"><rect x="110" y="96" width="240" height="56" rx="10"/><text x="230" y="120" text-anchor="middle">Rules engine</text><text class="sub" x="230" y="139" text-anchor="middle">a recorded reason for every decision</text></g>
-                <g class="out" style="--d:0"><rect x="10" y="206" width="104" height="44" rx="8"/><circle cx="26" cy="228" r="4"/><text x="36" y="233">Redo</text></g>
-                <g class="out" style="--d:80"><rect x="122" y="206" width="104" height="44" rx="8"/><circle cx="138" cy="228" r="4"/><text x="148" y="233">Reissue</text></g>
-                <g class="out" style="--d:160"><rect x="234" y="206" width="104" height="44" rx="8"/><circle cx="250" cy="228" r="4"/><text x="260" y="233">Refund</text></g>
-                <g class="out" style="--d:240"><rect x="346" y="206" width="104" height="44" rx="8"/><circle cx="362" cy="228" r="4"/><text x="372" y="233">Review</text></g>
-                <path class="edge hot" pathLength="1" style="--d:700" d="M62 250 V296"/>
-                <path class="edge hot" pathLength="1" style="--d:740" d="M174 250 V296"/>
-                <path class="edge hot" pathLength="1" style="--d:780" d="M286 250 V296"/>
-                <path class="edge hot" pathLength="1" style="--d:820" d="M398 250 V296"/>
-                <g class="out final" style="--d:900"><rect x="10" y="296" width="440" height="56" rx="10"/><text x="230" y="320" text-anchor="middle">Automated handling</text><text class="sub" x="230" y="339" text-anchor="middle">every queue ends in the same flow</text></g>
+                <g class="node engine"><rect x="110" y="96" width="240" height="56" rx="10"/><text x="230" y="120" text-anchor="middle">Rules engine</text><text class="sub" x="230" y="139" text-anchor="middle">rules written with the operation</text></g>
+                <g class="out" style="--d:0"><rect x="10" y="206" width="104" height="60" rx="8"/><text x="62" y="231" text-anchor="middle">Automated</text><text class="sub" x="62" y="250" text-anchor="middle">bot executes</text></g>
+                <g class="out" style="--d:80"><rect x="122" y="206" width="104" height="60" rx="8"/><text x="174" y="231" text-anchor="middle">Person</text><text class="sub" x="174" y="250" text-anchor="middle">person acts</text></g>
+                <g class="out" style="--d:160"><rect x="234" y="206" width="104" height="60" rx="8"/><text x="286" y="231" text-anchor="middle">Review</text><text class="sub" x="286" y="250" text-anchor="middle">low evidence</text></g>
+                <g class="out" style="--d:240"><rect x="346" y="206" width="104" height="60" rx="8"/><text x="398" y="231" text-anchor="middle">Resolved</text><text class="sub" x="398" y="250" text-anchor="middle">no new action</text></g>
+                <path class="edge hot" pathLength="1" style="--d:700" d="M62 266 V308"/>
+                <path class="edge hot" pathLength="1" style="--d:740" d="M174 266 V308"/>
+                <path class="edge hot" pathLength="1" style="--d:780" d="M286 266 V308"/>
+                <path class="edge hot" pathLength="1" style="--d:820" d="M398 266 V308"/>
+                <g class="out final" style="--d:900"><rect x="10" y="308" width="440" height="56" rx="10"/><text x="230" y="332" text-anchor="middle">A recorded reason for every case</text><text class="sub" x="230" y="351" text-anchor="middle">the same rule for the same case</text></g>
               </svg>
             </figure></div>
         </div>
       </header>
 
-      <div class="kpis" style="--n:3" data-reveal><div class="kpi"><div class="kpi__value">6h <span class="arrow">→</span> 20min</div><div class="kpi__label">of work to handle the rejected payments</div></div><div class="kpi"><div class="kpi__value">16</div><div class="kpi__label">possible outcomes, set by written rules</div></div><div class="kpi"><div class="kpi__value">10 <span class="arrow">→</span> 0</div><div class="kpi__label">Jira tickets a day opened by one panel user</div></div></div>
+      <div class="kpis" style="--n:3" data-reveal><div class="kpi"><div class="kpi__value">4 categories</div><div class="kpi__label">in the original tree: Issue, Redo, Refund and Review</div></div><div class="kpi"><div class="kpi__value">Reason</div><div class="kpi__label">recorded for every decision the engine makes</div></div><div class="kpi"><div class="kpi__value">Review</div><div class="kpi__label">when the evidence is not enough, a person decides</div></div></div>
     <section class="section" data-reveal>
       <div class="section__head">
-        <p class="section__label">The challenge</p>
+        <p class="section__label">Business problem</p>
         <div>
           <h2>Where each payment went depended on who was on duty.</h2>
-          <div class="section__body"><ul class="list"><li>Rejections were <strong>copied and pasted by hand</strong> before any analysis.</li><li>With no written rule, two analysts could send the same case to <strong>different places</strong>.</li><li>Every case became a <strong>ticket</strong>, and the real work got lost in the queue.</li></ul></div>
+          <div class="section__body"><ul class="list"><li>Rejections were <strong>copied and pasted by hand</strong> before any analysis.</li><li>With no written rule, two analysts could send the same case to <strong>different places</strong>.</li><li>Many cases turned into <strong>tickets</strong>, and the handling was scattered outside the workflow.</li></ul></div>
         </div>
       </div>
     </section>
     <section class="section" data-reveal>
       <div class="section__head">
-        <p class="section__label">My contribution</p>
+        <p class="section__label">Operating context</p>
+        <div>
+          <h2>Handling a rejection means cross-checking sources and knowing the rules.</h2>
+          <div class="section__body"><div class="prose"><p>Each rejection has to be compared with the gateway statement, the collections system and the status at the creditor. The right rule depends on precedence: the same payment can look like an issue case or a refund case, depending on the status of the agreement.</p></div></div>
+        </div>
+      </div>
+    </section>
+    <section class="section" data-reveal>
+      <div class="section__head">
+        <p class="section__label">My responsibility</p>
         <div>
           <h2>I mapped the rule with the people who do the work and turned it into a system.</h2>
-          <div class="section__body"><div class="prose"><p>I talked to the people who handled payments every day to understand the real criteria behind each decision. Then I wrote those rules in a deterministic way and built the three parts of the solution: the bot that extracts the rejections, the engine that decides and the panel where the team works.</p></div></div>
+          <div class="section__body"><ul class="list"><li>I mapped <strong>patterns</strong> across cases with the people who handled payments every day.</li><li>I worked out the rules and their <strong>precedence</strong>.</li><li>I structured the <strong>decision tree</strong> and evolved it based on observed cases.</li><li>I linked each destination to the <strong>operational actions that are allowed</strong>.</li><li>I made exceptions go to <strong>review</strong>, with no destination assigned without evidence.</li></ul><div class="prose"><p>I built the three parts of the solution: the bot that extracts the rejections, the engine that decides and the panel where the team works.</p></div></div>
         </div>
       </div>
     </section>
     <section class="section" data-reveal>
       <div class="section__head">
-        <p class="section__label">The approach</p>
+        <p class="section__label">Analysis and decisions</p>
         <div>
-          <h2>Three deliveries in three months, each one built on the last.</h2>
-          <div class="section__body"><ol class="timeline">
-          <li><time>Apr 2026</time><b>First bot</b><p>Automatic extraction of the rejections, which used to be copied by hand.</p></li>
-          <li><time>May 2026</time><b>Diagnosis engine</b><p>Sixteen deterministic outcomes. The end of manual, on-duty decisions.</p></li>
-          <li><time>Jun 2026</time><b>Panel in production</b><p>Diagnosis, evidence and action on the same screen.</p></li>
-        </ol></div>
+          <h2>Start with four categories and add detail only with evidence.</h2>
+          <div class="section__body"><div class="prose"><p>The tree started with four main categories: Issue, Redo, Refund and Review. Between July and October 2026, the rules were split into more specific destinations as cases appeared that the categories did not explain. The most important design decision: when the evidence is not enough, the engine does not pick a destination.</p></div><ol class="timeline"><li><time>Phase 1</time><b>First bot</b><p>Automatic extraction of the rejections, which used to be copied by hand.</p></li><li><time>Phase 2</time><b>Rules engine</b><p>Four main categories, with the reason for each decision recorded.</p></li><li><time>Jul to Oct 2026</time><b>Rules evolve</b><p>The categories were split into more specific destinations as new cases appeared.</p></li></ol></div>
         </div>
       </div>
     </section>
     <section class="section" data-reveal>
       <div class="section__head">
-        <p class="section__label">The solution</p>
+        <p class="section__label">How the solution works</p>
         <div>
-          <h2>Each case arrives already diagnosed, in the queue for the action it needs.</h2>
-          <div class="section__body"><div class="outcomes">
-          <div class="panel outcome"><b>Redo</b><span>Queue for payments that need to be made again.</span></div>
-          <div class="panel outcome"><b>Reissue</b><span>Queue for cases that need a new payment slip.</span></div>
-          <div class="panel outcome"><b>Refund</b><span>Goes to the flow that pays the customer back.</span></div>
-          <div class="panel outcome"><b>Review</b><span>Queue for cases that need another check.</span></div>
-        </div>
-        <p class="prose" style="margin-top:20px">Each queue is independent and has its own automation.</p>
-        <div style="margin-top:32px"><ul class="list"><li><strong>Written rules</strong>, with the reason for each decision recorded in the case.</li><li><strong>Write-off bot</strong> with a live log of every operation.</li><li><strong>Payment path dashboard</strong>, from rejection to resolution.</li><li>Focus mode, one case at a time, with <span class="keys"><kbd>J</kbd><kbd>K</kbd><kbd>X</kbd></span> shortcuts for next, back and done.</li></ul></div></div>
+          <h2>A handling destination is not the same as an automated action.</h2>
+          <div class="section__body"><div class="cards4"><div class="panel"><b>Automated action</b><span>Issuing a payment slip with write-off, and Redo: the bot carries them out and logs every operation.</span></div><div class="panel"><b>Action by a person</b><span>Refunds, contract payoff, proposals and payments still open at the creditor: the engine classifies and the person responsible acts.</span></div><div class="panel"><b>Review</b><span>Without enough evidence for a safe decision, the case goes to human review.</span></div><div class="panel"><b>Already resolved</b><span>A payment already written off, or a rejection handled in the next run: the case is identified and triggers no new action.</span></div></div><div style="margin-top:28px"><ul class="list"><li><strong>Written rules</strong>, with the reason for each decision recorded in the case.</li><li><strong>Write-off bot</strong> with a log of every operation.</li><li>A <strong>panel</strong> with diagnosis, evidence and action on the same screen, including the customer’s other payments.</li><li>A second payment for the same installment goes to the <strong>duplicate payment controls</strong>.</li></ul></div></div>
         </div>
       </div>
     </section>
-    <section class="section" aria-label="Panel screen">
+    <section class="section" aria-label="Demo">
       <figure class="frame-wrap" data-reveal>
         <div class="frame" style="--h:560px; --s:0.6">
           <div class="frame__bar" aria-hidden="true"><span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__url">Rejections · Payment handling</span></div>
-          <div class="frame__view"><iframe src="../demos/en/painel-rejeicoes.html" title="Rejections panel with fictitious data" loading="lazy" tabindex="-1"></iframe></div>
+          <div class="frame__view"><iframe src="../demos/en/painel-rejeicoes.html" title="Rejections panel with synthetic data" loading="lazy" tabindex="-1"></iframe></div>
         </div>
         <figcaption class="frame__cta">
-          <span class="note">Fictitious data: no name, CPF (tax ID), contract or amount is real.</span>
-          <a class="btn" href="../demos/en/painel-rejeicoes.html">Open the full screen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+          <span class="note">This is an interactive demonstration using synthetic data. All records and results are illustrative and do not represent actual operational data.</span>
+          <a class="btn" href="../demos/en/painel-rejeicoes.html">Open the demo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
         </figcaption>
       </figure>
     </section>
     <section class="section" data-reveal>
       <div class="section__head">
-        <p class="section__label">Impact</p>
+        <p class="section__label">Result and evidence</p>
         <div>
-          <h2>Work that used to live in tickets now happens in the panel.</h2>
-          <div class="section__body"><div class="prose"><p>The team's curation and control moved into the panel and became automated. One user, who opened Jira tickets every day, no longer needs them.</p></div>
-        <blockquote class="quote panel"><p>Mariana, a panel user, said it is much more practical than Jira, and that seeing the customer's other payments in the same case made her work a lot easier.</p><cite>User feedback, Simplic (summarized and translated)</cite></blockquote></div>
+          <h2>Case handling moved into the panel, with the customer’s context.</h2>
+          <div class="section__body"><div class="prose"><p>The team’s curation and control now happen inside the panel, which shows the customer’s other payments in the same case. In parallel, I investigated a recurring ticket pattern, identified a business rule related to the normal payment posting timeline, and shared the findings with the operation to reduce rework.</p></div><blockquote class="quote panel"><p>A BackOffice user said the panel is much more practical than Jira, and that seeing the customer’s other payments in the same case made her work a lot easier.</p><cite>User feedback, Simplic (summarized and translated)</cite></blockquote><p class="measure"><b>How it was measured.</b> A qualitative result. There is no formal measurement of human time or of rule accuracy, so no performance number is published here.</p></div>
+        </div>
+      </div>
+    </section>
+    <section class="section" data-reveal>
+      <div class="section__head">
+        <p class="section__label">Limitations</p>
+        <div>
+          <h2>What the engine does not do.</h2>
+          <div class="section__body"><ul class="list"><li>There is no formally validated <strong>accuracy rate</strong>.</li><li>Destinations that depend on a person are still <strong>manual</strong>.</li><li>It does not decide cases <strong>without enough evidence</strong>.</li><li>It does not pay <strong>refunds</strong>: paying the customer back stays with the person responsible.</li></ul></div>
+        </div>
+      </div>
+    </section>
+    <section class="section" data-reveal>
+      <div class="section__head">
+        <p class="section__label">Sustainability</p>
+        <div>
+          <h2>Someone else can understand and continue the work.</h2>
+          <div class="section__body"><div class="prose"><p>Written rules, a recorded reason on every case and visible exceptions mean the work no longer depends on whoever knows the rule by heart. The rules keep being adjusted based on observed cases.</p></div></div>
+        </div>
+      </div>
+    </section>
+    <section class="section" data-reveal>
+      <div class="section__head">
+        <p class="section__label">Leadership Principles</p>
+        <div>
+          <h2>How this case connects to Amazon’s principles.</h2>
+          <div class="section__body"><ul class="lp"><li class="panel"><b>Dive Deep</b><span>I mapped patterns across cases and the precedence between rules before writing the logic.</span></li><li class="panel"><b>Invent and Simplify</b><span>I started with four categories and only added detail when a real case required it.</span></li><li class="panel"><b>Earn Trust</b><span>When the evidence is not enough, the case goes to a person, with the reason recorded, instead of getting a guess.</span></li></ul></div>
         </div>
       </div>
     </section>
@@ -182,15 +206,15 @@
         <p class="section__label">Technology and methods</p>
         <div>
           <h2>Simple tools, well-defined rules.</h2>
-          <div class="section__body"><div class="stack"><span class="tag">Python</span><span class="tag">Flask</span><span class="tag">HTML, CSS and JavaScript</span><span class="tag">Bot automation</span><span class="tag">Business Analysis</span><span class="tag">Deterministic rules</span></div></div>
+          <div class="section__body"><div class="stack"><span class="tag">Python</span><span class="tag">Flask</span><span class="tag">HTML, CSS and JavaScript</span><span class="tag">Bot automation</span><span class="tag">Business Analysis</span><span class="tag">Decision tree</span></div></div>
         </div>
       </div>
     </section>
     </main>
 
-    <nav class="next" aria-label="Next project">
+    <nav class="next" aria-label="Next case">
       <a href="pagamentos-em-duplicidade.html">
-        <span><span class="next__label">Next project</span><span class="next__title">Duplicate Payments Panel</span></span>
+        <span><span class="next__label">Next case</span><span class="next__title">Duplicate Payment Controls</span></span>
         <span class="next__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </a>
     </nav>

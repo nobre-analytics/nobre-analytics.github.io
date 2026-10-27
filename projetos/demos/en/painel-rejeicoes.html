@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Rejections · Payment handling</title>
-<meta name="description" content="Demo with fictitious data of the rejected-payment handling panel: queues by decision, write-off bot and a dashboard of the payment path.">
+<meta name="description" content="Demo with synthetic data of the rejected-payment handling panel: queues by decision, write-off bot and a dashboard of the payment path.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23048A05'/%3E%3Cpath d='M13 9l-5 5 5 5M8.5 14H19a5 5 0 0 1 0 10h-3' fill='none' stroke='%23fff' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='16' cy='24' r='2.4' fill='%23F5BF05'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -274,6 +274,7 @@ table.plan tr.feito td:last-child{text-decoration:none}
 <style>.voltar-proj{color:inherit;font-weight:700;text-decoration:none;border-bottom:1px solid currentColor;opacity:.92;white-space:nowrap}.voltar-proj:hover{opacity:1}</style>
 </head>
 <body>
+<div class="synthetic-banner" role="note" style="background:#2B2416;color:#F3E9D2;font:500 12.5px/1.45 system-ui,-apple-system,Segoe UI,sans-serif;padding:7px 16px;text-align:center;border-bottom:1px solid #6B5A33"><b style="letter-spacing:.06em;text-transform:uppercase;font-size:11px;margin-right:8px">Synthetic data</b>This is an interactive demonstration using synthetic data. All records and results are illustrative and do not represent actual operational data.</div>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
     <symbol id="i-volta" viewBox="0 0 16 16"><path d="M6 3.5 2.5 7 6 10.5M3 7h6.5a4 4 0 0 1 0 8H8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
@@ -298,8 +299,8 @@ table.plan tr.feito td:last-child{text-decoration:none}
 </svg>
 
 <div class="tarja" id="tarja">
-  <span class="vivo" id="tarjaTxt">Nothing running now</span>
-  <span class="dir"><a class="voltar-proj" href="../../en/index.html">← All projects</a><span class="esconde">source: rejeicoes_09102026.xlsx</span><span class="demo">Fictitious data</span><span class="esconde">Demo: nothing is saved</span></span>
+  <span class="vivo" id="tarjaTxt">Simulation: nothing is running</span>
+  <span class="dir"><a class="voltar-proj" href="../../en/central-pagamentos-rejeitados.html">← Back to the case</a><span class="esconde">file: demo_rejections.xlsx</span><span class="demo">Synthetic data</span><span class="esconde">Demo: nothing is saved</span></span>
 </div>
 
 <header class="topo">
@@ -320,7 +321,7 @@ table.plan tr.feito td:last-child{text-decoration:none}
   <main>
     <div class="banda"><h1 id="titulo">Dashboard</h1><p id="subtitulo" hidden></p></div>
     <div class="conteudo" id="conteudo" tabindex="-1"></div>
-    <footer class="rodape"><span>Rejections · payment handling · demo with fictitious data</span><span id="conferido">Checked at 17:36</span></footer>
+    <footer class="rodape"><span>Rejections · payment handling · demo with synthetic data</span><span id="conferido">Simulation</span></footer>
   </main>
 </div>
 <div class="dica" id="dica" role="tooltip"></div>
@@ -329,10 +330,9 @@ table.plan tr.feito td:last-child{text-decoration:none}
 <script>
 "use strict";
 /* ─────────────────────────────────────────────────────────────────────────────
-   DADOS FICTÍCIOS. Nenhum CPF, contrato, nome ou valor desta página é real.
-   CPFs aparecem mascarados no mesmo formato do painel de produção.
+   DADOS SINTÉTICOS. Nenhum CPF, contrato, nome ou valor desta página é real.
    ───────────────────────────────────────────────────────────────────────────── */
-const HOJE = new Date(2026,9,9);
+const HOJE = new Date(2026,2,5);
 const brl = v => v.toLocaleString("en-US",{style:"currency",currency:"BRL"});
 const brlK = v => v>=10000 ? "R$"+Math.round(v/1000).toLocaleString("en-US")+"k" : brl(v);
 const esc = s => String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -354,74 +354,69 @@ const FILA = Object.fromEntries(FILAS.map(f=>[f.k,f]));
 let seq = 0;
 function caso(fila,meio,contrato,valor,dia,origem,assess,trat,extra){
   seq++;
-  return Object.assign({id:seq, fila, cpf:"•••."+meio+"-••", contrato, valor, data:new Date(2026,9,dia),
+  return Object.assign({id:seq, fila, cpf:meio, contrato, valor, data:new Date(2026,2,dia),
     origem, assess, trat, tratado:false}, extra||{});
 }
 const CASOS = [
-  caso("refazer","418.207","40-00731552/03A",412.30,6,"Boleto","NORTE","Broken agreement with the original still open: rebuild the agreement for the R$412.30 balance in the collection agency login and write off.",
-    {regra:"BROKEN agreement and original not written off: REDO", gateway:"Oct 6 09:12 · boleto · R$412.30", cobranca:"Agreement broken on Oct 5, instalment 02 overdue", credora:"Instalments 006 to 008 open"}),
-  caso("refazer","553.902","40-01188730/11",198.75,8,"Pix","ATLAS","Agreement broken on the same day as the payment: rebuild only the balance (R$198.75) and write off instalment 01.",
-    {regra:"Payment after the break: REDO for the balance", gateway:"Oct 8 14:40 · pix · R$198.75", cobranca:"Agreement broken on Oct 8 at 06:00", credora:"Active contract, 2 instalments open"}),
-  caso("refazer","702.115","40-00920014/07B",356.10,9,"Boleto","NORTE","Broken agreement, original open: rebuild in the collection agency login and write off instalment 03.",
-    {regra:"BROKEN agreement and original not written off: REDO", gateway:"Oct 9 07:58 · boleto · R$356.10", cobranca:"Agreement broken on Oct 7", credora:"Instalments 003 and 004 open"}),
-  caso("emitir","261.774","40-02209188/02",211.35,7,"Boleto","VÉRTICE","Active agreement, instalment 03 open: issue a new R$211.35 boleto and write off with the rejected payment.",
-    {regra:"ACTIVE agreement with an open instalment: ISSUE", gateway:"Oct 7 10:21 · boleto · R$211.35", cobranca:"Active agreement, instalment 03 due Oct 10", credora:"No mismatch", emitido:true}),
-  caso("emitir","889.430","40-01730021/05",147.92,8,"Boleto","ATLAS","Active agreement: issue the boleto for instalment 05 (R$147.92) and write off.",
-    {regra:"ACTIVE agreement with an open instalment: ISSUE", gateway:"Oct 8 16:03 · boleto · R$147.92", cobranca:"Active agreement, instalment 05 open", credora:"No mismatch"}),
-  caso("emitir","340.668","40-00519977/01",96.40,9,"Pix","PRISMA","Active agreement: issue the boleto for instalment 02 (R$96.40) and write off.",
-    {regra:"ACTIVE agreement with an open instalment: ISSUE", gateway:"Oct 9 08:47 · pix · R$96.40", cobranca:"Active agreement, instalment 02 open", credora:"No mismatch"}),
-  caso("emitir","915.203","40-02455610/04",183.66,9,"Boleto","NORTE","Active agreement: issue the boleto for instalment 04 (R$183.66) and write off.",
-    {regra:"ACTIVE agreement with an open instalment: ISSUE", gateway:"Oct 9 09:30 · boleto · R$183.66", cobranca:"Active agreement, instalment 04 open", credora:"No mismatch"}),
-  caso("antecipacao","127.540","40-01902233/06",223.70,8,"Boleto","","Paid instalment 07 before the due date and nothing is overdue: set up an agreement for instalment 07 only and issue.",
-    {regra:"No overdue instalment and payment this month: EARLY PAYMENT", gateway:"Oct 8 11:15 · boleto · R$223.70", cobranca:"No active agreement", credora:"Next instalment 07 due Oct 25"}),
-  caso("reembolsos","604.381","40-00387761/09",288.88,7,"Boleto","","Instalment 05 already settled by direct debit on Oct 2: reverse the R$288.88 direct debit and write off the instalment with the boleto.",{regra:"Direct debit on the same instalment, within 15 days: DD REFUND", gateway:"Oct 7 · boleto · R$288.88", cobranca:"Agreement settled", credora:"Direct debit on Oct 2 on instalment 05"}),
-  caso("reembolsos","772.019","40-01455300/02",249.49,9,"Boleto","","Instalment 03 paid by direct debit on Oct 4: reverse the R$249.49 direct debit and write off instalment 03.",{regra:"Direct debit on the same instalment, within 15 days: DD REFUND", gateway:"Oct 9 · boleto · R$249.49", cobranca:"Agreement settled", credora:"Direct debit on Oct 4 on instalment 03"}),
-  caso("reembolsos","458.836","40-02001477/08",241.08,9,"Boleto","","Instalment 08 paid by direct debit on Oct 5: reverse the direct debit and write off with the boleto.",{regra:"Direct debit on the same instalment, within 15 days: DD REFUND", gateway:"Oct 9 · boleto · R$241.08", cobranca:"Agreement settled", credora:"Direct debit on Oct 5 on instalment 08"}),
-  caso("reembolsos","319.257","40-00664412/03",191.80,9,"Boleto","","Instalment 02 paid by direct debit on Oct 6: reverse the R$191.80 direct debit.",{regra:"Direct debit on the same instalment, within 15 days: DD REFUND", gateway:"Oct 9 · boleto · R$191.80", cobranca:"Agreement settled", credora:"Direct debit on Oct 6 on instalment 02"}),
-  caso("reembolsos","846.590","40-01299845/01",98.88,9,"Boleto","","Instalment 01 paid by direct debit on Oct 7: reverse the R$98.88 direct debit.",{regra:"Direct debit on the same instalment, within 15 days: DD REFUND", gateway:"Oct 9 · boleto · R$98.88", cobranca:"Agreement settled", credora:"Direct debit on Oct 7 on instalment 01"}),
-  caso("quitacao","233.481","40-00845519/12",2716.40,7,"Boleto","","The agreement paid off the whole contract and the direct debit also went through: reverse the direct debit and write off instalments 008 to 012.",
-    {nota:"payoff agreement · 5 instalments", regra:"Payoff agreement + direct debit in the period: CONTRACT PAYOFF", gateway:"Oct 7 · boleto · R$2,716.40", cobranca:"Payoff agreement paid", credora:"Direct debit on Oct 5 on instalment 008"}),
-  caso("quitacao","580.064","40-01077342/04",2064.26,8,"Pix","","Payoff via Pix with a direct debit in the same month: reverse the direct debit and write off instalments 004 to 009.",
-    {nota:"payoff agreement · 6 instalments", regra:"Payoff agreement + direct debit in the period: CONTRACT PAYOFF", gateway:"Oct 8 · pix · R$2,064.26", cobranca:"Payoff agreement paid", credora:"Direct debit on Oct 6 on instalment 004"}),
-  caso("proposta","694.112","40-02311908/02",121.40,8,"Boleto","","Paid 61% of the agreement instalment: record it as a proposal and contact the customer to complete or deduct.",
-    {regra:"Paid less than 75% of the instalment: PROPOSAL", gateway:"Oct 8 · boleto · R$121.40", cobranca:"Agreement instalment R$199.00", credora:"No mismatch"}),
-  caso("proposta","205.873","40-00990651/05",77.80,9,"Pix","","Paid 48% of the agreement down payment: record it as a proposal.",
-    {regra:"Paid less than 75% of the instalment: PROPOSAL", gateway:"Oct 9 · pix · R$77.80", cobranca:"Agreement down payment R$162.00", credora:"No mismatch"}),
-  caso("jira","371.645","40-01600233/03",327.34,8,"Pix","","Automatic Pix with no matching instalment: open a ticket to reverse the Pix.",
-    {regra:"Automatic Pix with no instalment: OPEN JIRA", gateway:"Oct 8 · automatic pix · R$327.34", cobranca:"No instalment with this amount", credora:"Contract paid off on Sep 30"}),
-  caso("credora","390.028","40-00201896/26A",314.96,7,"Boleto","","Use the R$314.96 payment to write off instalments 004 to 005 of contract 40-00201896/26A. Instalments open at the creditor.",
-    {nota:"contract ends in a letter: renegotiated", regra:"Agreement paid and original open at the creditor: OPEN AT CREDITOR", gateway:"Oct 7 · boleto · R$314.96", cobranca:"Agreement paid", credora:"Instalments 004 and 005 open"}),
-  caso("credora","033.452","40-00941803/26A",271.14,9,"Boleto","","Use the R$271.14 payment to write off instalments 005 to 006 and deduct R$104.67 from instalment 007.",
-    {nota:"contract ends in a letter: renegotiated", regra:"Agreement paid and original open at the creditor: OPEN AT CREDITOR", gateway:"Oct 9 · boleto · R$271.14", cobranca:"Agreement paid", credora:"Instalments 005 to 007 open"}),
-  caso("credora","118.906","40-01422107/03",402.18,6,"Boleto","","Use the R$402.18 payment to write off instalments 003 to 004 of contract 40-01422107/03.",
-    {regra:"Agreement paid and original open at the creditor: OPEN AT CREDITOR", gateway:"Oct 6 · boleto · R$402.18", cobranca:"Agreement paid", credora:"Instalments 003 and 004 open"}),
-  caso("credora","845.317","40-02170045/01",188.40,8,"Pix","","Use the R$188.40 payment to write off instalment 009.",
-    {regra:"Agreement paid and original open at the creditor: OPEN AT CREDITOR", gateway:"Oct 8 · pix · R$188.40", cobranca:"Agreement paid", credora:"Instalment 009 open"}),
-  caso("credora","267.093","40-00755820/14",355.02,8,"Boleto","","Late: two overdue instalments and a direct debit coming up. Deduct R$355.02 from instalments 010 and 011.",
-    {nota:"2 overdue instalments", regra:"Two or more overdue with a direct debit close: DEDUCT FROM OPEN ONES", gateway:"Oct 8 · boleto · R$355.02", cobranca:"No agreement", credora:"Instalments 010 and 011 overdue"}),
-  caso("credora","509.744","40-01366619/08",241.55,9,"Boleto","","Use the R$241.55 payment to write off instalment 008.",
-    {regra:"Agreement paid and original open at the creditor: OPEN AT CREDITOR", gateway:"Oct 9 · boleto · R$241.55", cobranca:"Agreement paid", credora:"Instalment 008 open"}),
-  caso("credora","676.228","40-00488101/02",169.90,9,"Pix","","Use the R$169.90 payment to write off instalment 002.",
-    {regra:"Agreement paid and original open at the creditor: OPEN AT CREDITOR", gateway:"Oct 9 · pix · R$169.90", cobranca:"Agreement paid", credora:"Instalment 002 open"}),
-  caso("credora","952.481","40-02088176/05",298.31,6,"Boleto","","Use the R$298.31 payment to write off instalments 005 and 006.",
-    {regra:"Agreement paid and original open at the creditor: OPEN AT CREDITOR", gateway:"Oct 6 · boleto · R$298.31", cobranca:"Agreement paid", credora:"Instalments 005 and 006 open"}),
-  caso("credora","430.159","40-01733480/11",132.77,7,"Boleto","","Use the R$132.77 payment to write off instalment 011.",
-    {regra:"Agreement paid and original open at the creditor: OPEN AT CREDITOR", gateway:"Oct 7 · boleto · R$132.77", cobranca:"Agreement paid", credora:"Instalment 011 open"}),
-  caso("credora","781.602","40-00316654/04",259.83,9,"Boleto","","Use the R$259.83 payment to write off instalment 004 and deduct R$41.10 from 005.",
-    {regra:"Agreement paid and original open at the creditor: OPEN AT CREDITOR", gateway:"Oct 9 · boleto · R$259.83", cobranca:"Agreement paid", credora:"Instalments 004 and 005 open"}),
+  caso("analisar","DEMO-C01","DEMO-001",140.00,4,"Pix","","Not enough evidence for a safe decision: review the sources before choosing the handling.",
+    {"regra": "Not enough evidence: ANALYZE MANUALLY", "gateway": "Mar 4 · pix · R$140.00", "cobranca": "No matching instalment", "credora": "Incomplete data to decide"}),
+  caso("analisar","DEMO-C02","DEMO-002",86.50,5,"Boleto","","Not enough evidence for a safe decision: review the sources before choosing the handling.",
+    {"regra": "Not enough evidence: ANALYZE MANUALLY", "gateway": "Mar 5 · boleto · R$86.50", "cobranca": "No matching instalment", "credora": "Incomplete data to decide"}),
+  caso("refazer","DEMO-C03","DEMO-003",210.00,3,"Boleto","ASSESSORIA A","Broken agreement with the original instalment open: rebuild the agreement for the balance and write it off.",
+    {"regra": "Agreement broken and original instalment open: REDO", "gateway": "Mar 3 · boleto · R$210.00", "cobranca": "Agreement broken on Mar 3", "credora": "Instalments 02 and 03 open"}),
+  caso("refazer","DEMO-C04","DEMO-004",99.50,4,"Pix","ASSESSORIA B","Broken agreement with the original instalment open: rebuild the agreement for the balance and write it off.",
+    {"regra": "Agreement broken and original instalment open: REDO", "gateway": "Mar 4 · pix · R$99.50", "cobranca": "Agreement broken on Mar 4", "credora": "Instalments 01 and 02 open"}),
+  caso("refazer","DEMO-C05","DEMO-005",160.00,5,"Boleto","ASSESSORIA A","Broken agreement with the original instalment open: rebuild the agreement for the balance and write it off.",
+    {"regra": "Agreement broken and original instalment open: REDO", "gateway": "Mar 5 · boleto · R$160.00", "cobranca": "Agreement broken on Mar 5", "credora": "Instalments 03 and 04 open"}),
+  caso("emitir","DEMO-C06","DEMO-006",120.00,3,"Boleto","ASSESSORIA C","Active agreement with an open instalment: issue a new payment slip and write it off with the rejected payment.",
+    {"regra": "Active agreement with an open instalment: ISSUE", "gateway": "Mar 3 · boleto · R$120.00", "cobranca": "Active agreement, instalment 03 open", "credora": "No mismatch", "emitido": true}),
+  caso("emitir","DEMO-C07","DEMO-007",75.00,4,"Boleto","ASSESSORIA B","Active agreement with an open instalment: issue a new payment slip and write it off with the rejected payment.",
+    {"regra": "Active agreement with an open instalment: ISSUE", "gateway": "Mar 4 · boleto · R$75.00", "cobranca": "Active agreement, instalment 05 open", "credora": "No mismatch"}),
+  caso("emitir","DEMO-C08","DEMO-008",64.90,5,"Pix","ASSESSORIA A","Active agreement with an open instalment: issue a new payment slip and write it off with the rejected payment.",
+    {"regra": "Active agreement with an open instalment: ISSUE", "gateway": "Mar 5 · pix · R$64.90", "cobranca": "Active agreement, instalment 02 open", "credora": "No mismatch"}),
+  caso("emitir","DEMO-C09","DEMO-009",110.00,5,"Boleto","ASSESSORIA A","Active agreement with an open instalment: issue a new payment slip and write it off with the rejected payment.",
+    {"regra": "Active agreement with an open instalment: ISSUE", "gateway": "Mar 5 · boleto · R$110.00", "cobranca": "Active agreement, instalment 04 open", "credora": "No mismatch"}),
+  caso("antecipacao","DEMO-C10","DEMO-010",130.00,4,"Boleto","","Payment with no overdue instalment this month: confirm it is an early payment before building the agreement.",
+    {"regra": "Payment with no overdue instalment this month: EARLY PAYMENT TO CONFIRM", "gateway": "Mar 4 · boleto · R$130.00", "cobranca": "No active agreement", "credora": "Next instalment 07 not due yet"}),
+  caso("reembolsos","DEMO-C11","DEMO-011",150.00,3,"Boleto","","Instalment already paid by direct debit: reverse the debit and write off the instalment with the slip.",
+    {"regra": "Direct debit on the same instalment, within the rule window: DD REFUND", "gateway": "Mar 3 · boleto · R$150.00", "cobranca": "Agreement settled", "credora": "Direct debit on instalment 05"}),
+  caso("reembolsos","DEMO-C12","DEMO-012",132.40,5,"Boleto","","Instalment already paid by direct debit: reverse the debit and write off the instalment with the slip.",
+    {"regra": "Direct debit on the same instalment, within the rule window: DD REFUND", "gateway": "Mar 5 · boleto · R$132.40", "cobranca": "Agreement settled", "credora": "Direct debit on instalment 03"}),
+  caso("reembolsos","DEMO-C13","DEMO-013",98.00,5,"Boleto","","Instalment already paid by direct debit: reverse the debit and write off the instalment with the slip.",
+    {"regra": "Direct debit on the same instalment, within the rule window: DD REFUND", "gateway": "Mar 5 · boleto · R$98.00", "cobranca": "Agreement settled", "credora": "Direct debit on instalment 08"}),
+  caso("quitacao","DEMO-C14","DEMO-014",980.00,3,"Boleto","","Payoff agreement paid with a direct debit in the period: reverse the debit and write off the remaining instalments.",
+    {"regra": "Payoff agreement with a direct debit in the period: CONTRACT PAYOFF", "gateway": "Mar 3 · boleto · R$980.00", "cobranca": "Payoff agreement paid", "credora": "Direct debit on instalment 08"}),
+  caso("quitacao","DEMO-C15","DEMO-015",1240.00,4,"Pix","","Payoff agreement paid with a direct debit in the period: reverse the debit and write off the remaining instalments.",
+    {"regra": "Payoff agreement with a direct debit in the period: CONTRACT PAYOFF", "gateway": "Mar 4 · pix · R$1,240.00", "cobranca": "Payoff agreement paid", "credora": "Direct debit on instalment 04"}),
+  caso("proposta","DEMO-C16","DEMO-016",70.00,4,"Boleto","","Payment below the instalment minimum: record it as a proposal and contact the customer.",
+    {"regra": "Payment below the instalment minimum: PROPOSAL", "gateway": "Mar 4 · boleto · R$70.00", "cobranca": "Agreement instalment larger than the amount paid", "credora": "No mismatch"}),
+  caso("proposta","DEMO-C17","DEMO-017",45.00,5,"Pix","","Payment below the instalment minimum: record it as a proposal and contact the customer.",
+    {"regra": "Payment below the instalment minimum: PROPOSAL", "gateway": "Mar 5 · pix · R$45.00", "cobranca": "Agreement instalment larger than the amount paid", "credora": "No mismatch"}),
+  caso("jira","DEMO-C18","DEMO-018",200.00,4,"Pix","","Automatic Pix with no matching instalment: open a ticket for the reversal.",
+    {"regra": "Automatic Pix with no matching instalment: OPEN JIRA", "gateway": "Mar 4 · pix · R$200.00", "cobranca": "No instalment with this amount", "credora": "Contract already paid off"}),
+  caso("credora","DEMO-C19","DEMO-019",180.00,3,"Boleto","","Agreement paid with the original instalment open at the creditor: use the payment to write off instalment 04.",
+    {"regra": "Agreement paid and original instalment open at the creditor: OPEN AT CREDITOR", "gateway": "Mar 3 · boleto · R$180.00", "cobranca": "Agreement paid", "credora": "Instalment 04 open"}),
+  caso("credora","DEMO-C20","DEMO-020",145.00,5,"Boleto","","Agreement paid with the original instalment open at the creditor: use the payment to write off instalment 05.",
+    {"regra": "Agreement paid and original instalment open at the creditor: OPEN AT CREDITOR", "gateway": "Mar 5 · boleto · R$145.00", "cobranca": "Agreement paid", "credora": "Instalment 05 open"}),
+  caso("credora","DEMO-C21","DEMO-021",230.00,2,"Boleto","","Agreement paid with the original instalment open at the creditor: use the payment to write off instalment 03.",
+    {"regra": "Agreement paid and original instalment open at the creditor: OPEN AT CREDITOR", "gateway": "Mar 2 · boleto · R$230.00", "cobranca": "Agreement paid", "credora": "Instalment 03 open"}),
+  caso("credora","DEMO-C22","DEMO-022",115.00,4,"Pix","","Agreement paid with the original instalment open at the creditor: use the payment to write off instalment 09.",
+    {"regra": "Agreement paid and original instalment open at the creditor: OPEN AT CREDITOR", "gateway": "Mar 4 · pix · R$115.00", "cobranca": "Agreement paid", "credora": "Instalment 09 open"}),
+  caso("credora","DEMO-C23","DEMO-023",160.00,5,"Boleto","","Agreement paid with the original instalment open at the creditor: use the payment to write off instalment 08.",
+    {"regra": "Agreement paid and original instalment open at the creditor: OPEN AT CREDITOR", "gateway": "Mar 5 · boleto · R$160.00", "cobranca": "Agreement paid", "credora": "Instalment 08 open"}),
 ];
 const RESOLVIDOS = [
-  ["ALREADY RESOLVED","Payment already written off in the collections system on Oct 8.",318.20,8],
-  ["PREVIOUS DAY","Rejection from yesterday's batch, write-off confirmed in the run.",204.15,8],
-  ["DUPLICATE REFUND","Second payment for the same instalment: sent to the FIDC panel.",176.90,7],
-  ["ALREADY RESOLVED","Gateway payment with a late fee (+2%): instalment already written off.",142.35,7],
-  ["PREVIOUS DAY","Rejection from Oct 6 handled in the Oct 7 run.",388.00,6],
-  ["SETTLED REFUND","Agreement settled before the payment: refund recorded.",136.25,6],
-].map((r,i)=>caso("resolvido",["612.004","147.338","908.551","276.890","533.417","864.120"][i],"40-0"+(1200450+i*7311)+"/0"+(i+1),r[2],r[3],i%2?"Pix":"Boleto","",r[1],{cat:r[0],tratado:true,regra:r[0]}));
+  ["ALREADY RESOLVED","Payment already written off in the collections system.",88.00,4],
+  ["PREVIOUS DAY","Rejection from the previous batch, write-off confirmed in the run.",126.00,4],
+  ["DUPLICATE REFUND","Second payment for the same instalment: sent to the duplicates panel.",92.00,3],
+  ["ALREADY RESOLVED","Instalment already written off by another payment.",54.00,3],
+  ["PREVIOUS DAY","Rejection handled in the next run.",140.00,2],
+  ["SETTLED REFUND","Agreement settled before the payment: refund recorded.",60.00,2]
+].map((r,i)=>caso("resolvido","DEMO-R"+String(i+1).padStart(2,"0"),"DEMO-R"+String(101+i),r[2],r[3],i%2?"Pix":"Boleto","",r[1],{cat:r[0],tratado:true,regra:r[0]}));
 CASOS.push(...RESOLVIDOS);
 
 let vista = "dashboard", busca = "", filtroData = "", filtroAss = "", esconderTratados = false;
-let grindIdx = 0, mesSel = "10/2026", tratadosHoje = 0;
+let grindIdx = 0, mesSel = "03/2026", tratadosHoje = 0;
 
 const pend = () => CASOS.filter(c=>c.fila!=="resolvido" && !c.tratado);
 const daFila = k => CASOS.filter(c=>c.fila===k);
@@ -439,7 +434,7 @@ function menu(){
   h += `<h4>Queues</h4>`;
   for(const f of FILAS){ const c=n(f.k); h += item(f.k,f.nome,f.icone,c, c? (f.urgente?"r":"v") : ""); }
   h += item("dashboard","Dashboard","i-dash",null);
-  h += `<h4>Lookup</h4>` + item("resolvidos","Resolved","i-ok",(2981+tratadosHoje+RESOLVIDOS.length).toLocaleString("en-US"),"f") + item("todos","All","i-lista",CASOS.length);
+  h += `<h4>Lookup</h4>` + item("resolvidos","Resolved","i-ok",(230+tratadosHoje+RESOLVIDOS.length).toLocaleString("en-US"),"f") + item("todos","All","i-lista",CASOS.length);
   $("#lado").innerHTML = h;
   document.title = (p.length?"("+p.length+") ":"") + tituloDe(vista) + " · Rejections";
 }
@@ -495,7 +490,7 @@ function vistaFila(k){
   const f = FILA[k], todos = daFila(k), arr = aplicaFiltros(todos), abertos = todos.filter(c=>!c.tratado);
   let h = barraFiltros(arr,todos);
   if(k==="analisar"){
-    h += `<div class="folha acao"><div class="t"><b>0 cases in pre-analysis</b><span>pre-analysis already ran in the orchestrator: these have no instalment line and need your review</span></div><button class="btn" disabled>Recheck (0)</button></div>`;
+    h += `<div class="folha acao"><div class="t"><b class="num">${abertos.length} cases for manual review</b><span>the engine did not find enough evidence for a safe decision, so it assigned no destination: a person decides</span></div></div>`;
   } else if(f.robo){
     h += painelRobo(k,abertos);
   } else {
@@ -592,15 +587,15 @@ function vistaGrind(){
 let RODADA = {status:"parado", etapa:-1};
 function vistaRodar(){
   const et = ["Fetching rejections","Diagnosing","Issuing","Closing the screens"];
-  const arq = [["Working file","internal, you handle the cases in the panel","rejeicoes_09102026.xlsx"],["Gateway statement",".csv exported from the bank","extrato_gateway_0910.csv"],
-    ["Daily write-offs",".txt from the collections system (optional)","baixas_0910.txt"],["Creditor load",".txt of open instalments (optional)","carga_credora_0910.txt"]];
+  const arq = [["Working file","internal, you handle the cases in the panel","demo_rejections.xlsx"],["Gateway statement",".csv exported from the bank","demo_gateway_statement.csv"],
+    ["Daily write-offs",".txt from the collections system (optional)","demo_write_offs.txt"],["Creditor load",".txt of open instalments (optional)","demo_creditor_load.txt"]];
   return `<div class="folha"><div class="arquivos">${arq.map(a=>`<div class="arq"><span><b>${a[0]}</b> · <span class="data">${a[1]}</span></span><span class="campo"><svg class="i"><use href="#i-doc"/></svg>${a[2]}</span></div>`).join("")}</div>
     <div class="acao" style="margin-top:14px;border-top:1px solid var(--border);padding-top:14px"><button class="btn prim" id="btnRodada" type="button" ${RODADA.status==="rodando"?"disabled":""}>${RODADA.status==="rodando"?"Running":"Run"}</button>
-    <span class="data">${RODADA.status==="rodando"?"Run in progress. You can switch tabs, it keeps going.":RODADA.status==="ok"?"Run just finished · "+pend().length+" case(s) on the desk":"Last run finished today at 08:09 · 184 cases read"}</span></div></div>
+    <span class="data">${RODADA.status==="rodando"?"Run in progress. You can switch tabs, it keeps going.":RODADA.status==="ok"?"Run just finished · "+pend().length+" case(s) on the desk":"Last simulated run · 31 cases read"}</span></div></div>
   <div class="folha"><div class="etapas">${et.map((e,i)=>`<div class="etapa ${RODADA.etapa>i||RODADA.status==="ok"?"ok":RODADA.etapa===i?"on":""}">${e}<i></i></div>`).join("")}</div></div>
-  <div class="folha-cab" style="margin:8px 0 -4px"><h2>How the run went</h2><span class="meta">07:53 to 08:09</span></div>
-  <div class="folha resumo"><div class="big"><b class="num">16 min</b><span>Duration</span></div><span class="sep"></span><div class="big"><b class="num">184</b><span>Cases</span></div><span class="sep"></span>
-    <p>Run finished, <b>21% faster</b> than usual (20 min). Most of the time went into <b>checking and completing</b> (68%): each case is matched against the gateway statement, the collections system and the creditor before it goes to a queue.</p></div>`;
+  <div class="folha-cab" style="margin:8px 0 -4px"><h2>How the run went</h2><span class="meta">simulation</span></div>
+  <div class="folha resumo"><div class="big"><b class="num">—</b><span>Duration (not measured in the simulation)</span></div><span class="sep"></span><div class="big"><b class="num">31</b><span>Synthetic cases</span></div><span class="sep"></span>
+    <p>Simulated run. In the tool, each case is matched against the gateway statement, the collections system and the creditor before it goes to a queue; anything without enough evidence goes to manual review.</p></div>`;
 }
 function rodarDia(){
   RODADA = {status:"rodando", etapa:0}; setTarja(true,"Daily run in progress"); render();
@@ -613,11 +608,11 @@ function rodarDia(){
 
 /* ── dashboard ── */
 const MESES = {
-  "10/2026":{rej:612, cats:[["CONTRACT PAYOFF","quitacao",4780.66],["OPEN AT CREDITOR","credora",3529.37],["DD REFUND","reembolsos",16012.78],["OPEN JIRA","jira",327.34],["EARLY PAYMENT TO CONFIRM","antecipacao",223.70],["ISSUE","emitir",71734.16],["PROPOSAL","proposta",199.20],["REDO","refazer",12418.55]],
-    quit:[["PREVIOUS DAY",61619.77],["DUPLICATE REFUND",14934.67],["ALREADY RESOLVED",6257.21],["TO DIAGNOSE",814.89],["SETTLED REFUND",136.25]], sem:72035.51,
-    dias:[[1,20505.30,0],[2,18284.22,0],[3,24428.21,0],[4,354.94,0],[5,1207.36,0],[6,0,0],[7,0,0],[8,0,0],[9,0,0]]},
-  "09/2026":{rej:1841, cats:[["ISSUE","",188420.10],["REDO","",61340.05],["DD REFUND","",40210.44],["OPEN AT CREDITOR","",18802.11],["CONTRACT PAYOFF","",9915.30],["PROPOSAL","",1420.00]], quit:[["PREVIOUS DAY",214330.08],["ALREADY RESOLVED",28411.90]], sem:251880.02, dias:[]},
-  "08/2026":{rej:1693, cats:[["ISSUE","",171006.33],["REDO","",70118.92],["DD REFUND","",35780.10],["OPEN AT CREDITOR","",12045.60]], quit:[["PREVIOUS DAY",190220.45],["ALREADY RESOLVED",19870.40]], sem:233410.77, dias:[]},
+  "03/2026":{rej:47, cats:[["CONTRACT PAYOFF", "quitacao", 2220.0], ["OPEN AT CREDITOR", "credora", 1250.0], ["DD REFUND", "reembolsos", 560.4], ["OPEN JIRA", "jira", 200.0], ["EARLY PAYMENT TO CONFIRM", "antecipacao", 130.0], ["ISSUE", "emitir", 1009.9], ["PROPOSAL", "proposta", 175.0], ["REDO", "refazer", 779.5], ["TO DIAGNOSE", "analisar", 226.5]],
+    quit:[["PREVIOUS DAY", 1350.0], ["DUPLICATE REFUND", 92.0], ["ALREADY RESOLVED", 380.0], ["SETTLED REFUND", 60.0]], sem:1180.00,
+    dias:[[1,410.00,0],[2,560.00,0],[3,620.00,0],[4,380.00,0],[5,0,0]]},
+  "02/2026":{rej:310, cats:[["ISSUE", "", 3100.0], ["REDO", "", 1150.0], ["DD REFUND", "", 620.0], ["OPEN AT CREDITOR", "", 540.0], ["CONTRACT PAYOFF", "", 900.0]], quit:[["PREVIOUS DAY", 4200.0], ["ALREADY RESOLVED", 1100.0]], sem:3900.00, dias:[]},
+  "01/2026":{rej:280, cats:[["ISSUE", "", 2790.0], ["REDO", "", 1035.0], ["DD REFUND", "", 558.0], ["OPEN AT CREDITOR", "", 486.0], ["CONTRACT PAYOFF", "", 810.0]], quit:[["PREVIOUS DAY", 3800.0], ["ALREADY RESOLVED", 950.0]], sem:3500.00, dias:[]},
 };
 function vistaDashboard(){
   const p = pend(), parados = soma(p);
@@ -631,19 +626,19 @@ function vistaDashboard(){
   const conc = totalDia - p.length;
 
   const passos = [
-    ["Customer paid","98,412","transactions","2026-08-01 to 2026-10-09",""],
+    ["Customer paid","1,200","synthetic transactions","2026-03-01 to 2026-03-05",""],
     ["Payment rejected",String(totalDia),"cases",brl(soma(CASOS.filter(c=>c.fila!=="resolvido")))+"<br>arrived as rejections and need some action",""],
     ["Why it was rejected",String(daFila("analisar").filter(c=>!c.tratado).length),"undiagnosed",totalDia+" already diagnosed","vazio"],
     ["What to do",String(naFila.length),"in queue",brl(soma(naFila))+"<br>"+esc(resumoFila),naFila.length?"agora":""],
     ["In progress",String(fazendo.length),"ongoing",brl(soma(fazendo))+"<br>boleto issued, awaiting confirmation",""],
     ["In the right place",String(conc),"completed","booked, refunded or routed",conc?"":"vazio"],
   ];
-  const caminho = `<div class="folha"><div class="folha-cab"><h2>The payment path</h2><span class="meta">where each rejected payment is right now</span><span class="meta dir">updated 2026-10-09 17:36</span></div>
+  const caminho = `<div class="folha"><div class="folha-cab"><h2>The payment path</h2><span class="meta">where each rejected payment is right now</span><span class="meta dir">simulation · 2026-03-05</span></div>
     <div class="caminho">${passos.map(s=>`<div class="passo ${s[4]}"><span class="no"><svg class="i"><use href="#i-ok"/></svg></span><h4>${s[0]}</h4><span class="n">${s[1]}</span><span class="u">${s[2]}</span><span class="x">${s[3]}</span></div>`).join("")}</div>
     <div class="rodape-cam"><span>Completed: <b class="num">${conc} of ${totalDia}</b> (${Math.round(100*conc/totalDia)}%)</span><span>Stuck waiting for action: <b class="num">${brl(parados)}</b></span><span>Oldest case in the queue: <b>${fdata(mais)}</b> (${diasMais} days)</span></div>
     <div class="progresso"><i style="width:${Math.round(100*conc/totalDia)}%"></i></div></div>`;
 
-  const M = MESES[mesSel], atual = mesSel==="10/2026";
+  const M = MESES[mesSel], atual = mesSel==="03/2026";
   const linhas = M.cats.map(([nome,k,total])=>{ const ab = atual&&k?soma(porCat[k]):0; return {nome,total:Math.max(total,ab),ab}; });
   const quit = M.quit.map(([nome,total])=>({nome,total,ab:0}));
   const todas = [...linhas.sort((a,b)=>b.ab-a.ab||b.total-a.total), ...quit];
@@ -667,7 +662,7 @@ function vistaDashboard(){
   let porDia = "";
   if(atual){
     const dias = M.dias.map(([d,tot,_])=>{ const doDia = CASOS.filter(c=>c.fila!=="resolvido"&&c.data.getDate()===d);
-      const ab = soma(doDia.filter(c=>!c.tratado)); const t = tot + soma(doDia) + (d>=6?[0,0,0,0,0,52810.76,45401.38,50426.95,16104.42][d-1]:0); return {nome:"2026-10-"+String(d).padStart(2,"0"),total:t,ab}; });
+      const ab = soma(doDia.filter(c=>!c.tratado)); const t = tot + soma(doDia) + 0; return {nome:"2026-03-"+String(d).padStart(2,"0"),total:t,ab}; });
     const mx = Math.max(...dias.map(x=>x.total));
     porDia = `<div class="folha"><div class="folha-cab"><h3>By rejection day</h3><span class="meta">the day the payment was rejected, not the batch day</span></div>
       <div class="barras">${dias.map(l=>barra(l).replace(/width:[\d.]+%/,"width:"+Math.max(2,100*l.total/mx)+"%")).join("")}</div></div>`;
@@ -683,7 +678,7 @@ function vistaDashboard(){
     ${Object.entries(grupos).sort((a,b)=>soma(b[1])-soma(a[1])).map(([a,xs])=>`<div class="ass"><b>${a}</b><span class="num">${xs.length} ${xs.length===1?"case":"cases"} · ${brl(soma(xs))}</span></div>`).join("")||`<div class="ass">No agency with open cases.</div>`}
     <p class="data" style="margin-top:8px">${semAss.length} open cases without an agency (${brl(soma(semAss))}): these are queues that do not go through an agency, such as refunds and payoffs.</p></div>`;
 
-  return `<div class="folha bib"><b>Day library</b><span class="chip num">63 days</span><span class="meta num">4,912 cases · ${p.length} pending</span><button class="btn peq" type="button" id="btnArquivar">Archive the day</button></div>
+  return `<div class="folha bib"><b>Day library</b><span class="chip num">12 days</span><span class="meta num">260 synthetic cases · ${p.length} pending</span><button class="btn peq" type="button" id="btnArquivar">Archive the day</button></div>
     ${caminho}
     <div class="folha-cab" style="margin:8px 0 -4px"><h2>Month view · ${mesSel}</h2><span class="meta">everything rejected this month, by rejection date</span>
       <span class="dir"><select id="mes" class="btn peq" aria-label="Month">${Object.keys(MESES).map(m=>`<option${m===mesSel?" selected":""}>${m}</option>`).join("")}</select></span></div>
@@ -717,7 +712,7 @@ function render(){
 function medeTopo(){ document.documentElement.style.setProperty("--topo-h", document.querySelector(".topo").offsetHeight+"px"); }
 addEventListener("resize",medeTopo); medeTopo();
 function ir(v){ vista=v; grindIdx=0; filtroData=""; filtroAss=""; if(v!=="todos"){busca="";$("#busca").value="";} try{history.replaceState(null,"","#"+v);}catch(e){} render(); window.scrollTo({top:0}); }
-function setTarja(on,txt){ $("#tarja").classList.toggle("rodando",on); $("#tarjaTxt").textContent = on?txt:"Nothing running now"; }
+function setTarja(on,txt){ $("#tarja").classList.toggle("rodando",on); $("#tarjaTxt").textContent = on?txt:"Simulation: nothing is running"; }
 
 /* ── eventos ── */
 $("#lado").addEventListener("click",e=>{const b=e.target.closest("[data-v]"); if(b) ir(b.dataset.v);});
@@ -734,7 +729,7 @@ $("#conteudo").addEventListener("change",e=>{
 });
 $("#conteudo").addEventListener("click",e=>{
   const t=e.target.closest("button"); if(!t) return;
-  if(t.dataset.acao==="copiar"){ const el=t.closest("[data-id]"); const c=CASOS.find(x=>x.id==el.dataset.id); aviso("CPF copied ("+c.cpf+", masked in this demo)"); return; }
+  if(t.dataset.acao==="copiar"){ const el=t.closest("[data-id]"); const c=CASOS.find(x=>x.id==el.dataset.id); aviso("Synthetic ID copied ("+c.cpf+")"); return; }
   if(t.id==="btnPlanilha"){ aviso("Spreadsheet generated for the operators (demo: no file is downloaded)"); return; }
   if(t.id==="btnRobo"){ rodarRobo(vista); return; }
   if(t.id==="btnRodada"){ rodarDia(); return; }
@@ -768,7 +763,7 @@ $("#btnTema").addEventListener("click",()=>{
 $("#btnRecarregar").addEventListener("click",()=>{const d=new Date();$("#conferido").textContent="Checked at "+d.toLocaleTimeString("en-GB");render();aviso("Data checked again");});
 $("#btnRelatorio").addEventListener("click",()=>{
   const p=pend(); const linhas=FILAS.map(f=>[f.titulo,daFila(f.k).filter(c=>!c.tratado)]).filter(x=>x[1].length).map(x=>`- ${x[0]}: ${x[1].length} (${brl(soma(x[1]))})`);
-  const txt=`Rejections 2026-10-09 (fictitious data)\n${p.length} open cases, ${brl(soma(p))}\n${linhas.join("\n")}`;
+  const txt=`Rejections 2026-03-05 (simulation, synthetic data)\n${p.length} open cases, ${brl(soma(p))}\n${linhas.join("\n")}`;
   (navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).then(()=>aviso("Daily report copied")).catch(()=>aviso("Report ready (the clipboard is not available here)"));
 });
 const dica=$("#dica");

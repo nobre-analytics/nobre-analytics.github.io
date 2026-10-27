@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Morning Operations Routine Automation | Paulo Nobre</title>
+<meta name="description" content="A scheduled sequence for the collections morning routine, with documented results and limits.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js');</script>
+<script src="../assets/vt.js"></script>
+<link rel="stylesheet" href="../assets/site.css">
+<style>
+
+.tree { padding: 28px 24px 24px; }
+.tree svg { width: 100%; height: auto; overflow: visible; }
+.tree .node rect { fill: var(--surface-2); stroke: var(--line-2); }
+.tree .node.root rect { fill: rgba(224,122,107,.12); stroke: rgba(224,122,107,.55); }
+.tree .node.engine rect { fill: rgba(214,168,76,.12); stroke: var(--amber); }
+.tree text { fill: var(--text); font: 600 14px "Hanken Grotesk", system-ui, sans-serif; }
+.tree text.sub { fill: var(--muted); font-weight: 500; font-size: 12px; }
+.tree .edge { fill: none; stroke: var(--line-2); stroke-width: 1.5; }
+.tree .edge.hot { stroke: var(--amber); }
+.tree .out rect { fill: var(--bg-2); stroke: var(--line-2); }
+.tree .out circle { fill: var(--amber); }
+.tree .final rect { fill: rgba(214,168,76,.14); stroke: var(--amber); }
+.tree .final text { font-size: 15px; }
+.tree__cap { margin-top: 14px; }
+@media (prefers-reduced-motion: no-preference) {
+  .js .tree .edge { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 1s var(--ease) forwards; animation-delay: calc(var(--d, 0) * 1ms + 700ms); }
+  .js .tree .out { opacity: 0; animation: fadein .6s var(--ease) forwards; animation-delay: calc(var(--d, 0) * 1ms + 1100ms); }
+}
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@keyframes fadein { to { opacity: 1; } }
+
+.outcomes { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 28px; }
+.outcome { padding: 20px; }
+.outcome b { display: block; font-size: 1.0625rem; letter-spacing: -0.01em; }
+.outcome span { display: block; margin-top: 6px; color: var(--muted); font-size: .9375rem; line-height: 1.45; }
+
+.timeline { list-style: none; position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin-top: 8px; }
+.timeline::before { content: ""; position: absolute; left: 0; right: 0; top: 7px; height: 1px; background: var(--line-2); }
+.timeline li { position: relative; padding: 32px 24px 0 0; }
+.timeline li::before { content: ""; position: absolute; left: 0; top: 0; width: 15px; height: 15px; border-radius: 50%; background: var(--bg); border: 2px solid var(--amber); }
+.timeline time { color: var(--amber); font-weight: 600; font-size: .9375rem; }
+.timeline b { display: block; margin-top: 4px; font-size: 1.0625rem; }
+.timeline p { margin-top: 6px; color: var(--muted); font-size: .9375rem; line-height: 1.5; max-width: 30ch; }
+
+
+.quote { margin-top: 28px; padding: 24px 28px; border-left: 2px solid var(--amber); max-width: var(--read); }
+.quote p { font-size: 1.125rem; color: var(--text); line-height: 1.5; }
+.quote cite { display: block; margin-top: 10px; font-style: normal; color: var(--muted); font-size: .9375rem; }
+
+@media (max-width: 920px) { .outcomes { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) {
+  .timeline { grid-template-columns: 1fr; gap: 28px; }
+  .timeline::before { left: 7px; right: auto; top: 0; bottom: 0; width: 1px; height: auto; }
+  .timeline li { padding: 0 0 0 32px; }
+  .tree { padding: 20px 12px 16px; }
+}
+@media (max-width: 420px) { .outcomes { grid-template-columns: 1fr; } }
+
+</style>
+</head>
+<body class="case case--automacao-rotina-operacional">
+<a class="skip" href="#conteudo">Skip to content</a>
+<div class="flares" aria-hidden="true"><div class="flare blue"></div><div class="flare cyan"></div><div class="flare amber"></div><div class="grain"></div></div>
+
+<div class="page">
+  <div class="wrap">
+    <nav class="topbar" aria-label="Navigation">
+      <a class="back" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg> All projects</a>
+      <span class="topbar__right"><span class="crumb">Case <b>01</b> of 04</span><span class="langs" role="group" aria-label="Language"><span class="langs__cur" aria-current="true">EN</span><a href="../automacao-rotina-operacional.html" hreflang="pt-BR" lang="pt-BR" title="Versão em português" data-lang-switch="pt-BR">PT</a></span></span>
+    </nav>
+
+    <main id="conteudo">
+      <header class="hero">
+        <div class="hero__grid">
+          <div>
+            <p class="hero__kicker" data-seq style="--i:0">Process improvement and automation</p>
+            <h1 data-seq style="--i:1">Morning Operations Routine Automation</h1>
+            <p class="hero__lede" data-seq style="--i:2">The routine that gets the collections operation ready depended on manual triggers, one step after another. I reorganized the steps into a scheduled sequence, and the dialer list was ready earlier on the documented days.</p>
+            <div class="facts" data-seq style="--i:3"><span class="fact">Scheduled sequence at 6:00</span><span class="fact">Existing platform</span><span class="fact">With vendor guidance</span></div></div>
+          <div class="hero__visual" data-seq style="--i:4">
+            <figure class="panel" style="padding:22px 18px"><div class="flowrow"><span class="tag-r">Before</span><span class="st ">A person checks<small>previous steps</small></span><span class="st ">A person triggers<small>the distribution</small></span><span class="st wait">Waiting<small>until someone sees it end</small></span><span class="st ">A person triggers<small>the dialer list</small></span></div><div class="flowrow"><span class="tag-r">After</span><span class="st auto">Scheduler<small>starts at 6:00</small></span><span class="st auto">Distribution<small>of the portfolio</small></span><span class="st auto">Dialer list<small>next in sequence</small></span><span class="st ">A person monitors<small>results and failures</small></span></div></figure></div>
+        </div>
+      </header>
+
+      <div class="kpis" style="--n:3" data-reveal><div class="kpi"><div class="kpi__value">7:30</div><div class="kpi__label">median dialer list completion before the change · 29 days, Apr and May 2026</div></div><div class="kpi"><div class="kpi__value">3 of 29</div><div class="kpi__label">days when the list was ready after 8:00, when operations start</div></div><div class="kpi"><div class="kpi__value">06:22 to 06:57</div><div class="kpi__label">list completion on the 3 documented days after the change</div></div></div>
+    <section class="section" data-reveal>
+      <div class="section__head">
+        <p class="section__label">Business problem</p>
+        <div>
+          <h2>Operations started at 8:00, but the preparation depended on someone triggering each step.</h2>
+          <div class="section__body"><div class="prose"><p>The dialer list has to be ready for the collections team to start the day. Because each task only started when a person triggered the previous one, any wait or failure pushed the list close to 8:00 and, on some days, past it.</p></div></div>
+        </div>
+      </div>
+    </section>
+    <section class="section" data-reveal>
+      <div class="section__head">
+        <p class="section__label">Operating context</p>
+        <div>
+          <h2>Five steps in sequence, each triggered by hand.</h2>
+          <div class="section__body"><ol class="steps"><li><span>Check that previous tasks and write-offs had finished.</span></li><li><span>Trigger the portfolio distribution to the collection agencies.</span></li><li><span>Wait for the distribution to finish.</span></li><li><span>Trigger the dialer list preparation.</span></li><li><span>Handle failures and rerun steps when needed.</span></li></ol><div class="prose"><p>Three people shared the BackOffice work, and none of them worked only on this routine.</p></div></div>
+        </div>
+      </div>
+    </section>
+    <section class="section" data-reveal>
+      <div class="section__head">
+        <p class="section__label">My responsibility</p>
+        <div>
+          <h2>I mapped the flow and set up the chaining, with vendor guidance.</h2>
+          <div class="section__body"><ul class="list"><li>I mapped the steps, timings and <strong>dependencies</strong> between tasks.</li><li>I identified the <strong>manual waits</strong> between one step and the next.</li><li>I set up and validated the <strong>chaining</strong> and <strong>scheduling</strong> on the existing platform, with guidance from the vendor’s support team.</li><li>I defined the <strong>failure and rerun</strong> path: repeat the step and, if that does not fix it, hand it to a person.</li></ul><p class="measure"><b>Who did what.</b> The platform and its code belong to the vendor, and their support team advised on how to use the chaining. The mapping, the sequence setup, the validation of the runs and the follow-up on the change were mine.</p></div>
+        </div>
+      </div>
+    </section>
+    <section class="section" data-reveal>
+      <div class="section__head">
+        <p class="section__label">Analysis and decisions</p>
+        <div>
+          <h2>The bottleneck was the wait between steps, not how long each step took.</h2>
+          <div class="section__body"><div class="prose"><p>In the April and May 2026 records, the wait between the distribution and the dialer list trigger reached <strong>41 minutes</strong> on one day. So the decision was to chain the dependent tasks and start the sequence on a schedule, at 6:00, instead of speeding up each task.</p><p>The failure path was explicit from the start: a failed step is rerun and, if the problem continues, a person takes over.</p></div></div>
+        </div>
+      </div>
+    </section>
+    <section class="section" data-reveal>
+      <div class="section__head">
+        <p class="section__label">How the solution works</p>
+        <div>
+          <h2>A scheduled start, steps in sequence, and a person monitoring the result.</h2>
+          <div class="section__body"><div class="cards4"><div class="panel"><b>Scheduled start</b><span>The sequence starts at 6:00, without someone needing to be online to trigger it.</span></div><div class="panel"><b>Distribution</b><span>The portfolio is distributed to the collection agencies.</span></div><div class="panel"><b>Dialer list</b><span>Starts when the distribution ends, with no manual trigger to wait for.</span></div><div class="panel"><b>Monitoring</b><span>A person checks the result and handles failures and reruns.</span></div></div></div>
+        </div>
+      </div>
+    </section>
+    <section class="section" aria-label="Demo">
+      <figure class="frame-wrap" data-reveal>
+        <div class="frame" style="--h:600px; --s:0.6">
+          <div class="frame__bar" aria-hidden="true"><span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__url">Morning routine · before and after</span></div>
+          <div class="frame__view"><iframe src="../demos/en/rotina-matinal.html" title="Morning routine demo with synthetic data" loading="lazy" tabindex="-1"></iframe></div>
+        </div>
+        <figcaption class="frame__cta">
+          <span class="note">This is an interactive demonstration using synthetic data. All records and results are illustrative and do not represent actual operational data.</span>
+          <a class="btn" href="../demos/en/rotina-matinal.html">Open the demo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        </figcaption>
+      </figure>
+    </section>
+    <section class="section" data-reveal>
+      <div class="section__head">
+        <p class="section__label">Result and evidence</p>
+        <div>
+          <h2>The dialer list was ready earlier on the documented days.</h2>
+          <div class="section__body"><figure class="panel chart"><svg viewBox="0 0 720 196" role="img" aria-labelledby="ch-t"><title id="ch-t">Dialer list completion time, before and after the scheduled sequence</title>
+      <line class="grid" x1="180.0" y1="20" x2="180.0" y2="170"/><text x="180.0" y="188" text-anchor="middle">06:00</text><line class="grid" x1="284.0" y1="20" x2="284.0" y2="170"/><text x="284.0" y="188" text-anchor="middle">06:30</text><line class="grid" x1="388.0" y1="20" x2="388.0" y2="170"/><text x="388.0" y="188" text-anchor="middle">07:00</text><line class="grid" x1="492.0" y1="20" x2="492.0" y2="170"/><text x="492.0" y="188" text-anchor="middle">07:30</text><line class="grid" x1="596.0" y1="20" x2="596.0" y2="170"/><text x="596.0" y="188" text-anchor="middle">08:00</text><line class="grid" x1="700.0" y1="20" x2="700.0" y2="170"/><text x="700.0" y="188" text-anchor="middle">08:30</text>
+      <line class="ref" x1="180.0" y1="14" x2="180.0" y2="170"/><text x="184.0" y="12">scheduled start</text>
+      <line class="ref" x1="596.0" y1="14" x2="596.0" y2="170"/><text x="600.0" y="12">operations start</text>
+      <text class="lbl" x="0" y="62">Before</text><text x="0" y="78">29 days · Apr and May 2026</text>
+      <rect class="range" x="422.7" y="52" width="180.3" height="22" rx="4"/>
+      <line class="med" x1="492.0" y1="46" x2="492.0" y2="80"/>
+      <text x="492.0" y="40" text-anchor="middle">median 7:30</text>
+      <text x="418.7" y="67" text-anchor="end">7:10</text><text x="606.9" y="67">8:02</text>
+      <text class="lbl" x="0" y="128">After</text><text x="0" y="144">3 documented days</text>
+      <circle class="dot" cx="256.3" cy="130" r="6"/><circle class="dot" cx="311.7" cy="130" r="6"/><circle class="dot" cx="377.6" cy="130" r="6"/><text x="256.3" y="112" text-anchor="middle">06:22</text><text x="311.7" y="154" text-anchor="middle">06:38</text><text x="377.6" y="112" text-anchor="middle">06:57</text>
+    </svg></figure><p class="chart__cap">Band = minimum and maximum of the 29 earlier days; line = median; dots = the 3 documented days after the change.</p><div class="prose"><p>The scheduled sequence reduced the dependency on manual triggers and made the dialer list available earlier on the documented days.</p></div><p class="measure"><b>How it was measured.</b> Historical run records of the routine. Before: 29 days observed in April and May 2026, with a median of 7:30, a minimum of 7:10 and a maximum of 8:02; on 3 of those days the list was ready after 8:00. After: 3 days with detailed records (6:57, 6:38 and 6:22). The times are dialer list completion times, not the end of every task in the routine.</p></div>
+        </div>
+      </div>
+    </section>
+    <section class="section" data-reveal>
+      <div class="section__head">
+        <p class="section__label">Limitations</p>
+        <div>
+          <h2>What the data does not show yet.</h2>
+          <div class="section__body"><ul class="list"><li>Three observations after the change are <strong>not enough</strong> to draw a conclusion about every day.</li><li>The times measure the <strong>dialer list</strong>. The full routine has other steps; in one record, the digital step finished after 8:00.</li><li>Human effort was <strong>not measured</strong> in hours before and after.</li><li>Email alerts were used in the past; the most recent configuration reviewed shows the feature is <strong>turned off</strong>.</li></ul></div>
+        </div>
+      </div>
+    </section>
+    <section class="section" data-reveal>
+      <div class="section__head">
+        <p class="section__label">Sustainability</p>
+        <div>
+          <h2>The routine no longer depends on someone triggering each step, but it is still monitored.</h2>
+          <div class="section__body"><div class="prose"><p>The team now has two people, and one of them monitors the morning routine. The team got smaller because a colleague left, not because of the automation. When a step fails, it is rerun; if that does not fix it, a person takes over.</p></div></div>
+        </div>
+      </div>
+    </section>
+    <section class="section" data-reveal>
+      <div class="section__head">
+        <p class="section__label">Leadership Principles</p>
+        <div>
+          <h2>How this case connects to Amazon’s principles.</h2>
+          <div class="section__body"><ul class="lp"><li class="panel"><b>Dive Deep</b><span>I gathered the real dialer list times and the waits between steps before proposing the change.</span></li><li class="panel"><b>Invent and Simplify</b><span>I used the chaining in the existing platform instead of looking for a new tool.</span></li><li class="panel"><b>Ownership</b><span>I validated the runs after the change and made it clear what happens when a step fails.</span></li></ul></div>
+        </div>
+      </div>
+    </section>
+    <section class="section" data-reveal>
+      <div class="section__head">
+        <p class="section__label">Technology and methods</p>
+        <div>
+          <h2>Process first, tool second.</h2>
+          <div class="section__body"><div class="stack"><span class="tag">Process mapping</span><span class="tag">Dependency analysis</span><span class="tag">Task chaining</span><span class="tag">Scheduling</span><span class="tag">Vendor platform</span></div></div>
+        </div>
+      </div>
+    </section>
+    </main>
+
+    <nav class="next" aria-label="Next case">
+      <a href="central-pagamentos-rejeitados.html">
+        <span><span class="next__label">Next case</span><span class="next__title">Rejected Payments Decision Engine</span></span>
+        <span class="next__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+    </nav>
+
+    <footer class="foot">
+      <span>© 2026 Paulo Nobre, São Paulo, Brazil</span>
+      <a href="index.html">Back to the project list</a>
+    </footer>
+  </div>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

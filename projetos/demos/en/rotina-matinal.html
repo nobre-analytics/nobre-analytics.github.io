@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Morning routine · before and after · Demo</title>
+<style>
+:root{--bg:#f6f4ef;--panel:#fff;--ink:#1d232b;--ink2:#4b5563;--muted:#6b7280;--line:#e5e1d8;--acc:#9a6b16;--acc-bg:#f6ecd7;--ok:#1f7a4d;--ok-bg:#e3f3ea;--warn:#a5431a;--warn-bg:#fbe6dc;--run:#1d5fa8;--run-bg:#e3edf9;--wait:#7a6a2a;--wait-bg:#f4efd9}
+@media (prefers-color-scheme:dark){:root{--bg:#10151c;--panel:#18202a;--ink:#e8ecf1;--ink2:#b9c2cd;--muted:#8d98a6;--line:#2a3442;--acc:#e0b25c;--acc-bg:#3a2f18;--ok:#5fcf97;--ok-bg:#163628;--warn:#f39a73;--warn-bg:#3d2117;--run:#7db3f0;--run-bg:#18304b;--wait:#e1cd7e;--wait-bg:#3a3418}}
+*{box-sizing:border-box;margin:0}
+body{font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink)}
+.synthetic-banner{background:#2B2416;color:#F3E9D2;font-size:12.5px;padding:7px 16px;text-align:center;border-bottom:1px solid #6B5A33}
+.synthetic-banner b{letter-spacing:.06em;text-transform:uppercase;font-size:11px;margin-right:8px}
+.synthetic-banner a{color:#F3E9D2;margin-right:12px}
+.wrap{max-width:1040px;margin:0 auto;padding:22px 18px 40px}
+h1{font-size:1.5rem;letter-spacing:-.01em}
+.sub{color:var(--ink2);margin-top:4px;max-width:70ch}
+.tabs{display:flex;gap:6px;margin-top:18px;flex-wrap:wrap}
+.tabs button{font:inherit;border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:8px 14px;border-radius:999px;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--ink);color:var(--panel);border-color:var(--ink)}
+.exp{margin-top:14px;padding:12px 14px;border-left:3px solid var(--acc);background:var(--acc-bg);border-radius:6px;color:var(--ink)}
+.bar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;margin-top:16px}
+.clock{font-variant-numeric:tabular-nums;font-weight:600}
+.clock small{display:block;font-weight:500;color:var(--muted);font-size:12px}
+.bar label{display:flex;gap:6px;align-items:center;color:var(--ink2);font-size:14px}
+.btn{font:inherit;font-weight:600;border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:8px 14px;border-radius:8px;cursor:pointer}
+.btn.prim{background:var(--acc);border-color:var(--acc);color:#fff}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.lane{display:grid;gap:10px;margin-top:18px}
+.lane.a{grid-template-columns:repeat(3,minmax(0,1fr))}.lane.b{grid-template-columns:repeat(4,minmax(0,1fr))}
+.step{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:8px;min-height:170px}
+.step .who{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.step h3{font-size:1rem}
+.step p{color:var(--ink2);font-size:13.5px}
+.chip{align-self:flex-start;font-size:12px;font-weight:600;padding:2px 9px;border-radius:999px;background:var(--line);color:var(--ink2)}
+.chip.running,.chip.retry{background:var(--run-bg);color:var(--run)}.chip.done{background:var(--ok-bg);color:var(--ok)}
+.chip.failed,.chip.person{background:var(--warn-bg);color:var(--warn)}.chip.waiting,.chip.ready{background:var(--wait-bg);color:var(--wait)}
+.prog{height:6px;border-radius:4px;background:var(--line);overflow:hidden;margin-top:auto}.prog i{display:block;height:100%;width:0;background:var(--run);transition:width .12s linear}
+.step .btn{align-self:flex-start}
+.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:18px}
+.metric{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.metric b{display:block;font-size:1.35rem;font-variant-numeric:tabular-nums}
+.metric span{color:var(--muted);font-size:13px}
+.log{margin-top:16px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;max-height:180px;overflow:auto;font:13px/1.55 ui-monospace,Consolas,monospace;color:var(--ink2)}
+.log h2{font:600 13px system-ui,sans-serif;color:var(--ink);margin-bottom:6px}
+.foot{margin-top:16px;color:var(--muted);font-size:13px}
+@media (max-width:760px){.lane.a,.lane.b{grid-template-columns:1fr}.metrics{grid-template-columns:1fr 1fr}.step{min-height:0}}
+@media (prefers-reduced-motion:reduce){.prog i{transition:none}}
+</style>
+</head>
+<body>
+<div class="synthetic-banner" role="note"><a href="../../en/automacao-rotina-operacional.html">← Back to the case</a><b>Synthetic data</b>This is an interactive demonstration using synthetic data. All records and results are illustrative and do not represent actual operational data.</div>
+<div class="wrap">
+  <h1>Morning routine: before and after</h1>
+  <p class="sub">Compare the sequence with manual triggers and the scheduled sequence. The clock belongs to the simulation, in minutes, and does not represent real times.</p>
+  <div class="tabs" role="tablist">
+    <button type="button" role="tab" id="tabA" aria-selected="true" aria-controls="painel">Before · manual flow</button>
+    <button type="button" role="tab" id="tabB" aria-selected="false" aria-controls="painel">After · scheduled flow</button>
+  </div>
+  <div id="painel" role="tabpanel">
+    <p class="exp" id="exp"></p>
+    <div class="bar">
+      <div class="clock" aria-live="polite"><small>Simulation clock</small><span id="clock">0</span> min</div>
+      <span id="opts"></span>
+      <button type="button" class="btn prim" id="start" hidden>Start the simulated morning</button>
+      <button type="button" class="btn" id="reset">Start over</button>
+    </div>
+    <div class="lane" id="lane"></div>
+    <div class="metrics">
+      <div class="metric"><b id="m1">0</b><span>Actions by a person</span></div>
+      <div class="metric"><b id="m2">0 min</b><span>Waiting for a person</span></div>
+      <div class="metric"><b id="m3">0</b><span>Automatic retries</span></div>
+      <div class="metric"><b id="m4">no</b><span>Handed to a person</span></div>
+    </div>
+    <div class="log" aria-live="polite"><h2>Simulation log</h2><div id="log"></div></div>
+  </div>
+  <p class="foot">The times in this simulation are illustrative. The documented times, with period and sample size, are on the case page.</p>
+</div>
+<script>
+"use strict";
+/* DEMONSTRAÇÃO COM DADOS SINTÉTICOS / SYNTHETIC DEMO. Etapas e tempos são ilustrativos. */
+const T = {"exp_a": "<b>Before:</b> each step only starts when someone triggers it. While nobody clicks, the simulation clock keeps counting the wait.", "exp_b": "<b>After:</b> the sequence starts on a schedule and runs on its own. A person steps in to check the result and handle failures.", "opt_a": "Simulate a dialer list failure", "opt_b1": "Simulate a distribution failure", "opt_b2": "The retry also fails", "st": {"idle": "waiting", "ready": "ready to trigger", "running": "running", "done": "done", "failed": "failed", "retry": "retrying", "person": "with a person", "waiting": "waiting for someone"}, "act": {"conferir": "Check", "disparar": "Trigger", "reexec": "Rerun", "conf_res": "Check the result"}, "who": {"pessoa": "Person", "agenda": "Scheduler", "seq": "Automatic sequence"}, "A": [["conf", "Check previous steps", "Did yesterday’s tasks and write-offs finish?", "pessoa", 3], ["dist", "Portfolio distribution", "Sends the portfolio to the collection agencies", "pessoa", 18], ["lista", "Dialer list", "Prepares the list for the team", "pessoa", 12]], "Bst": [["agenda", "Scheduled start", "The sequence starts on its own", "agenda", 1], ["dist", "Portfolio distribution", "Sends the portfolio to the collection agencies", "seq", 18], ["lista", "Dialer list", "Starts when the distribution ends", "seq", 12], ["mon", "Monitoring", "A person checks the result", "pessoa", 2]], "min": "min", "yes": "yes", "no": "no", "done_a": "Simulated morning finished with manual triggers.", "done_b": "Simulated morning finished by the scheduled sequence.", "l_wait": "waiting for a person to trigger it", "l_fail": "failed", "l_retry": "automatic retry", "l_person": "handed to a person", "l_start": "start", "l_done": "done"};
+const $ = id => document.getElementById(id);
+let modo = "A", S = null, timer = null;
+function novo(){
+  const base = modo==="A" ? T.A : T.Bst;
+  S = {t:0, manual:0, espera:0, tent:0, pessoa:false, fim:false, falhaA:false, falhaB1:false, falhaB2:false, jaFalhou:{}, log:[],
+       steps: base.map(([id,nome,desc,quem,dur])=>({id,nome,desc,quem,dur,st:"idle",p:0}))};
+  if(modo==="A"){ S.steps[0].st="ready"; }
+}
+function log(m){ S.log.push(`[${String(S.t).padStart(3," ")} ${T.min}] ${m}`); }
+function opcoes(){
+  if(modo==="A") return `<label><input type="checkbox" id="fA"> ${T.opt_a}</label>`;
+  return `<label><input type="checkbox" id="fB1"> ${T.opt_b1}</label><label><input type="checkbox" id="fB2" disabled> ${T.opt_b2}</label>`;
+}
+function botao(s,i){
+  if(modo==="A"){
+    if(s.st==="ready") return `<button type="button" class="btn prim" data-i="${i}">${i===0?T.act.conferir:T.act.disparar}</button>`;
+    if(s.st==="failed") return `<button type="button" class="btn prim" data-i="${i}">${T.act.reexec}</button>`;
+    return "";
+  }
+  if(s.st==="person") return `<button type="button" class="btn prim" data-i="${i}">${T.act.reexec}</button>`;
+  if(s.id==="mon" && s.st==="ready") return `<button type="button" class="btn prim" data-i="${i}">${T.act.conf_res}</button>`;
+  return "";
+}
+function render(){
+  $("exp").innerHTML = modo==="A"?T.exp_a:T.exp_b;
+  $("tabA").setAttribute("aria-selected",modo==="A"); $("tabB").setAttribute("aria-selected",modo==="B");
+  $("start").hidden = modo!=="B"; $("start").disabled = !(modo==="B" && S.steps[0].st==="idle");
+  const lane=$("lane"); lane.className="lane "+(modo==="A"?"a":"b");
+  lane.innerHTML = S.steps.map((s,i)=>{
+    const st = (modo==="A" && s.st==="ready" && i>0) ? "waiting" : s.st;
+    return `<article class="step"><span class="who">${T.who[s.quem]}</span><h3>${s.nome}</h3><p>${s.desc}</p>
+      <span class="chip ${st}">${T.st[st]}</span>${botao(s,i)}<div class="prog"><i style="width:${s.p}%"></i></div></article>`;}).join("");
+  $("clock").textContent = S.t; $("m1").textContent = S.manual; $("m2").textContent = S.espera+" "+T.min;
+  $("m3").textContent = S.tent; $("m4").textContent = S.pessoa?T.yes:T.no;
+  $("log").innerHTML = S.log.map(x=>`<div>${x}</div>`).join("") || "<div>—</div>";
+}
+function tick(){
+  if(S.fim) return;
+  let algo=false;
+  S.steps.forEach((s,i)=>{
+    if(s.st==="running"||s.st==="retry"){
+      algo=true; s.p=Math.min(100,s.p+100/s.dur);
+      if(s.p>=100){
+        const deveFalhar = (modo==="A" && s.id==="lista" && S.falhaA && !S.jaFalhou.lista) ||
+                           (modo==="B" && s.id==="dist" && S.falhaB1 && (s.st==="running" || (s.st==="retry" && S.falhaB2)));
+        if(deveFalhar){
+          S.jaFalhou[s.id]=true; s.p=0;
+          if(modo==="A"){ s.st="failed"; log(s.nome+": "+T.l_fail); }
+          else if(s.st==="running"){ s.st="retry"; S.tent++; log(s.nome+": "+T.l_fail+" · "+T.l_retry); }
+          else { s.st="person"; S.pessoa=true; log(s.nome+": "+T.l_fail+" · "+T.l_person); }
+        } else {
+          s.st="done"; log(s.nome+": "+T.l_done);
+          const nx=S.steps[i+1];
+          if(nx){ if(modo==="A"){ nx.st="ready"; log(nx.nome+": "+T.l_wait); } else { nx.st = nx.quem==="pessoa" ? "ready" : "running"; } }
+          else { S.fim=true; log(modo==="A"?T.done_a:T.done_b); }
+        }
+      }
+    }
+  });
+  const esperando = S.steps.some((s,i)=>(modo==="A" && i>0 && s.st==="ready") || s.st==="failed" || s.st==="person");
+  if(algo || esperando || (modo==="B" && S.steps.some(s=>s.id==="mon"&&s.st==="ready"))){ S.t++; if(esperando) S.espera++; }
+  render();
+}
+function iniciarTimer(){ clearInterval(timer); timer=setInterval(tick,140); }
+function trocar(m){ modo=m; novo(); $("opts").innerHTML=opcoes(); ligarOpcoes(); render(); iniciarTimer(); }
+function ligarOpcoes(){
+  const fA=$("fA"), f1=$("fB1"), f2=$("fB2");
+  if(fA) fA.onchange=()=>{S.falhaA=fA.checked;};
+  if(f1) f1.onchange=()=>{S.falhaB1=f1.checked; f2.disabled=!f1.checked; if(!f1.checked){f2.checked=false;S.falhaB2=false;}};
+  if(f2) f2.onchange=()=>{S.falhaB2=f2.checked;};
+}
+$("lane").addEventListener("click",e=>{
+  const b=e.target.closest("[data-i]"); if(!b) return; const i=+b.dataset.i, s=S.steps[i];
+  if(modo==="A"){
+    S.manual++;
+    if(s.id==="conf"){ s.st="running"; log(s.nome+": "+T.l_start); }
+    else { s.st="running"; s.p=0; log(s.nome+": "+T.l_start); }
+  } else {
+    if(s.st==="person"){ S.manual++; s.st="running"; s.p=0; S.falhaB1=false; log(s.nome+": "+T.act.reexec); }
+    else if(s.id==="mon"){ S.manual++; s.st="running"; log(s.nome+": "+T.l_start); }
+  }
+  render();
+});
+$("start").onclick=()=>{ const s=S.steps[0]; s.st="running"; log(s.nome+": "+T.l_start); render(); };
+$("reset").onclick=()=>trocar(modo);
+$("tabA").onclick=()=>trocar("A"); $("tabB").onclick=()=>trocar("B");
+trocar("A");
+</script>
+</body>
+</html>

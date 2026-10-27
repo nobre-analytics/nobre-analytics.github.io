@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Automação da Rotina Operacional Matinal | Paulo Nobre</title>
+<meta name="description" content="Sequência agendada para a rotina matinal da operação de cobrança, com resultados documentados e limites.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js');</script>
+<script src="assets/vt.js"></script>
+<link rel="stylesheet" href="assets/site.css">
+<style>
+
+.tree { padding: 28px 24px 24px; }
+.tree svg { width: 100%; height: auto; overflow: visible; }
+.tree .node rect { fill: var(--surface-2); stroke: var(--line-2); }
+.tree .node.root rect { fill: rgba(224,122,107,.12); stroke: rgba(224,122,107,.55); }
+.tree .node.engine rect { fill: rgba(214,168,76,.12); stroke: var(--amber); }
+.tree text { fill: var(--text); font: 600 14px "Hanken Grotesk", system-ui, sans-serif; }
+.tree text.sub { fill: var(--muted); font-weight: 500; font-size: 12px; }
+.tree .edge { fill: none; stroke: var(--line-2); stroke-width: 1.5; }
+.tree .edge.hot { stroke: var(--amber); }
+.tree .out rect { fill: var(--bg-2); stroke: var(--line-2); }
+.tree .out circle { fill: var(--amber); }
+.tree .final rect { fill: rgba(214,168,76,.14); stroke: var(--amber); }
+.tree .final text { font-size: 15px; }
+.tree__cap { margin-top: 14px; }
+@media (prefers-reduced-motion: no-preference) {
+  .js .tree .edge { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 1s var(--ease) forwards; animation-delay: calc(var(--d, 0) * 1ms + 700ms); }
+  .js .tree .out { opacity: 0; animation: fadein .6s var(--ease) forwards; animation-delay: calc(var(--d, 0) * 1ms + 1100ms); }
+}
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@keyframes fadein { to { opacity: 1; } }
+
+.outcomes { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 28px; }
+.outcome { padding: 20px; }
+.outcome b { display: block; font-size: 1.0625rem; letter-spacing: -0.01em; }
+.outcome span { display: block; margin-top: 6px; color: var(--muted); font-size: .9375rem; line-height: 1.45; }
+
+.timeline { list-style: none; position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin-top: 8px; }
+.timeline::before { content: ""; position: absolute; left: 0; right: 0; top: 7px; height: 1px; background: var(--line-2); }
+.timeline li { position: relative; padding: 32px 24px 0 0; }
+.timeline li::before { content: ""; position: absolute; left: 0; top: 0; width: 15px; height: 15px; border-radius: 50%; background: var(--bg); border: 2px solid var(--amber); }
+.timeline time { color: var(--amber); font-weight: 600; font-size: .9375rem; }
+.timeline b { display: block; margin-top: 4px; font-size: 1.0625rem; }
+.timeline p { margin-top: 6px; color: var(--muted); font-size: .9375rem; line-height: 1.5; max-width: 30ch; }
+
+
+.quote { margin-top: 28px; padding: 24px 28px; border-left: 2px solid var(--amber); max-width: var(--read); }
+.quote p { font-size: 1.125rem; color: var(--text); line-height: 1.5; }
+.quote cite { display: block; margin-top: 10px; font-style: normal; color: var(--muted); font-size: .9375rem; }
+
+@media (max-width: 920px) { .outcomes { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) {
+  .timeline { grid-template-columns: 1fr; gap: 28px; }
+  .timeline::before { left: 7px; right: auto; top: 0; bottom: 0; width: 1px; height: auto; }
+  .timeline li { padding: 0 0 0 32px; }
+  .tree { padding: 20px 12px 16px; }
+}
+@media (max-width: 420px) { .outcomes { grid-template-columns: 1fr; } }
+
+</style>
+</head>
+<body class="case case--automacao-rotina-operacional">
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+<div class="flares" aria-hidden="true"><div class="flare blue"></div><div class="flare cyan"></div><div class="flare amber"></div><div class="grain"></div></div>
+
+<div class="page">
+  <div class="wrap">
+    <nav class="topbar" aria-label="Navegação">
+      <a class="back" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg> Todos os projetos</a>
+      <span class="topbar__right"><span class="crumb">Case <b>01</b> de 04</span><span class="langs" role="group" aria-label="Idioma"><span class="langs__cur" aria-current="true">PT</span><a href="en/automacao-rotina-operacional.html" hreflang="en" lang="en" title="English version" data-lang-switch="en">EN</a></span></span>
+    </nav>
+
+    <main id="conteudo">
+      <header class="hero">
+        <div class="hero__grid">
+          <div>
+            <p class="hero__kicker" data-seq style="--i:0">Melhoria de processo e automação</p>
+            <h1 data-seq style="--i:1">Automação da Rotina Operacional Matinal</h1>
+            <p class="hero__lede" data-seq style="--i:2">A rotina que prepara a operação de cobrança dependia de disparos manuais em sequência. Reorganizei as etapas em uma sequência agendada, e a lista do discador ficou pronta mais cedo nos dias documentados.</p>
+            <div class="facts" data-seq style="--i:3"><span class="fact">Sequência agendada às 6h</span><span class="fact">Plataforma já existente</span><span class="fact">Com orientação do fornecedor</span></div></div>
+          <div class="hero__visual" data-seq style="--i:4">
+            <figure class="panel" style="padding:22px 18px"><div class="flowrow"><span class="tag-r">Antes</span><span class="st ">Pessoa confere<small>etapas anteriores</small></span><span class="st ">Pessoa dispara<small>a distribuição</small></span><span class="st wait">Espera<small>até alguém ver o fim</small></span><span class="st ">Pessoa dispara<small>a lista do discador</small></span></div><div class="flowrow"><span class="tag-r">Depois</span><span class="st auto">Agendador<small>início às 6h</small></span><span class="st auto">Distribuição<small>da carteira</small></span><span class="st auto">Lista do discador<small>na sequência</small></span><span class="st ">Pessoa acompanha<small>resultado e falhas</small></span></div></figure></div>
+        </div>
+      </header>
+
+      <div class="kpis" style="--n:3" data-reveal><div class="kpi"><div class="kpi__value">7h30</div><div class="kpi__label">mediana de conclusão da lista do discador antes da mudança · 29 dias, abr e mai/2026</div></div><div class="kpi"><div class="kpi__value">3 de 29</div><div class="kpi__label">dias em que a lista ficou pronta depois das 8h, quando a operação começa</div></div><div class="kpi"><div class="kpi__value">6h22 a 6h57</div><div class="kpi__label">conclusão da lista nos 3 dias documentados depois da mudança</div></div></div>
+    <section class="section" data-reveal>
+      <div class="section__head">
+        <p class="section__label">Problema de negócio</p>
+        <div>
+          <h2>A operação começava às 8h, mas a preparação dependia de alguém disparar cada etapa.</h2>
+          <div class="section__body"><div class="prose"><p>A lista do discador precisa estar pronta para a equipe de cobrança começar o dia. Como cada tarefa só começava quando uma pessoa disparava a anterior, qualquer espera ou falha empurrava a lista para perto das 8h e, em alguns dias, para depois.</p></div></div>
+        </div>
+      </div>
+    </section>
+    <section class="section" data-reveal>
+      <div class="section__head">
+        <p class="section__label">Contexto operacional</p>
+        <div>
+          <h2>Cinco etapas em sequência, todas com disparo manual.</h2>
+          <div class="section__body"><ol class="steps"><li><span>Conferir se as tarefas e as baixas anteriores estavam concluídas.</span></li><li><span>Disparar a distribuição da carteira para as assessorias.</span></li><li><span>Aguardar o término da distribuição.</span></li><li><span>Disparar a preparação da lista do discador.</span></li><li><span>Tratar falhas e reexecutar etapas quando necessário.</span></li></ol><div class="prose"><p>Três pessoas dividiam as atividades do BackOffice, sem dedicação exclusiva a essa rotina.</p></div></div>
+        </div>
+      </div>
+    </section>
+    <section class="section" data-reveal>
+      <div class="section__head">
+        <p class="section__label">Minha responsabilidade</p>
+        <div>
+          <h2>Mapeei o fluxo e configurei o encadeamento, com orientação do fornecedor.</h2>
+          <div class="section__body"><ul class="list"><li>Mapeei as etapas, os horários e as <strong>dependências</strong> entre as tarefas.</li><li>Identifiquei os <strong>pontos de espera</strong> manual entre uma etapa e a próxima.</li><li>Configurei e validei o <strong>encadeamento</strong> e o <strong>agendamento</strong> na plataforma existente, com orientação do suporte do fornecedor.</li><li>Defini o caminho de <strong>falha e reexecução</strong>: repetir a etapa e, se não resolver, acionar uma pessoa.</li></ul><p class="measure"><b>Quem fez o quê.</b> A plataforma e o seu código são do fornecedor, e o suporte orientou o uso do encadeamento. O mapeamento, a configuração da sequência, a validação das execuções e o acompanhamento da mudança foram meus.</p></div>
+        </div>
+      </div>
+    </section>
+    <section class="section" data-reveal>
+      <div class="section__head">
+        <p class="section__label">Análise e decisões</p>
+        <div>
+          <h2>O gargalo era a espera entre as etapas, não a duração delas.</h2>
+          <div class="section__body"><div class="prose"><p>Nos registros de abril e maio de 2026, a espera entre a distribuição e o disparo da lista do discador chegou a <strong>41 minutos</strong> em um dos dias. Por isso a decisão foi encadear as tarefas dependentes e iniciar a sequência por agendamento, às 6h, em vez de acelerar cada tarefa.</p><p>O caminho de falha ficou explícito desde o início: uma etapa que falha é reexecutada e, se o problema continuar, uma pessoa assume.</p></div></div>
+        </div>
+      </div>
+    </section>
+    <section class="section" data-reveal>
+      <div class="section__head">
+        <p class="section__label">Como a solução funciona</p>
+        <div>
+          <h2>Início agendado, etapas em sequência e uma pessoa acompanhando o resultado.</h2>
+          <div class="section__body"><div class="cards4"><div class="panel"><b>Início agendado</b><span>A sequência começa às 6h, sem depender de alguém estar conectado para disparar.</span></div><div class="panel"><b>Distribuição</b><span>A carteira é distribuída para as assessorias.</span></div><div class="panel"><b>Lista do discador</b><span>Começa quando a distribuição termina, sem esperar um disparo manual.</span></div><div class="panel"><b>Acompanhamento</b><span>Uma pessoa confere o resultado e trata as falhas e reexecuções.</span></div></div></div>
+        </div>
+      </div>
+    </section>
+    <section class="section" aria-label="Demonstração">
+      <figure class="frame-wrap" data-reveal>
+        <div class="frame" style="--h:600px; --s:0.6">
+          <div class="frame__bar" aria-hidden="true"><span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__url">Rotina matinal · antes e depois</span></div>
+          <div class="frame__view"><iframe src="demos/pt/rotina-matinal.html" title="Demonstração da rotina matinal com dados sintéticos" loading="lazy" tabindex="-1"></iframe></div>
+        </div>
+        <figcaption class="frame__cta">
+          <span class="note">Esta é uma demonstração interativa com dados sintéticos. Os registros e resultados são ilustrativos e não representam dados reais da operação.</span>
+          <a class="btn" href="demos/pt/rotina-matinal.html">Abrir a demonstração <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        </figcaption>
+      </figure>
+    </section>
+    <section class="section" data-reveal>
+      <div class="section__head">
+        <p class="section__label">Resultado e evidências</p>
+        <div>
+          <h2>A lista do discador ficou pronta mais cedo nos dias documentados.</h2>
+          <div class="section__body"><figure class="panel chart"><svg viewBox="0 0 720 196" role="img" aria-labelledby="ch-t"><title id="ch-t">Horário de conclusão da lista do discador, antes e depois da sequência agendada</title>
+      <line class="grid" x1="180.0" y1="20" x2="180.0" y2="170"/><text x="180.0" y="188" text-anchor="middle">06:00</text><line class="grid" x1="284.0" y1="20" x2="284.0" y2="170"/><text x="284.0" y="188" text-anchor="middle">06:30</text><line class="grid" x1="388.0" y1="20" x2="388.0" y2="170"/><text x="388.0" y="188" text-anchor="middle">07:00</text><line class="grid" x1="492.0" y1="20" x2="492.0" y2="170"/><text x="492.0" y="188" text-anchor="middle">07:30</text><line class="grid" x1="596.0" y1="20" x2="596.0" y2="170"/><text x="596.0" y="188" text-anchor="middle">08:00</text><line class="grid" x1="700.0" y1="20" x2="700.0" y2="170"/><text x="700.0" y="188" text-anchor="middle">08:30</text>
+      <line class="ref" x1="180.0" y1="14" x2="180.0" y2="170"/><text x="184.0" y="12">início agendado</text>
+      <line class="ref" x1="596.0" y1="14" x2="596.0" y2="170"/><text x="600.0" y="12">início da operação</text>
+      <text class="lbl" x="0" y="62">Antes</text><text x="0" y="78">29 dias · abr e mai/2026</text>
+      <rect class="range" x="422.7" y="52" width="180.3" height="22" rx="4"/>
+      <line class="med" x1="492.0" y1="46" x2="492.0" y2="80"/>
+      <text x="492.0" y="40" text-anchor="middle">mediana 7h30</text>
+      <text x="418.7" y="67" text-anchor="end">7h10</text><text x="606.9" y="67">8h02</text>
+      <text class="lbl" x="0" y="128">Depois</text><text x="0" y="144">3 dias documentados</text>
+      <circle class="dot" cx="256.3" cy="130" r="6"/><circle class="dot" cx="311.7" cy="130" r="6"/><circle class="dot" cx="377.6" cy="130" r="6"/><text x="256.3" y="112" text-anchor="middle">06:22</text><text x="311.7" y="154" text-anchor="middle">06:38</text><text x="377.6" y="112" text-anchor="middle">06:57</text>
+    </svg></figure><p class="chart__cap">Faixa = mínimo e máximo dos 29 dias anteriores; traço = mediana; pontos = os 3 dias documentados depois da mudança.</p><div class="prose"><p>A sequência agendada reduziu a dependência de disparos manuais e antecipou a disponibilidade da lista do discador nos dias documentados.</p></div><p class="measure"><b>Como foi medido.</b> Registros históricos de execução da rotina. Antes: 29 dias observados em abril e maio de 2026, com mediana de 7h30, mínimo de 7h10 e máximo de 8h02; em 3 desses dias a lista ficou pronta depois das 8h. Depois: 3 dias com registro detalhado (6h57, 6h38 e 6h22). Os horários são de conclusão da lista do discador, não de todas as tarefas da rotina.</p></div>
+        </div>
+      </div>
+    </section>
+    <section class="section" data-reveal>
+      <div class="section__head">
+        <p class="section__label">Limitações</p>
+        <div>
+          <h2>O que os dados ainda não mostram.</h2>
+          <div class="section__body"><ul class="list"><li>Três observações depois da mudança <strong>não bastam</strong> para uma conclusão sobre todos os dias.</li><li>Os horários medem a <strong>lista do discador</strong>. A rotina completa tem outras etapas; em um registro, a etapa digital terminou depois das 8h.</li><li>O esforço humano <strong>não foi medido</strong> em horas antes e depois.</li><li>Alertas por e-mail foram usados no passado; a configuração mais recente examinada indica que o recurso está <strong>desativado</strong>.</li></ul></div>
+        </div>
+      </div>
+    </section>
+    <section class="section" data-reveal>
+      <div class="section__head">
+        <p class="section__label">Sustentabilidade</p>
+        <div>
+          <h2>A rotina não depende de alguém disparar cada etapa, mas continua acompanhada.</h2>
+          <div class="section__body"><div class="prose"><p>Hoje a equipe tem duas pessoas, e uma delas monitora a rotina matinal. A equipe diminuiu pela saída de um colaborador, e não por causa da automação. Quando uma etapa falha, ela é reexecutada; se não resolver, uma pessoa assume.</p></div></div>
+        </div>
+      </div>
+    </section>
+    <section class="section" data-reveal>
+      <div class="section__head">
+        <p class="section__label">Princípios de liderança</p>
+        <div>
+          <h2>Como este case se conecta aos princípios da Amazon.</h2>
+          <div class="section__body"><ul class="lp"><li class="panel"><b>Dive Deep</b><span>Levantei os horários reais da lista do discador e a espera entre etapas antes de propor a mudança.</span></li><li class="panel"><b>Invent and Simplify</b><span>Usei o encadeamento da plataforma já existente em vez de buscar uma ferramenta nova.</span></li><li class="panel"><b>Ownership</b><span>Validei as execuções depois da mudança e deixei definido o que acontece quando uma etapa falha.</span></li></ul></div>
+        </div>
+      </div>
+    </section>
+    <section class="section" data-reveal>
+      <div class="section__head">
+        <p class="section__label">Tecnologia e métodos</p>
+        <div>
+          <h2>Processo primeiro, ferramenta depois.</h2>
+          <div class="section__body"><div class="stack"><span class="tag">Mapeamento de processo</span><span class="tag">Análise de dependências</span><span class="tag">Encadeamento de tarefas</span><span class="tag">Agendamento</span><span class="tag">Plataforma do fornecedor</span></div></div>
+        </div>
+      </div>
+    </section>
+    </main>
+
+    <nav class="next" aria-label="Próximo case">
+      <a href="central-pagamentos-rejeitados.html">
+        <span><span class="next__label">Próximo case</span><span class="next__title">Central de Pagamentos Rejeitados</span></span>
+        <span class="next__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+    </nav>
+
+    <footer class="foot">
+      <span>© 2026 Paulo Nobre, São Paulo</span>
+      <a href="index.html">Voltar para a lista de projetos</a>
+    </footer>
+  </div>
+</div>
+<script src="assets/site.js"></script>
+</body>
+</html>

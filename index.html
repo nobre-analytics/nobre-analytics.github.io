@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Paulo Nobre | PMO &amp; Project Delivery</title>
-<meta name="description" content="Paulo Nobre, PMO &amp; Project Delivery. I turn operational problems into structured projects and deliver measurable results in process improvement and business transformation." data-meta-pt="Paulo Nobre, PMO e Project Delivery. Transformo problemas operacionais em projetos estruturados e entrego resultados mensuráveis em melhoria de processos e transformação de negócio." data-meta-en="Paulo Nobre, PMO &amp; Project Delivery. I turn operational problems into structured projects and deliver measurable results in process improvement and business transformation.">
+<title>Paulo Nobre | Process Improvement &amp; Project Delivery</title>
+<meta name="description" content="Paulo Nobre, process improvement and project delivery. I turn operational problems into structured, measurable, and sustainable solutions." data-meta-pt="Paulo Nobre, melhoria de processos e project delivery. Transformo problemas operacionais em soluções estruturadas, mensuráveis e sustentáveis." data-meta-en="Paulo Nobre, process improvement and project delivery. I turn operational problems into structured, measurable, and sustainable solutions.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -118,6 +118,8 @@ img{max-width:100%;display:block}
 .card__impact{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;margin-top:auto;padding-top:24px;border-top:1px solid var(--line)}
 .card__impact b{font-size:clamp(2.1rem,3.2vw,2.8rem);font-weight:300;line-height:1;letter-spacing:-.03em;color:var(--acc)}
 .card__impact span{color:var(--tx2);font-size:.92rem;max-width:26ch;line-height:1.4}
+.card__impact--text span{max-width:none;color:var(--tx);font-size:.98rem}
+.card__kind{margin-bottom:10px}
 .card__foot{background:var(--deep);border-top:1px solid var(--line);padding:20px clamp(28px,3vw,40px)}
 .card__facts{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
 .card__facts b{display:block;font-weight:500;font-size:1.05rem}
@@ -403,7 +405,7 @@ html.draft .draft-only{display:block}
 
 /* impact band: full-bleed accent, no dividers */
 .band{background:var(--acc);color:#15120B}
-.band__grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:24px;padding-top:clamp(36px,4vw,52px);padding-bottom:clamp(36px,4vw,52px);text-align:center}
+.band__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;padding-top:clamp(36px,4vw,52px);padding-bottom:clamp(36px,4vw,52px);text-align:center}
 .bk b{display:inline-block;font-size:clamp(2rem,3.4vw,3rem);font-weight:400;line-height:1;letter-spacing:-.03em}
 .bk span{display:block;margin-top:12px;font-size:.74rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
 .band [data-ph]{color:rgba(21,18,11,.55);border-bottom-color:rgba(21,18,11,.45)}
@@ -909,11 +911,12 @@ body{padding-top:calc(var(--hdr) + env(safe-area-inset-top,0px))}
 <!-- ============ 2. HERO ============ -->
 <section class="hero">
   <div class="wrap hero__grid">
-    <p class="hero__pos"><span data-pt="PMO · Project Delivery" data-en="PMO · Project Delivery">PMO · Project Delivery</span><span data-pt="Melhoria de processos · Transformação de negócio" data-en="Process improvement · Business transformation">Process improvement · Business transformation</span></p>
-    <h1 data-pt="Transformo problemas operacionais em projetos estruturados e conduzo a entrega até o resultado mensurável." data-en="I turn operational problems into structured projects and lead them to measurable results.">I turn operational problems into structured projects and lead them to measurable results.</h1>
-    <p class="hero__lede" data-pt="Comecei na operação, por isso sei onde os processos quebram. Hoje conduzo problemas operacionais do diagnóstico à entrega: encontro a causa raiz, estruturo a iniciativa, coordeno Operações, Tecnologia e gestão, e uso automação onde ela reduz risco e trabalho manual. O objetivo é sempre um resultado que possa ser medido e sustentado." data-en="I started in operations, so I know where processes break. Today I take operational problems from diagnosis to delivery: I find the root cause, structure the initiative, coordinate Operations, Technology and management, and use automation where it removes risk and manual work. The goal is always a result that can be measured and sustained.">I started in operations, so I know where processes break. Today I take operational problems from diagnosis to delivery: I find the root cause, structure the initiative, coordinate Operations, Technology and management, and use automation where it removes risk and manual work. The goal is always a result that can be measured and sustained.</p>
+    <p class="hero__pos"><span data-pt="Melhoria de processos · Project delivery" data-en="Process improvement · Project delivery">Process improvement · Project delivery</span><span data-pt="Business analysis · Automação operacional" data-en="Business analysis · Operational automation">Business analysis · Operational automation</span></p>
+    <h1 data-pt="Melhoria de processos e automação operacional, da investigação à entrega." data-en="Process improvement and operational automation, from root cause analysis to delivery.">Process improvement and operational automation, from root cause analysis to delivery.</h1>
+    <p class="hero__lede" data-pt="Investigo causas raiz, estruturo regras de negócio e transformo processos manuais em fluxos automatizados, rastreáveis e sustentáveis." data-en="I investigate root causes, structure business rules, and turn manual processes into automated, traceable, and sustainable workflows.">I investigate root causes, structure business rules, and turn manual processes into automated, traceable, and sustainable workflows.</p>
     <div class="hero__cta">
       <a class="btn btn--solid" href="#cases" data-pt="Ver os cases" data-en="See the cases">See the cases</a>
+      <a class="btn" href="projetos/" data-proj-link data-pt="Projetos detalhados" data-en="Detailed projects">Detailed projects</a>
       <a class="btn" href="#contact" data-pt="Entrar em contato" data-en="Get in touch">Get in touch</a>
       <!-- Resume button: hidden until CONFIG.resumeUrl is set in the script. -->
       <button class="btn" type="button" data-resume hidden data-pt="Baixar currículo" data-en="Download resume">Download resume</button>
@@ -922,13 +925,11 @@ body{padding-top:calc(var(--hdr) + env(safe-area-inset-top,0px))}
 </section>
 
 <!-- ============ 3. IMPACT BAND ============ -->
-<section class="band" aria-label="Impact">
+<section class="band" aria-label="Highlights">
   <div class="wrap band__grid">
-    <div class="bk rv"><b class="num">R$ 326k</b><span data-pt="Impacto financeiro oculto identificado" data-en="Hidden financial impact identified">Hidden financial impact identified</span></div>
-    <div class="bk rv"><b class="num">12+</b><span data-pt="Projetos entregues em seis meses" data-en="Projects delivered in six months">Projects delivered in six months</span></div>
-    <div class="bk rv"><b class="num">8+</b><span data-pt="Pessoas coordenadas em 3 áreas" data-en="People coordinated across 3 areas">People coordinated across 3 areas</span></div>
-    <div class="bk rv"><b class="num">98%</b><span data-pt="Feedback de carreira positivo" data-en="Positive career feedback">Positive career feedback</span></div>
-    <div class="bk rv"><b class="num">4+</b><span data-pt="Anos em operações e melhoria de processos" data-en="Years in operations and process improvement">Years in operations and process improvement</span></div>
+    <div class="bk rv"><b class="num">4</b><span data-pt="Cases detalhados com demonstração interativa" data-en="Detailed case studies with interactive demos">Detailed case studies with interactive demos</span></div>
+    <div class="bk rv"><b class="num">Green Belt</b><span data-pt="Lean Six Sigma" data-en="Lean Six Sigma">Lean Six Sigma</span></div>
+    <div class="bk rv"><b class="num" data-pt="Desde 2022" data-en="Since 2022">Since 2022</b><span data-pt="Em operações financeiras e melhoria de processos" data-en="In financial operations and process improvement">In financial operations and process improvement</span></div>
   </div>
 </section>
 
@@ -938,7 +939,7 @@ body{padding-top:calc(var(--hdr) + env(safe-area-inset-top,0px))}
     <div class="sec__head sec__head--stack">
       <p class="label label--acc rv">Cases</p>
       <h2 class="h2 rv" data-pt="Iniciativas que conduzi" data-en="Initiatives I led">Initiatives I led</h2>
-      <p class="lead rv" data-pt="Seis casos reais. Cada um mostra o problema de negócio, o que estava sob minha responsabilidade, quem precisei coordenar e o que mudou." data-en="Six real cases. Each one shows the business problem, what I owned, who I coordinated and what changed.">Six real cases. Each one shows the business problem, what I owned, who I coordinated and what changed.</p>
+      <p class="lead rv" data-pt="Quatro cases principais, cada um com página detalhada e demonstração com dados sintéticos, e uma iniciativa relacionada. Cada um mostra o problema de negócio, o que estava sob minha responsabilidade e o que mudou." data-en="Four core case studies, each with a detailed page and a demo using synthetic data, plus one related initiative. Each one shows the business problem, what I owned and what changed.">Four core case studies, each with a detailed page and a demo using synthetic data, plus one related initiative. Each one shows the business problem, what I owned and what changed.</p>
     </div>
     <div class="cases" id="caseList"></div>
     <div class="cases__nav" aria-hidden="true"><span class="cases__count" id="caseCount"></span><span class="cases__dots" id="caseDots"></span></div>
@@ -950,7 +951,7 @@ body{padding-top:calc(var(--hdr) + env(safe-area-inset-top,0px))}
   <div class="wrap">
     <div class="sec__head">
       <p class="label label--acc rv" data-pt="Como eu trabalho" data-en="How I work">How I work</p>
-      <h2 class="h2 rv" data-pt="Do problema ambíguo ao resultado sustentável" data-en="From an unclear problem to a lasting result">From an unclear problem to a lasting result</h2>
+      <h2 class="h2 rv" data-pt="Transformo problemas operacionais em soluções estruturadas, mensuráveis e sustentáveis." data-en="I turn operational problems into structured, measurable, and sustainable solutions.">I turn operational problems into structured, measurable, and sustainable solutions.</h2>
       <p class="lead rv" data-pt="É assim que conduzo uma iniciativa, do primeiro sinal do problema até um resultado que a operação consegue manter sem mim." data-en="This is how I run an initiative, from the first sign of a problem to a result the operation can keep without me.">This is how I run an initiative, from the first sign of a problem to a result the operation can keep without me.</p>
     </div>
     <div class="method" id="methodRow">
@@ -990,10 +991,10 @@ body{padding-top:calc(var(--hdr) + env(safe-area-inset-top,0px))}
         <p class="job__when" data-pt="2026 – atual" data-en="2026 – present">2026 – present</p>
         <div class="job__who">
           <h3>Simplic <span data-pt="· Enova International" data-en="· Enova International">· Enova International</span></h3>
-          <p data-pt="Analista de Processos PL · Escopo: PMO e Project Delivery" data-en="Process Analyst (PL) · Scope: PMO &amp; Project Delivery">Process Analyst (PL) · Scope: PMO &amp; Project Delivery</p>
-          <span class="job__tag" data-pt="Project delivery · Transformação" data-en="Project delivery · Transformation">Project delivery · Transformation</span>
+          <p data-pt="Analista de Processos Pleno · Melhoria de processos e project delivery" data-en="Process Analyst (mid-level) · Process improvement &amp; project delivery">Process Analyst (mid-level) · Process improvement &amp; project delivery</p>
+          <span class="job__tag" data-pt="Melhoria de processos · Project delivery" data-en="Process improvement · Project delivery">Process improvement · Project delivery</span>
         </div>
-        <p class="job__what" data-pt="Conduzo iniciativas de melhoria e transformação em uma operação de recuperação de crédito. Diagnostico problemas operacionais, estruturo as iniciativas, coordeno Operações, Tecnologia, gestão e fornecedores, e entrego a mudança. Mais de 12 projetos entregues em seis meses." data-en="I lead improvement and transformation initiatives in a credit recovery operation. I diagnose operational problems, structure the initiatives, coordinate Operations, Technology, management and vendors, and deliver the change. 12+ projects delivered in six months.">I lead improvement and transformation initiatives in a credit recovery operation. I diagnose operational problems, structure the initiatives, coordinate Operations, Technology, management and vendors, and deliver the change. 12+ projects delivered in six months.</p>
+        <p class="job__what" data-pt="Conduzo iniciativas de melhoria e transformação em uma operação de recuperação de crédito. Diagnostico problemas operacionais, estruturo as iniciativas, coordeno Operações, Tecnologia, gestão e fornecedores, e entrego a mudança." data-en="I lead improvement and transformation initiatives in a credit recovery operation. I diagnose operational problems, structure the initiatives, coordinate Operations, Technology, management and vendors, and deliver the change.">I lead improvement and transformation initiatives in a credit recovery operation. I diagnose operational problems, structure the initiatives, coordinate Operations, Technology, management and vendors, and deliver the change.</p>
       </article>
       <article class="job rv">
         <p class="job__when" data-pt="2025" data-en="2025">2025</p>
@@ -1031,8 +1032,8 @@ body{padding-top:calc(var(--hdr) + env(safe-area-inset-top,0px))}
   <div class="wrap">
     <div class="sec__head sec__head--stack">
       <p class="label label--acc rv" data-pt="Portfólio de projetos" data-en="Project portfolio">Project portfolio</p>
-      <h2 class="h2 rv" data-pt="Principais projetos · 2022 – hoje" data-en="Key projects · 2022 – today">Key projects · 2022 – today</h2>
-      <p class="lead rv" data-pt="Cada projeto está classificado pelo tipo de problema que resolveu." data-en="Each project is tagged by the type of problem it solved.">Each project is tagged by the type of problem it solved.</p>
+      <h2 class="h2 rv" data-pt="Projetos selecionados em melhoria de processos e automação operacional" data-en="Selected projects in process improvement and operational automation">Selected projects in process improvement and operational automation</h2>
+      <p class="lead rv" data-pt="De 2024 até hoje. Fases de uma mesma solução aparecem juntas, e cada item está classificado pelo tipo de problema que resolveu." data-en="From 2024 to today. Phases of the same solution are grouped together, and each item is tagged by the type of problem it solved.">From 2024 to today. Phases of the same solution are grouped together, and each item is tagged by the type of problem it solved.</p>
     </div>
     <div class="pf pf--collapsed" id="pfList"></div>
     <button class="pf__more" type="button" id="pfMore" aria-controls="pfList" aria-expanded="false"></button>
@@ -1108,7 +1109,7 @@ body{padding-top:calc(var(--hdr) + env(safe-area-inset-top,0px))}
         <div class="ccard rv"><span class="ccard__ic">EDU</span><div><b data-pt="Ciência de Dados" data-en="Data Science">Data Science</b><small data-pt="Univesp · Em curso" data-en="Univesp · In progress">Univesp · In progress</small></div></div>
         <div class="ccard rv"><span class="ccard__ic">OPS</span><div><b data-pt="Qualidade · PCP · Gestão de fornecedores" data-en="Quality · Production planning &amp; control · Supplier management">Quality · Production planning &amp; control · Supplier management</b><small data-pt="Certificações em gestão de operações" data-en="Operations management certifications">Operations management certifications</small></div></div>
         <div class="ccard rv"><span class="ccard__ic">AI</span><div><b>AI Journey</b><small data-pt="Inteligência artificial aplicada" data-en="Applied artificial intelligence">Applied artificial intelligence</small></div></div>
-        <div class="ccard rv"><span class="ccard__ic">LNG</span><div><b data-pt="Português nativo · Inglês: proficiência profissional completa" data-en="Portuguese (native) · English (full professional proficiency)">Portuguese (native) · English (full professional proficiency)</b><small data-pt="Idiomas" data-en="Languages">Languages</small></div></div>
+        <div class="ccard rv"><span class="ccard__ic">LNG</span><div><b data-pt="Português nativo · Inglês: intermediário (B1), em desenvolvimento contínuo" data-en="Portuguese (native) · English: Intermediate (B1), actively improving">Portuguese (native) · English: Intermediate (B1), actively improving</b><small data-pt="Idiomas" data-en="Languages">Languages</small></div></div>
       </div>
     </div>
   </div>
@@ -1138,7 +1139,7 @@ body{padding-top:calc(var(--hdr) + env(safe-area-inset-top,0px))}
 <!-- ============ 12. FOOTER ============ -->
 <footer class="foot" id="contact">
   <div class="wrap">
-    <p class="foot__id">Paulo Nobre <span>PMO &amp; Project Delivery</span></p>
+    <p class="foot__id">Paulo Nobre <span>Process Improvement &amp; Project Delivery</span></p>
     <div class="foot__btns">
       <a class="btn btn--solid" href="mailto:nobrecontato21@outlook.com">nobrecontato21@outlook.com</a>
       <a class="btn" href="https://www.linkedin.com/in/paulo-nobre-/" target="_blank" rel="noopener">LinkedIn</a>
@@ -1175,152 +1176,79 @@ if(DRAFT) document.documentElement.classList.add('draft');
 /* ================= CASES ================= */
 function L(pt,en){ return {pt:pt,en:en}; }
 var CASES = [
-{ id:'capture',
-  ctx:L('Simplic · Causa raiz e risco operacional','Simplic · Root cause & operational risk'),
-  title:L('Os R$ 326 mil que o controle não enxergava','The R$ 326k the control could not see'),
-  problem:L('O BackOffice recebia e-mails, tickets de Jira e reclamações sobre pagamentos que nunca foram contabilizados. O relatório de controle parecia saudável, e ninguém sabia por que esses casos só apareciam por outros canais.','BackOffice kept receiving emails, Jira tickets and complaints about payments that were never booked. The control report looked healthy, and nobody knew why these cases only appeared through other channels.'),
-  did:L('Rastreei o dado de ponta a ponta, da origem até a tela, e isolei o ponto em que os registros desapareciam antes de chegar à operação. Isso expôs cerca de R$ 326 mil em casos não conciliados que o controle existente não conseguia detectar. A correção saiu em um dia.','I traced the data end to end, from source to screen, and isolated the point where records disappeared before reaching the operation. This exposed about R$ 326k in unreconciled cases that the existing control could not detect. The fix was in place within one day.'),
-  metric:'R$ 326k', metricLabel:L('em casos não conciliados expostos, com correção em um dia','in unreconciled cases exposed, fixed within one day'),
-  kpis:[['R$ 326k',L('identificados','identified')],['384',L('casos revelados num só dia','cases surfaced in one day')],['1 dia',L('da suspeita à correção','from suspicion to fix'),'1 day']],
-  context:L('Uma operação de recuperação de crédito na Simplic, em que os pagamentos rejeitados são tratados a partir de uma fila no painel da operação.','A credit recovery operation at Simplic, where rejected payments are worked from a queue on the operation’s dashboard.'),
-  challenge:L('A fila parecia limpa, mas as reclamações continuavam. O problema não estava na análise: rejeição que não chega ao sistema não pode ser tratada, e o controle não dava nenhum sinal de que algo faltava.','The queue looked clean, but the complaints kept coming. The problem was not in the analysis: a rejection that never reaches the system cannot be worked, and the control gave no sign that anything was missing.'),
-  diagnosis:L('Refiz o caminho do dado da origem até a tela e encontrei uma falha de captura: os registros se perdiam antes de chegar ao painel. O relatório de controle dependia do mesmo dado que faltava, por isso não conseguia acusar a ausência. O controle olhava o processo com o mesmo ponto cego do processo.','I retraced the data path from source to screen and found a capture gap: records were lost before they reached the dashboard. The control report depended on the same data that was missing, so it could not flag the gap. The control was checking the process with the process’s own blind spot.'),
-  role:L('Assumi a investigação do primeiro sinal até a correção: conduzi o rastreio do dado, isolei o ponto de falha e levei a evidência às áreas envolvidas.','I owned the investigation from the first signal to the fix: I led the data tracing, isolated the failure point and brought the evidence to the areas involved.'),
-  stakeholders:L('BackOffice e as áreas responsáveis por cada etapa do fluxo de dados.','BackOffice and the areas that own each step of the data flow.'),
-  approach:L('Em vez de tratar as reclamações uma a uma, tratei-as como sintoma e segui o caminho do dado, etapa por etapa, até o ponto em que os registros sumiam.','Instead of handling the complaints one by one, I treated them as a symptom and followed the data path, step by step, to the point where the records disappeared.'),
-  execution:L('Com o ponto de falha isolado, compartilhei a evidência com as áreas envolvidas e a falha de captura foi fechada em um dia. Com o fluxo corrigido, 384 casos apareceram na fila em um único dia.','With the failure point isolated, I shared the evidence with the areas involved and the capture gap was closed within one day. With the flow fixed, 384 cases surfaced in the queue in a single day.'),
-  flow:{before:[['Origem','Source'],['Captura','Capture'],['Ruptura silenciosa','Silent break','break'],['Painel: fila vazia','Dashboard: empty queue']],
-        after:[['Origem','Source'],['Captura','Capture'],['Painel','Dashboard','new'],['Análise','Analysis']]},
-  solution:L('A falha de captura foi fechada para que toda rejeição chegue à tela da operação e seja tratada pelo fluxo normal.','The capture gap was closed so every rejection reaches the operation’s screen and is handled by the normal workflow.'),
-  tools:['Análise de causa raiz|Root cause analysis','Rastreio de dados ponta a ponta|End-to-end data tracing','Conciliação|Reconciliation','Risco operacional|Operational risk'],
-  results:[L('Cerca de R$ 326 mil em casos não conciliados expostos.','About R$ 326k in unreconciled cases exposed.'),L('384 casos revelados num só dia.','384 cases surfaced in a single day.'),L('Um dia da suspeita à correção.','One day from suspicion to fix.'),L('Queda forte no volume de reclamações e solicitações sobre pagamentos não contabilizados.','A sharp drop in complaints and requests about unbooked payments.')],
-  lessons:L('Um controle que depende do mesmo dado do processo não consegue detectar a ausência desse dado. Verifique de onde o dado vem, não só o que o relatório mostra.','A control that depends on the same data as the process cannot detect when that data is missing. Check where the data comes from, not only what the report shows.')
+{ id:'rotina', kind:L('Case principal','Core case'),
+  page:L('projetos/automacao-rotina-operacional.html','projetos/en/automacao-rotina-operacional.html'),
+  ctx:L('Simplic · Melhoria de processo e automação','Simplic · Process improvement & automation'),
+  title:L('Automação da Rotina Operacional Matinal','Morning Operations Routine Automation'),
+  problem:L('A lista do discador precisava estar pronta antes das 8h, mas cada etapa da rotina dependia de alguém disparar a anterior.','The dialer list had to be ready before 8:00, but each step of the routine depended on someone triggering the previous one.'),
+  did:L('Mapeei o fluxo, identifiquei as esperas entre etapas e configurei, com orientação do suporte do fornecedor, uma sequência agendada às 6h, com caminho de falha e reexecução.','I mapped the flow, found the waits between steps and, with guidance from the vendor’s support team, set up a sequence scheduled at 6:00, with a failure and rerun path.'),
+  metric:'', metricLabel:L('Lista do discador pronta mais cedo nos dias documentados: mediana de 7h30 em 29 dias antes; entre 6h22 e 6h57 nos 3 dias registrados depois.','Dialer list ready earlier on the documented days: a 7:30 median over 29 days before; between 06:22 and 06:57 on the 3 recorded days after.'),
+  kpis:[]
 },
-{ id:'backoffice',
-  ctx:L('Simplic · Transformação operacional','Simplic · Operational transformation'),
-  title:L('De um BackOffice dependente de uma pessoa a uma operação estruturada','From a person-dependent BackOffice to a structured operation'),
-  problem:L('Uma operação com processos e subprocessos altamente manuais, repetitivos e sujeitos a risco, com baixa rastreabilidade, pouca visibilidade do fluxo e forte dependência de conhecimento concentrado em uma única pessoa.','An operation with highly manual, repetitive and risk-prone processes and subprocesses, low traceability, little visibility of the flow and heavy dependence on knowledge held by one person.'),
-  did:L('Conduzi uma transformação de seis meses: mapeei e documentei os processos de ponta a ponta, conectei as áreas envolvidas, identifiquei as melhorias, implementei automações e consolidei tudo em uma única ferramenta operacional.','I led a six-month transformation: I mapped and documented the processes end to end, connected the areas involved, identified the improvements, implemented automations and brought everything into one operational tool.'),
-  metric:'2 → 1', metricLabel:L('pessoas para o trabalho do dia, agora concluído antes das 12h','people for the daily work, now finished before noon'),
-  kpis:[['6 meses',L('da operação manual à estruturada','from manual to structured operation'),'6 months'],['2 → 1',L('pessoas para o trabalho diário','people for the daily work')],['12h',L('trabalho do dia concluído antes do meio-dia','daily work done before noon'),'Noon']],
-  context:L('O BackOffice da operação de recuperação de crédito, com processos que cresceram de forma manual e dependiam de uma única pessoa para rodar.','The BackOffice of the credit recovery operation, with processes that had grown manually and depended on one person to run.'),
-  challenge:L('O trabalho do dia ocupava duas pessoas o dia inteiro. Qualquer ausência ou erro virava risco operacional, e ninguém além de uma pessoa tinha visão completa do fluxo.','The daily work kept two people busy all day. Any absence or mistake became an operational risk, and only one person had a full view of the flow.'),
-  diagnosis:L('O mapeamento mostrou que o problema não era uma tarefa lenta. O conhecimento estava concentrado, as etapas eram manuais e repetidas, e havia pouca rastreabilidade. A operação era frágil por desenho.','Mapping showed the problem was not one slow task. Knowledge was concentrated, steps were manual and repeated, and there was little traceability. The operation was fragile by design.'),
-  role:L('Assumi a transformação de ponta a ponta: diagnóstico, desenho dos processos, coordenação com as áreas conectadas, implementação das automações e documentação para o time.','I owned the transformation end to end: diagnosis, process design, coordination with the connected areas, implementation of the automations and documentation for the team.'),
-  stakeholders:L('O time de BackOffice e as áreas conectadas aos seus processos.','The BackOffice team and the areas connected to its processes.'),
-  approach:L('Primeiro o processo, depois a ferramenta: mapeei e documentei os fluxos de ponta a ponta antes de automatizar, para saber o que mudar e em que ordem.','Process first, then the tool: I mapped and documented the flows end to end before automating, to know what to change and in what order.'),
-  execution:L('Em seis meses, avancei do mapeamento para a documentação, a melhoria e a automação dos principais processos, e depois consolidei as soluções em uma única ferramenta operacional.','Over six months, I moved from mapping to documentation, improvement and automation of the main processes, and then consolidated the solutions into a single operational tool.'),
-  flow:{before:[['Processos manuais','Manual processes'],['Conhecimento em uma pessoa','Knowledge in one person','break'],['Baixa rastreabilidade','Low traceability']],
-        after:[['Processos mapeados','Mapped processes'],['Automações','Automations'],['Ferramenta única','Single tool','new']]},
-  solution:L('Uma operação documentada, com os principais processos automatizados e reunidos em uma só ferramenta. Diferentes pessoas conseguem executar os processos com segurança.','A documented operation, with the main processes automated and gathered in one tool. Different people can run the processes safely.'),
-  tools:['Mapeamento de processos|Process mapping','Documentação|Process documentation','Automação|Automation','Gestão de mudança|Change management'],
-  results:[L('O que ocupava duas pessoas o dia inteiro hoje é concluído antes das 12h por uma pessoa.','Work that took two people all day is now done before noon by one person.'),L('Operação mais automatizada, rastreável e sustentável.','A more automated, traceable and sustainable operation.'),L('Menor dependência de conhecimento individual: diferentes pessoas executam os processos com segurança.','Less dependence on individual knowledge: different people can run the processes safely.')],
-  lessons:L('A automação é o meio. O resultado real é uma operação que não depende de uma pessoa para funcionar.','Automation is the means. The real result is an operation that does not depend on one person to run.')
+{ id:'rejections', kind:L('Case principal','Core case'),
+  page:L('projetos/central-pagamentos-rejeitados.html','projetos/en/central-pagamentos-rejeitados.html'),
+  ctx:L('Simplic · Regras de negócio e automação','Simplic · Business rules & automation'),
+  title:L('Central de Pagamentos Rejeitados','Rejected Payments Decision Engine'),
+  problem:L('O destino de cada pagamento rejeitado dependia da análise individual de quem estava de plantão. As rejeições eram copiadas à mão, e o mesmo caso podia receber destinos diferentes.','Where each rejected payment went depended on the individual judgment of whoever was on duty. Rejections were copied by hand, and the same case could end up in different places.'),
+  did:L('Mapeei as regras com quem executava o processo, escrevi a lógica de decisão e construí um robô de extração, um motor de regras e um painel de tratativa. Cada caso recebe um destino e o motivo da decisão; o que não tem evidência suficiente vai para análise manual.','I mapped the rules with the people who ran the process, wrote the decision logic and built an extraction bot, a rules engine and a handling panel. Each case gets a destination and the reason for the decision; anything without enough evidence goes to manual review.'),
+  metric:'', metricLabel:L('Regras escritas no lugar da decisão individual, com motivo registrado em cada caso e exceções encaminhadas para análise manual.','Written rules instead of individual judgment, with a recorded reason for each case and exceptions routed to manual review.'),
+  kpis:[]
 },
-{ id:'engine',
-  ctx:L('Simplic · Análise de negócio e regras','Simplic · Business analysis & rules'),
-  title:L('Da decisão operacional à regra de negócio','From operational judgement to business rules'),
-  problem:L('O tratamento de cada pagamento rejeitado dependia da análise individual de um operador, tornando a operação suscetível a decisões inconsistentes e à dependência de conhecimento tácito.','Handling each rejected payment depended on an individual operator’s analysis, which left the operation exposed to inconsistent decisions and to reliance on tacit knowledge.'),
-  did:L('Mapeei e formalizei as regras de negócio junto aos responsáveis pela execução, estruturando a lógica de decisão em quatro desfechos determinísticos, com encaminhamento para revisão humana nos casos em que não houvesse evidências suficientes para uma decisão segura.','I mapped and formalised the business rules with the people who run the process, structuring the decision logic into four deterministic outcomes, with cases routed to human review whenever there was not enough evidence for a safe decision.'),
-  metric:'100%', metricLabel:L('das decisões com desfecho determinístico e motivo registrado','of decisions with a deterministic outcome and a recorded reason'),
-  kpis:[['4',L('desfechos possíveis','possible outcomes')],['100%',L('das decisões com motivo escrito','of decisions with a written reason')],['~10 → 0',L('tickets de Jira por dia','Jira tickets per day')]],
-  context:L('Pagamentos rejeitados na operação de recuperação de crédito, cada um com um destino a decidir.','Rejected payments in the credit recovery operation, each needing a destination.'),
-  challenge:L('A decisão vivia na cabeça das pessoas. O mesmo caso podia ter destinos diferentes conforme o analista, não havia motivo registrado, e cada caso virava um ticket.','The decision lived in people’s heads. The same case could get a different destination depending on the analyst, there was no recorded reason, and every case became a ticket.'),
-  diagnosis:L('As regras existiam, mas só como conhecimento tácito. O trabalho real era torná-las explícitas antes de automatizar qualquer coisa.','The rules existed, but only as tacit knowledge. The real work was to make them explicit before automating anything.'),
-  role:L('Conduzi o levantamento de requisitos e o desenho do processo de decisão: mapeamento das regras com os analistas, documentação, desenho dos desfechos e entrega no painel da operação.','I led requirements discovery and the design of the decision process: rule mapping with the analysts, documentation, outcome design and delivery in the operation’s dashboard.'),
-  stakeholders:L('Os analistas que executam o processo, que definiram as regras reais, e os usuários do painel que tratam os casos.','The analysts who run the process, who defined the real rules, and the dashboard users who work the cases.'),
-  approach:L('Documentei a regra de negócio antes de automatizar. Também defini o que o sistema não deve decidir: quando não consegue afirmar um desfecho, o caso vai para revisão humana em vez de um palpite.','I documented the business rule before automating. I also defined what the system should not decide: when it cannot assert an outcome, the case goes to human review instead of a guess.'),
-  execution:L('As regras foram validadas com os analistas, transformadas em quatro desfechos com motivo escrito e entregues no painel da operação, junto com os demais pagamentos do cliente para dar contexto à análise.','The rules were validated with the analysts, turned into four outcomes with written reasons and delivered in the operation’s dashboard, together with the customer’s other payments to give context to the review.'),
-  flow:{before:[['Pagamento rejeitado','Rejected payment'],['Analista decide','Analyst decides','break'],['Destino','Destination']],
-        after:[['Pagamento rejeitado','Rejected payment'],['Regras escritas','Written rules','new'],['1 de 4 desfechos + motivo','1 of 4 outcomes + reason'],['Sem certeza: revisão humana','Unsure: human review']]},
-  solution:L('Quatro desfechos determinísticos no lugar da decisão manual, cada um com motivo escrito, e uma única fila de revisão humana para o que não é certo.','Four deterministic outcomes instead of the manual decision, each with a written reason, and a single human review queue for what is uncertain.'),
-  tools:['Levantamento de requisitos|Requirements discovery','Regras de negócio e BRD|Business rules & BRD','Modelagem de decisão|Decision modelling','Revisão humana no fluxo|Human-in-the-loop design'],
-  results:[L('Quatro desfechos possíveis, sem ambiguidade.','Four possible outcomes, no ambiguity.'),L('100% das decisões com motivo escrito.','100% of decisions with a written reason.'),L('De cerca de 10 tickets de Jira por dia para zero: a tratativa e o controle de curadoria da área passaram a ser feitos no painel.','From around 10 Jira tickets a day to zero: the area’s case handling and curation control moved into the dashboard.')],
-  quote:{text:L('O painel é bem mais prático do que o Jira. Verifiquei que vocês estão anexando também os demais pagamentos do cliente nele, o que facilita bastante!','The dashboard is much more practical than Jira. I noticed you are also attaching the customer’s other payments to it, which makes things a lot easier!'),who:L('Mariana, usuária do painel, Simplic','Mariana, dashboard user, Simplic'),tr:true},
-  lessons:L('Antes de automatizar uma decisão, escreva a regra. E quando o sistema não consegue afirmar, ele envia para revisão humana em vez de adivinhar.','Before you automate a decision, write the rule down. And when the system cannot assert, it sends the case to human review instead of guessing.')
+{ id:'duplicates', kind:L('Case principal','Core case'),
+  page:L('projetos/pagamentos-em-duplicidade.html','projetos/en/pagamentos-em-duplicidade.html'),
+  ctx:L('Simplic · Conciliação e controle de risco','Simplic · Reconciliation & risk control'),
+  title:L('Controle de Pagamentos em Duplicidade','Duplicate Payment Controls'),
+  problem:L('Clientes que pagavam a mesma parcela duas vezes precisavam ser reembolsados, mas só depois de a duplicidade ser comprovada. Sem esse batimento, havia o risco de devolver um pagamento legítimo ou de deixar o cliente sem o valor pago a mais.','Customers who paid the same installment twice had to be refunded, but only after the duplicate was proven. Without that check, there was a risk of refunding a legitimate payment or of leaving the customer without the overpaid amount.'),
+  did:L('Desenhei e construí um painel que cruza o sistema de cobrança com o extrato do gateway de pagamento, separa quem decide o lote (curadoria) de quem executa (operação) e acompanha o estado de cada caso. A solicitação e o pagamento do reembolso continuam com as pessoas responsáveis.','I designed and built a panel that matches the collections system against the payment gateway statement, separates who decides the batch (curation) from who carries it out (operation) and tracks the status of each case. Requesting and paying the refund stays with the people responsible.'),
+  metric:'', metricLabel:L('Reembolso considerado só depois do batimento com o extrato, com papéis separados para decidir e executar.','Refunds considered only after matching against the statement, with separate roles for deciding and executing.'),
+  kpis:[]
+},
+{ id:'monitor', kind:L('Case principal','Core case'),
+  page:L('projetos/monitor-operacao.html','projetos/en/monitor-operacao.html'),
+  ctx:L('Simplic · Monitoramento da operação','Simplic · Operations monitoring'),
+  title:L('Monitor da Operação','Operations Monitor'),
+  problem:L('A operação depende de robôs que rodam antes do expediente. Quando um deles falhava sem ninguém perceber, a equipe começava o dia com dado incompleto.','The operation relies on bots that run before the workday. When one failed unnoticed, the team started the day with incomplete data.'),
+  did:L('Organizei uma tela em torno de três perguntas do gestor (a manhã fechou, quanto entrou, o que falhou), com o estado de cada rotina e a etapa em que uma falha parou. Também investiguei e corrigi uma condição de corrida que exibia valores errados. O monitor inclui uma versão para celular.','I built a screen around three questions managers ask (did the morning close, how much came in, what failed), showing the status of each routine and the step where a failure stopped. I also investigated and fixed a race condition that displayed wrong values. The monitor includes a mobile version.'),
+  metric:'', metricLabel:L('Falhas das rotinas automáticas visíveis em uma tela, com a etapa em que cada uma parou.','Failures of automated routines visible on one screen, with the step where each one stopped.'),
+  kpis:[]
 },
 { id:'infra',
+  kind:L('Iniciativa relacionada','Related initiative'),
   ctx:L('Simplic · Diagnóstico e escalada','Simplic · Diagnosis & escalation'),
   title:L('O gargalo que ninguém tinha medido','The bottleneck nobody had measured'),
-  problem:L('Em dias de pico de entrada de carteira, o processamento falhava. Os clientes novos ficavam de fora e a operação rodava só com a carteira do dia anterior, justamente nos dias de maior faturamento.','On peak portfolio-intake days, processing failed. New customers were left out and the operation ran only on the previous day’s portfolio, exactly on the highest-revenue days.'),
-  did:L('Acionei o CRM para investigar as falhas de processamento nos picos de entrada de carteira e identifiquei a causa: a capacidade contratada estava abaixo da demanda real. Apresentei o diagnóstico e o impacto financeiro à diretoria, obtive a aprovação para ampliar a infraestrutura e coordenei a implementação com o time e os stakeholders envolvidos, programando o ajuste para um dia de menor volume e preservando a continuidade operacional.','I engaged the CRM to investigate the processing failures during portfolio-intake peaks and identified the cause: contracted capacity was below real demand. I presented the diagnosis and the financial impact to the director, secured approval to expand the infrastructure and coordinated the implementation with the team and stakeholders involved, scheduling the change for a low-volume day to preserve operational continuity.'),
-  metric:'R$ 1,6-2,6 mi', metricEn:'R$ 1.6-2.6M', metricLabel:L('de faturamento diário protegido em dias de pico','in daily revenue protected on peak days'),
-  kpis:[['R$ 1,6-2,6 mi',L('faturamento diário protegido','daily revenue protected'),'R$ 1.6-2.6M'],['0',L('falhas em dias de pico após o ajuste','peak-day failures after the fix')],['1',L('causa raiz: capacidade contratada','root cause: contracted capacity')]],
+  problem:L('Em dias de pico de entrada de carteira, o processamento falhava. Os clientes novos ficavam de fora e a operação rodava só com a carteira do dia anterior, justamente nos dias de maior volume.','On peak portfolio-intake days, processing failed. New customers were left out and the operation ran only on the previous day’s portfolio, exactly on the highest-volume days.'),
+  did:L('Acionei o time da plataforma de CRM para investigar as falhas de processamento nos picos de entrada de carteira e identifiquei a causa: a capacidade contratada estava abaixo da demanda real. Apresentei o diagnóstico e o impacto no negócio à diretoria, obtive a aprovação para ampliar a infraestrutura e coordenei a implementação com o time e os stakeholders envolvidos, programando o ajuste para um dia de menor volume e preservando a continuidade operacional.','I engaged the CRM platform team to investigate the processing failures during portfolio-intake peaks and identified the cause: contracted capacity was below real demand. I presented the diagnosis and the business impact to the director, secured approval to expand the infrastructure and coordinated the implementation with the team and stakeholders involved, scheduling the change for a low-volume day to preserve operational continuity.'),
+  metric:'', metricLabel:L('Capacidade de processamento ajustada à demanda real dos dias de pico, com a mudança feita sem interromper a operação.','Processing capacity matched to real peak-day demand, with the change made without disrupting operations.'),
+  kpis:[],
   context:L('O processamento diário de carteira, que precisa absorver grandes volumes nos dias de entrada.','Daily portfolio processing, which must absorb large volumes on intake days.'),
-  challenge:L('O sistema falhava exatamente nos dias em que mais precisava faturar. Sem uma causa clara, cada dia de pico era um risco para a receita.','The system failed exactly on the days it most needed to bill. Without a clear cause, every peak day was a revenue risk.'),
+  challenge:L('O sistema falhava exatamente nos dias de maior volume. Sem uma causa clara, cada dia de pico era um risco operacional.','The system failed exactly on the highest-volume days. Without a clear cause, every peak day was an operational risk.'),
   diagnosis:L('A revisão de performance mostrou onde o pico acontecia e onde o processamento se perdia: a capacidade contratada era muito menor do que o número de clientes em carteira.','The performance review showed where the peak happened and where processing was lost: contracted capacity was far below the number of customers in the portfolio.'),
-  role:L('Assumi o problema do diagnóstico à resolução: enquadrei o risco de negócio, solicitei a revisão técnica, escalei com evidência e coordenei a implementação. O conhecimento técnico de infraestrutura estava com o CRM; meu papel foi transformar a evidência em uma decisão de negócio.','I owned the problem from diagnosis to resolution: I framed the business risk, requested the technical review, escalated with evidence and coordinated implementation. The infrastructure expertise sat with the CRM; my role was to turn the evidence into a business decision.'),
-  stakeholders:L('CRM, diretoria e time técnico.','CRM, director and technical team.'),
+  role:L('Assumi o problema do diagnóstico à resolução: enquadrei o risco de negócio, solicitei a revisão técnica, escalei com evidência e coordenei a implementação. O conhecimento técnico de infraestrutura estava com o time da plataforma de CRM; meu papel foi transformar a evidência em uma decisão de negócio.','I owned the problem from diagnosis to resolution: I framed the business risk, requested the technical review, escalated with evidence and coordinated implementation. The infrastructure expertise sat with the CRM platform team; my role was to turn the evidence into a business decision.'),
+  stakeholders:L('Time da plataforma de CRM, diretoria e time técnico.','CRM platform team, director and technical team.'),
   approach:L('Começar pela evidência: localizar onde o pico quebra o processamento e só então levar uma causa clara, com o impacto financeiro, para quem pode decidir.','Start with evidence: find where the peak breaks processing, and only then take a clear cause, with its financial impact, to the people who can decide.'),
-  execution:L('O CRM conduziu a revisão de performance, apresentei a causa e a receita em risco à diretoria, o aumento foi aprovado e coordenei o ajuste com o time técnico.','The CRM ran the performance review, I presented the cause and the revenue at risk to the director, the increase was approved and I coordinated the change with the technical team.'),
+  execution:L('O time da plataforma de CRM conduziu a revisão de performance, apresentei a causa e o impacto no negócio à diretoria, o aumento foi aprovado e coordenei o ajuste com o time técnico.','The CRM platform team ran the performance review, I presented the cause and the business impact to the director, the increase was approved and I coordinated the change with the technical team.'),
   flow:{before:[['Entrada de carteira','Portfolio intake'],['Pico de volume','Volume peak'],['Capacidade insuficiente','Insufficient capacity','break'],['Só carteira do dia anterior','Previous day’s portfolio only']],
         after:[['Entrada de carteira','Portfolio intake'],['Pico de volume','Volume peak'],['Capacidade ajustada','Right-sized capacity','new'],['Clientes novos processados','New customers processed']]},
   solution:L('Aumento de infraestrutura dimensionado para o volume real de clientes processados.','An infrastructure increase sized to the real volume of customers processed.'),
   tools:['Análise de causa raiz|Root cause analysis','Revisão de performance|Performance review','Gestão de stakeholders|Stakeholder management','Escalada com evidência|Evidence-based escalation'],
-  results:[L('O processamento parou de falhar em dias de produção intensiva.','Processing stopped failing on heavy production days.'),L('Entre R$ 1,6 mi e R$ 2,6 mi de faturamento diário protegido em dias de pico.','Between R$ 1.6M and R$ 2.6M in daily revenue protected on peak days.'),L('Ajuste feito em um dia de menor volume, sem interromper a operação.','Change made on a low-volume day, with no disruption to operations.')],
+  results:[L('O processamento parou de falhar em dias de produção intensiva.','Processing stopped failing on heavy production days.'),L('Ajuste feito em um dia de menor volume, sem interromper a operação.','Change made on a low-volume day, with no disruption to operations.')],
   lessons:L('Antes de corrigir o sistema, confirme se ele tem capacidade para o volume que você pede dele. E leve à decisão a causa junto com o impacto no negócio.','Before fixing the system, confirm it has capacity for the volume you ask of it. And take the cause to the decision together with its business impact.')
-},
-{ id:'routine',
-  ctx:L('Simplic · Modelo operacional','Simplic · Operating model'),
-  title:L('Fim de falha/dependência operacional','Ending operational failure and dependency'),
-  problem:L('A distribuição diária de carteiras e bases para a equipe de cobrança dependia de uma execução manual sequencial, iniciada às 7h, por vezes antes. Como cada tarefa precisava ser acompanhada para que a próxima começasse, atrasos comprometiam a disponibilidade das bases no início da operação, às 8h. Na ausência do responsável, outras áreas ou gestores precisavam assumir a rotina.','The daily distribution of portfolios and data sets to the collections team depended on a manual, sequential run that started at 7:00, sometimes earlier. Because each task had to be watched before the next one could start, delays put the availability of the data at risk when operations opened at 8:00. When the owner was absent, other areas or managers had to take over the routine.'),
-  did:L('Mapeei o fluxo, analisei os horários e as dependências entre tarefas e apresentei uma proposta de redesenho, obtendo a aprovação para implementá-la. As etapas passaram a ser encadeadas e programadas para execução automática, eliminando a necessidade de acompanhamento manual entre tarefas e antecipando a conclusão da rotina para as 6h30, sem aquisição de novas ferramentas.','I mapped the flow, analysed the timings and the dependencies between tasks, and presented a redesign proposal that was approved for implementation. The steps were chained and scheduled to run automatically, removing the need for manual follow-up between tasks and bringing the routine’s completion forward to 6:30, with no new tools purchased.'),
-  metric:'1h30', metricEn:'1.5h', metricLabel:L('mais cedo: rotina concluída às 6h30, ante 8h anteriormente','earlier: routine completed at 6:30, versus 8:00 before'),
-  kpis:[['8h → 6h30',L('conclusão da rotina','routine completion'),'8:00 → 6:30'],['0',L('dependência de uma pessoa','dependency on one person')],['0',L('ferramentas novas adquiridas','new tools purchased')]],
-  context:L('A rotina diária que distribui carteiras e bases para a equipe de cobrança antes do início da operação, às 8h.','The daily routine that distributes portfolios and data sets to the collections team before operations open at 8:00.'),
-  challenge:L('Um ponto único de falha: a rotina começava só quando o responsável entrava, e cada etapa esperava alguém acompanhar a anterior. Qualquer atraso chegava ao início da cobrança, e uma ausência deslocava outras áreas e gestores.','A single point of failure: the routine only started when its owner logged in, and each step waited for someone to watch the previous one. Any delay reached the start of collections, and one absence pulled in other areas and managers.'),
-  diagnosis:L('Mapeei o fluxo de ponta a ponta, com os horários de execução e as dependências entre as tarefas. O gargalo não era a duração das tarefas, e sim a espera manual entre uma etapa e a seguinte.','I mapped the flow end to end, with run times and the dependencies between tasks. The bottleneck was not how long the tasks took, but the manual wait between one step and the next.'),
-  role:L('Assumi o redesenho: mapeamento do processo, proposta de mudança, aprovação e acompanhamento até a nova rotina rodar de forma confiável.','I owned the redesign: process mapping, the change proposal, approval and follow-up until the new routine ran reliably.'),
-  stakeholders:L('Time de CRM, gestão e a equipe de cobrança que recebe as bases.','The CRM team, management and the collections team that receives the data.'),
-  approach:L('Não tratei como uma tarefa a automatizar, mas como um modelo operacional a mudar, usando a plataforma que já existia.','I did not treat it as a task to automate, but as an operating model to change, using the platform we already had.'),
-  execution:L('Com a proposta aprovada, as etapas foram encadeadas e programadas para rodar automaticamente, e acompanhei a mudança até a rotina concluir sozinha às 6h30.','With the proposal approved, the steps were chained and scheduled to run automatically, and I followed the change until the routine finished on its own at 6:30.'),
-  flow:{before:[['Responsável inicia às 7h','Owner starts at 7:00'],['Acompanha cada etapa na mão','Watches each step by hand','break'],['Bases em risco às 8h','Data at risk at 8:00']],
-        after:[['Execução programada','Scheduled run','new'],['Etapas encadeadas','Chained steps'],['Bases prontas às 6h30','Data ready at 6:30']]},
-  solution:L('As etapas rodam encadeadas e no horário, sem acompanhamento manual. As bases ficam prontas às 6h30, antes do início da cobrança.','The steps run chained and on schedule, with no manual follow-up. The data is ready at 6:30, before collections start.'),
-  tools:['Mapeamento de processos|Process mapping','Análise de dependências|Dependency analysis','CRM|CRM','Gestão de risco|Risk management'],
-  results:[L('1h30 mais cedo: conclusão às 6h30, ante 8h anteriormente.','1.5 hours earlier: completion at 6:30, versus 8:00 before.'),L('Zero dependência operacional: a rotina deixou de depender de uma pessoa para iniciar e avançar entre etapas.','Zero operational dependency: the routine no longer depends on one person to start or to move between steps.'),L('Maior previsibilidade: bases disponibilizadas antes do início da operação de cobrança.','Greater predictability: data delivered before collections operations start.')],
-  lessons:L('O objetivo não era automatizar uma tarefa, e sim mudar o modelo operacional para que o negócio não dependa de alguém estar online às 7h. Antes de comprar uma ferramenta nova, veja o que a atual consegue fazer.','The goal was not to automate a task. It was to change the operating model so the business does not depend on someone being online at 7:00. Before buying a new tool, check what the current one can do.')
-},
-{ id:'reports',
-  ctx:L('Simplic · Informação de gestão','Simplic · Management information'),
-  title:L('Dados de gestão disponíveis antes do expediente','Management data available before the workday'),
-  problem:L('Os gestores precisavam consultar a arrecadação do dia anterior antes do início do expediente para orientar as decisões da manhã. A consolidação e a disponibilização desses dados dependiam de uma rotina manual, limitando a agilidade no acesso à informação.','Managers needed to check the previous day’s collections before the workday started, to guide the morning’s decisions. Consolidating and publishing that data depended on a manual routine, which limited how quickly they could access the information.'),
-  did:L('Parti das necessidades dos usuários para definir o formato de acesso e a experiência de consulta. Estruturei uma visão mobile de autosserviço, permitindo que os gestores consultassem os indicadores diretamente pelo celular, sem depender de solicitações ou da preparação manual de relatórios. Coordenei a disponibilização da solução em AWS e a atualização automática dos dados antes do expediente, eliminando a etapa manual de consolidação e publicação.','I started from the users’ needs to define how they would access and consult the data. I structured a self-service mobile view, so managers could check the KPIs straight from their phones, without raising requests or waiting for manually prepared reports. I coordinated deploying the solution on AWS and the automatic data refresh before the workday, removing the manual consolidation and publishing step.'),
-  metric:'100%', metricLabel:L('das automações seguem em uso até hoje','of the automations are still in use today'),
-  kpis:[['100%',L('ainda em uso','still in use')],['0',L('etapas manuais para montar a visão','manual steps to build the view')],['Mobile',L('consulta pelo celular','viewed on the phone')]],
-  context:L('Decisões de negócio tomadas toda manhã com base no valor arrecadado no dia anterior.','Business decisions made every morning based on the previous day’s collections.'),
-  challenge:L('A informação chegava devagar e dependia de trabalho manual, justamente no momento em que a decisão precisava ser rápida.','The information arrived slowly and depended on manual work, exactly when the decision needed to be fast.'),
-  diagnosis:L('O problema não era falta de dado, e sim o caminho até o gestor: uma etapa manual repetida todo dia e um formato que não combinava com a forma como os gestores consultam a informação.','The problem was not missing data, but the path to the manager: a manual step repeated every day and a format that did not match how managers check information.'),
-  role:L('Assumi da necessidade do usuário à entrega: requisitos com os gestores, desenho da solução, implementação e adoção.','I owned it from user needs to delivery: requirements with the managers, solution design, implementation and adoption.'),
-  stakeholders:L('Os gestores que tomam as decisões da manhã.','The managers who make the morning decisions.'),
-  approach:L('Comecei pelo usuário: o que os gestores precisavam ver e onde preferiam ver. A resposta foi o celular, e a solução foi desenhada para ele.','I started with the user: what managers needed to see and where they preferred to see it. The answer was the phone, and the solution was designed for it.'),
-  execution:null,
-  flow:{before:[['Coleta manual','Manual collection','break'],['Montagem do relatório','Report assembly'],['Gestor espera','Manager waits']],
-        after:[['Atualização automática','Automated refresh','new'],['Pronto antes do expediente','Ready before the workday'],['Gestor consulta no celular','Manager checks on phone']]},
-  solution:L('Uma visão mobile de autosserviço, disponibilizada em AWS e alimentada por uma automação em Python que atualiza os dados todo dia antes do expediente, sem consolidação ou publicação manual.','A self-service mobile view, deployed on AWS and fed by a Python automation that refreshes the data every day before the workday, with no manual consolidation or publishing.'),
-  tools:['Levantamento de requisitos|Requirements discovery','Autoatendimento|Self-service reporting','Visão mobile|Mobile view','Python|Python','AWS|AWS'],
-  results:[L('Gestores decidem pela manhã com os dados do dia anterior, direto do celular.','Managers decide in the morning with the previous day’s data, straight from their phones.'),L('Fim da montagem manual do relatório.','No more manual report assembly.'),L('100% das automações seguem em uso até hoje.','100% of the automations are still in use today.')],
-  lessons:L('Uma solução é adotada quando é feita para onde o usuário já está.','A solution gets adopted when it is built for where the user already is.')
 }
 ];
 
 /* ================= PROJECT PORTFOLIO =================
    Most recent first. a = the type of problem the project solved. */
 var PROJECTS = [
-  {y:L('set 2026','Sep 2026'), org:'Simplic', t:L('Implantação para 8 pessoas em 3 áreas','Rollout to 8 people across 3 areas'), d:L('Construção de novas frentes e treinamento em novos fluxos','New workstreams built and training on the new flows'), a:L('Mudança e adoção','Change & adoption')},
-  {y:L('ago 2026','Aug 2026'), org:'Simplic', t:L('Painéis FIDC com acesso remoto','FIDC consoles with remote access'), d:L('Porta única com login, papéis e trilha de auditoria','Single entry point with login, roles and audit trail'), a:L('Governança','Governance')},
-  {y:L('jun 2026','Jun 2026'), org:'Simplic', t:L('Painel de rejeições em produção','Rejection console in production'), d:L('Ferramenta automatizada para a operação de BackOffice','Automated tool for the BackOffice operation'), a:L('Melhoria de processos','Process improvement')},
-  {y:L('mai 2026','May 2026'), org:'Simplic', t:L('Regras de decisão para rejeições de pagamento','Decision rules for payment rejections'), d:L('Quatro desfechos determinísticos com motivo escrito','Four deterministic outcomes with a written reason'), a:L('Regras de negócio','Business rules')},
-  {y:L('abr 2026','Apr 2026'), org:'Simplic', t:L('Extração automatizada de rejeições','Automated rejection extraction'), d:L('Fim do copiar e colar manual','End of manual copy and paste'), a:L('Automação','Automation')},
-  {y:L('2026','2026'), org:'Simplic', t:L('Causa raiz de falha de captura','Capture failure root cause'), d:L('R$ 326 mil expostos, correção em 1 dia','R$ 326k exposed, fixed in 1 day'), a:L('Risco operacional','Operational risk')},
-  {y:L('2026','2026'), org:'Simplic', t:L('Capacidade de processamento em dias de pico','Processing capacity for peak days'), d:L('Diagnóstico, escalada à diretoria e aumento de infraestrutura','Diagnosis, escalation to the director and infrastructure increase'), a:L('Project delivery','Project delivery')},
-  {y:L('2026','2026'), org:'Simplic', t:L('Transformação do BackOffice','BackOffice transformation'), d:L('Processos mapeados, documentados e automatizados, e um novo BackOffice em seis meses','Processes mapped, documented and automated, and a new BackOffice in six months'), a:L('Project delivery','Project delivery')},
-  {y:L('2026','2026'), org:'Simplic', t:L('Rotina diária sem operador','Unattended daily routine'), d:L('Relatórios disponíveis 24 horas','Reports available 24/7'), a:L('Automação','Automation')},
-  {y:L('2026','2026'), org:'Simplic', t:L('Visão de gestão no celular','Mobile management view'), d:L('Dados do dia anterior antes do expediente','Previous-day data before the workday'), a:L('Dados e analytics','Data & analytics')},
-  {y:L('2026','2026'), org:'Simplic', t:L('Conciliação de baixas duplicadas','Duplicate write-off reconciliation'), d:L('Robô em Python que substituiu a conciliação manual entre dois sistemas','Python bot that replaced manual reconciliation between two systems'), a:L('Conciliação','Reconciliation')},
-  {y:L('2026','2026'), org:'Simplic', t:L('Detecção de pagamentos duplicados FIDC','FIDC duplicate-payment detection'), d:L('Cruzamento com extratos bancários e painel de curadoria','Cross-checked against bank statements, with a curation panel'), a:L('Risco operacional','Operational risk')},
-  {y:L('2026','2026'), org:'Simplic', t:L('Base de conhecimento do time','Team knowledge base'), d:L('Processos compartilhados, colaboradores treinados e conteúdo todo documentado','Processes shared, team trained and all content documented'), a:L('Gestão do conhecimento','Knowledge management')},
-  {y:L('2026','2026'), org:'Simplic', t:L('Implementação de novos parceiros via API','New partner onboarding via API'), d:L('Condução de ponta a ponta da criação, dos testes e do tombamento para produção de novos parceiros','End-to-end lead on setup, testing and go-live of new partners'), a:L('Project delivery','Project delivery')},
+  {y:L('ago 2026','Aug 2026'), org:'Simplic', t:L('Painel de pagamentos em duplicidade (FIDC)','Duplicate payment controls (FIDC)'), d:L('Batimento com o extrato do gateway, curadoria e operação separadas, acesso pelo navegador para a equipe','Matching against the gateway statement, separate curation and operation, browser access for the team'), a:L('Risco operacional','Operational risk')},
+  {y:L('2026','2026'), org:'Simplic', t:L('Central de Pagamentos Rejeitados','Rejected Payments Decision Engine'), d:L('Robô de extração, motor de regras com motivo registrado e painel; regras evoluídas de jul a out/2026','Extraction bot, rules engine with recorded reasons and a panel; rules evolved from Jul to Oct 2026'), a:L('Regras de negócio','Business rules')},
+  {y:L('2026','2026'), org:'Simplic', t:L('Monitor da Operação','Operations Monitor'), d:L('Estado das rotinas automáticas em uma tela, com versão para celular','Status of automated routines on one screen, with a mobile version'), a:L('Monitoramento','Monitoring')},
+    {y:L('2026','2026'), org:'Simplic', t:L('Capacidade de processamento em dias de pico','Processing capacity for peak days'), d:L('Diagnóstico, escalada à diretoria e aumento de infraestrutura','Diagnosis, escalation to the director and infrastructure increase'), a:L('Project delivery','Project delivery')},
+  {y:L('2026','2026'), org:'Simplic', t:L('Transformação do BackOffice','BackOffice transformation'), d:L('Mapeamento, documentação e automação dos principais processos do BackOffice','Mapping, documentation and automation of the main BackOffice processes'), a:L('Project delivery','Project delivery')},
+  {y:L('2026','2026'), org:'Simplic', t:L('Automação da rotina operacional matinal','Morning operations routine automation'), d:L('Sequência agendada às 6h no lugar de disparos manuais; lista do discador pronta mais cedo nos dias documentados','A sequence scheduled at 6:00 instead of manual triggers; dialer list ready earlier on the documented days'), a:L('Automação','Automation')},
+    {y:L('2026','2026'), org:'Simplic', t:L('Visão de gestão no celular','Mobile management view'), d:L('Dados do dia anterior antes do expediente','Previous-day data before the workday'), a:L('Dados e analytics','Data & analytics')},
+  {y:L('2026','2026'), org:'Simplic', t:L('Conciliador de baixas duplicadas','Duplicate write-off reconciler'), d:L('Robô em Python que trata baixas registradas duas vezes no sistema de cobrança. Execução parcial; projeto distinto do painel FIDC','Python bot that handles payments written off twice in the collections system. Partially executed; separate from the FIDC panel'), a:L('Conciliação','Reconciliation')},
+  {y:L('2026','2026'), org:'Simplic', t:L('Base de conhecimento do time','Team knowledge base'), d:L('Processos documentados e compartilhados com o time','Processes documented and shared with the team'), a:L('Gestão do conhecimento','Knowledge management')},
+    {y:L('2026','2026'), org:'Simplic', t:L('Implementação de novos parceiros via API','New partner onboarding via API'), d:L('Condução de ponta a ponta da criação, dos testes e do tombamento para produção de novos parceiros','End-to-end lead on setup, testing and go-live of new partners'), a:L('Project delivery','Project delivery')},
   {y:L('2025','2025'), org:'Itaú Unibanco', t:L('Demandas da rede de agências em modelo de PMO','Branch-network demands in a PMO model'), d:L('Consultoria interna de pessoas','Internal people consulting'), a:L('PMO','PMO')},
   {y:L('2025','2025'), org:'Itaú Unibanco', t:L('People analytics com dados de alto volume','People analytics on high-volume data'), d:L('Apoio às decisões da consultoria de pessoas','Supporting people consulting decisions'), a:L('Dados e analytics','Data & analytics')},
   {y:L('2024','2024'), org:'Itaú Unibanco', t:L('Reestruturação do fluxo financeiro de Garantias','Collateral financial flow restructuring'), d:L('Operação de cerca de R$ 2 milhões por mês','Operation of roughly R$ 2 million a month'), a:L('Melhoria de processos','Process improvement')}
@@ -1333,7 +1261,7 @@ function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').rep
 function pair(s){ var p = s.split('|'); return lang === 'en' && p[1] ? p[1] : p[0]; }
 var UI = {
   challenge:L('Problema','Problem'), action:L('O que fiz','What I did'), impact:L('Impacto','Impact'),
-  read:L('Ler o caso completo','Read the full case'), back:L('Todos os cases','All cases'), next:L('Próximo caso','Next case'),
+  read:L('Ler o caso completo','Read the full case'), readPage:L('Ver o case detalhado e a demonstração','See the case study and demo'), back:L('Todos os cases','All cases'), next:L('Próximo caso','Next case'),
   before:L('Antes','Before'), after:L('Depois','After'), exhibit:L('Antes e depois','Before and after'),
   draft:L('A escrever.','To be written.'), all:L('Todos','All'),
   sec:{context:L('Contexto','Context'),challenge:L('Problema de negócio','Business problem'),diagnosis:L('Diagnóstico','Diagnosis'),role:L('Meu papel','My role'),approach:L('Abordagem','Approach'),solution:L('Solução','Solution'),stakeholders:L('Stakeholders','Stakeholders'),execution:L('Execução','Execution'),tools:L('Métodos e ferramentas','Methods & tools'),results:L('Resultados','Results'),lessons:L('Aprendizado','Lessons learned')}
@@ -1347,11 +1275,11 @@ function renderCards(){
   CASES.forEach(function(c){
     var facts = c.kpis.filter(function(k){ return kv(k) !== metricText(c); }).map(function(k){ return '<li><b class="num">'+esc(kv(k))+'</b><span>'+esc(t(k[1]))+'</span></li>'; }).join('');
     h += '<article class="card rv in">'
-      + '<div class="card__main"><h3>'+esc(t(c.title))+'</h3>'
+      + '<div class="card__main">'+(c.kind?'<p class="label label--acc card__kind">'+esc(t(c.kind))+'</p>':'')+'<h3>'+esc(t(c.title))+'</h3>'
       + '<div class="card__row"><p class="label">'+t(UI.challenge)+'</p><p>'+esc(t(c.problem))+'</p></div>'
       + '<div class="card__row"><p class="label">'+t(UI.action)+'</p><p>'+esc(t(c.did))+'</p></div>'
-      + '<div class="card__impact"><b class="num">'+esc(metricText(c))+'</b><span>'+esc(t(c.metricLabel))+'</span></div></div>'
-      + '<div class="card__foot"><a class="link" href="#case/'+c.id+'">'+t(UI.read)+' <span aria-hidden="true">→</span></a></div>'
+      + '<div class="card__impact'+(metricText(c)?'':' card__impact--text')+'">'+(metricText(c)?'<b class="num">'+esc(metricText(c))+'</b>':'')+'<span>'+esc(t(c.metricLabel))+'</span></div></div>'
+      + '<div class="card__foot"><a class="link" href="'+(c.page?esc(t(c.page)):'#case/'+c.id)+'">'+t(c.page?UI.readPage:UI.read)+' <span aria-hidden="true">→</span></a></div>'
       + '</article>';
   });
   document.getElementById('caseList').innerHTML = h;
@@ -1399,15 +1327,16 @@ function block(key, html, extra){
 }
 function p(v){ return v ? '<p>'+esc(t(v))+'</p>' : ''; }
 
+function modalCases(){ return CASES.filter(function(x){ return !x.page; }); }
 function renderCase(c){
-  var i = CASES.indexOf(c), nx = CASES[(i+1) % CASES.length];
+  var M = modalCases(), i = M.indexOf(c), nx = M[(i+1) % M.length];
   var kpis = c.kpis.map(function(k){ return '<div><b class="num">'+esc(lang==='en'&&k[2]?k[2]:k[0])+'</b><span>'+esc(t(k[1]))+'</span></div>'; }).join('');
   var tools = '<div class="tags">'+c.tools.map(function(x){ return '<span>'+esc(pair(x))+'</span>'; }).join('')+'</div>';
   var results = '<ul>'+c.results.map(function(r){ return '<li>'+esc(t(r))+'</li>'; }).join('')+'</ul>';
   cs.innerHTML =
-    '<div class="cs__bar"><div class="wrap"><button class="cs__back" type="button" data-close><span aria-hidden="true">←</span> '+t(UI.back)+'</button><span class="cs__count num">'+String(i+1).padStart(2,'0')+' / '+String(CASES.length).padStart(2,'0')+'</span></div></div>'
+    '<div class="cs__bar"><div class="wrap"><button class="cs__back" type="button" data-close><span aria-hidden="true">←</span> '+t(UI.back)+'</button><span class="cs__count num">'+String(i+1).padStart(2,'0')+' / '+String(M.length).padStart(2,'0')+'</span></div></div>'
   + '<article><header class="cs__hero"><div class="wrap"><p class="label label--acc">'+esc(t(c.ctx))+'</p><h1 id="csTitle">'+esc(t(c.title))+'</h1><p>'+esc(t(c.problem))+'</p></div></header>'
-  + '<div class="wrap"><div class="cs__kpis">'+kpis+'</div>'
+  + '<div class="wrap">'+(kpis?'<div class="cs__kpis">'+kpis+'</div>':'')
   + '<div class="cs__body">'
   +   block('context', p(c.context)) + block('challenge', p(c.challenge)) + block('diagnosis', p(c.diagnosis))
   +   exhibit(c)
@@ -1421,8 +1350,10 @@ function renderCase(c){
 }
 
 function openCase(id){
+  var ALIAS = {engine:'rejections', routine:'rotina'}; if(ALIAS[id]) id = ALIAS[id];
   var c = CASES.filter(function(x){ return x.id === id; })[0];
   if(!c){ closeCase(true); return; }
+  if(c.page){ location.replace(t(c.page)); return; }
   if(!current) lastFocus = document.activeElement;
   current = c; renderCase(c);
   cs.hidden = false; cs.scrollTop = 0; document.body.classList.add('lock');
@@ -1432,7 +1363,7 @@ function openCase(id){
 function closeCase(silent){
   if(!current && cs.hidden) return;
   current = null; cs.hidden = true; cs.innerHTML = ''; document.body.classList.remove('lock');
-  document.title = 'Paulo Nobre | PMO & Project Delivery';
+  document.title = 'Paulo Nobre | Process Improvement & Project Delivery';
   if(!silent){
     var w = document.getElementById('cases');
     if(lastFocus && document.contains(lastFocus)) lastFocus.focus({preventScroll:true});

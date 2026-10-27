@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Cérebro · Painel da Operação</title>
-<meta name="description" content="Demonstração com dados fictícios do Cérebro: o observador da frota de robôs coletores. Diz em segundos se a manhã fechou, quanto entrou e o que falhou.">
+<meta name="description" content="Demonstração com dados sintéticos do Cérebro: o observador da frota de robôs coletores. Diz em segundos se a manhã fechou, quanto entrou e o que falhou.">
 <meta name="theme-color" content="#048A05">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23fff'/%3E%3Cpath d='M26.4 11.8A11 11 0 1 0 26.4 20.2' fill='none' stroke='%23048A05' stroke-width='3.4' stroke-linecap='round'/%3E%3Ccircle cx='26.4' cy='20.2' r='3.1' fill='%23F5BF05'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -243,6 +243,7 @@ svg.i{width:15px;height:15px;flex:none}
 <style>.voltar-proj{color:inherit;font-weight:700;text-decoration:none;border-bottom:1px solid currentColor;opacity:.92;white-space:nowrap}.voltar-proj:hover{opacity:1}</style>
 </head>
 <body>
+<div class="synthetic-banner" role="note" style="background:#2B2416;color:#F3E9D2;font:500 12.5px/1.45 system-ui,-apple-system,Segoe UI,sans-serif;padding:7px 16px;text-align:center;border-bottom:1px solid #6B5A33"><b style="letter-spacing:.06em;text-transform:uppercase;font-size:11px;margin-right:8px">Dados sintéticos</b>Esta é uma demonstração interativa com dados sintéticos. Os registros e resultados são ilustrativos e não representam dados reais da operação.</div>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
   <symbol id="i-hoje" viewBox="0 0 16 16"><path d="M2.5 3.5h11M2.5 8h11M2.5 12.5h7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></symbol>
   <symbol id="i-pagamentos" viewBox="0 0 16 16"><path d="M2.5 13.5V9M6.2 13.5V5.5M9.8 13.5V7.5M13.5 13.5v-11" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></symbol>
@@ -260,8 +261,8 @@ svg.i{width:15px;height:15px;flex:none}
 </defs></svg>
 
 <div class="faixa-atencao"><div class="int">
-  <span class="vivo" role="status">ao vivo · agora</span>
-  <span class="dir"><a class="voltar-proj" href="../../index.html">← Todos os projetos</a><span class="demo">Dados fictícios</span><span class="esconde">Sincronizado agora</span><span class="esconde" id="emExecucao">Nenhum coletor em execução</span></span>
+  <span class="vivo" role="status">Simulação</span>
+  <span class="dir"><a class="voltar-proj" href="../../monitor-operacao.html">← Voltar ao case</a><span class="demo">Dados sintéticos</span><span class="esconde">Demonstração</span><span class="esconde" id="emExecucao">Nenhum coletor em execução</span></span>
 </div></div>
 
 <header class="topo"><div class="int">
@@ -272,8 +273,8 @@ svg.i{width:15px;height:15px;flex:none}
   <nav class="menu" aria-label="Seções">
     <a class="nav-item" href="#hoje" data-secao="hoje"><svg class="i"><use href="#i-hoje"/></svg><span class="nav-rot">Hoje</span><span class="nav-conta alerta">1</span></a>
     <a class="nav-item" href="#pagamentos" data-secao="pagamentos"><svg class="i"><use href="#i-pagamentos"/></svg><span class="nav-rot">Pagamentos</span></a>
-    <a class="nav-item" href="#rejeicoes" data-secao="rejeicoes"><svg class="i"><use href="#i-rejeicoes"/></svg><span class="nav-rot">Rejeições</span><span class="nav-conta">28</span></a>
-    <a class="nav-item" href="#jiras" data-secao="jiras"><svg class="i"><use href="#i-jiras"/></svg><span class="nav-rot">Jiras</span></a>
+    <a class="nav-item" href="#rejeicoes" data-secao="rejeicoes"><svg class="i"><use href="#i-rejeicoes"/></svg><span class="nav-rot">Rejeições</span><span class="nav-conta">23</span></a>
+    <a class="nav-item" href="#jiras" data-secao="jiras"><svg class="i"><use href="#i-jiras"/></svg><span class="nav-rot">Chamados</span></a>
     <a class="nav-item" href="#controles" data-secao="controles"><svg class="i"><use href="#i-controles"/></svg><span class="nav-rot">Coleta e alertas</span></a>
   </nav>
   <div class="topo-meio">
@@ -285,10 +286,11 @@ svg.i{width:15px;height:15px;flex:none}
 </div></header>
 
 <main id="conteudo">
+<h1 style="position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap">Monitor da operação · demonstração com dados sintéticos</h1>
 <!-- HOJE -->
 <section class="secao" id="s-hoje">
   <div class="banda com-faixa"><div class="int">
-    <div class="secao-cab"><div><h2>Hoje</h2><p>sexta, 09/10/2026</p></div></div>
+    <div class="secao-cab"><div><h2>Hoje</h2><p>quinta, 05/03/2026 · simulação</p></div></div>
     <div class="faixa" id="faixaHoje"></div>
   </div></div>
   <div class="int corpo">
@@ -303,18 +305,18 @@ svg.i{width:15px;height:15px;flex:none}
 <!-- PAGAMENTOS -->
 <section class="secao" id="s-pagamentos" hidden>
   <div class="banda com-faixa"><div class="int">
-    <div class="secao-cab"><div><h2>Baixa de pagamentos</h2><p>Fonte: sistema de cobrança, relatório de baixas. Foto do dia 08/10, extraída hoje às 07:41.</p>
+    <div class="secao-cab"><div><h2>Pagamentos</h2><p>Simulação: foto do dia 04/03, com valores inventados.</p>
       <div class="acoes"><div class="segmento" role="group" aria-label="Densidade"><button type="button" aria-pressed="true" data-dens="conf">Confortável</button><button type="button" aria-pressed="false" data-dens="comp">Compacta</button></div><button class="btn btn-primario" type="button" id="btnRodar">Rodar agora</button></div></div></div>
     <div class="faixa" id="faixaPg"></div>
   </div></div>
   <div class="int corpo">
     <div class="periodo">
-      <label><span class="rotulo">Início</span><input type="date" value="2026-10-08"></label>
-      <label><span class="rotulo">Fim</span><input type="date" value="2026-10-09"></label>
+      <label><span class="rotulo">Início</span><input type="date" value="2026-03-04"></label>
+      <label><span class="rotulo">Fim</span><input type="date" value="2026-03-05"></label>
       <div><span class="rotulo" style="display:block;color:var(--text-3);margin-bottom:4px">Atalhos</span>
-        <div class="segmento" role="group" aria-label="Atalhos de período"><button type="button" aria-pressed="true">08/10 até hoje</button><button type="button" aria-pressed="false">Só 08/10</button><button type="button" aria-pressed="false">7 dias</button><button type="button" aria-pressed="false">Este mês</button></div></div>
+        <div class="segmento" role="group" aria-label="Atalhos de período"><button type="button" aria-pressed="true">04/03 até hoje</button><button type="button" aria-pressed="false">Só 04/03</button><button type="button" aria-pressed="false">7 dias</button><button type="button" aria-pressed="false">Este mês</button></div></div>
     </div>
-    <div class="folha"><div class="folha-cab"><h3>Canal e faixa de atraso</h3><span class="meta">08/10 a 09/10/2026</span></div>
+    <div class="folha"><div class="folha-cab"><h3>Canal e faixa de atraso</h3><span class="meta">04/03 a 05/03/2026</span></div>
       <div class="tabela-rola"><table class="tabela" id="tabPg"></table></div></div>
     <div class="grade-2 mt">
       <div class="folha"><div class="folha-cab"><h3>Recebimento por canal</h3><span class="meta">10 maiores</span></div><div id="barCanal"></div></div>
@@ -332,19 +334,19 @@ svg.i{width:15px;height:15px;flex:none}
   </div></div>
   <div class="int corpo"><div class="grade-2">
     <div class="folha"><div class="folha-cab"><h3>Últimos dias</h3><span class="meta">pela data da rejeição</span></div><div class="tabela-rola"><table class="tabela" id="tabRej"></table></div></div>
-    <div class="folha"><div class="folha-cab"><h3>Onde está o que falta</h3><span class="meta">28 casos em aberto</span></div><div id="barRej"></div></div>
+    <div class="folha"><div class="folha-cab"><h3>Onde está o que falta</h3><span class="meta">23 casos em aberto</span></div><div id="barRej"></div></div>
   </div></div>
 </section>
 
 <!-- JIRAS -->
 <section class="secao" id="s-jiras" hidden>
-  <div class="banda"><div class="int"><div class="secao-cab"><div><h2>Jiras</h2><p>Chamados atribuídos e lotes de críticas de processamento.</p></div></div></div></div>
+  <div class="banda"><div class="int"><div class="secao-cab"><div><h2>Chamados</h2><p>Fila de chamados lida por um coletor (simulação).</p></div></div></div></div>
   <div class="int corpo">
-    <div class="nota aviso"><strong>Conexão com o Jira aguardando a conta de serviço.</strong> Enquanto o token da API não existir, a coleta devolve zero chamados. Os números abaixo não descrevem a fila real.</div>
-    <div class="folha mt"><div class="folha-cab"><h3>O que a coleta trouxe</h3><span class="meta">última leitura 16:00</span></div>
+    <div class="nota aviso"><strong>Simulação de fonte indisponível.</strong> Quando a coleta não consegue ler a fonte, o painel mostra isso, em vez de exibir zero como se fosse um dado real.</div>
+    <div class="folha mt"><div class="folha-cab"><h3>O que a coleta trouxe</h3><span class="meta">última leitura 06:35</span></div>
       <table class="tabela"><thead><tr><th>Fila</th><th class="num">Abertos</th><th class="num">Atribuídos a mim</th><th>Situação</th></tr></thead><tbody>
-      <tr><td>Críticas de processamento</td><td class="num">0</td><td class="num">0</td><td><span class="st parado">Sem dado confiável</span></td></tr>
-      <tr><td>Reembolsos</td><td class="num">0</td><td class="num">0</td><td><span class="st parado">Sem dado confiável</span></td></tr>
+      <tr><td>Fila A</td><td class="num">0</td><td class="num">0</td><td><span class="st parado">Sem dado confiável</span></td></tr>
+      <tr><td>Fila B</td><td class="num">0</td><td class="num">0</td><td><span class="st parado">Sem dado confiável</span></td></tr>
       </tbody></table></div>
   </div>
 </section>
@@ -359,7 +361,7 @@ svg.i{width:15px;height:15px;flex:none}
 </section>
 </main>
 
-<footer class="rodape"><div class="int"><span>Cérebro, observador da frota de coletores · demonstração com dados fictícios</span><span class="dir"><span>versão 2026.10.09</span><a href="cerebro-mobile.html">Versão celular</a></span></div></footer>
+<footer class="rodape"><div class="int"><span>Cérebro, observador da frota de coletores · demonstração com dados sintéticos</span><span class="dir"><span>versão demo</span><a href="cerebro-mobile.html">Versão celular</a></span></div></footer>
 
 <div class="veu" id="veu" hidden></div>
 <aside class="detalhe" id="detalhe" role="dialog" aria-modal="true" aria-labelledby="detTitulo" hidden>
@@ -371,7 +373,7 @@ svg.i{width:15px;height:15px;flex:none}
 
 <script>
 "use strict";
-/* DADOS FICTÍCIOS. Códigos de tarefa, canais, assessorias e valores foram inventados. */
+/* DADOS SINTÉTICOS (simulação). Coletores, tarefas, canais, horários e valores foram criados para esta demonstração. */
 const $ = s => document.querySelector(s);
 const brl = v => v.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
 const mil = v => "R$ "+Math.round(v/1000).toLocaleString("pt-BR")+" mil";
@@ -379,31 +381,29 @@ const esc = s => String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&
 function aviso(m){const a=$("#aviso");a.textContent=m;a.classList.add("on");clearTimeout(aviso.t);aviso.t=setTimeout(()=>a.classList.remove("on"),2600);}
 
 const COLETORES = [
-  {st:"ok", nome:"Baixa de pagamentos", cod:"baixa_pagamentos", ult:"07:41 · 108,8 s", prox:"14:00", hoje:true, obs:""},
-  {st:"ok", nome:"Pagamentos no gateway", cod:"gateway_pagamentos", ult:"08:51 · 22,4 s", prox:"09:00", hoje:true, obs:""},
-  {st:"ok", nome:"Tarefas por e-mail", cod:"tarefas_email", ult:"07:41 · 6,1 s", prox:"10:20", hoje:true, obs:""},
-  {st:"ok", nome:"Reabilitação de crédito", cod:"reabilitacao", ult:"14:49 · 41,0 s", prox:"seg 14:00", hoje:true, obs:""},
-  {st:"ok", nome:"Rejeições", cod:"rejeicoes_hist", ult:"16:00 · 3,2 s", prox:"18:00", hoje:true, obs:""},
-  {st:"alerta", nome:"Jiras", cod:"jiras", ult:"16:00 · 1,9 s", prox:"seg 08:00", hoje:false, obs:"Conta de serviço pendente"},
+  {st:"ok", nome:"Coleta de pagamentos", cod:"DEMO_COLETA_PAG", ult:"06:10 · 40 s", prox:"12:00", hoje:true, obs:""},
+  {st:"ok", nome:"Coleta do gateway", cod:"DEMO_COLETA_GW", ult:"06:20 · 15 s", prox:"10:00", hoje:true, obs:""},
+  {st:"ok", nome:"Coleta de rejeições", cod:"DEMO_COLETA_REJ", ult:"06:28 · 5 s", prox:"12:30", hoje:true, obs:""},
+  {st:"alerta", nome:"Coleta de chamados", cod:"DEMO_COLETA_CHM", ult:"06:35 · 2 s", prox:"13:00", hoje:false, obs:"Fonte indisponível na simulação: uma pessoa precisa verificar"},
 ];
 const TAREFAS = [
-  {cod:"CARGA_DIA", dias:"terça a sexta", ok:true, etapas:6, fim:"05:43", lista:["Abre a carga do dia","Valida o layout","Importa contratos","Importa parcelas","Recalcula saldos","Fecha o lote"]},
-  {cod:"AMOSTRA", dias:"segunda a sábado", ok:true, etapas:1, fim:"03:01", lista:["Gera a amostra de conferência"]},
-  {cod:"REPASSE_AUT", dias:"terça a sábado", ok:false, etapas:17, fim:"06:12", falhou:12, lista:Array.from({length:17},(_,i)=>["Lê arquivo de repasse","Separa por assessoria","Confere CPF","Confere contrato","Aplica regra de repasse","Agrupa por canal","Calcula comissão","Grava lote","Envia retorno A","Envia retorno B","Confere saldo","Envia retorno C","Concilia","Fecha repasse","Arquiva","Notifica","Encerra"][i])},
-  {cod:"DISTRIB_DIG", dias:"segunda", ok:null, etapas:3, fim:"", lista:["Distribui carteira digital","Confere","Fecha"]},
+  {cod:"DEMO_TAREFA_A", dias:"segunda a sexta", ok:true, etapas:5, fim:"05:50", lista:["Abre o lote de exemplo", "Valida o arquivo", "Importa registros", "Confere totais", "Fecha o lote"]},
+  {cod:"DEMO_TAREFA_B", dias:"todos os dias", ok:true, etapas:1, fim:"05:10", lista:["Gera a amostra de conferência"]},
+  {cod:"DEMO_TAREFA_C", dias:"segunda a sábado", ok:false, etapas:8, fim:"06:12", falhou:5, lista:["Lê o arquivo de entrada", "Valida o formato", "Separa por grupo", "Confere identificadores", "Aplica as regras", "Grava o lote", "Envia o retorno", "Fecha a execução"]},
+  {cod:"DEMO_TAREFA_D", dias:"segunda", ok:null, etapas:3, fim:"", lista:["Prepara a distribuição", "Confere", "Fecha"]},
 ];
-const REAB = [["Bureau A",[["REAB_A_DISP","disparo","14:00"],["REAB_A_ENV","envio","14:13"]]],["Bureau B",[["REAB_B_RET","retorno","14:16"],["REAB_B_ENV","envio","14:49"]]]];
+const REAB = [["Parceiro A",[["DEMO_PARC_A1","envio","06:00"],["DEMO_PARC_A2","retorno","06:05"]]],["Parceiro B",[["DEMO_PARC_B1","envio","06:10"],["DEMO_PARC_B2","retorno","06:15"]]]];
 
 function ind(rot,val,sub,forma,falha){return `<div class="ind${falha?" falha":""}"><div class="ind-rot rotulo">${forma?`<span class="forma ${forma}"></span>`:""}${rot}</div><div class="ind-val">${val}</div><div class="ind-sub">${sub}</div></div>`;}
 
 function pintaHoje(){
   const falhas = TAREFAS.filter(t=>t.ok===false).length;
   $("#faixaHoje").innerHTML =
-    ind("Recebido no dia","R$ 1.742 mil","ref. 08/10 · R$ 1.742.318,90","") +
+    ind("Recebido no dia","R$ 48 mil","ref. 04/03 · R$ 48.000,00 · simulação","") +
     ind("Checklist",`3<small>/4</small>`,falhas?`${falhas} falhou`:"tudo de pé","falha",!!falhas) +
-    ind("Gateway","Constando","09/10 · 08:51","ok") +
-    ind("Coletores",`5<small>/6</small>`,"com dado de hoje","ok") +
-    ind("Rejeições pendentes","28","em 63 dias · 99% concluído","anel");
+    ind("Gateway","Constando","05/03 · 06:50","ok") +
+    ind("Coletores",`3<small>/4</small>`,"com dado de hoje","ok") +
+    ind("Rejeições pendentes","23","em 12 dias · simulação","anel");
   const ok = COLETORES.filter(c=>c.hoje).length;
   $("#procMeta").textContent = `${COLETORES.length} habilitados · ${ok} com dado de hoje`;
   const rot = {ok:"Concluído",alerta:"Alerta",falha:"Falhou"};
@@ -411,33 +411,30 @@ function pintaHoje(){
 
   const tarefas = `<div class="folha"><div class="folha-cab"><h3>Tarefas do sistema de cobrança</h3><span class="acoes"><button class="btn btn-primario" type="button" data-verificar="tarefas"><svg class="i"><use href="#i-girar"/></svg>Verificar agora</button></span></div>
     ${TAREFAS.map((t,i)=>`<div class="tarefa" data-abre="tar:${i}" tabindex="0" role="button"><span class="ponto${t.ok===false?" falha":""}" ${t.ok===null?'style="background:transparent;border:2px solid var(--border-strong)"':""}></span>
-      <div><div class="t-cod">${t.cod}</div><div class="t-sub">${t.dias} · lido às 07:41</div></div>
+      <div><div class="t-cod">${t.cod}</div><div class="t-sub">${t.dias} · lido às 06:40</div></div>
       <div class="t-res">${t.ok===null?`<b style="color:var(--text-3)">Não roda hoje</b><span>próxima segunda</span>`:`<b class="${t.ok?"":"falhou"}">${t.ok?"Funcionou":"Falhou"}</b><span>${t.ok?t.etapas+" etapas · terminou às "+t.fim:"parou na etapa "+t.falhou+" de "+t.etapas}</span>`}</div>
       <svg class="i"><use href="#i-seta"/></svg></div>`).join("")}</div>`;
-  const gateway = `<div class="folha"><div class="folha-cab"><h3>Gateway: pagamentos constando</h3><span class="meta">09/10/2026 · lido às 08:51</span><span class="acoes"><button class="btn btn-primario" type="button" data-verificar="gateway"><svg class="i"><use href="#i-girar"/></svg>Verificar agora</button></span></div>
+  const gateway = `<div class="folha"><div class="folha-cab"><h3>Gateway: pagamentos constando</h3><span class="meta">05/03/2026 · lido às 06:50</span><span class="acoes"><button class="btn btn-primario" type="button" data-verificar="gateway"><svg class="i"><use href="#i-girar"/></svg>Verificar agora</button></span></div>
     <table class="tabela"><thead><tr><th>Forma</th><th>Situação</th></tr></thead><tbody>
-      <tr><td>Boleto</td><td><span class="st ok">Constando</span><span class="cod" style="font-family:var(--f-ui)">412 boletos · último 08:46</span></td></tr>
-      <tr><td>Pix automático</td><td><span class="st ok">Constando</span><span class="cod" style="font-family:var(--f-ui)">5.918 Pix · R$ 2.104.377,60</span></td></tr></tbody></table></div>`;
-  const reab = `<div class="folha"><div class="folha-cab"><h3>Reabilitação de crédito</h3><span class="meta">4/4 concluídas</span><span class="acoes"><button class="btn btn-primario" type="button" data-verificar="reab"><svg class="i"><use href="#i-girar"/></svg>Verificar agora</button></span></div>
+      <tr><td>Boleto</td><td><span class="st ok">Constando</span><span class="cod" style="font-family:var(--f-ui)">120 boletos · último 06:45</span></td></tr>
+      <tr><td>Pix automático</td><td><span class="st ok">Constando</span><span class="cod" style="font-family:var(--f-ui)">260 Pix · R$ 18.400,00</span></td></tr></tbody></table></div>`;
+  const reab = `<div class="folha"><div class="folha-cab"><h3>Tarefas com parceiros (simulação)</h3><span class="meta">4/4 concluídas</span><span class="acoes"><button class="btn btn-primario" type="button" data-verificar="reab"><svg class="i"><use href="#i-girar"/></svg>Verificar agora</button></span></div>
     <table class="tabela"><thead><tr><th>Tarefa</th><th>Situação</th></tr></thead><tbody>
     ${REAB.map(([g,ts])=>`<tr class="sub"><td colspan="2">${g}</td></tr>`+ts.map(t=>`<tr><td><b class="cod" style="color:var(--text);font-weight:700">${t[0]}</b><span class="t-sub">${g}, ${t[1]}</span></td><td><span class="st ok">Concluída às ${t[2]}</span></td></tr>`).join("")).join("")}</tbody></table>
-    <p class="t-sub" style="margin-top:10px">Lido em 09/10 às 15:02.</p></div>`;
-  const bat = `<div class="folha"><div class="folha-cab"><h3>Batimento com a credora</h3><span class="meta">conciliação quinzenal, sempre aos sábados</span></div>
-    <div class="bat"><div><small class="rotulo">Último</small><span class="bat-data num">26/09</span></div><div><small class="rotulo">Próximo</small><span class="bat-data num">10/10</span><small>amanhã, sábado</small></div>
+    <p class="t-sub" style="margin-top:10px">Simulação.</p></div>`;
+  const bat = `<div class="folha"><div class="folha-cab"><h3>Conferência periódica com a credora</h3><span class="meta">simulação</span></div>
+    <div class="bat"><div><small class="rotulo">Último</small><span class="bat-data num">26/02</span></div><div><small class="rotulo">Próximo</small><span class="bat-data num">12/03</span><small>próxima semana</small></div>
     <button class="btn btn-primario" type="button" id="btnBatimento" style="margin-left:auto">Registrar batimento de hoje</button></div>
-    <p class="t-sub" style="margin-top:12px">A agenda pula dia de entrada (1, 5º útil, 15, 20, 30) e o dia seguinte. Marcação fica no servidor com autor e hora.</p></div>`;
+    <p class="t-sub" style="margin-top:12px">Na ferramenta, cada marcação fica registrada com autor e hora. Na simulação, nada é gravado.</p></div>`;
   const susp = `<div class="folha"><div class="folha-cab"><h3>Fontes suspensas</h3><span class="meta">aguardando a fonte voltar</span></div>
-    <table class="tabela"><tbody><tr><td><span class="st parado">Suspensa</span></td><td><b>Arquivo sequencial</b><br><span class="t-sub">SFTP da credora. O relatório deixou de ser publicado após a troca de modelo; volta assim que a fonte for restabelecida.</span></td></tr></tbody></table></div>`;
+    <table class="tabela"><tbody><tr><td><span class="st parado">Suspensa</span></td><td><b>Fonte de exemplo</b><br><span class="t-sub">Suspensa na simulação para mostrar o estado. Volta quando a fonte for restabelecida.</span></td></tr></tbody></table></div>`;
   $("#cartoesHoje").innerHTML = tarefas + gateway + reab + bat + susp;
 }
 
 /* pagamentos */
-const FAIXAS = ["Em dia","1 a 3 dias","4 dias","5 a 30 dias","31 a 60 dias","Mais de 60 dias"];
-const CANAIS = [ // grupo, canal, total recebido (R$), peso por faixa de atraso. DADOS FICTÍCIOS
-  ["CallCenter","CENTRAL_A",301418.65,[60,70,18,90,28,35]],["CallCenter","CENTRAL_B",211205.12,[0,0,1,180,30,0.2]],["CallCenter","CENTRAL_C",38690.40,[0,0.9,0,0.4,38,0.2]],
-  ["Assessorias","ASS_NORTE",69311.27,[0,0,0,0,1.3,68]],["Assessorias","ASS_ATLAS",31702.88,[0,0,0,0,0.7,31]],["Assessorias","ASS_PRISMA",29688.15,[0,0,0,0,0.7,29]],
-  ["Portais","PORTAL_PROPRIO",612437.90,[310,0,350,175,36,74]],["Portais","MARKETPLACE_A",268915.33,[55,300,2,11,14,19]],["Portais","BUREAU_NEG",189577.61,[0,5.4,0,6.5,29,290]],["Portais","QUITA_FACIL",30604.22,[0,1.9,0,0.6,2.6,34]],["Portais","LINK_PORTAL",2412.00,[0,0,0,0,0,2.4]],
-  ["Outros","PARCEIRO_X",471790.48,[0,360,37,79,3.7,0.85]],["Outros","BOLETAGEM",9018.73,[0,0,0,0,8.2,0.76]],["Outros","INTERNO",600.37,[0.22,0,0,0,0,0.38]],
+const FAIXAS = ["Em dia", "1 a 30 dias", "31 a 60 dias", "61 a 90 dias", "Mais de 90 dias"];
+const CANAIS = [ // grupo, canal, total (R$), peso por faixa de atraso. DADOS SINTÉTICOS, SIMULAÇÃO
+  ["CallCenter","CANAL_A1",9000.00,[40, 30, 15, 10, 5]],["CallCenter","CANAL_A2",6000.00,[10, 40, 30, 15, 5]],["Assessorias","ASSESSORIA_A",4000.00,[0, 10, 30, 30, 30]],["Assessorias","ASSESSORIA_B",3000.00,[0, 5, 25, 35, 35]],["Portais","PORTAL_1",12000.00,[50, 25, 15, 5, 5]],["Portais","PORTAL_2",7000.00,[30, 40, 20, 5, 5]],["Outros","PARCEIRO_1",5500.00,[20, 40, 20, 10, 10]],["Outros","OUTROS",1500.00,[10, 20, 30, 20, 20]],
 ];
 function porFaixa(total,peso){ const s=peso.reduce((a,b)=>a+b,0); const v=peso.map(p=>Math.round(100*total*p/s)/100); const dif=Math.round(100*(total-v.reduce((a,b)=>a+b,0)))/100; v[v.findLastIndex(x=>x>0)]=Math.round(100*(v[v.findLastIndex(x=>x>0)]+dif))/100; return v; }
 const DADOS = ["CallCenter","Assessorias","Portais","Outros"].map(g=>[g,CANAIS.filter(c=>c[0]===g).map(c=>[c[1],porFaixa(c[2],c[3])])]);
@@ -445,7 +442,7 @@ const somaArr = a => a.reduce((x,y)=>x+y,0);
 function pintaPg(){
   const totG = DADOS.map(([g,cs])=>[g, FAIXAS.map((_,i)=>somaArr(cs.map(c=>c[1][i])))]);
   const geral = FAIXAS.map((_,i)=>somaArr(totG.map(t=>t[1][i]))), total = somaArr(geral);
-  $("#faixaPg").innerHTML = ind("Total recebido",mil(total),"08/10 a 09/10/2026","") + totG.map(([g,v])=>{const t=somaArr(v);return ind(g,mil(t),brl(t)+" · "+(100*t/total).toFixed(1).replace(".",",")+"%","");}).join("");
+  $("#faixaPg").innerHTML = ind("Total recebido",mil(total),"04/03 a 05/03/2026 · simulação","") + totG.map(([g,v])=>{const t=somaArr(v);return ind(g,mil(t),brl(t)+" · "+(100*t/total).toFixed(1).replace(".",",")+"%","");}).join("");
   const cel = v => v?brl(v):"·";
   let h = `<thead><tr><th>Canal</th>${FAIXAS.map(f=>`<th class="num">${f}</th>`).join("")}<th class="num">Total</th></tr></thead><tbody>`;
   DADOS.forEach(([g,cs],gi)=>{
@@ -463,25 +460,25 @@ function pintaPg(){
 }
 
 function pintaRej(){
-  $("#faixaRej").innerHTML = ind("Pendentes","28","R$ 10.841,57 parados","anel") + ind("Tratados no mês","331","92% do que exige ação","ok") + ind("Rejeitado no mês",mil(265024.06),"612 casos","") + ind("Biblioteca","63 dias","4.912 casos","");
-  const dias=[["09/10",41,33,8],["08/10",57,48,9],["07/10",52,45,7],["06/10",60,56,4],["05/10",14,14,0],["04/10",6,6,0],["03/10",71,71,0]];
+  $("#faixaRej").innerHTML = ind("Pendentes","23","R$ 4.941,30 parados","anel") + ind("Tratados no mês","18","41% do que exige ação","ok") + ind("Rejeitado no mês",mil(9613.30),"47 casos","") + ind("Biblioteca","12 dias","260 casos sintéticos","");
+  const dias=[["05/03",9,0,9],["04/03",10,2,8],["03/03",7,2,5],["02/03",3,2,1]];
   $("#tabRej").innerHTML = `<thead><tr><th>Dia</th><th class="num">Casos</th><th class="num">Tratados</th><th class="num">Pendentes</th><th>Situação</th></tr></thead><tbody>`+
     dias.map(d=>`<tr><td>${d[0]}/2026</td><td class="num">${d[1]}</td><td class="num">${d[2]}</td><td class="num">${d[3]}</td><td><span class="st ${d[3]?"alerta":"ok"}">${d[3]?"Em aberto":"Fechado"}</span></td></tr>`).join("")+`</tbody>`;
-  const f=[["Aberto na credora",10,2634.06],["Reembolso DA",5,1070.13],["Emitir",4,639.33],["Refazer",3,967.15],["Quitação",2,4780.66],["Proposta",2,199.20],["Antecipação",1,223.70],["Abrir Jira",1,327.34]];
+  const f=[["Aberto na credora", 5, 830.0], ["Emitir", 4, 369.9], ["Refazer", 3, 469.5], ["Reembolso DA", 3, 380.4], ["Quitação", 2, 2220.0], ["Proposta", 2, 115.0], ["Análise manual", 2, 226.5], ["Antecipação", 1, 130.0], ["Abrir Jira", 1, 200.0]];
   const mx=Math.max(...f.map(x=>x[2]));
   $("#barRej").innerHTML = f.map(x=>`<div class="bar-lin"><span>${x[0]}</span><span class="bar-trilho"><i style="width:${100*x[2]/mx}%;background:var(--destaque)"></i></span><span class="pct num">${x[1]}</span><span class="v num">${brl(x[2])}</span></div>`).join("");
 }
 
 function pintaCtl(){
-  $("#faixaCtl").innerHTML = ind("Coletores ativos","6","5 com dado de hoje","ok") + ind("Vigia","a cada 10 min","último às 17:30","ok") + ind("Alertas hoje","1","Jiras sem conta de serviço","falha",true) + ind("Relatório da manhã","08:40","enviado por e-mail","ok");
-  const ag = [["baixa_pagamentos","07:30 e 14:00","seg a sex"],["gateway_pagamentos","07:30 e 09:00","seg a sáb"],["tarefas_email","até 10:20, a cada 20 min","seg a sáb"],["rejeicoes_hist","de 2 em 2 h","todo dia"],["jiras","08:00, 12:00 e 16:00","seg a sex"],["reabilitacao","14:00 a 15:00","seg a sex"]];
+  $("#faixaCtl").innerHTML = ind("Coletores (simulação)","4","3 com dado de hoje","ok") + ind("Vigia","periódico","simulação","ok") + ind("Com uma pessoa","2","depois das tentativas automáticas","falha",true) + ind("Recuperado","1","nova tentativa automática","ok");
+  const ag = [["DEMO_COLETA_PAG", "06:00 e 12:00", "seg a sex"], ["DEMO_COLETA_GW", "06:15 e 10:00", "seg a sex"], ["DEMO_COLETA_REJ", "06:25 e 12:30", "seg a sex"], ["DEMO_COLETA_CHM", "06:35 e 13:00", "seg a sex"]];
   $("#cartoesCtl").innerHTML =
-    `<div class="folha"><div class="folha-cab"><h3>Agenda dos coletores</h3><span class="meta">quem roda é o agendador, não a tela</span></div><table class="tabela"><thead><tr><th>Coletor</th><th>Horário</th><th>Dias</th></tr></thead><tbody>${ag.map(a=>`<tr><td><span class="cod" style="color:var(--text)">${a[0]}</span></td><td>${a[1]}</td><td>${a[2]}</td></tr>`).join("")}</tbody></table></div>`+
+    `<div class="folha"><div class="folha-cab"><h3>Agenda dos coletores</h3><span class="meta">simulação: agenda ilustrativa</span></div><table class="tabela"><thead><tr><th>Coletor</th><th>Horário</th><th>Dias</th></tr></thead><tbody>${ag.map(a=>`<tr><td><span class="cod" style="color:var(--text)">${a[0]}</span></td><td>${a[1]}</td><td>${a[2]}</td></tr>`).join("")}</tbody></table></div>`+
     `<div class="folha"><div class="folha-cab"><h3>Vigia</h3><span class="meta">reinicia o que caiu</span></div><table class="tabela"><tbody>
-      <tr><td>Cérebro</td><td><span class="st ok">No ar</span></td><td class="num">17:30</td></tr><tr><td>Servidor do painel</td><td><span class="st ok">No ar</span></td><td class="num">17:30</td></tr><tr><td>Túnel público</td><td><span class="st ok">No ar</span></td><td class="num">17:30</td></tr><tr><td>Navegador dos robôs</td><td><span class="st ok">Livre</span></td><td class="num">17:30</td></tr></tbody></table></div>`+
-    `<div class="folha"><div class="folha-cab"><h3>Alertas por e-mail</h3><span class="meta">1 hoje</span></div><table class="tabela"><tbody>
-      <tr class="falhou"><td><span class="st alerta">Alerta</span></td><td>Jiras: coleta sem conta de serviço<span class="t-sub" style="display:block">16:00 · avisado o responsável</span></td></tr>
-      <tr><td><span class="st ok">Resolvido</span></td><td>REPASSE_AUT parou na etapa 12<span class="t-sub" style="display:block">06:15 · reaberto às 07:02</span></td></tr></tbody></table></div>`;
+      <tr><td>Cérebro</td><td><span class="st ok">No ar</span></td><td class="num">06:40</td></tr><tr><td>Servidor do painel</td><td><span class="st ok">No ar</span></td><td class="num">06:40</td></tr><tr><td>Navegador dos robôs</td><td><span class="st ok">Livre</span></td><td class="num">06:40</td></tr></tbody></table></div>`+
+    `<div class="folha"><div class="folha-cab"><h3>Alertas no painel</h3><span class="meta">simulação</span></div><table class="tabela"><tbody>
+      <tr class="falhou"><td><span class="st alerta">Com uma pessoa</span></td><td>Coleta de chamados: fonte indisponível<span class="t-sub" style="display:block">06:35 · aguardando verificação</span></td></tr><tr class="falhou"><td><span class="st alerta">Com uma pessoa</span></td><td>DEMO_TAREFA_C parou na etapa 5<span class="t-sub" style="display:block">06:12 · a nova tentativa automática também falhou</span></td></tr>
+      <tr><td><span class="st ok">Recuperado</span></td><td>DEMO_TAREFA_A falhou na etapa 2<span class="t-sub" style="display:block">05:40 · nova tentativa automática às 05:45 concluída</span></td></tr></tbody></table></div>`;
 }
 
 /* navegação */
@@ -490,7 +487,7 @@ function irPara(sec){
   if(!SECOES.includes(sec)) sec="hoje";
   SECOES.forEach(x=>{ $("#s-"+x).hidden = x!==sec; });
   document.querySelectorAll(".nav-item").forEach(a=>{ if(a.dataset.secao===sec) a.setAttribute("aria-current","page"); else a.removeAttribute("aria-current"); });
-  document.title = ({hoje:"Hoje",pagamentos:"Pagamentos",rejeicoes:"Rejeições",jiras:"Jiras",controles:"Coleta e alertas"})[sec]+" · Cérebro";
+  document.title = ({hoje:"Hoje",pagamentos:"Pagamentos",rejeicoes:"Rejeições",jiras:"Chamados",controles:"Coleta e alertas"})[sec]+" · Cérebro";
   window.scrollTo({top:0});
 }
 addEventListener("hashchange",()=>irPara(location.hash.slice(1)));
@@ -498,10 +495,10 @@ addEventListener("hashchange",()=>irPara(location.hash.slice(1)));
 /* detalhe */
 function abrirDetalhe(chave){
   const [tipo,i]=chave.split(":"); let t,sub,corpo;
-  if(tipo==="tar"){ const x=TAREFAS[i]; t=x.cod; sub=x.dias+" · lido às 07:41";
+  if(tipo==="tar"){ const x=TAREFAS[i]; t=x.cod; sub=x.dias+" · lido às 06:40 (simulação)";
     corpo = x.ok===null ? `<p class="nota">Esta tarefa só roda às segundas. Hoje não há execução esperada.</p>` :
-      `<p class="nota ${x.ok?"":"aviso"}">${x.ok?`Funcionou: ${x.etapas} etapas, terminou às ${x.fim}.`:`Falhou na etapa ${x.falhou} de ${x.etapas}. O vigia reabriu às 07:02 e o alerta foi enviado.`}</p>`+
-      `<div class="mt">${x.lista.map((e,k)=>`<div class="etapa ${x.falhou===k+1?"falhou":""}"><span class="n">${k+1}</span><span>${x.falhou===k+1?"<b>"+e+"</b>":e}</span><span class="h">${x.falhou&&k+1>x.falhou?"não rodou":x.falhou===k+1?"erro 06:12":"ok"}</span></div>`).join("")}</div>`; }
+      `<p class="nota ${x.ok?"":"aviso"}">${x.ok?`Funcionou: ${x.etapas} etapas, terminou às ${x.fim}.`:`Falhou na etapa ${x.falhou} de ${x.etapas}. Simulação: a nova tentativa automática também falhou, então o caso foi para uma pessoa.`}</p>`+
+      `<div class="mt">${x.lista.map((e,k)=>`<div class="etapa ${x.falhou===k+1?"falhou":""}"><span class="n">${k+1}</span><span>${x.falhou===k+1?"<b>"+e+"</b>":e}</span><span class="h">${x.falhou&&k+1>x.falhou?"não rodou":x.falhou===k+1?"erro (simulação)":"ok"}</span></div>`).join("")}</div>`; }
   else { const x=COLETORES[i]; t=x.nome; sub=x.cod;
     corpo = `<table class="tabela"><tbody><tr><td>Situação</td><td>${x.st==="ok"?"Concluído":"Alerta"}</td></tr><tr><td>Última execução</td><td>${x.ult}</td></tr><tr><td>Próxima</td><td>${x.prox}</td></tr><tr><td>Dado de hoje</td><td>${x.hoje?"Sim":"Não"}</td></tr><tr><td>Observação</td><td>${esc(x.obs||"Nada a observar")}</td></tr></tbody></table>
       <p class="nota mt">O painel espelha o que o robô gravou, com a hora em que gravou. Não recalcula nada.</p>`; }
@@ -514,7 +511,7 @@ document.addEventListener("click",e=>{
   const a=e.target.closest("[data-abre]"); if(a){abrirDetalhe(a.dataset.abre);return;}
   const v=e.target.closest("[data-verificar]"); if(v){ v.disabled=true; v.lastChild.textContent="Verificando"; setTimeout(()=>{v.disabled=false;v.lastChild.textContent="Verificar agora";aviso("Conferido agora: nada mudou desde a última leitura");},1400); return; }
   if(e.target.closest("#btnBatimento")){ aviso("Batimento registrado hoje às "+new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"})+" (demonstração)"); return; }
-  if(e.target.closest("#btnRodar")){ const b=$("#btnRodar"); b.disabled=true; b.textContent="Rodando"; $("#emExecucao").textContent="Baixa de pagamentos em execução"; setTimeout(()=>{b.disabled=false;b.textContent="Rodar agora";$("#emExecucao").textContent="Nenhum coletor em execução";aviso("Coleta concluída em 4 s (demonstração)");},4000); return; }
+  if(e.target.closest("#btnRodar")){ const b=$("#btnRodar"); b.disabled=true; b.textContent="Rodando"; $("#emExecucao").textContent="Coleta de pagamentos em execução (simulação)"; setTimeout(()=>{b.disabled=false;b.textContent="Rodar agora";$("#emExecucao").textContent="Nenhum coletor em execução";aviso("Coleta concluída em 4 s (demonstração)");},4000); return; }
   const sg=e.target.closest(".segmento button"); if(sg){ sg.parentElement.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",b===sg)); if(sg.dataset.dens) document.querySelectorAll(".tabela").forEach(t=>t.style.fontSize=sg.dataset.dens==="comp"?"12px":""); }
 });
 document.addEventListener("keydown",e=>{

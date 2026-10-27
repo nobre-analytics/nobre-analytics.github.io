@@ -268,3 +268,41 @@ kbd { display: inline-grid; place-items: center; min-width: 26px; height: 26px; 
 .langs a { color: var(--text-2); text-decoration: none; transition: color .3s var(--ease), background .3s var(--ease); }
 .langs a:hover { color: var(--text); background: var(--surface); }
 @media (max-width: 420px) { .topbar__right { gap: 10px; } .crumb { display: none; } }
+
+/* ── v2: shared case-study components ── */
+.steps { list-style: none; counter-reset: s; display: grid; gap: 0; max-width: var(--read); }
+.steps li { counter-increment: s; display: grid; grid-template-columns: 40px 1fr; gap: 14px; padding: 16px 0; border-top: 1px solid var(--line); color: var(--text-2); }
+.steps li:last-child { border-bottom: 1px solid var(--line); }
+.steps li::before { content: counter(s); display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--amber); color: var(--amber); font-weight: 600; font-size: .875rem; }
+.steps strong { color: var(--text); font-weight: 600; }
+.cards4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.cards4 .panel { padding: 20px; }
+.cards4 b { display: block; font-size: 1.0625rem; letter-spacing: -0.01em; color: var(--text); }
+.cards4 span { display: block; margin-top: 6px; color: var(--muted); font-size: .9375rem; line-height: 1.45; }
+.measure { margin-top: 24px; padding: 18px 20px; max-width: var(--read); border-left: 2px solid var(--amber); color: var(--text-2); font-size: .9375rem; line-height: 1.55; }
+.measure b { color: var(--text); }
+.lp { list-style: none; display: grid; gap: 12px; max-width: var(--read); }
+.lp li { padding: 16px 20px; }
+.lp b { display: block; color: var(--amber); font-weight: 600; font-size: .9375rem; }
+.lp span { display: block; margin-top: 4px; color: var(--text-2); }
+.chart { padding: 24px 20px 16px; max-width: 760px; }
+.chart svg { width: 100%; height: auto; display: block; overflow: visible; }
+.chart text { fill: var(--text-2); font: 500 12px "Hanken Grotesk", system-ui, sans-serif; }
+.chart .lbl { fill: var(--text); font-weight: 600; font-size: 13px; }
+.chart .axis { stroke: var(--line-2); stroke-width: 1; }
+.chart .grid { stroke: var(--line); stroke-width: 1; }
+.chart .ref { stroke: var(--amber); stroke-width: 1.5; stroke-dasharray: 4 4; }
+.chart .range { fill: rgba(214,168,76,.22); stroke: rgba(214,168,76,.7); }
+.chart .med { stroke: var(--text); stroke-width: 2.5; }
+.chart .dot { fill: var(--amber); stroke: var(--bg); stroke-width: 1.5; }
+.chart__cap { margin-top: 10px; color: var(--muted); font-size: .875rem; line-height: 1.5; }
+.flowrow { display: grid; grid-template-columns: 56px repeat(4, minmax(0, 1fr)); gap: 6px; align-items: stretch; }
+.flowrow + .flowrow { margin-top: 10px; }
+.flowrow .tag-r { color: var(--amber); font-weight: 600; font-size: .8125rem; align-self: center; }
+.flowrow .st { padding: 9px 9px; border-radius: 10px; border: 1px solid var(--line-2); background: var(--surface-2); font-size: .78rem; overflow-wrap: anywhere; color: var(--text); line-height: 1.3; }
+.flowrow .st small { display: block; color: var(--muted); font-size: .75rem; margin-top: 3px; }
+.flowrow .st.wait { border-style: dashed; color: var(--muted); }
+.flowrow .st.auto { border-color: rgba(214,168,76,.6); background: rgba(214,168,76,.10); }
+@media (max-width: 920px) { .cards4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .flowrow { grid-template-columns: 1fr 1fr; } .flowrow .tag-r { grid-column: 1 / -1; } }
+@media (max-width: 420px) { .cards4 { grid-template-columns: 1fr; } }
