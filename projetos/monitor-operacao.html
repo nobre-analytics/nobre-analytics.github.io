@@ -1,223 +1,64 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Monitor da Operação | Paulo Nobre</title>
-<meta name="description" content="Monitor das rotinas automáticas: estado, falhas, novas tentativas e encaminhamento para uma pessoa.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script>document.documentElement.classList.add('js');</script>
-<script src="assets/vt.js"></script>
-<link rel="stylesheet" href="assets/site.css">
-<style>
-
-.board { padding: 0; overflow: hidden; }
-.board__top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 20px; border-bottom: 1px solid var(--line); }
-.board__title { font-weight: 600; }
-.verdict { display: inline-flex; align-items: center; gap: 8px; padding: 4px 10px; border-radius: 999px; background: rgba(214,168,76,.14); color: var(--amber-2); font-size: .8125rem; font-weight: 600; }
-.pulse { width: 8px; height: 8px; border-radius: 50%; background: var(--amber); box-shadow: 0 0 0 0 rgba(214,168,76,.6); }
-@media (prefers-reduced-motion: no-preference) { .pulse { animation: pulse 2.4s ease-out infinite; } }
-@keyframes pulse { 70% { box-shadow: 0 0 0 8px rgba(214,168,76,0); } 100% { box-shadow: 0 0 0 0 rgba(214,168,76,0); } }
-.q3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-bottom: 1px solid var(--line); }
-.q3 div { padding: 16px 20px; }
-.q3 div + div { border-left: 1px solid var(--line); }
-.q3 span { display: block; color: var(--muted); font-size: .8125rem; }
-.q3 b { display: block; margin-top: 4px; font-size: 1.125rem; font-variant-numeric: tabular-nums; }
-.bots { list-style: none; }
-.bots li { display: grid; grid-template-columns: 12px 1fr auto; gap: 12px; align-items: center; padding: 12px 20px; border-top: 1px solid var(--line); font-size: .9375rem; }
-.bots li:first-child { border-top: 0; }
-.bots .st { width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
-.bots .st.fail { background: var(--red); }
-.bots time { color: var(--muted); font-size: .8125rem; font-variant-numeric: tabular-nums; }
-.bots .fail-txt { color: var(--red); font-size: .8125rem; font-weight: 600; }
-.board__cap { padding: 12px 20px 16px; border-top: 1px solid var(--line); }
-@media (prefers-reduced-motion: no-preference) {
-  .js .bots li { opacity: 0; animation: fadein .5s var(--ease) forwards; animation-delay: calc(var(--d) * 1ms + 700ms); }
-}
-@keyframes fadein { to { opacity: 1; } }
-
-.questions { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
-.question { padding: 26px 24px; }
-.question b { display: block; font-size: 1.375rem; letter-spacing: -0.02em; line-height: 1.2; }
-.question p { margin-top: 10px; color: var(--muted); }
-
-.fix { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin-top: 8px; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
-.fix div { padding: 22px; background: rgba(19,33,58,.6); }
-.fix div + div { border-left: 1px solid var(--line); }
-.fix span { color: var(--amber); font-weight: 600; font-size: .875rem; }
-.fix p { margin-top: 6px; color: var(--text-2); }
-
-@media (max-width: 760px) {
-  .questions, .fix { grid-template-columns: 1fr; }
-  .fix div + div { border-left: 0; border-top: 1px solid var(--line); }
-}
-@media (max-width: 420px) { .q3 div { padding: 12px; } .q3 b { font-size: 1rem; } }
-
-</style>
+<title>Falhas das rotinas visíveis antes do expediente · Case · Paulo Nobre</title>
+<meta name="description" content="Um monitor que mostra em uma tela se a manhã fechou, o que falhou e em que etapa parou, com uma versão para o celular do gestor. Inclui a investigação de uma falha que exibia valores errados.">
+<link rel="canonical" href="https://nobre-analytics.github.io/projetos/monitor-operacao.html">
+<link rel="alternate" hreflang="pt-BR" href="https://nobre-analytics.github.io/projetos/monitor-operacao.html">
+<link rel="alternate" hreflang="en" href="https://nobre-analytics.github.io/projetos/en/monitor-operacao.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Falhas das rotinas visíveis antes do expediente · Case · Paulo Nobre">
+<meta property="og:description" content="Um monitor que mostra em uma tela se a manhã fechou, o que falhou e em que etapa parou, com uma versão para o celular do gestor. Inclui a investigação de uma falha que exibia valores errados.">
+<meta property="og:url" content="https://nobre-analytics.github.io/projetos/monitor-operacao.html">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Paulo Nobre">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://nobre-analytics.github.io/static/img/og-pt.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://nobre-analytics.github.io/static/img/og-pt.png">
+<meta name="theme-color" content="#0B1220">
+<link rel="icon" href="../static/img/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../static/fonts/hanken-grotesk-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../static/css/site.css">
+<script>document.documentElement.classList.add('js')</script>
 </head>
-<body class="case case--monitor-operacao">
+<body>
 <a class="skip" href="#conteudo">Pular para o conteúdo</a>
-<div class="flares" aria-hidden="true"><div class="flare blue"></div><div class="flare cyan"></div><div class="flare amber"></div><div class="grain"></div></div>
-
-<div class="page">
-  <div class="wrap">
-    <nav class="topbar" aria-label="Navegação">
-      <a class="back" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg> Todos os projetos</a>
-      <span class="topbar__right"><span class="crumb">Case <b>04</b> de 04</span><span class="langs" role="group" aria-label="Idioma"><span class="langs__cur" aria-current="true">PT</span><a href="en/monitor-operacao.html" hreflang="en" lang="en" title="English version" data-lang-switch="en">EN</a></span></span>
-    </nav>
-
-    <main id="conteudo">
-      <header class="hero">
-        <div class="hero__grid">
-          <div>
-            <p class="hero__kicker" data-seq style="--i:0">Monitoramento e confiabilidade</p>
-            <h1 data-seq style="--i:1">Monitor da Operação</h1>
-            <p class="hero__lede" data-seq style="--i:2">Um monitor das rotinas automáticas da operação. Em uma tela, mostra se a manhã fechou, o que falhou e em que etapa parou, e deixa claro quando uma pessoa precisa agir.</p>
-            <div class="facts" data-seq style="--i:3"><span class="fact">Rotinas antes do expediente</span><span class="fact">Acesso pelo navegador</span><span class="fact">Python</span></div></div>
-          <div class="hero__visual" data-seq style="--i:4">
-            <figure class="panel board">
-              <div class="board__top"><span class="board__title">Manhã de hoje</span><span class="verdict"><span class="pulse" aria-hidden="true"></span>1 falha para tratar</span></div>
-              <div class="q3"><div><span>A manhã fechou?</span><b>Quase</b></div><div><span>Quanto entrou?</span><b>R$ 48.210</b></div><div><span>O que falhou?</span><b>1 tarefa</b></div></div>
-              <ul class="bots">
-                <li style="--d:0"><span class="st" aria-hidden="true"></span><span>Sistema de cobrança</span><time>05:12</time></li>
-                <li style="--d:90"><span class="st" aria-hidden="true"></span><span>Gateway de pagamento</span><time>05:26</time></li>
-                <li style="--d:180"><span class="st fail" aria-hidden="true"></span><span>Arquivo do credor</span><span class="fail-txt">parou na etapa 3</span></li>
-                <li style="--d:270"><span class="st" aria-hidden="true"></span><span>Tarefas por e-mail</span><time>05:41</time></li>
-              </ul>
-              <figcaption class="board__cap note">Ilustração com dados sintéticos.</figcaption>
-            </figure></div>
-        </div>
-      </header>
-
-      <div class="kpis" style="--n:3" data-reveal><div class="kpi"><div class="kpi__value">Veredito</div><div class="kpi__label">a primeira informação responde se a manhã fechou</div></div><div class="kpi"><div class="kpi__value">Etapa</div><div class="kpi__label">a tarefa com falha mostra onde parou</div></div><div class="kpi"><div class="kpi__value">Escalada</div><div class="kpi__label">depois das tentativas automáticas, uma pessoa assume</div></div></div>
-    <section class="section" data-reveal>
-      <div class="section__head">
-        <p class="section__label">Problema de negócio</p>
-        <div>
-          <h2>Uma falha de madrugada precisa aparecer antes de a equipe começar.</h2>
-          <div class="section__body"><div class="prose"><p>A operação depende de rotinas que rodam antes do expediente. Se uma delas falha e ninguém percebe, a equipe começa o dia com dado incompleto. O problema não era só rodar as rotinas, era <strong>saber, rápido, se a manhã estava pronta</strong>.</p></div></div>
-        </div>
-      </div>
-    </section>
-    <section class="section" data-reveal>
-      <div class="section__head">
-        <p class="section__label">Contexto operacional</p>
-        <div>
-          <h2>Algumas rotinas são agendadas; outras são disparadas manualmente.</h2>
-          <div class="section__body"><div class="prose"><p>Nem toda rotina configurada roda por agendamento: algumas são disparadas sob demanda e outras ficam desativadas. O monitor precisava mostrar o estado real de cada uma, sem fingir que tudo estava verde.</p></div></div>
-        </div>
-      </div>
-    </section>
-    <section class="section" data-reveal>
-      <div class="section__head">
-        <p class="section__label">Minha responsabilidade</p>
-        <div>
-          <h2>Desenhei a tela, o vigia e a investigação da falha de dados.</h2>
-          <div class="section__body"><ul class="list"><li>Organizei a tela em volta de <strong>três perguntas</strong> do gestor: a manhã fechou, quanto entrou, o que falhou.</li><li>Configurei a <strong>verificação de saúde</strong>, as <strong>novas tentativas</strong> e o <strong>reinício automático com limite</strong>.</li><li>Investiguei e corrigi a <strong>condição de corrida</strong> que exibia valores errados.</li><li>Escrevi o <strong>manual do operador</strong>.</li></ul></div>
-        </div>
-      </div>
-    </section>
-    <section class="section" data-reveal>
-      <div class="section__head">
-        <p class="section__label">Análise e decisões</p>
-        <div>
-          <h2>Quando o número está errado, ninguém volta a usar o painel.</h2>
-          <div class="section__body"><div class="fix"><div><span>Sintoma</span><p>Valores de pagamento e sequencial apareciam errados em alguns momentos.</p></div><div><span>Causa raiz</span><p>Uma condição de corrida: duas atualizações gravavam o mesmo dado sem ordem garantida, e a tela podia ler um arquivo pela metade.</p></div><div><span>Correção</span><p>Passei a gravar o dado de forma atômica, com bloqueio, para que a leitura sempre encontre uma versão completa.</p></div></div></div>
-        </div>
-      </div>
-    </section>
-    <section class="section" data-reveal>
-      <div class="section__head">
-        <p class="section__label">Como a solução funciona</p>
-        <div>
-          <h2>Uma tela para o veredito, o detalhe a um clique.</h2>
-          <div class="section__body"><ul class="list"><li><strong>Estado de cada rotina</strong>, com o horário da última gravação do dado.</li><li><strong>Identificação de falhas</strong> com a etapa em que a tarefa parou.</li><li><strong>Novas tentativas</strong> e reinício automático, com limite diário.</li><li><strong>Escalada para uma pessoa</strong> quando a nova tentativa não resolve.</li><li>Quando uma fonte não responde, o painel mostra <strong>"sem dado"</strong> em vez de zero.</li></ul></div>
-        </div>
-      </div>
-    </section>
-    <section class="section" aria-label="Demonstração">
-      <figure class="frame-wrap" data-reveal>
-        <div class="frame" style="--h:600px; --s:0.6">
-          <div class="frame__bar" aria-hidden="true"><span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__url">Cérebro · Painel da Operação</span></div>
-          <div class="frame__view"><iframe src="demos/pt/cerebro.html" title="Monitor da operação com dados sintéticos" loading="lazy" tabindex="-1"></iframe></div>
-        </div>
-        <figcaption class="frame__cta">
-          <span class="note">Esta é uma demonstração interativa com dados sintéticos. Os registros e resultados são ilustrativos e não representam dados reais da operação.</span>
-          <a class="btn" href="demos/pt/cerebro.html">Abrir a demonstração <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
-        </figcaption>
-      </figure>
-    </section>
-    <section class="section" data-reveal>
-      <div class="section__head">
-        <p class="section__label">Resultado e evidências</p>
-        <div>
-          <h2>Falhas das rotinas ficam visíveis em uma tela, com a etapa em que pararam.</h2>
-          <div class="section__body"><p class="measure"><b>Como foi medido.</b> Resultado qualitativo. O monitor mostra o estado e as falhas de cada rotina, mas não há medição do tempo economizado em relação à detecção manual. Os estados da demonstração são simulados e não comprovam execuções reais.</p></div>
-        </div>
-      </div>
-    </section>
-    <section class="section" data-reveal>
-      <div class="section__head">
-        <p class="section__label">Limitações</p>
-        <div>
-          <h2>O que o monitor não garante.</h2>
-          <div class="section__body"><ul class="list"><li>Não substitui a <strong>conferência da pessoa responsável</strong>.</li><li>Não torna agendadas as rotinas que hoje são <strong>manuais ou desativadas</strong>.</li><li>Os alertas por e-mail <strong>não estão ativos</strong> na configuração mais recente examinada.</li></ul></div>
-        </div>
-      </div>
-    </section>
-    <section class="section" data-reveal>
-      <div class="section__head">
-        <p class="section__label">Sustentabilidade</p>
-        <div>
-          <h2>Recuperação controlada e conhecimento documentado.</h2>
-          <div class="section__body"><div class="prose"><p>O reinício automático tem limite, para não esconder um problema recorrente: depois das tentativas, o caso vai para uma pessoa. O manual do operador registra como ler o painel e o que fazer em cada tipo de falha. A versão para celular leva o veredito da manhã para o gestor.</p></div></div>
-        </div>
-      </div>
-    </section>
-    <section class="section" data-reveal>
-      <div class="section__head">
-        <p class="section__label">Princípios de liderança</p>
-        <div>
-          <h2>Como este case se conecta aos princípios da Amazon.</h2>
-          <div class="section__body"><ul class="lp"><li class="panel"><b>Dive Deep</b><span>Rastreei os valores errados até a ordem das gravações e corrigi a causa, não o sintoma.</span></li><li class="panel"><b>Insist on the Highest Standards</b><span>O painel mostra "sem dado" quando a fonte falha, em vez de exibir zero como se fosse real.</span></li><li class="panel"><b>Ownership</b><span>Defini um limite para os reinícios automáticos e quando o problema passa para uma pessoa.</span></li></ul></div>
-        </div>
-      </div>
-    </section>
-    <section class="section" data-reveal>
-      <div class="section__head">
-        <p class="section__label">Tecnologia e métodos</p>
-        <div>
-          <h2>Automação com monitoramento.</h2>
-          <div class="section__body"><div class="stack"><span class="tag">Python</span><span class="tag">Playwright</span><span class="tag">Robôs de coleta</span><span class="tag">HTML, CSS e JavaScript</span><span class="tag">Análise de causa raiz</span></div></div>
-        </div>
-      </div>
-    </section>
-    <section class="section" data-reveal>
-      <div class="section__head">
-        <p class="section__label">Também no celular</p>
-        <div>
-          <h2>O mesmo monitor ganhou uma versão pensada para o gestor.</h2>
-          <div class="section__body"><a class="btn btn--ghost" href="monitor-operacao-celular.html">Ver a versão para celular <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:16px;height:16px"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
-        </div>
-      </div>
-    </section>
-    </main>
-
-    <nav class="next" aria-label="Extensão">
-      <a href="monitor-operacao-celular.html">
-        <span><span class="next__label">Extensão deste case</span><span class="next__title">Monitor da Operação: versão para celular</span></span>
-        <span class="next__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </a>
-    </nav>
-
-    <footer class="foot">
-      <span>© 2026 Paulo Nobre, São Paulo</span>
-      <a href="index.html">Voltar para a lista de projetos</a>
-    </footer>
+<header class="hdr">
+  <div class="wrap hdr__in">
+    <a class="brand" href="../?lang=pt"><b>Paulo Nobre</b><span>Melhoria de processos e automação</span></a>
+    <nav class="nav" aria-label="Principal"><a href="../?lang=pt">Início</a><a href="./" aria-current="page">Projetos</a><a href="./#demos">Demos</a><a href="../?lang=pt#contato">Contato</a></nav>
+    <div class="lang" role="group" aria-label="Idioma"><a href="monitor-operacao.html" lang="pt-BR" hreflang="pt-BR" data-lang-link="pt" aria-current="true">PT</a><a href="en/monitor-operacao.html" lang="en" hreflang="en" data-lang-link="en">EN</a></div>
+    <button class="menu-btn" type="button" aria-expanded="false">Menu</button>
   </div>
-</div>
-<script src="assets/site.js"></script>
+</header>
+<main id="conteudo">
+<div class="case-hero"><div class="wrap">
+  <p class="crumb"><a href="../?lang=pt">Início</a> / <a href="./">Projetos</a> / Case 04</p>
+  <p class="eyebrow enter" style="margin-top:24px">Acompanhamento da operação</p>
+  <h1 class="h1 enter d1">Como tornei visíveis as falhas das rotinas que rodam antes do expediente</h1>
+  <p class="lede enter d2">Organizei em uma tela o estado das rotinas automáticas da operação: se a manhã fechou, o que falhou e em que etapa parou. A mesma informação ganhou uma versão para o celular do gestor.</p>
+  <dl class="summary enter d3"><div><dt>Problema</dt><dd>Algumas rotinas rodam de madrugada. Quando uma falhava sem ninguém perceber, a equipe começava o dia com dados incompletos.</dd></div><div><dt>Minha participação</dt><dd>Desenhei a tela em torno de três perguntas do gestor, configurei novas tentativas com limite e corrigi uma falha que exibia valores errados.</dd></div><div><dt>O que mudou</dt><dd>As falhas aparecem com a etapa em que a tarefa parou, e o caso passa para uma pessoa quando a nova tentativa não resolve.</dd></div><div><dt>Evidência</dt><dd>Funcionamento observado. Sem medição do tempo para perceber uma falha.<br><span class="ev ev--qual">Resultado qualitativo</span></dd></div></dl>
+</div></div>
+<section class="case-sec" id="problema" aria-labelledby="problema-h"><div class="wrap case-grid"><div class="side"><p class="eyebrow">O problema</p></div><div class="main"><h2 class="h2 rv" id="problema-h">Uma falha de madrugada precisa aparecer antes de a equipe começar.</h2><div class="rv"><div class="prose"><p>A operação depende de rotinas que coletam e preparam dados antes do expediente. Se uma delas falha e ninguém percebe, a equipe trabalha o dia inteiro com informação incompleta.</p><p>O problema não era só executar as rotinas. Era saber, rápido, se a manhã estava pronta e, se não estivesse, onde a falha tinha acontecido.</p><p>Nem toda rotina cadastrada roda por agendamento: algumas são disparadas quando necessário e outras ficam desligadas. O monitor precisava mostrar o estado real de cada uma, em vez de apresentar tudo como se estivesse funcionando.</p></div></div></div></div></section>
+<section class="case-sec" id="contribuicao" aria-labelledby="contribuicao-h"><div class="wrap case-grid"><div class="side"><p class="eyebrow">Minha contribuição</p></div><div class="main"><h2 class="h2 rv" id="contribuicao-h">Desenhei a tela, as novas tentativas e a correção de uma falha nos dados.</h2><div class="rv"><div class="contrib"><div class="me"><h3><i aria-hidden="true"></i>O que fiz diretamente</h3><ul><li>Organizei a tela em volta de três perguntas do gestor: a manhã fechou, quanto entrou e o que falhou.</li><li>Configurei a verificação de estado, as novas tentativas e o reinício automático com limite.</li><li>Investiguei e corrigi a causa de valores que apareciam errados em alguns momentos.</li><li>Escrevi o manual do operador.</li><li>Redesenhei a tela para o celular.</li></ul></div><div class="dep"><h3><i aria-hidden="true"></i>Dependências externas</h3><ul><li>As rotinas e os sistemas de origem dos dados.</li><li>A conferência final da manhã continua com a pessoa responsável.</li></ul></div></div></div></div></div></section>
+<section class="case-sec" id="como-funciona" aria-labelledby="como-funciona-h"><div class="wrap case-grid"><div class="side"><p class="eyebrow">Como funciona</p></div><div class="main"><h2 class="h2 rv" id="como-funciona-h">O veredito em uma tela, o detalhe a um clique.</h2><div class="rv"><ol class="flow"><li><h3>Coleta</h3><p>Cada rotina grava o dado e o horário da última gravação.</p><span class="who who--auto">automático</span></li><li><h3>Verificação</h3><p>O monitor confere o estado de cada rotina e a etapa em que uma falha parou.</p><span class="who who--auto">automático</span></li><li><h3>Nova tentativa</h3><p>Uma rotina que falhou roda de novo, com um limite de tentativas.</p><span class="who who--auto">automático</span></li><li><h3>Encaminhamento</h3><p>Se a nova tentativa não resolve, o caso vai para uma pessoa.</p><span class="who who--human">pessoa</span></li><li><h3>Veredito</h3><p>A primeira informação da tela responde se a manhã fechou.</p><span class="who ">automático e pessoa</span></li></ol><div class="prose" style="margin-top:20px"><p>Quando uma fonte não responde, a tela mostra “sem dado” em vez de zero. Um zero falso parece um dia ruim; “sem dado” mostra que é preciso verificar.</p></div><details class="more-box" style="margin-top:20px"><summary><span>A falha que fazia valores aparecerem errados<small>Sintoma, causa e correção</small></span></summary><div class="more-box__body prose"><p><strong>Sintoma:</strong> valores de pagamento e números de sequência apareciam errados em alguns momentos. Quando o número está errado, ninguém volta a confiar no painel.</p><p><strong>Causa:</strong> duas atualizações gravavam o mesmo dado sem uma ordem garantida, e a tela às vezes lia um arquivo ainda pela metade. O nome técnico disso é condição de corrida.</p><p><strong>Correção:</strong> passei a gravar o dado de uma vez só, com bloqueio, para que a leitura sempre encontre uma versão completa.</p></div></details></div></div></div></section>
+<section class="case-sec" id="o-que-mudou" aria-labelledby="o-que-mudou-h"><div class="wrap case-grid"><div class="side"><p class="eyebrow">O que mudou</p></div><div class="main"><h2 class="h2 rv" id="o-que-mudou-h">As falhas ficam visíveis em uma tela, com a etapa em que pararam.</h2><div class="rv"><div class="prose"><p>O gestor consegue saber se a manhã fechou sem abrir cada sistema, e a equipe vê em que etapa uma tarefa parou. Depois das tentativas automáticas, fica claro quando uma pessoa precisa agir.</p></div><div class="evidence"><div class="evidence__head"><b>Como o resultado foi avaliado</b><span class="ev ev--qual">Resultado qualitativo</span></div><div class="evidence__body"><div class="method-note" style="margin-top:0;border-top:0;padding-top:0"><p>O resultado é qualitativo. Não há medição do tempo economizado em relação à verificação manual. Os estados da demonstração são simulados e não comprovam execuções reais.</p></div></div></div></div></div></div></section>
+<section class="case-sec" id="celular" aria-labelledby="celular-h"><div class="wrap case-grid"><div class="side"><p class="eyebrow">Extensão para celular</p></div><div class="main"><h2 class="h2 rv" id="celular-h">No celular, a pergunta muda para “preciso agir agora?”.</h2><div class="rv"><div class="prose"><p>A versão para celular é uma extensão deste monitor, não um projeto separado. No computador, o monitor mostra todas as frentes lado a lado. No celular, isso viraria uma rolagem longa, então a hierarquia mudou.</p></div><ol class="steps" style="margin-top:24px"><li><span class="n">01</span><h3>Veredito primeiro</h3><p>A primeira coisa na tela responde se a manhã fechou.</p></li><li><span class="n">02</span><h3>Detalhe sob demanda</h3><p>Tabelas viram listas, e o detalhe abre em uma folha que sobe da base da tela.</p></li><li><span class="n">03</span><h3>Ao alcance do polegar</h3><p>O menu fica embaixo, onde o polegar alcança.</p></li><li><span class="n">04</span><h3>Benefício esperado</h3><p>O gestor saber em poucos segundos se precisa agir. Isso ainda não foi medido.</p></li></ol></div></div></div></section>
+<section class="case-sec" id="limitacoes" aria-labelledby="limitacoes-h"><div class="wrap case-grid"><div class="side"><p class="eyebrow">Limitações</p></div><div class="main"><h2 class="h2 rv" id="limitacoes-h">O que o monitor não garante.</h2><div class="rv"><ul class="limits"><li class="human"><span>Não substitui a conferência da pessoa responsável.</span><span class="who who--human">intervenção humana</span></li><li class=""><span>Não transforma em agendadas as rotinas que hoje são disparadas manualmente ou estão desligadas.</span><span></span></li><li class=""><span>Os alertas por e-mail não estão ativos na configuração mais recente.</span><span></span></li><li class=""><span>Não há medição de quanto tempo antes uma falha passou a ser percebida.</span><span></span></li></ul></div></div></div></section>
+<section class="case-sec" id="tecnico" aria-labelledby="tecnico-h"><div class="wrap case-grid"><div class="side"><p class="eyebrow">Detalhes técnicos</p></div><div class="main"><h2 class="h2 rv" id="tecnico-h">Automação com acompanhamento.</h2><div class="rv"><details class="more-box"><summary><span>Tecnologias, termos e decisões de implementação<small>Para quem quer aprofundar</small></span></summary><div class="more-box__body tech-body"><div class="prose"><p><strong>Reinício com limite:</strong> uma rotina que falha é reiniciada automaticamente algumas vezes. O limite existe para não esconder um problema recorrente: depois dele, o caso vai para uma pessoa.</p><p><strong>Gravação atômica:</strong> o dado é gravado por inteiro de uma vez, então quem lê nunca encontra um arquivo pela metade.</p></div><ul class="tech"><li>Python</li><li>Playwright</li><li>Robôs de coleta</li><li>HTML, CSS e JavaScript</li><li>Análise de causa raiz</li><li>Design responsivo</li></ul></div></details></div></div></div></section>
+<section class="case-sec" id="demonstracao" aria-labelledby="demonstracao-h"><div class="wrap case-grid"><div class="side"><p class="eyebrow">Demonstração</p></div><div class="main"><h2 class="h2 rv" id="demonstracao-h">Abra a manhã simulada no computador ou no celular.</h2><div class="rv"><div class="demo-cta on-dark"><div><h3>Monitor da operação</h3><p class="small" style="margin-top:8px">O que você pode explorar:</p><ul><li>Ver o veredito da manhã e abrir a tarefa que falhou.</li><li>Conferir a etapa em que ela parou, a nova tentativa e o encaminhamento para uma pessoa.</li><li>Comparar a versão de computador com a versão para celular.</li></ul><p class="note"><b>Dados sintéticos.</b> Esta é uma demonstração interativa com dados sintéticos. Os registros e resultados são ilustrativos e não representam dados reais da operação.</p></div><div class="btns"><a class="btn btn--primary" href="demos/pt/cerebro.html">Explorar a demonstração <span class="arr" aria-hidden="true">→</span></a><a class="btn btn--secondary" href="demos/pt/cerebro-mobile.html">Versão para celular</a></div></div></div></div></div></section>
+</main>
+<nav class="case-nav" aria-label="Navegação entre cases"><div class="wrap case-nav__in"><a class="prev" href="pagamentos-em-duplicidade.html"><small>← Case anterior</small><b>Como passei a identificar pagamentos duplicados antes de qualquer reembolso</b></a><a class="next" href="./"><small>Todos os projetos →</small><b>Projetos</b></a></div></nav>
+<footer class="foot" id="contato"><div class="wrap">
+  <h2>Vamos conversar</h2>
+  <p>Estou aberto a oportunidades em melhoria de processos, excelência operacional, PMO, operações de negócio e automação, inclusive em equipes remotas.</p>
+  <div class="actions on-dark"><a class="btn btn--primary" href="mailto:nobrecontato21@outlook.com">nobrecontato21@outlook.com</a><a class="btn btn--secondary" href="https://www.linkedin.com/in/paulo-nobre-/" rel="noopener">LinkedIn</a></div>
+  <div class="foot__base"><span>© 2026 Paulo Nobre · São Paulo, Brasil</span><a href="../?lang=pt">Página inicial</a><div class="lang" role="group" aria-label="Idioma"><a href="monitor-operacao.html" lang="pt-BR" data-lang-link="pt" aria-current="true">PT</a><a href="en/monitor-operacao.html" lang="en" data-lang-link="en">EN</a></div></div>
+</div></footer>
+<script src="../static/js/site.js" defer></script>
 </body>
 </html>

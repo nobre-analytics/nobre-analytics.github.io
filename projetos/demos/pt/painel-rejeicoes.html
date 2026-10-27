@@ -6,36 +6,35 @@
 <title>Rejeições · Tratativa de pagamentos</title>
 <meta name="description" content="Demonstração com dados sintéticos do painel de tratativa de pagamentos rejeitados: filas por decisão, robô de baixa e dashboard do caminho do pagamento.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23048A05'/%3E%3Cpath d='M13 9l-5 5 5 5M8.5 14H19a5 5 0 0 1 0 10h-3' fill='none' stroke='%23fff' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='16' cy='24' r='2.4' fill='%23F5BF05'/%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 <script>
 (function(){try{var t=localStorage.getItem("demo-tema");if(t==="dark")document.documentElement.setAttribute("data-theme","dark");}catch(e){}})();
 </script>
 <style>
+@font-face{font-family:"Hanken Grotesk";font-style:normal;font-weight:300 800;font-display:swap;src:url("../../../static/fonts/hanken-grotesk-latin-var.woff2") format("woff2")}@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:400;font-display:swap;src:url("../../../static/fonts/ibm-plex-mono-latin-400-normal.woff2") format("woff2")}@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:500;font-display:swap;src:url("../../../static/fonts/ibm-plex-mono-latin-500-normal.woff2") format("woff2")}
+
 :root{
   color-scheme:light;
-  --canvas:#F3F3F3; --surface:#FFFFFF; --sunken:#F7F7F6; --hover:#EFF7EF;
-  --border:#E3E4E1; --border-strong:#C9CCC7;
-  --text:#333333; --text-2:#4A4A4A; --text-3:#6C6E6B;
-  --marca:#048A05; --marca-fundo:#037604; --marca-texto:#00661F; --marca-tinta:#E6F3E6;
-  --destaque:#F5BF05; --destaque-2:#E0AE00; --destaque-ink:#33321F; --destaque-tinta:#FDF3D2;
+  --canvas:#F7F9FC; --surface:#FFFFFF; --sunken:#F8FAFC; --hover:#F0F7F6;
+  --border:#E2E8F0; --border-strong:#CBD5E1;
+  --text:#1E293B; --text-2:#334155; --text-3:#64748B;
+  --marca:#115E59; --marca-fundo:#115E59; --marca-texto:#115E59; --marca-tinta:#E6F2F0;
+  --destaque:#FBBF24; --destaque-2:#F59E0B; --destaque-ink:#33321F; --destaque-tinta:#FDF3D2;
   --danger:#C02B1D; --danger-tinta:#FBECEA; --warning:#8A6200;
-  --barra-fundo:#E6E7E4;
+  --barra-fundo:#E2E8F0;
   --sombra:0 1px 2px rgba(20,32,20,.05),0 6px 16px -10px rgba(20,32,20,.22);
   --sombra-2:0 2px 4px rgba(20,32,20,.06),0 16px 32px -16px rgba(20,32,20,.30);
-  --ff-titulo:"Bree Serif",Georgia,"Times New Roman",serif;
-  --ff:"Open Sans","Segoe UI",system-ui,sans-serif;
-  --mono:"Cascadia Mono",Consolas,ui-monospace,monospace;
+  --ff-titulo:"Hanken Grotesk",system-ui,sans-serif;
+  --ff:"Hanken Grotesk","Segoe UI",system-ui,sans-serif;
+  --mono:"IBM Plex Mono","Cascadia Mono",Consolas,ui-monospace,monospace;
 }
 :root[data-theme=dark]{
   color-scheme:dark;
-  --canvas:#10140F; --surface:#191E17; --sunken:#131711; --hover:#1F2A1D;
-  --border:#2A3127; --border-strong:#3C453A;
-  --text:#ECEFEA; --text-2:#B9BEB5; --text-3:#99A095;
-  --marca:#0B7A0C; --marca-fundo:#096509; --marca-texto:#63C264; --marca-tinta:#1D2D1B;
-  --destaque-tinta:#3A3218; --danger:#F0655A; --danger-tinta:#3A1F1C; --warning:#E4B437;
-  --barra-fundo:#232A21;
+  --canvas:#0B1220; --surface:#191E17; --sunken:#131711; --hover:#1F2A1D;
+  --border:#1E293B; --border-strong:#334155;
+  --text:#F1F5F9; --text-2:#B8C2CF; --text-3:#94A3B8;
+  --marca:#115E59; --marca-fundo:#134E4A; --marca-texto:#2DD4BF; --marca-tinta:#1E293B;
+  --destaque-tinta:#3A3218; --danger:#F0655A; --danger-tinta:#3A1F1C; --warning:#FBBF24;
+  --barra-fundo:#1E293B;
   --sombra:0 1px 2px rgba(0,0,0,.35); --sombra-2:0 10px 28px -12px rgba(0,0,0,.6);
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -51,7 +50,7 @@ svg.i{width:16px;height:16px;flex:none}
 /* tarja */
 .tarja{background:var(--marca-fundo);color:#fff;font-size:12.5px;font-weight:600;height:24px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;gap:16px;white-space:nowrap;overflow:hidden}
 .tarja .vivo{display:inline-flex;align-items:center;gap:7px}
-.tarja .vivo::before{content:"";width:7px;height:7px;border-radius:50%;background:#B9F5BA}
+.tarja .vivo::before{content:"";width:7px;height:7px;border-radius:50%;background:#99F6E4}
 .tarja.rodando .vivo::before{background:var(--destaque);animation:pulsa 1s infinite}
 .tarja .dir{display:flex;gap:16px}
 .tarja .demo{background:var(--destaque);color:var(--destaque-ink);border-radius:3px;padding:0 7px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;font-weight:800}
@@ -158,8 +157,8 @@ details.det summary::-webkit-details-marker{display:none}
 .res:first-child{border-top:0}
 .res .ok{color:var(--marca-texto);font-weight:800}
 .res .erro{color:var(--danger);font-weight:800}
-.log{margin-top:12px;background:#121611;color:#CFE8CF;font:12px/1.55 var(--mono);border-radius:6px;padding:10px 12px;height:168px;overflow:auto;white-space:pre}
-.log .ok{color:#8BE28C}.log .er{color:#FF8D80}.log .t{color:#7E8C7C}
+.log{margin-top:12px;background:#121611;color:#CCE7E3;font:12px/1.55 var(--mono);border-radius:6px;padding:10px 12px;height:168px;overflow:auto;white-space:pre}
+.log .ok{color:#5EEAD4}.log .er{color:#FF8D80}.log .t{color:#64748B}
 
 /* planilha */
 .tabela-rola{overflow-x:auto}
@@ -270,6 +269,7 @@ table.plan tr.feito td:last-child{text-decoration:none}
   .res{grid-template-columns:80px 46px 1fr}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media (max-width:720px){.tarja{height:auto;white-space:normal;flex-wrap:wrap;padding:6px 14px;row-gap:4px}}
 </style>
 <style>.voltar-proj{color:inherit;font-weight:700;text-decoration:none;border-bottom:1px solid currentColor;opacity:.92;white-space:nowrap}.voltar-proj:hover{opacity:1}</style>
 </head>
@@ -324,7 +324,7 @@ table.plan tr.feito td:last-child{text-decoration:none}
     <footer class="rodape"><span>Rejeições · tratativa de pagamentos · demonstração com dados sintéticos</span><span id="conferido">Simulação</span></footer>
   </main>
 </div>
-<div class="dica" id="dica" role="tooltip"></div>
+<div class="dica" id="dica" role="tooltip" aria-hidden="true"></div>
 <div class="aviso" id="aviso" role="status" aria-live="polite"></div>
 
 <script>
@@ -434,7 +434,7 @@ function menu(){
   h += `<h4>Filas</h4>`;
   for(const f of FILAS){ const c=n(f.k); h += item(f.k,f.nome,f.icone,c, c? (f.urgente?"r":"v") : ""); }
   h += item("dashboard","Dashboard","i-dash",null);
-  h += `<h4>Consulta</h4>` + item("resolvidos","Resolvidos","i-ok",(230+tratadosHoje+RESOLVIDOS.length).toLocaleString("pt-BR"),"f") + item("todos","Todos","i-lista",CASOS.length);
+  h += `<h4>Consulta</h4>` + item("resolvidos","Resolvidos","i-ok",CASOS.filter(c=>c.tratado).length,"f") + item("todos","Todos","i-lista",CASOS.length);
   $("#lado").innerHTML = h;
   document.title = (p.length?"("+p.length+") ":"") + tituloDe(vista) + " · Rejeições";
 }
@@ -594,7 +594,7 @@ function vistaRodar(){
     <span class="data">${RODADA.status==="rodando"?"Rodada em andamento. Pode trocar de aba, ela continua.":RODADA.status==="ok"?"Rodada concluída agora · "+pend().length+" caso(s) na mesa":"Última rodada simulada · 31 casos lidos"}</span></div></div>
   <div class="folha"><div class="etapas">${et.map((e,i)=>`<div class="etapa ${RODADA.etapa>i||RODADA.status==="ok"?"ok":RODADA.etapa===i?"on":""}">${e}<i></i></div>`).join("")}</div></div>
   <div class="folha-cab" style="margin:8px 0 -4px"><h2>Como foi a rodada</h2><span class="meta">simulação</span></div>
-  <div class="folha resumo"><div class="big"><b class="num">—</b><span>Duração (não medida na simulação)</span></div><span class="sep"></span><div class="big"><b class="num">31</b><span>Casos sintéticos</span></div><span class="sep"></span>
+  <div class="folha resumo"><div class="big"><b class="num">–</b><span>Duração (não medida na simulação)</span></div><span class="sep"></span><div class="big"><b class="num">31</b><span>Casos sintéticos</span></div><span class="sep"></span>
     <p>Rodada simulada. Na ferramenta, cada caso é cruzado com o extrato do gateway, o sistema de cobrança e a credora antes de ir para uma fila; o que não tem evidência suficiente vai para análise manual.</p></div>`;
 }
 function rodarDia(){
@@ -608,7 +608,7 @@ function rodarDia(){
 
 /* ── dashboard ── */
 const MESES = {
-  "03/2026":{rej:47, cats:[["QUITAÇÃO DE CONTRATO", "quitacao", 2220.0], ["ABERTO NA CREDORA", "credora", 1250.0], ["REEMBOLSO DA", "reembolsos", 560.4], ["ABRIR JIRA", "jira", 200.0], ["ANTECIPAÇÃO A CONFIRMAR", "antecipacao", 130.0], ["EMITIR", "emitir", 1009.9], ["PROPOSTA", "proposta", 175.0], ["REFAZER", "refazer", 779.5], ["A DIAGNOSTICAR", "analisar", 226.5]],
+  "03/2026":{rej:47, cats:[["QUITAÇÃO DE CONTRATO", "quitacao", 2220.0], ["ABERTO NA CREDORA", "credora", 1250.0], ["REEMBOLSO DA", "reembolsos", 560.4], ["ABRIR JIRA", "jira", 200.0], ["ANTECIPAÇÃO A CONFIRMAR", "antecipacao", 130.0], ["EMITIR", "emitir", 999.9], ["PROPOSTA", "proposta", 185.0], ["REFAZER", "refazer", 779.5], ["A DIAGNOSTICAR", "analisar", 226.5]],
     quit:[["DIA ANTERIOR", 1350.0], ["REEMBOLSO DUPLICIDADE", 92.0], ["JÁ RESOLVIDO", 380.0], ["REEMBOLSO LIQUIDADO", 60.0]], sem:1180.00,
     dias:[[1,410.00,0],[2,560.00,0],[3,620.00,0],[4,380.00,0],[5,0,0]]},
   "02/2026":{rej:310, cats:[["EMITIR", "", 3100.0], ["REFAZER", "", 1150.0], ["REEMBOLSO DA", "", 620.0], ["ABERTO NA CREDORA", "", 540.0], ["QUITAÇÃO DE CONTRATO", "", 900.0]], quit:[["DIA ANTERIOR", 4200.0], ["JÁ RESOLVIDO", 1100.0]], sem:3900.00, dias:[]},

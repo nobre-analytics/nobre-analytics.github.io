@@ -5,29 +5,28 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>The Brain on mobile</title>
 <meta name="description" content="Demo with synthetic data of The Brain redesigned for mobile: the morning verdict on the first screen, lists instead of tables and details in a bottom sheet.">
-<meta name="theme-color" content="#048A05">
+<meta name="theme-color" content="#115E59">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23fff'/%3E%3Cpath d='M26.4 11.8A11 11 0 1 0 26.4 20.2' fill='none' stroke='%23048A05' stroke-width='3.4' stroke-linecap='round'/%3E%3Ccircle cx='26.4' cy='20.2' r='3.1' fill='%23F5BF05'/%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 <script>
 (function(){try{if(localStorage.getItem("demo-tema")==="dark")document.documentElement.setAttribute("data-tema","escuro");}catch(e){}})();
 </script>
 <style>
+@font-face{font-family:"Hanken Grotesk";font-style:normal;font-weight:300 800;font-display:swap;src:url("../../../static/fonts/hanken-grotesk-latin-var.woff2") format("woff2")}@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:400;font-display:swap;src:url("../../../static/fonts/ibm-plex-mono-latin-400-normal.woff2") format("woff2")}@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:500;font-display:swap;src:url("../../../static/fonts/ibm-plex-mono-latin-500-normal.woff2") format("woff2")}
+
 :root{
   color-scheme:light;
-  --canvas:#F3F3F3; --surface:#FFFFFF; --sunken:#F7F7F6; --hover:#EFF7EF;
-  --border:#E3E4E1; --border-strong:#C9CCC7;
-  --text:#333333; --text-2:#4A4A4A; --text-3:#6C6E6B;
-  --marca:#048A05; --marca-fundo:#037604; --marca-texto:#00661F;
-  --destaque:#F5BF05; --destaque-ink:#33321F; --destaque-fundo:#E0AE00;
+  --canvas:#F7F9FC; --surface:#FFFFFF; --sunken:#F8FAFC; --hover:#F0F7F6;
+  --border:#E2E8F0; --border-strong:#CBD5E1;
+  --text:#1E293B; --text-2:#334155; --text-3:#64748B;
+  --marca:#115E59; --marca-fundo:#115E59; --marca-texto:#115E59;
+  --destaque:#FBBF24; --destaque-ink:#33321F; --destaque-fundo:#F59E0B;
   --warning:#8A6200; --danger:#C02B1D;
   --danger-soft:color-mix(in oklch,var(--danger) 8%,transparent);
-  --barra-fundo:#E6E7E4;
-  --palco:#E9EAE7; --palco-txt:#2B2F2A;
-  --f-titulo:"Bree Serif",Georgia,"Times New Roman",serif;
-  --f-ui:"Open Sans","Segoe UI",system-ui,sans-serif;
-  --f-cod:"Cascadia Mono",Consolas,ui-monospace,monospace;
+  --barra-fundo:#E2E8F0;
+  --palco:#EEF2F7; --palco-txt:#2B2F2A;
+  --f-titulo:"Hanken Grotesk",system-ui,sans-serif;
+  --f-ui:"Hanken Grotesk","Segoe UI",system-ui,sans-serif;
+  --f-cod:"IBM Plex Mono","Cascadia Mono",Consolas,ui-monospace,monospace;
   --elev-1:0 1px 3px rgb(31 38 31 / .07),0 6px 18px -10px rgb(31 38 31 / .18);
   --elev-2:0 -2px 6px rgb(31 38 31 / .06),0 -18px 40px -14px rgb(31 38 31 / .30);
   --curva:cubic-bezier(.2,0,0,1);
@@ -35,14 +34,14 @@
 }
 :root[data-tema=escuro]{
   color-scheme:dark;
-  --canvas:#10140F; --surface:#191E17; --sunken:#131711; --hover:#1F2A1D;
-  --border:#2A3127; --border-strong:#3C453A;
-  --text:#ECEFEA; --text-2:#B9BEB5; --text-3:#99A095;
-  --marca:#0B7A0C; --marca-fundo:#096509; --marca-texto:#63C264;
-  --destaque-fundo:#D8A800; --warning:#E4B437; --danger:#F0655A;
+  --canvas:#0B1220; --surface:#191E17; --sunken:#131711; --hover:#1F2A1D;
+  --border:#1E293B; --border-strong:#334155;
+  --text:#F1F5F9; --text-2:#B8C2CF; --text-3:#94A3B8;
+  --marca:#115E59; --marca-fundo:#134E4A; --marca-texto:#2DD4BF;
+  --destaque-fundo:#D97706; --warning:#FBBF24; --danger:#F0655A;
   --danger-soft:color-mix(in oklch,var(--danger) 12%,transparent);
-  --barra-fundo:#232A21;
-  --palco:#0B0E0A; --palco-txt:#DDE3DA;
+  --barra-fundo:#1E293B;
+  --palco:#060A14; --palco-txt:#DCE3EC;
   --elev-1:0 1px 3px rgb(0 0 0 / .5),0 6px 18px -10px rgb(0 0 0 / .6);
   --elev-2:0 -2px 6px rgb(0 0 0 / .4),0 -18px 40px -14px rgb(0 0 0 / .7);
 }
@@ -60,10 +59,10 @@ svg.i{width:18px;height:18px;flex:none}
 
 /* ── palco (só na tela grande): aparelho + notas ── */
 .palco{min-height:100vh;display:grid;grid-template-columns:auto minmax(0,440px);gap:64px;align-items:center;justify-content:center;padding:40px 32px}
-.aparelho{width:392px;height:min(852px,calc(100vh - 64px));min-height:640px;border-radius:52px;background:#0E120D;padding:12px;position:relative;
-  box-shadow:0 0 0 2px #2A3127,0 2px 4px rgb(0 0 0 / .2),0 30px 60px -20px rgb(20 30 20 / .55)}
+.aparelho{width:392px;height:min(852px,calc(100vh - 64px));min-height:640px;border-radius:52px;background:#080D18;padding:12px;position:relative;
+  box-shadow:0 0 0 2px #1E293B,0 2px 4px rgb(0 0 0 / .2),0 30px 60px -20px rgb(20 30 20 / .55)}
 .tela{width:100%;height:100%;border-radius:41px;overflow:hidden;position:relative;background:var(--canvas);isolation:isolate}
-.ilha{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:104px;height:30px;border-radius:16px;background:#0E120D;z-index:60}
+.ilha{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:104px;height:30px;border-radius:16px;background:#080D18;z-index:60}
 .barra-so{height:44px;background:var(--marca-fundo);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:6px 28px 0 34px;font-weight:700;font-size:14px;position:relative;z-index:5}
 .barra-so .sinais{display:flex;gap:6px;align-items:center}
 .barra-so .sinais i{display:block;background:#fff;border-radius:1px}
@@ -103,7 +102,7 @@ svg.i{width:18px;height:18px;flex:none}
 .hero{background:var(--marca);color:#fff;padding:14px 16px 16px}
 .hero .data{font-size:13px;opacity:.92}
 .veredito{margin:6px 0 14px}
-.veredito h1{font-size:25px;line-height:1.12}
+.veredito h2{font-size:25px;line-height:1.12}
 .veredito .sub{font:400 13.5px/1.4 var(--f-ui);margin-top:6px;opacity:.95}
 .etq{display:inline-flex;align-items:center;gap:7px;min-height:36px;border:0;cursor:pointer;background:var(--destaque);color:var(--destaque-ink);border-radius:6px;padding:0 12px;font-size:11.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;margin-top:10px}
 .etq:active{background:var(--destaque-fundo)}
@@ -157,7 +156,7 @@ details.mais summary > svg{transition:transform 140ms var(--curva)}
 .periodos{display:flex;gap:6px;overflow-x:auto;padding:2px 0 0;scrollbar-width:none;margin-top:12px}
 .periodos::-webkit-scrollbar{display:none}
 .periodos button{flex:none;height:36px;padding:0 14px;border-radius:18px;border:1px solid rgb(255 255 255 / .55);background:transparent;color:#fff;font-size:13px;font-weight:700;cursor:pointer}
-.periodos button[aria-pressed=true]{background:#fff;color:#00661F;border-color:#fff}
+.periodos button[aria-pressed=true]{background:#fff;color:#115E59;border-color:#fff}
 .grupo-pg{border-top:1px solid var(--border)}
 .grupo-pg summary{display:grid;grid-template-columns:minmax(0,1fr) auto 18px;gap:6px 12px;align-items:center;padding:12px 12px 12px 16px;min-height:64px}
 .grupo-pg summary:active{background:var(--hover)}
@@ -267,7 +266,7 @@ details.mais summary > svg{transition:transform 140ms var(--curva)}
       </nav>
       <div class="home-ind" aria-hidden="true"></div>
       <div class="veu" id="veu"></div>
-      <section class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="shTitulo" aria-hidden="true">
+      <section class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="shTitulo" aria-hidden="true" inert>
         <div class="alca" aria-hidden="true"></div>
         <div class="sheet-cab"><div><h2 id="shTitulo"></h2><p id="shSub"></p></div><button class="icone-btn" type="button" id="shFechar" aria-label="Close"><svg class="i"><use href="#i-fechar"/></svg></button></div>
         <div class="sheet-corpo" id="shCorpo"></div>
@@ -329,7 +328,7 @@ function abaHoje(){
   return `<section class="hero" id="hero">
     <span class="data">Thursday, Mar 5, 2026 · simulation</span>
     <div class="veredito" id="veredito">
-      <h1>The morning closed with 1 failure</h1>
+      <h2>The morning closed with 1 failure</h2>
       <p class="sub">DEMO_TAREFA_C stopped at step 5. The automatic retry also failed, so the case went to a person.</p>
       <button class="etq" type="button" data-abre="tar:0">1 needs attention · see steps</button>
     </div>
@@ -385,7 +384,7 @@ function abaRejeicoes(){
     <a class="link-cheio" href="painel-rejeicoes.html">Open the rejections panel ${seta.replace("<svg>",'<svg class="i">')}</a></div></div>`;
 }
 function abaAlertas(){
-  return `<section class="hero"><span class="data">Collection and alerts</span><div class="veredito"><h1>2 cases with a person, 1 recovered</h1><p class="sub">The watchdog checks periodically and restarts whatever went down, with a retry limit. Simulation.</p></div></section>
+  return `<section class="hero"><span class="data">Collection and alerts</span><div class="veredito"><h2>2 cases with a person, 1 recovered</h2><p class="sub">The watchdog checks periodically and restarts whatever went down, with a retry limit. Simulation.</p></div></section>
   <div class="corpo">
     <div class="cartao"><div class="cartao-cab"><h2>Alerts on the panel</h2><span class="meta">simulation</span></div>
       <button class="linha" type="button" data-abre="col:3"><span class="ponto alerta"></span><span><span class="t">Ticket collection: source unavailable</span><span class="s">06:35 · waiting for a check</span></span><span class="r alerta">With a person</span>${seta}</button>
@@ -410,10 +409,10 @@ let ultimoFoco = null;
 function abrirSheet(titulo,sub,corpo){
   ultimoFoco = document.activeElement;
   $("#shTitulo").textContent=titulo; $("#shSub").textContent=sub; $("#shCorpo").innerHTML=corpo;
-  $("#veu").classList.add("on"); $("#sheet").classList.add("on"); $("#sheet").setAttribute("aria-hidden","false");
+  $("#veu").classList.add("on"); $("#sheet").classList.add("on"); $("#sheet").setAttribute("aria-hidden","false"); $("#sheet").removeAttribute("inert"); $("#sheet").removeAttribute("inert"); $("#sheet").removeAttribute("inert");
   setTimeout(()=>$("#shFechar").focus({preventScroll:true}),60);
 }
-function fecharSheet(){ $("#veu").classList.remove("on"); $("#sheet").classList.remove("on"); $("#sheet").setAttribute("aria-hidden","true"); if(ultimoFoco&&ultimoFoco.focus) ultimoFoco.focus({preventScroll:true}); }
+function fecharSheet(){ $("#veu").classList.remove("on"); $("#sheet").classList.remove("on"); $("#sheet").setAttribute("aria-hidden","true"); $("#sheet").setAttribute("inert",""); $("#sheet").setAttribute("inert",""); $("#sheet").setAttribute("inert",""); if(ultimoFoco&&ultimoFoco.focus) ultimoFoco.focus({preventScroll:true}); }
 function detalhe(chave){
   const [tipo,i] = chave.split(":");
   if(tipo==="tar"){

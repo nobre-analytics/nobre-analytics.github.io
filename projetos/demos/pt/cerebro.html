@@ -5,29 +5,28 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Cérebro · Painel da Operação</title>
 <meta name="description" content="Demonstração com dados sintéticos do Cérebro: o observador da frota de robôs coletores. Diz em segundos se a manhã fechou, quanto entrou e o que falhou.">
-<meta name="theme-color" content="#048A05">
+<meta name="theme-color" content="#115E59">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23fff'/%3E%3Cpath d='M26.4 11.8A11 11 0 1 0 26.4 20.2' fill='none' stroke='%23048A05' stroke-width='3.4' stroke-linecap='round'/%3E%3Ccircle cx='26.4' cy='20.2' r='3.1' fill='%23F5BF05'/%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 <script>
 (function(){try{if(localStorage.getItem("demo-tema")==="dark")document.documentElement.setAttribute("data-tema","escuro");}catch(e){}})();
 </script>
 <style>
+@font-face{font-family:"Hanken Grotesk";font-style:normal;font-weight:300 800;font-display:swap;src:url("../../../static/fonts/hanken-grotesk-latin-var.woff2") format("woff2")}@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:400;font-display:swap;src:url("../../../static/fonts/ibm-plex-mono-latin-400-normal.woff2") format("woff2")}@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:500;font-display:swap;src:url("../../../static/fonts/ibm-plex-mono-latin-500-normal.woff2") format("woff2")}
+
 :root{
   color-scheme:light;
-  --canvas:#F3F3F3; --surface:#FFFFFF; --sunken:#F7F7F6; --hover:#EFF7EF;
-  --border:#E3E4E1; --border-strong:#C9CCC7;
-  --text:#333333; --text-2:#4A4A4A; --text-3:#6C6E6B;
-  --marca:#048A05; --marca-fundo:#037604; --marca-texto:#00661F;
-  --destaque:#F5BF05; --destaque-ink:#33321F; --destaque-fundo:#E0AE00;
+  --canvas:#F7F9FC; --surface:#FFFFFF; --sunken:#F8FAFC; --hover:#F0F7F6;
+  --border:#E2E8F0; --border-strong:#CBD5E1;
+  --text:#1E293B; --text-2:#334155; --text-3:#64748B;
+  --marca:#115E59; --marca-fundo:#115E59; --marca-texto:#115E59;
+  --destaque:#FBBF24; --destaque-ink:#33321F; --destaque-fundo:#F59E0B;
   --warning:#8A6200; --danger:#C02B1D;
   --danger-soft:color-mix(in oklch,var(--danger) 8%,transparent);
   --warning-soft:color-mix(in oklch,var(--destaque) 22%,transparent);
-  --barra:#7C807A; --barra-fundo:#E6E7E4;
-  --f-titulo:"Bree Serif",Georgia,"Times New Roman",serif;
-  --f-ui:"Open Sans","Segoe UI",system-ui,sans-serif;
-  --f-cod:"Cascadia Mono",Consolas,ui-monospace,monospace;
+  --barra:#64748B; --barra-fundo:#E2E8F0;
+  --f-titulo:"Hanken Grotesk",system-ui,sans-serif;
+  --f-ui:"Hanken Grotesk","Segoe UI",system-ui,sans-serif;
+  --f-cod:"IBM Plex Mono","Cascadia Mono",Consolas,ui-monospace,monospace;
   --elev-1:0 1px 3px rgb(31 38 31 / .07),0 6px 18px -10px rgb(31 38 31 / .18);
   --elev-2:0 2px 6px rgb(31 38 31 / .10),0 20px 44px -14px rgb(31 38 31 / .28);
   --curva:cubic-bezier(.2,0,0,1);
@@ -35,13 +34,13 @@
 }
 :root[data-tema=escuro]{
   color-scheme:dark;
-  --canvas:#10140F; --surface:#191E17; --sunken:#131711; --hover:#1F2A1D;
-  --border:#2A3127; --border-strong:#3C453A;
-  --text:#ECEFEA; --text-2:#B9BEB5; --text-3:#99A095;
-  --marca:#0B7A0C; --marca-fundo:#096509; --marca-texto:#63C264;
-  --destaque-fundo:#D8A800; --warning:#E4B437; --danger:#F0655A;
+  --canvas:#0B1220; --surface:#191E17; --sunken:#131711; --hover:#1F2A1D;
+  --border:#1E293B; --border-strong:#334155;
+  --text:#F1F5F9; --text-2:#B8C2CF; --text-3:#94A3B8;
+  --marca:#115E59; --marca-fundo:#134E4A; --marca-texto:#2DD4BF;
+  --destaque-fundo:#D97706; --warning:#FBBF24; --danger:#F0655A;
   --danger-soft:color-mix(in oklch,var(--danger) 12%,transparent);
-  --barra:#8D948A; --barra-fundo:#232A21;
+  --barra:#94A3B8; --barra-fundo:#1E293B;
   --elev-1:0 1px 3px rgb(0 0 0 / .5),0 6px 18px -10px rgb(0 0 0 / .6);
   --elev-2:0 2px 6px rgb(0 0 0 / .55),0 20px 44px -14px rgb(0 0 0 / .7);
 }
@@ -185,7 +184,7 @@ svg.i{width:15px;height:15px;flex:none}
 .segmento button[aria-pressed=true]{background:var(--marca);color:#fff}
 .banda .segmento{background:rgb(255 255 255 / .16)}
 .banda .segmento button{color:#fff}
-.banda .segmento button[aria-pressed=true]{background:#fff;color:#00661F}
+.banda .segmento button[aria-pressed=true]{background:#fff;color:#115E59}
 
 /* batimento */
 .bat{display:flex;gap:16px;align-items:center;flex-wrap:wrap}

@@ -6,10 +6,12 @@
 <meta name="robots" content="noindex">
 <title>Rotina matinal · antes e depois · Demonstração</title>
 <style>
-:root{--bg:#f6f4ef;--panel:#fff;--ink:#1d232b;--ink2:#4b5563;--muted:#6b7280;--line:#e5e1d8;--acc:#9a6b16;--acc-bg:#f6ecd7;--ok:#1f7a4d;--ok-bg:#e3f3ea;--warn:#a5431a;--warn-bg:#fbe6dc;--run:#1d5fa8;--run-bg:#e3edf9;--wait:#7a6a2a;--wait-bg:#f4efd9}
+@font-face{font-family:"Hanken Grotesk";font-style:normal;font-weight:300 800;font-display:swap;src:url("../../../static/fonts/hanken-grotesk-latin-var.woff2") format("woff2")}@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:400;font-display:swap;src:url("../../../static/fonts/ibm-plex-mono-latin-400-normal.woff2") format("woff2")}@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:500;font-display:swap;src:url("../../../static/fonts/ibm-plex-mono-latin-500-normal.woff2") format("woff2")}
+
+:root{--bg:#F7F9FC;--panel:#fff;--ink:#0F172A;--ink2:#334155;--muted:#475569;--line:#E2E8F0;--acc:#115E59;--acc-bg:#E6F2F0;--ok:#1f7a4d;--ok-bg:#e3f3ea;--warn:#a5431a;--warn-bg:#fbe6dc;--run:#1d5fa8;--run-bg:#e3edf9;--wait:#7a6a2a;--wait-bg:#f4efd9}
 @media (prefers-color-scheme:dark){:root{--bg:#10151c;--panel:#18202a;--ink:#e8ecf1;--ink2:#b9c2cd;--muted:#8d98a6;--line:#2a3442;--acc:#e0b25c;--acc-bg:#3a2f18;--ok:#5fcf97;--ok-bg:#163628;--warn:#f39a73;--warn-bg:#3d2117;--run:#7db3f0;--run-bg:#18304b;--wait:#e1cd7e;--wait-bg:#3a3418}}
 *{box-sizing:border-box;margin:0}
-body{font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink)}
+body{font:15px/1.5 "Hanken Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink)}
 .synthetic-banner{background:#2B2416;color:#F3E9D2;font-size:12.5px;padding:7px 16px;text-align:center;border-bottom:1px solid #6B5A33}
 .synthetic-banner b{letter-spacing:.06em;text-transform:uppercase;font-size:11px;margin-right:8px}
 .synthetic-banner a{color:#F3E9D2;margin-right:12px}
@@ -42,8 +44,8 @@ h1{font-size:1.5rem;letter-spacing:-.01em}
 .metric{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
 .metric b{display:block;font-size:1.35rem;font-variant-numeric:tabular-nums}
 .metric span{color:var(--muted);font-size:13px}
-.log{margin-top:16px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;max-height:180px;overflow:auto;font:13px/1.55 ui-monospace,Consolas,monospace;color:var(--ink2)}
-.log h2{font:600 13px system-ui,sans-serif;color:var(--ink);margin-bottom:6px}
+.log{margin-top:16px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;max-height:180px;overflow:auto;font:13px/1.55 "IBM Plex Mono",ui-monospace,Consolas,monospace;color:var(--ink2)}
+.log h2{font:600 13px "Hanken Grotesk",system-ui,sans-serif;color:var(--ink);margin-bottom:6px}
 .foot{margin-top:16px;color:var(--muted);font-size:13px}
 @media (max-width:760px){.lane.a,.lane.b{grid-template-columns:1fr}.metrics{grid-template-columns:1fr 1fr}.step{min-height:0}}
 @media (prefers-reduced-motion:reduce){.prog i{transition:none}}
@@ -115,7 +117,7 @@ function render(){
       <span class="chip ${st}">${T.st[st]}</span>${botao(s,i)}<div class="prog"><i style="width:${s.p}%"></i></div></article>`;}).join("");
   $("clock").textContent = S.t; $("m1").textContent = S.manual; $("m2").textContent = S.espera+" "+T.min;
   $("m3").textContent = S.tent; $("m4").textContent = S.pessoa?T.yes:T.no;
-  $("log").innerHTML = S.log.map(x=>`<div>${x}</div>`).join("") || "<div>—</div>";
+  $("log").innerHTML = S.log.map(x=>`<div>${x}</div>`).join("") || "<div>–</div>";
 }
 function tick(){
   if(S.fim) return;
