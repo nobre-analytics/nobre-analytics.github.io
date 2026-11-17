@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="../assets/site.css">
 <style>
 
-.phone { position: relative; width: 300px; max-width: 100%; margin: 0 auto; padding: 12px; border-radius: 44px; background: linear-gradient(160deg, #24433C, #13302C); border: 1px solid var(--line-2); box-shadow: 0 40px 90px -40px rgba(0,0,0,.9), inset 0 0 0 1px rgba(255,255,255,.04); }
+.phone { position: relative; width: 300px; max-width: 100%; margin: 0 auto; padding: 12px; border-radius: 44px; background: linear-gradient(160deg, var(--line), var(--surface)); border: 1px solid var(--line-2); box-shadow: 0 40px 90px -40px rgba(0,0,0,.9), inset 0 0 0 1px rgba(255,255,255,.04); }
 .phone__screen { position: relative; height: 560px; border-radius: 34px; overflow: hidden; background: var(--bg); }
 .phone__screen iframe { max-width: none; position: absolute; left: 0; top: 0; border: 0; width: 375px; height: calc(560px / var(--ps)); transform: scale(var(--ps)); transform-origin: 0 0; }
 .phone__notch { position: absolute; left: 50%; top: 20px; z-index: 2; width: 84px; height: 22px; transform: translateX(-50%); border-radius: 999px; background: #070d18; }
@@ -22,7 +22,7 @@
 
 .principles { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
 .principle { padding: 24px; }
-.principle__n { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 10px; background: rgba(217,130,91,.14); color: var(--amber); font-weight: 700; }
+.principle__n { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 10px; background: rgba(var(--acc-rgb),.14); color: var(--amber); font-weight: 700; }
 .principle b { display: block; margin-top: 14px; font-size: 1.125rem; letter-spacing: -0.015em; }
 .principle p { margin-top: 6px; color: var(--muted); }
 
@@ -70,7 +70,7 @@
         <p class="section__label">The challenge</p>
         <div>
           <h2>The manager wants the morning numbers before getting to a computer.</h2>
-          <div class="section__body"><div class="prose"><p>On desktop, the monitor shows every workstream at once. On a phone, that much information turns into endless scrolling. The question changed: instead of <strong>"what is happening everywhere?"</strong>, it became <strong>"do I need to act now?"</strong>. The expected benefit, not yet measured, is that managers know within seconds, without a computer, whether they need to act.</p></div></div>
+          <div class="section__body"><div class="prose"><p>On desktop, the monitor shows every workstream at once. On a phone, that much information turns into endless scrolling. The question changed: instead of <strong>"what is happening everywhere?"</strong>, it became <strong>"do I need to act now?"</strong>. The goal is for managers to know within seconds, without a computer, whether they need to act.</p></div></div>
         </div>
       </div>
     </section>
@@ -83,7 +83,7 @@
           <div class="frame-desk">
       <figure class="frame-wrap" >
         <div class="frame" style="--h:430px; --s:0.5">
-          <div class="frame__bar" aria-hidden="true"><span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__url">The Brain · desktop</span></div>
+          <div class="frame__bar" aria-hidden="true"><span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__url">Monitor · desktop</span></div>
           <div class="frame__view"><iframe src="../demos/en/cerebro.html" title="Desktop monitor with synthetic data" loading="lazy" tabindex="-1"></iframe></div>
         </div>
         <figcaption class="frame__cta">
@@ -137,7 +137,7 @@
 
     <nav class="next" aria-label="Next project">
       <a href="automacao-rotina-operacional.html">
-        <span><span class="next__label">Next case</span><span class="next__title">Morning Operations Routine Automation</span></span>
+        <span><span class="next__label">Next case</span><span class="next__title">A morning routine that starts on its own</span></span>
         <span class="next__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </a>
     </nav>
@@ -149,5 +149,6 @@
   </div>
 </div>
 <script src="../assets/site.js"></script>
+<script src="../assets/scene.js" defer></script>
 </body>
 </html>

@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>The Brain on mobile</title>
-<meta name="description" content="Demo with synthetic data of The Brain redesigned for mobile: the morning verdict on the first screen, lists instead of tables and details in a bottom sheet.">
+<title>The Operations monitor on mobile</title>
+<meta name="description" content="Demo with synthetic data of The operations monitor redesigned for mobile: the morning verdict on the first screen, lists instead of tables and details in a bottom sheet.">
 <meta name="theme-color" content="#14403A">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23fff'/%3E%3Cpath d='M26.4 11.8A11 11 0 1 0 26.4 20.2' fill='none' stroke='%23048A05' stroke-width='3.4' stroke-linecap='round'/%3E%3Ccircle cx='26.4' cy='20.2' r='3.1' fill='%23F5BF05'/%3E%3C/svg%3E">
 <script>
@@ -254,7 +254,7 @@ details.mais summary > svg{transition:transform 140ms var(--curva)}
       <div class="rolagem" id="rolagem">
         <div class="tarja"><span class="vivo" role="status">Simulation</span><span class="chip-demo">Synthetic data</span><a class="voltar-proj so-cel" href="../../en/monitor-operacao-celular.html" style="margin-left:10px">← Back to the case</a></div>
         <header class="appbar">
-          <span class="marca"><svg width="24" height="24" aria-hidden="true"><use href="#i-marca"/></svg><b>The Brain</b><span id="tituloAba">Today</span></span>
+          <span class="marca"><svg width="24" height="24" aria-hidden="true"><use href="#i-marca"/></svg><b>Monitor</b><span id="tituloAba">Today</span></span>
           <button class="icone-btn" type="button" id="btnIr" aria-label="Go to"><svg class="i"><use href="#i-busca"/></svg></button>
           <button class="icone-btn" type="button" id="btnTema" aria-label="Toggle theme"><svg class="i"><use href="#i-tema"/></svg></button>
         </header>
@@ -279,10 +279,10 @@ details.mais summary > svg{transition:transform 140ms var(--curva)}
   </div>
 
   <aside class="notas" aria-label="What changed">
-    <h1>The Brain on mobile</h1>
+    <h1>The Operations monitor on mobile</h1>
     <p class="lead">Managers open the panel on their phone to know one thing: did the morning close? The previous version was the desktop screen squeezed in. This one was designed for the thumb. <span class="chip-demo">Synthetic data</span></p>
     <ol class="nota-lista" id="notas"></ol>
-    <div class="rodape-n"><a class="voltar-proj" href="../../en/monitor-operacao-celular.html">← Back to the case</a><a href="cerebro.html">See the desktop version</a><a href="painel-rejeicoes.html">Rejections panel</a><a href="painel-fidc.html">FIDC panel</a></div>
+    <div class="rodape-n"><a class="voltar-proj" href="../../en/monitor-operacao-celular.html">← Back to the case</a><a href="cerebro.html">See the desktop version</a><a href="painel-rejeicoes.html">Rejections panel</a><a href="painel-fidc.html">Duplicate payments</a></div>
   </aside>
 </div>
 
@@ -443,7 +443,7 @@ $("#veu").addEventListener("click",fecharSheet);
 $("#shFechar").addEventListener("click",fecharSheet);
 document.addEventListener("keydown",e=>{ if(e.key==="Escape") fecharSheet(); });
 $("#btnIr").addEventListener("click",()=>abrirSheet("Go to","sections and other panels",`<div class="ir-lista">
-  ${[["Today","section","hoje"],["Payments","section","pagamentos"],["Rejections","section","rejeicoes"],["Alerts","section","alertas"],["Rejections panel","open","painel-rejeicoes.html"],["FIDC panel","open","painel-fidc.html"],["Desktop version","open","cerebro.html"],["Toggle theme","action","tema"]]
+  ${[["Today","section","hoje"],["Payments","section","pagamentos"],["Rejections","section","rejeicoes"],["Alerts","section","alertas"],["Rejections panel","open","painel-rejeicoes.html"],["Duplicate payments","open","painel-fidc.html"],["Desktop version","open","cerebro.html"],["Toggle theme","action","tema"]]
     .map(x=>`<button type="button" data-ir="${x[2]}">${x[0]}<span>${x[1]}</span></button>`).join("")}</div>`));
 function alternaTema(){const dk=document.documentElement.getAttribute("data-tema")!=="escuro";document.documentElement.setAttribute("data-tema",dk?"escuro":"claro");try{localStorage.setItem("demo-tema",dk?"dark":"light");}catch(e){}}
 $("#btnTema").addEventListener("click",alternaTema);

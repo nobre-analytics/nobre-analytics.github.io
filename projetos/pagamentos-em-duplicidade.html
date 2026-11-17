@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pagamentos duplicados identificados antes do reembolso · Case · Paulo Nobre</title>
-<meta name="description" content="Um painel que confronta o sistema de cobrança com o extrato do gateway para identificar quem pagou a mesma parcela duas vezes e organizar os casos para análise de reembolso. A decisão e o pagamento continuam com pessoas.">
+<title>Controle de pagamentos em duplicidade · Case · Paulo Nobre</title>
+<meta name="description" content="Como Paulo Nobre estruturou um controle que identifica quem pagou a mesma parcela duas vezes e organiza a devolução com papéis separados.">
 <script>document.documentElement.classList.add('js');</script>
 <script src="assets/vt.js"></script>
 <link rel="stylesheet" href="assets/site.css">
@@ -19,7 +19,7 @@
 .link { position: relative; height: 2px; background: var(--line-2); margin: 0 4px; }
 .link::after { content: ""; position: absolute; right: -2px; top: -3px; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
 .ok { color: var(--green); } .dup { color: var(--amber); } .rev { color: var(--cyan); }
-.link.ok { background: #8FD1AE; } .link.dup { background: #D9825B; } .link.rev { background: #9CCFC4; }
+.link.ok { background: #8FD1AE; } .link.dup { background: var(--amber); } .link.rev { background: #9CCFC4; }
 .chip { display: inline-flex; align-items: center; gap: 6px; margin-top: 6px; padding: 2px 8px; border-radius: 999px; font-size: .75rem; font-weight: 600; background: currentColor; }
 .chip i { font-style: normal; color: var(--bg); }
 .recon__cap { margin-top: 14px; }
@@ -75,10 +75,10 @@
       <header class="hero">
         <div class="hero__grid">
           <div>
-            <p class="hero__kicker" data-seq style="--i:0">Conciliação e controle de risco</p>
-            <h1 data-seq style="--i:1">Como passei a identificar pagamentos duplicados antes de qualquer reembolso</h1>
-            <p class="hero__lede" data-seq style="--i:2">Construí um painel que confronta os pagamentos do sistema de cobrança com o extrato do gateway e organiza os casos de clientes que pagaram a mesma parcela duas vezes. A decisão e o reembolso continuam com pessoas.</p>
-            <div class="facts" data-seq style="--i:3"><span class="fact">Em uso desde ago/2026</span><span class="fact">Fundo FIDC</span><span class="fact">Python e Flask</span></div></div>
+            <p class="hero__kicker" data-seq style="--i:0">Produto interno · Controle financeiro</p>
+            <h1 data-seq style="--i:1">Pagamentos duplicados identificados antes de qualquer reembolso</h1>
+            <p class="hero__lede" data-seq style="--i:2">Paulo estruturou um controle que confronta o sistema de cobrança com o extrato do gateway, identifica quem pagou a mesma parcela duas vezes e organiza a devolução com papéis separados: o sistema identifica, uma pessoa aprova e outra executa.</p>
+            <div class="facts" data-seq style="--i:3"><span class="fact">Em uso desde ago/2026</span><span class="fact">Controle financeiro</span><span class="fact">Python e Flask</span></div></div>
           <div class="hero__visual" data-seq style="--i:4">
             <figure class="panel recon">
               <div class="recon__head" aria-hidden="true"><span>Sistema de cobrança</span><span></span><span>Extrato do gateway</span></div>
@@ -91,22 +91,22 @@
       </header>
 
       <div class="kpis" style="--n:3" data-reveal><div class="kpi"><div class="kpi__value">2 fontes</div><div class="kpi__label">confrontadas: sistema de cobrança e extrato do gateway</div></div><div class="kpi"><div class="kpi__value">2 papéis</div><div class="kpi__label">separados: quem decide o lote e quem executa</div></div><div class="kpi"><div class="kpi__value">Estado por caso</div><div class="kpi__label">pendente, solicitado, concluído, removido ou devolvido</div></div></div>
-    <section class="section summary-sec" aria-label="Resumo" data-reveal><div class="cards4"><div class="panel"><b>Problema</b><span>Quem pagou duas vezes precisa receber de volta, mas só depois de a duplicidade estar comprovada. Sem esse batimento, havia risco de devolver um pagamento legítimo ou de deixar o cliente sem o valor.</span></div><div class="panel"><b>Minha participação</b><span>Desenhei as regras de identificação e construí o painel, com papéis separados para montar o lote e para executar.</span></div><div class="panel"><b>O que mudou</b><span>Cada caso tem estado e histórico em um só lugar: identificado, em curadoria, solicitado e concluído.</span></div><div class="panel"><b>Evidência</b><span>Em uso desde agosto de 2026. Nenhum valor ou contagem de casos é publicado.<br><span class="ev ev--qual">Resultado qualitativo</span></span></div></div></section>
+    <section class="section summary-sec" aria-label="Resumo" data-reveal><div class="cards4"><div class="panel"><b>Problema</b><span>Quem pagou duas vezes tem direito ao valor, mas devolver exige prova. Sem o batimento, o risco era devolver um pagamento legítimo ou deixar o cliente sem o dinheiro.</span></div><div class="panel"><b>Papel do Paulo</b><span>Estruturou a solução a partir das necessidades da cobrança e dos controles financeiros, definiu as regras de identificação e entregou o painel com curadoria e operação.</span></div><div class="panel"><b>Decisão-chave</b><span>O produto não aprova nem transfere dinheiro. Quem monta o lote não é quem executa o reembolso.</span></div><div class="panel"><b>Resultado</b><span>Cada caso tem estado e histórico em um só lugar, da identificação à conclusão. Em uso desde agosto de 2026.</span></div></div></section>
     <section class="section" id="problema" data-reveal>
       <div class="section__head">
         <p class="section__label">O problema</p>
         <div>
-          <h2>Devolver dinheiro exige prova, não só a suspeita de duplicidade.</h2>
-          <div class="section__body"><div class="prose"><div class="prose"><p>Às vezes o cliente paga a mesma parcela duas vezes, por exemplo por Pix e por boleto. Ele tem direito ao valor pago a mais, mas a devolução só pode acontecer depois de confirmar que os dois créditos existem e se referem à mesma parcela.</p><p>Este caso é diferente do conciliador de baixas duplicadas, outra iniciativa, que trata um único pagamento registrado duas vezes no sistema de cobrança. Aqui houve dois pagamentos de verdade.</p></div></div></div>
+          <h2>Devolver dinheiro exige prova, não suspeita.</h2>
+          <div class="section__body"><div class="prose"><div class="prose"><p>Às vezes o cliente paga a mesma parcela duas vezes, por exemplo por Pix e por boleto. Ele tem direito ao valor pago a mais, mas a devolução só pode acontecer depois de confirmar que os dois créditos existem e se referem à mesma parcela.</p><p>Este controle é diferente de uma baixa registrada duas vezes no sistema de cobrança. Aqui, o cliente realmente pagou duas vezes.</p></div></div></div>
         </div>
       </div>
     </section>
     <section class="section" id="contribuicao" data-reveal>
       <div class="section__head">
-        <p class="section__label">Minha contribuição</p>
+        <p class="section__label">Papel do Paulo</p>
         <div>
-          <h2>Separei classificar, aprovar e pagar.</h2>
-          <div class="section__body"><div class="prose"><div class="prose"><p>A principal decisão foi não deixar a ferramenta decidir sobre dinheiro. O painel identifica e organiza; uma pessoa aprova o lote; o pagamento acontece fora da ferramenta.</p></div></div><div class="contrib"><div class="panel c-col me"><b>O que fiz diretamente</b><ul class="list"><li>Desenhei as regras que identificam possíveis duplicidades a partir dos pagamentos e das rejeições.</li><li>Construí o painel, com os modos de curadoria e de operação.</li><li>Defini os controles que reduzem o risco de devolver o pagamento errado.</li><li>Registrei a evidência de cada caso, para que a decisão possa ser conferida depois.</li></ul></div><div class="panel c-col dep"><b>Dependências externas</b><ul class="list"><li>A aprovação do lote e o pagamento do reembolso são feitos pelas pessoas responsáveis.</li><li>Os dados vêm do sistema de cobrança e do extrato do gateway de pagamento.</li></ul></div></div></div>
+          <h2>Ele separou identificar, aprovar e pagar.</h2>
+          <div class="section__body"><div class="prose"><p>A decisão central foi não deixar a ferramenta decidir sobre dinheiro. O painel identifica e organiza; uma pessoa aprova o lote; o pagamento acontece fora da ferramenta, com rastreabilidade.</p></div><div class="contrib"><div class="panel c-col me"><b>O que ele conduziu</b><ul class="list"><li>Definiu as regras que identificam possíveis duplicidades a partir dos pagamentos e das rejeições.</li><li>Desenhou o fluxo de conciliação, aprovação e reembolso, com os modos de curadoria e de operação.</li><li>Definiu os controles que reduzem o risco de devolver o pagamento errado.</li><li>Garantiu que cada caso guarde a evidência da decisão, para auditoria.</li></ul></div><div class="panel c-col with"><b>Com as áreas</b><ul class="list"><li>Alinhou as regras com a cobrança e com os controles financeiros.</li></ul></div><div class="panel c-col dep"><b>Fora do escopo</b><ul class="list"><li>A aprovação do lote e o pagamento do reembolso são das pessoas responsáveis.</li><li>Os dados vêm do sistema de cobrança e do extrato do gateway.</li></ul></div></div></div>
         </div>
       </div>
     </section>
@@ -121,19 +121,19 @@
     </section>
     <section class="section" id="o-que-mudou" data-reveal>
       <div class="section__head">
-        <p class="section__label">O que mudou</p>
+        <p class="section__label">Resultado</p>
         <div>
-          <h2>Cada etapa tem um estado diferente, e só a última significa dinheiro devolvido.</h2>
-          <div class="section__body"><div class="prose"><div class="prose"><p>Antes, o caso dependia de conferências separadas. Agora, ele tem estado e histórico em um só lugar, e quem decide e quem executa trabalham na mesma tela, com papéis diferentes.</p></div></div><div class="compare"><div class="panel"><b class="c-h">Ainda não é reembolso</b><ol class="c-ol"><li><strong>Identificado:</strong> o batimento encontrou um segundo crédito para a mesma parcela.</li><li><strong>Em curadoria:</strong> quem decide mantém o caso no lote, marca para revisão ou remove.</li></ol></div><div class="panel after"><b class="c-h">Em execução por pessoas</b><ol class="c-ol"><li><strong>Solicitado:</strong> quem executa pediu o reembolso, e o caso está em andamento.</li><li><strong>Concluído:</strong> as pessoas responsáveis fizeram o reembolso, e o caso é encerrado no painel.</li></ol></div></div><div class="panel evidence"><div class="evidence__head"><b>Como o resultado foi avaliado</b><span class="ev ev--qual">Resultado qualitativo</span></div><div class="evidence__body"><div class="method-note" style="margin-top:0;border-top:0;padding-top:0"><div class="prose"><p>O resultado é qualitativo: os casos passaram a ter estado e histórico em um só lugar. Casos identificados ou em andamento não são reembolsos pagos, e não há registro comprovado de valores devolvidos por este fluxo. Por isso nenhum valor ou contagem é publicado.</p></div></div></div></div></div>
+          <h2>O caso deixou de depender de conferências soltas e ganhou um ciclo de vida.</h2>
+          <div class="section__body"><div class="prose"><p>Antes, cada caso dependia de conferências separadas. Agora, ele percorre estados claros (identificado, em curadoria, solicitado e concluído), e só o último significa dinheiro devolvido.</p><p>Quem decide e quem executa trabalham na mesma tela, com papéis diferentes, e todo o histórico fica registrado.</p></div></div>
         </div>
       </div>
     </section>
     <section class="section" id="limitacoes" data-reveal>
       <div class="section__head">
-        <p class="section__label">Limitações</p>
+        <p class="section__label">Decisões de produto</p>
         <div>
-          <h2>O que o painel não faz.</h2>
-          <div class="section__body"><ul class="list"><li>O painel não transfere dinheiro e não aprova reembolsos sozinho.</li><li>A decisão sobre o lote e a execução do reembolso são de pessoas. <em class="who who--human">intervenção humana</em></li><li>A regra de pareamento aparece aqui simplificada, como descrição de negócio.</li><li>A versão usada no navegador e a versão local têm formas de acesso diferentes, por isso não descrevo um modelo único de autenticação.</li></ul></div>
+          <h2>Controles que protegem o cliente e a empresa.</h2>
+          <div class="section__body"><ul class="list"><li>O painel não transfere dinheiro nem aprova reembolsos sozinho. <em class="who who--human">intervenção humana</em></li><li>Aprovação e execução ficam com pessoas diferentes.</li><li>Nenhum caso vira reembolso sem dois créditos comprovados para a mesma parcela.</li><li>Por sigilo, valores e contagens reais não são publicados aqui.</li></ul></div>
         </div>
       </div>
     </section>
@@ -159,7 +159,7 @@
 
     <nav class="next" aria-label="Próximo case">
       <a href="monitor-operacao.html">
-        <span><span class="next__label">Próximo case</span><span class="next__title">Como tornei visíveis as falhas das rotinas que rodam antes do expediente</span></span>
+        <span><span class="next__label">Próximo case</span><span class="next__title">Um monitor que mostra cedo se a operação está pronta</span></span>
         <span class="next__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </a>
     </nav>
@@ -171,5 +171,6 @@
   </div>
 </div>
 <script src="assets/site.js"></script>
+<script src="assets/scene.js" defer></script>
 </body>
 </html>

@@ -4,352 +4,91 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Projects | Paulo Nobre</title>
-<meta name="description" content="Four case studies from a collections and payments operation, with interactive demos using synthetic data.">
+<meta name="description" content="Internal products and automations Paulo Nobre led at a credit fintech, with interactive demos using synthetic data.">
 <script>document.documentElement.classList.add('js');</script>
 <script src="../assets/vt.js"></script>
 <link rel="stylesheet" href="../assets/site.css">
 <style>
-  :root {
-    --bg: #0E2320;
-    --surface: #13302C;
-    --line: #24433C;
-    --text: #F0EBE1;
-    --muted: #9DABA4;
-    --amber: #D9825B;
-    --amber-soft: rgba(217, 130, 91, 0.10);
-    --ease: cubic-bezier(.22, .8, .24, 1);
+  :root{--ease:cubic-bezier(.22,.8,.24,1)}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{min-height:100vh;min-height:100svh;padding:112px 20px 80px;color:var(--text);font-family:"Public Sans",system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  main{position:relative;z-index:1;width:100%;max-width:760px;margin:0 auto}
+  .bar{position:fixed;top:0;left:0;right:0;z-index:3;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:22px 32px;background:linear-gradient(180deg,rgba(4,12,7,.75),rgba(4,12,7,0))}
+  .bar a{color:var(--text-2);text-decoration:none;font-weight:500;font-size:.9375rem}
+  .bar a:hover{color:var(--text)}
+  .bar__home{display:inline-flex;align-items:center;gap:10px;padding:8px 4px}
+  .bar__home svg{width:18px;height:18px;transition:transform .4s var(--ease)}
+  .bar__home:hover svg{transform:translateX(-4px)}
+  header{text-align:center;margin-bottom:36px}
+  .eyebrow{color:var(--amber);font-size:.78rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase}
+  h1{margin-top:14px;font-family:"Source Serif 4",Georgia,serif;font-size:clamp(2.4rem,6.4vw,3.6rem);font-weight:500;letter-spacing:-.025em;line-height:1.02}
+  .lede{margin:18px auto 0;max-width:52ch;color:var(--text-2);font-size:1.0625rem;line-height:1.6}
+  .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;margin:30px 0 8px;border:1px solid var(--line-2);border-radius:14px;overflow:hidden;background:var(--line-2);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+  .stat{padding:18px 16px;background:rgba(7,20,12,.72);text-align:center}
+  .stat b{display:block;font-family:"Source Serif 4",Georgia,serif;font-size:clamp(1.5rem,3.4vw,2rem);font-weight:500;color:var(--amber);line-height:1.05;white-space:nowrap}
+  .stat span{display:block;margin-top:6px;color:var(--text-2);font-size:.8125rem;line-height:1.4}
+  .group-h{margin:52px 0 14px;color:var(--amber);font-size:.78rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase}
+  .group-p{color:var(--muted);font-size:.9375rem;line-height:1.55;margin:-4px 0 16px}
+  .projects{list-style:none;display:grid;gap:12px}
+  .project{position:relative;display:grid;grid-template-columns:3rem 1fr auto;align-items:center;gap:16px;padding:22px 20px;color:inherit;text-decoration:none;border:1px solid var(--line);border-radius:14px;background:rgba(7,20,12,.62);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);isolation:isolate;overflow:hidden;transition:border-color .35s var(--ease),transform .35s var(--ease),background .35s var(--ease)}
+  .project::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(var(--acc-rgb),.16),rgba(var(--acc-rgb),0) 80%);transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease)}
+  .num{font-size:.875rem;font-weight:600;color:var(--muted);font-variant-numeric:tabular-nums;transition:color .3s var(--ease)}
+  .kind{display:block;color:var(--amber);font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+  .title{display:block;margin-top:6px;font-family:"Source Serif 4",Georgia,serif;font-size:clamp(1.2rem,3vw,1.42rem);font-weight:600;letter-spacing:-.01em;line-height:1.25}
+  .desc{display:block;margin-top:6px;color:var(--text-2);font-size:.9375rem;line-height:1.5}
+  .ev{display:inline-block;margin-top:10px;padding:3px 9px;border-radius:999px;border:1px solid rgba(var(--acc-rgb),.35);color:var(--amber-2);font-size:.75rem;font-weight:600}
+  .go{display:grid;place-items:center;width:44px;height:44px;border:1px solid var(--line-2);border-radius:50%;color:var(--amber);transition:background .35s var(--ease),color .35s var(--ease),border-color .35s var(--ease)}
+  .go svg{width:18px;height:18px}
+  a.project:hover,a.project:focus-visible{border-color:rgba(var(--acc-rgb),.55);transform:translateY(-2px);background:rgba(9,26,15,.78)}
+  a.project:hover::before,a.project:focus-visible::before{transform:scaleX(1)}
+  a.project:hover .num,a.project:focus-visible .num{color:var(--amber)}
+  a.project:hover .go,a.project:focus-visible .go{background:var(--amber);border-color:var(--amber);color:#08140c}
+  .project:focus{outline:none}.project:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+  .project.static{grid-template-columns:3rem 1fr}
+  .demos{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .demo{border:1px solid var(--line);border-radius:14px;padding:18px;background:rgba(7,20,12,.62);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+  .demo h3{font-family:"Source Serif 4",Georgia,serif;font-size:1.08rem;font-weight:600}
+  .demo p{margin-top:6px;color:var(--text-2);font-size:.875rem;line-height:1.5}
+  .demo .links{display:flex;flex-wrap:wrap;gap:14px;margin-top:12px}
+  .demo .links a{color:var(--amber);font-weight:600;font-size:.875rem;text-decoration:none;border-bottom:1px solid rgba(var(--acc-rgb),.35)}
+  .demo .links a:hover{border-bottom-color:var(--amber)}
+  .syn{display:inline-block;margin-top:10px;padding:2px 8px;border-radius:4px;background:rgba(var(--acc-rgb),.14);color:var(--amber-2);font-size:.72rem;font-weight:600;letter-spacing:.04em}
+  footer{margin-top:56px;text-align:center;color:var(--muted);font-size:.85rem}
+  @media (prefers-reduced-motion:no-preference){
+    .js header>*,.js .stats{opacity:0;transform:translateY(12px);animation:rise .8s var(--ease) forwards}
+    .js header>*:nth-child(2){animation-delay:.06s}.js header>*:nth-child(3){animation-delay:.12s}.js .stats{animation-delay:.2s}
+    .js .projects li,.js .demos li{opacity:0;transform:translateY(14px);animation:rise .7s var(--ease) forwards}
+    .js .projects li:nth-child(1){animation-delay:.3s}.js .projects li:nth-child(2){animation-delay:.36s}.js .projects li:nth-child(3){animation-delay:.42s}.js .projects li:nth-child(4){animation-delay:.48s}.js .projects li:nth-child(5){animation-delay:.54s}
+    .js .demos li{animation-delay:.5s}
   }
-
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  html { background: var(--bg); }
-
-  body {
-    min-height: 100vh;
-    min-height: 100svh;
-    display: grid;
-    place-items: center;
-    padding: 48px 16px;
-    background: var(--bg);
-    color: var(--text);
-    font-family: "Public Sans", system-ui, -apple-system, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
+  @keyframes rise{to{opacity:1;transform:none}}
+  @media (max-width:640px){
+    body{padding:96px 14px 64px}.bar{padding:14px 16px}
+    .stats{grid-template-columns:1fr}.demos{grid-template-columns:1fr}
+    .project{grid-template-columns:2rem 1fr auto;gap:12px;padding:18px 14px}.go{width:38px;height:38px}
   }
-
-  main { position: relative; z-index: 1; width: 100%; max-width: 680px; }
-
-  
-  .bar { position: fixed; top: 0; left: 0; right: 0; z-index: 2; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 24px 32px; }
-  .bar a { color: var(--text-2); text-decoration: none; font-weight: 500; font-size: .9375rem; }
-  .bar a:hover { color: var(--text); }
-  .bar__home { display: inline-flex; align-items: center; gap: 10px; padding: 8px 4px; }
-  .bar__home svg { width: 18px; height: 18px; transition: transform .4s var(--ease); }
-  .bar__home:hover svg { transform: translateX(-4px); }
-  @media (max-width: 520px) { .bar { position: absolute; padding: 16px; } body { padding-top: 88px; } }
-
-  /* Header */
-  header { text-align: center; margin-bottom: 40px; }
-
-  h1 {
-    font-size: clamp(2.5rem, 7vw, 3.5rem);
-    font-weight: 700;
-    letter-spacing: -0.035em;
-    line-height: 1;
-  }
-
-  .lede {
-    margin: 16px auto 0;
-    max-width: 40ch;
-    color: var(--muted);
-    font-size: 1.0625rem;
-    line-height: 1.5;
-  }
-
-  .rule {
-    width: 48px;
-    height: 2px;
-    margin: 28px auto 0;
-    background: var(--amber);
-    transform-origin: center;
-  }
-
-  /* List */
-  .projects { list-style: none; border-top: 1px solid var(--line); }
-
-  .projects li { border-bottom: 1px solid var(--line); }
-
-  .project {
-    position: relative;
-    display: grid;
-    grid-template-columns: 3rem 1fr auto;
-    align-items: center;
-    gap: 16px;
-    padding: 24px 12px;
-    color: inherit;
-    text-decoration: none;
-    isolation: isolate;
-    border-radius: 2px;
-  }
-
-  /* Amber sweep behind the row */
-  .project::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    background: linear-gradient(90deg, rgba(217, 130, 91, 0.13), rgba(217, 130, 91, 0.02) 85%);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform .5s var(--ease);
-  }
-
-  /* Amber bar on the left edge */
-  .project::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 18%;
-    bottom: 18%;
-    width: 2px;
-    background: var(--amber);
-    transform: scaleY(0);
-    transition: transform .35s var(--ease);
-  }
-
-  .num {
-    font-size: .875rem;
-    font-weight: 600;
-    color: var(--muted);
-    font-variant-numeric: tabular-nums;
-    transition: color .3s var(--ease);
-  }
-
-  .body { min-width: 0; transition: transform .45s var(--ease); }
-
-  .title {
-    display: block;
-    font-size: clamp(1.1875rem, 3.2vw, 1.4375rem);
-    font-weight: 600;
-    letter-spacing: -0.015em;
-    line-height: 1.25;
-  }
-
-  .desc {
-    display: block;
-    margin-top: 6px;
-    color: var(--muted);
-    font-size: .9375rem;
-    line-height: 1.45;
-  }
-
-  .go {
-    display: grid;
-    place-items: center;
-    width: 44px;
-    height: 44px;
-    border: 1px solid var(--line);
-    border-radius: 50%;
-    color: var(--amber);
-    overflow: hidden;
-    transition: background .35s var(--ease), border-color .35s var(--ease), color .35s var(--ease);
-  }
-
-  .go svg { width: 18px; height: 18px; transition: transform .45s var(--ease); }
-
-  /* Hover and keyboard focus share one state */
-  .project:hover::before,
-  .project:focus-visible::before { transform: scaleX(1); }
-
-  .project:hover::after,
-  .project:focus-visible::after { transform: scaleY(1); }
-
-  .project:hover .num,
-  .project:focus-visible .num { color: var(--amber); }
-
-  .project:hover .body,
-  .project:focus-visible .body { transform: translateX(6px); }
-
-  .project:hover .go,
-  .project:focus-visible .go {
-    background: var(--amber);
-    border-color: var(--amber);
-    color: var(--bg);
-  }
-
-  .project:hover .go svg,
-  .project:focus-visible .go svg { animation: nudge .5s var(--ease); }
-
-  @keyframes nudge {
-    0%   { transform: translateX(0); }
-    45%  { transform: translateX(150%); }
-    46%  { transform: translateX(-150%); }
-    100% { transform: translateX(0); }
-  }
-
-  .project:focus { outline: none; }
-  .project:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
-
-  /* Dim the rows you are not pointing at (pointer devices only) */
-  @media (hover: hover) {
-    .projects:hover .project:not(:hover) .body { opacity: .6; }
-    .body { transition: transform .45s var(--ease), opacity .3s var(--ease); }
-  }
-
-
-  /* Entrance: one orchestrated sequence */
-  @media (prefers-reduced-motion: no-preference) {
-    .js header > * { opacity: 0; transform: translateY(12px); animation: rise .8s var(--ease) forwards; }
-    .js header h1 { animation-delay: .05s; }
-    .js header .lede { animation-delay: .15s; }
-    .js header .rule { transform: scaleX(0); opacity: 1; animation: draw .8s var(--ease) .3s forwards; }
-    .js .projects li { opacity: 0; transform: translateY(16px); animation: rise .7s var(--ease) forwards; }
-    .js .projects li:nth-child(1) { animation-delay: .35s; }
-    .js .projects li:nth-child(2) { animation-delay: .43s; }
-    .js .projects li:nth-child(3) { animation-delay: .51s; }
-    .js .projects li:nth-child(4) { animation-delay: .59s; }
-  }
-
-  @keyframes rise { to { opacity: 1; transform: none; } }
-  @keyframes draw { to { transform: scaleX(1); } }
-
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { transition: none !important; animation: none !important; }
-  }
-
-  /* Mobile */
-  @media (max-width: 520px) {
-    body { padding: 40px 16px; }
-    header { margin-bottom: 32px; }
-    .project { grid-template-columns: 2rem 1fr auto; gap: 12px; padding: 20px 4px; }
-    .go { width: 38px; height: 38px; }
-    .project:hover .body, .project:focus-visible .body { transform: translateX(3px); }
-  }
-
-  /* v2: groups, evidence line, demo catalogue */
-  .group-h { margin: 56px 0 14px; color: var(--amber); font-size: .9375rem; font-weight: 600; letter-spacing: .01em; }
-  .group-h:first-of-type { margin-top: 0; }
-  .group-p { color: var(--muted); font-size: .9375rem; line-height: 1.5; margin: -6px 0 16px; }
-  .ev { display: block; margin-top: 8px; color: var(--amber); font-size: .8125rem; line-height: 1.4; }
-  .projects li.ext .num { color: var(--amber); }
-  .project.static { cursor: default; grid-template-columns: 2.5rem 1fr; }
-  .project.static::before, .project.static::after { display: none; }
-  .demos { list-style: none; display: grid; gap: 12px; }
-  .demo { border: 1px solid var(--line); border-radius: 12px; padding: 18px 18px 16px; background: rgba(14,35,32,.55); }
-  .demo h3 { font-size: 1.0625rem; font-weight: 600; letter-spacing: -0.01em; }
-  .demo dl { display: grid; grid-template-columns: 7.5rem 1fr; gap: 6px 12px; margin-top: 10px; font-size: .875rem; line-height: 1.45; }
-  .demo dt { color: var(--muted); }
-  .demo dd { color: var(--text); }
-  .demo .links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
-  .demo .links a { color: var(--amber); font-weight: 600; font-size: .875rem; text-decoration: none; border-bottom: 1px solid rgba(217,130,91,.35); }
-  .demo .links a:hover { border-bottom-color: var(--amber); }
-  .syn { display: inline-block; margin-top: 10px; padding: 2px 8px; border-radius: 4px; background: #3A2219; color: #F6DCCB; font-size: .75rem; font-weight: 600; letter-spacing: .04em; }
-  @media (max-width: 520px) { .demo dl { grid-template-columns: 1fr; gap: 2px; } .demo dd { margin-bottom: 6px; } }
-  @media (prefers-reduced-motion: no-preference) { .js .projects li:nth-child(5) { animation-delay: .67s; } }
-  .project .title, .group-h, .demo h3 { font-family: "Source Serif 4", Georgia, serif; font-optical-sizing: auto; }
-  .project .title { font-weight: 600; letter-spacing: -0.01em; }
 </style>
 </head>
 <body>
-<div class="flares" aria-hidden="true">
-  <div class="flare blue"></div>
-  <div class="flare cyan"></div>
-  <div class="flare amber"></div>
-  <div class="grain"></div>
-</div>
-<nav class="bar" aria-label="Navigation"><a class="bar__home" href="../../?lang=en"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg> Portfolio</a><span class="langs" role="group" aria-label="Language"><span class="langs__cur" aria-current="true">EN</span><a href="../" hreflang="pt-BR" lang="pt-BR" title="Versão em português">PT</a></span></nav>
+<div class="flares" aria-hidden="true"><div class="grain"></div></div>
+<nav class="bar" aria-label="Navigation"><a class="bar__home" href="../../?lang=en"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg> Portfolio</a><span class="langs" role="group" aria-label="Language"><a href="../" hreflang="pt-BR" lang="pt-BR" title="Versão em português">PT</a><span class="langs__cur" aria-current="true">EN</span></span></nav>
 <main>
   <header>
-    <h1>Projects</h1>
-    <p class="lede">Four case studies from a collections and payments operation. Each one shows the problem, my part in the work, how the solution works, what changed and what stays with people.</p>
-    <div class="rule" aria-hidden="true"></div>
+    <p class="eyebrow">Projects</p>
+    <h1>From problem to product in use</h1>
+    <p class="lede">Four deliveries Paulo led at a credit fintech, from diagnosis to result. Each case shows the problem, his role, the product decisions and what changed.</p>
   </header>
-
-  <h2 class="group-h">Core case studies</h2>
-  <ol class="projects">
-    <li>
-      <a class="project" href="automacao-rotina-operacional.html">
-        <span class="num" aria-hidden="true">01</span>
-        <span class="body">
-          <span class="title">How the morning routine stopped depending on manual triggers</span>
-          <span class="desc">The dialer list had to be ready before 8:00, but each step waited for someone to trigger the previous one. The sequence now starts on its own at 6:00.</span>
-          <span class="ev">Measured from records · 29 days before, 3 records after</span>
-        </span>
-        <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </a>
-    </li>
-    <li>
-      <a class="project" href="central-pagamentos-rejeitados.html">
-        <span class="num" aria-hidden="true">02</span>
-        <span class="body">
-          <span class="title">How I organised and partly automated the analysis of rejected payments</span>
-          <span class="desc">Written rules that suggest the next step for each case, with the reason recorded and human review when the evidence is not enough.</span>
-          <span class="ev">Qualitative result · rules and demo</span>
-        </span>
-        <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </a>
-    </li>
-    <li>
-      <a class="project" href="pagamentos-em-duplicidade.html">
-        <span class="num" aria-hidden="true">03</span>
-        <span class="body">
-          <span class="title">How I started identifying duplicate payments before any refund</span>
-          <span class="desc">Matching against the gateway statement, with separate roles for building the batch and carrying it out. The decision and the payment stay with people.</span>
-          <span class="ev">Qualitative result · no amounts published</span>
-        </span>
-        <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </a>
-    </li>
-    <li>
-      <a class="project" href="monitor-operacao.html">
-        <span class="num" aria-hidden="true">04</span>
-        <span class="body">
-          <span class="title">How I made failures in the pre-workday routines visible</span>
-          <span class="desc">One screen that shows whether the morning closed, what failed and at which step it stopped, and when a person needs to act.</span>
-          <span class="ev">Qualitative result · how it works and demo</span>
-        </span>
-        <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </a>
-    </li>
-    <li class="ext">
-      <a class="project" href="monitor-operacao-celular.html">
-        <span class="num" aria-hidden="true">04+</span>
-        <span class="body">
-          <span class="title">Extension of case 04: mobile version</span>
-          <span class="desc">The same monitor on the manager’s phone: the morning verdict first, details on demand.</span>
-          <span class="ev">Not counted as a separate project</span>
-        </span>
-        <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </a>
-    </li>
-  </ol>
-
-  <h2 class="group-h">Other initiative</h2>
-  <ol class="projects">
-    <li><div class="project static"><span class="num" aria-hidden="true">·</span><span class="body"><span class="title">Duplicate write-off reconciler</span><span class="desc">A Python bot that handles payments written off twice in the collections system. Partially delivered; it is different from case 03, where the customer actually paid twice.</span></span></div></li>
-  </ol>
-
+  <div class="stats"><div class="stat"><b>200+</b><span>rejected payments a day with a defined next step</span></div><div class="stat"><b>R$ 200k</b><span>a year in capacity freed by automation</span></div><div class="stat"><b>3</b><span>internal products in use in the BackOffice</span></div></div>
+  <h2 class="group-h">Cases</h2>
+  <ol class="projects"><li><a class="project" href="automacao-rotina-operacional.html"><span class="num" aria-hidden="true">01</span><span class="body"><span class="kind">Process automation</span><span class="title">A morning routine that starts on its own</span><span class="desc">The preparation sequence starts at 6:00 and only calls a person when something fails.</span><span class="ev">List ready between 06:22 and 06:57 · before, a 07:30 median</span></span><span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></li><li><a class="project" href="central-pagamentos-rejeitados.html"><span class="num" aria-hidden="true">02</span><span class="body"><span class="kind">Internal product · Business rules</span><span class="title">A decision engine for rejected payments</span><span class="desc">Every rejection gets a defined next step, with the reason recorded; the repetitive ones are automated.</span><span class="ev">200+ a day · 7 next steps · 3 channels</span></span><span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></li><li><a class="project" href="pagamentos-em-duplicidade.html"><span class="num" aria-hidden="true">03</span><span class="body"><span class="kind">Internal product · Financial control</span><span class="title">Duplicate payments identified before any refund</span><span class="desc">The system identifies, one person approves and another executes. The product never moves money on its own.</span><span class="ev">In use since Aug 2026</span></span><span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></li><li><a class="project" href="monitor-operacao.html"><span class="num" aria-hidden="true">04</span><span class="body"><span class="kind">Internal product · Operational visibility</span><span class="title">A monitor that shows early whether operations are ready</span><span class="desc">Did the morning close, how much ran and what failed, with the step where it stopped. Includes a mobile version.</span><span class="ev">Desktop and mobile</span></span><span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></li></ol>
+  <h2 class="group-h">Another initiative</h2>
+  <ol class="projects"><li><div class="project static"><span class="num" aria-hidden="true">·</span><span class="body"><span class="title">The cause of failures on peak days</span><span class="desc">Diagnosis with the CRM platform team, escalation to the director with the cause and its business impact, and a capacity change coordinated on a low-volume day, with no disruption to operations.</span></span></div></li></ol>
   <h2 class="group-h" id="demos">Interactive demos</h2>
-  <p class="group-p">Screens recreated with synthetic data so you can try how they work. All records and results are illustrative and do not represent actual operational data.</p>
-  <ul class="demos">
-    <li class="demo"><h3>Morning routine: before and after</h3><dl><dt>Problem</dt><dd>Chained manual triggers delayed the dialer list.</dd><dt>What to try</dt><dd>Trigger each step in manual mode, then run the scheduled sequence and simulate a failure with a retry.</dd><dt>Case</dt><dd>01 · Morning routine</dd></dl>
-      <span class="syn">Synthetic data</span>
-      <div class="links"><a href="../demos/en/rotina-matinal.html">Explore the demo</a><a href="automacao-rotina-operacional.html">See the case</a></div></li>
-    <li class="demo"><h3>Rejected payments panel</h3><dl><dt>Problem</dt><dd>Each rejection needed a next step, with a reason.</dd><dt>What to try</dt><dd>Open the queues, see the reason behind each suggestion, run the bot and see the month view.</dd><dt>Case</dt><dd>02 · Rejected payments</dd></dl>
-      <span class="syn">Synthetic data</span>
-      <div class="links"><a href="../demos/en/painel-rejeicoes.html">Explore the demo</a><a href="central-pagamentos-rejeitados.html">See the case</a></div></li>
-    <li class="demo"><h3>Duplicate payments panel</h3><dl><dt>Problem</dt><dd>Refund only after the duplicate is proven.</dd><dt>What to try</dt><dd>Switch between curation and operation, build the batch and track the status of each case.</dd><dt>Case</dt><dd>03 · Duplicate payments</dd></dl>
-      <span class="syn">Synthetic data</span>
-      <div class="links"><a href="../demos/en/painel-fidc.html">Explore the demo</a><a href="pagamentos-em-duplicidade.html">See the case</a></div></li>
-    <li class="demo"><h3>Operations monitor (desktop)</h3><dl><dt>Problem</dt><dd>A failure during the night has to show up before the workday.</dd><dt>What to try</dt><dd>Open the failed task, see the step where it stopped, the alerts and the status after the retry.</dd><dt>Case</dt><dd>04 · Operations monitor</dd></dl>
-      <span class="syn">Synthetic data</span>
-      <div class="links"><a href="../demos/en/cerebro.html">Explore the demo</a><a href="monitor-operacao.html">See the case</a></div></li>
-    <li class="demo"><h3>Operations monitor (mobile)</h3><dl><dt>Problem</dt><dd>Managers want the morning verdict on their phone.</dd><dt>What to try</dt><dd>Move through the bottom tabs, open the detail sheet and compare with the desktop version.</dd><dt>Case</dt><dd>04+ · Mobile version</dd></dl>
-      <span class="syn">Synthetic data</span>
-      <div class="links"><a href="../demos/en/cerebro-mobile.html">Explore the demo</a><a href="monitor-operacao-celular.html">See the case</a></div></li>
-  </ul>
+  <p class="group-p">Screens recreated with synthetic data, so you can try how they work. The records are illustrative and do not represent real operational data.</p>
+  <ul class="demos"><li class="demo"><h3>Morning routine: before and after</h3><p>Trigger the steps by hand and compare with the scheduled sequence, including a simulated failure.</p><span class="syn">Synthetic data</span><div class="links"><a href="../demos/en/rotina-matinal.html">Explore the demo</a><a href="automacao-rotina-operacional.html">See the case</a></div></li><li class="demo"><h3>Rejected payments panel</h3><p>Open the queues, see the reason behind each next step and run the bot on the engine’s first version.</p><span class="syn">Synthetic data</span><div class="links"><a href="../demos/en/painel-rejeicoes.html">Explore the demo</a><a href="central-pagamentos-rejeitados.html">See the case</a></div></li><li class="demo"><h3>Duplicate payment control</h3><p>Switch between curation and operation, build the batch and follow the status of each case.</p><span class="syn">Synthetic data</span><div class="links"><a href="../demos/en/painel-fidc.html">Explore the demo</a><a href="pagamentos-em-duplicidade.html">See the case</a></div></li><li class="demo"><h3>Operations monitor</h3><p>See the morning verdict, open the failed task and compare desktop and mobile.</p><span class="syn">Synthetic data</span><div class="links"><a href="../demos/en/cerebro.html">Explore the demo</a><a href="monitor-operacao.html">See the case</a></div></li></ul>
+  <footer>© 2026 Paulo Nobre, São Paulo</footer>
 </main>
-
 <script src="../assets/site.js"></script>
+<script src="../assets/scene.js" defer></script>
 </body>
 </html>

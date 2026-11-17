@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cérebro · Painel da Operação</title>
-<meta name="description" content="Demonstração com dados sintéticos do Cérebro: o observador da frota de robôs coletores. Diz em segundos se a manhã fechou, quanto entrou e o que falhou.">
+<title>Monitor da operação</title>
+<meta name="description" content="Demonstração com dados sintéticos do monitor da operação: o observador da frota de robôs coletores. Diz em segundos se a manhã fechou, quanto entrou e o que falhou.">
 <meta name="theme-color" content="#14403A">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23fff'/%3E%3Cpath d='M26.4 11.8A11 11 0 1 0 26.4 20.2' fill='none' stroke='%23048A05' stroke-width='3.4' stroke-linecap='round'/%3E%3Ccircle cx='26.4' cy='20.2' r='3.1' fill='%23F5BF05'/%3E%3C/svg%3E">
 <script>
@@ -270,7 +270,7 @@ svg.i{width:15px;height:15px;flex:none}
 <header class="topo"><div class="int">
   <a class="marca" href="#hoje">
     <svg width="26" height="26" viewBox="0 0 32 32" aria-hidden="true"><path d="M26.4 11.8A11 11 0 1 0 26.4 20.2" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/><circle class="ponto" cx="26.4" cy="20.2" r="3.1"/></svg>
-    <span><span class="marca-nome">Cérebro</span> <span class="marca-sub">Painel da Operação</span></span>
+    <span><span class="marca-nome">Monitor</span> <span class="marca-sub">Painel da Operação</span></span>
   </a>
   <nav class="menu" aria-label="Seções">
     <a class="nav-item" href="#hoje" data-secao="hoje"><svg class="i"><use href="#i-hoje"/></svg><span class="nav-rot">Hoje</span><span class="nav-conta alerta">1</span></a>
@@ -363,7 +363,7 @@ svg.i{width:15px;height:15px;flex:none}
 </section>
 </main>
 
-<footer class="rodape"><div class="int"><span>Cérebro, observador da frota de coletores · demonstração com dados sintéticos</span><span class="dir"><span>versão demo</span><a href="cerebro-mobile.html">Versão celular</a></span></div></footer>
+<footer class="rodape"><div class="int"><span>Monitor da operação, observador da frota de coletores · demonstração com dados sintéticos</span><span class="dir"><span>versão demo</span><a href="cerebro-mobile.html">Versão celular</a></span></div></footer>
 
 <div class="veu" id="veu" hidden></div>
 <aside class="detalhe" id="detalhe" role="dialog" aria-modal="true" aria-labelledby="detTitulo" hidden>
@@ -477,7 +477,7 @@ function pintaCtl(){
   $("#cartoesCtl").innerHTML =
     `<div class="folha"><div class="folha-cab"><h3>Agenda dos coletores</h3><span class="meta">simulação: agenda ilustrativa</span></div><table class="tabela"><thead><tr><th>Coletor</th><th>Horário</th><th>Dias</th></tr></thead><tbody>${ag.map(a=>`<tr><td><span class="cod" style="color:var(--text)">${a[0]}</span></td><td>${a[1]}</td><td>${a[2]}</td></tr>`).join("")}</tbody></table></div>`+
     `<div class="folha"><div class="folha-cab"><h3>Vigia</h3><span class="meta">reinicia o que caiu</span></div><table class="tabela"><tbody>
-      <tr><td>Cérebro</td><td><span class="st ok">No ar</span></td><td class="num">06:40</td></tr><tr><td>Servidor do painel</td><td><span class="st ok">No ar</span></td><td class="num">06:40</td></tr><tr><td>Navegador dos robôs</td><td><span class="st ok">Livre</span></td><td class="num">06:40</td></tr></tbody></table></div>`+
+      <tr><td>Monitor</td><td><span class="st ok">No ar</span></td><td class="num">06:40</td></tr><tr><td>Servidor do painel</td><td><span class="st ok">No ar</span></td><td class="num">06:40</td></tr><tr><td>Navegador dos robôs</td><td><span class="st ok">Livre</span></td><td class="num">06:40</td></tr></tbody></table></div>`+
     `<div class="folha"><div class="folha-cab"><h3>Alertas no painel</h3><span class="meta">simulação</span></div><table class="tabela"><tbody>
       <tr class="falhou"><td><span class="st alerta">Com uma pessoa</span></td><td>Coleta de chamados: fonte indisponível<span class="t-sub" style="display:block">06:35 · aguardando verificação</span></td></tr><tr class="falhou"><td><span class="st alerta">Com uma pessoa</span></td><td>DEMO_TAREFA_C parou na etapa 5<span class="t-sub" style="display:block">06:12 · a nova tentativa automática também falhou</span></td></tr>
       <tr><td><span class="st ok">Recuperado</span></td><td>DEMO_TAREFA_A falhou na etapa 2<span class="t-sub" style="display:block">05:40 · nova tentativa automática às 05:45 concluída</span></td></tr></tbody></table></div>`;
@@ -489,7 +489,7 @@ function irPara(sec){
   if(!SECOES.includes(sec)) sec="hoje";
   SECOES.forEach(x=>{ $("#s-"+x).hidden = x!==sec; });
   document.querySelectorAll(".nav-item").forEach(a=>{ if(a.dataset.secao===sec) a.setAttribute("aria-current","page"); else a.removeAttribute("aria-current"); });
-  document.title = ({hoje:"Hoje",pagamentos:"Pagamentos",rejeicoes:"Rejeições",jiras:"Chamados",controles:"Coleta e alertas"})[sec]+" · Cérebro";
+  document.title = ({hoje:"Hoje",pagamentos:"Pagamentos",rejeicoes:"Rejeições",jiras:"Chamados",controles:"Coleta e alertas"})[sec]+" · Monitor";
   window.scrollTo({top:0});
 }
 addEventListener("hashchange",()=>irPara(location.hash.slice(1)));
@@ -525,7 +525,7 @@ $("#detFechar").addEventListener("click",fecharDetalhe);
 $("#veu").addEventListener("click",()=>{fecharDetalhe();fecharPaleta();});
 
 /* paleta Ctrl K */
-const ITENS=[["Hoje","seção","#hoje"],["Pagamentos","seção","#pagamentos"],["Rejeições","seção","#rejeicoes"],["Jiras","seção","#jiras"],["Coleta e alertas","seção","#controles"],["Painel de rejeições","abrir","painel-rejeicoes.html"],["Painel FIDC","abrir","painel-fidc.html"],["Versão celular","abrir","cerebro-mobile.html"],["Alternar tema","ação","tema"]];
+const ITENS=[["Hoje","seção","#hoje"],["Pagamentos","seção","#pagamentos"],["Rejeições","seção","#rejeicoes"],["Jiras","seção","#jiras"],["Coleta e alertas","seção","#controles"],["Painel de rejeições","abrir","painel-rejeicoes.html"],["Pagamentos duplicados","abrir","painel-fidc.html"],["Versão celular","abrir","cerebro-mobile.html"],["Alternar tema","ação","tema"]];
 let selP=0;
 function listaP(){const q=$("#paletaBusca").value.toLowerCase();const xs=ITENS.filter(i=>i[0].toLowerCase().includes(q));selP=Math.min(selP,Math.max(0,xs.length-1));$("#paletaLista").innerHTML=xs.map((x,k)=>`<li role="option" data-ir="${x[2]}" aria-selected="${k===selP}">${x[0]}<span>${x[1]}</span></li>`).join("");}
 function abrirPaleta(){$("#paleta").hidden=false;$("#veu").hidden=false;$("#veu").classList.add("on");$("#paletaBusca").value="";selP=0;listaP();$("#paletaBusca").focus();}

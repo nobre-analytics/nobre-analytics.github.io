@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>A morning routine without manual triggers · Case · Paulo Nobre</title>
-<meta name="description" content="How the collections team’s morning preparation started running on its own at 6:00, with steps in sequence and a person monitoring failures. With the period and sample size of each measurement.">
+<title>A morning routine that starts on its own · Case · Paulo Nobre</title>
+<meta name="description" content="How Paulo Nobre reorganised the daily preparation of a collections operation: the sequence starts at 6:00, runs in a chain and only calls a person when something fails.">
 <script>document.documentElement.classList.add('js');</script>
 <script src="../assets/vt.js"></script>
 <link rel="stylesheet" href="../assets/site.css">
@@ -14,14 +14,14 @@
 .tree svg { width: 100%; height: auto; overflow: visible; }
 .tree .node rect { fill: var(--surface-2); stroke: var(--line-2); }
 .tree .node.root rect { fill: rgba(224,122,107,.12); stroke: rgba(224,122,107,.55); }
-.tree .node.engine rect { fill: rgba(217,130,91,.12); stroke: var(--amber); }
+.tree .node.engine rect { fill: rgba(var(--acc-rgb),.12); stroke: var(--amber); }
 .tree text { fill: var(--text); font: 600 14px "Public Sans", system-ui, sans-serif; }
 .tree text.sub { fill: var(--muted); font-weight: 500; font-size: 12px; }
 .tree .edge { fill: none; stroke: var(--line-2); stroke-width: 1.5; }
 .tree .edge.hot { stroke: var(--amber); }
 .tree .out rect { fill: var(--bg-2); stroke: var(--line-2); }
 .tree .out circle { fill: var(--amber); }
-.tree .final rect { fill: rgba(217,130,91,.14); stroke: var(--amber); }
+.tree .final rect { fill: rgba(var(--acc-rgb),.14); stroke: var(--amber); }
 .tree .final text { font-size: 15px; }
 .tree__cap { margin-top: 14px; }
 @media (prefers-reduced-motion: no-preference) {
@@ -77,32 +77,32 @@
       <header class="hero">
         <div class="hero__grid">
           <div>
-            <p class="hero__kicker" data-seq style="--i:0">Process improvement and automation</p>
-            <h1 data-seq style="--i:1">How the morning routine stopped depending on manual triggers</h1>
-            <p class="hero__lede" data-seq style="--i:2">Preparing the collections operation depended on a person starting each step, one after the other. I reorganised the steps into a sequence that starts on its own at 6:00 and checked the result in the execution records.</p>
-            <div class="facts" data-seq style="--i:3"><span class="fact">Scheduled sequence at 6:00</span><span class="fact">Existing platform</span><span class="fact">With vendor guidance</span></div></div>
+            <p class="hero__kicker" data-seq style="--i:0">Process automation</p>
+            <h1 data-seq style="--i:1">A morning routine that starts on its own, before the team arrives</h1>
+            <p class="hero__lede" data-seq style="--i:2">Paulo reorganised the daily preparation of the collections operation. Instead of depending on a person triggering each step, the sequence starts at 6:00, runs in a chain and only calls someone when something fails.</p>
+            <div class="facts" data-seq style="--i:3"><span class="fact">Credit fintech</span><span class="fact">Existing platform</span><span class="fact">Measured from records</span></div></div>
           <div class="hero__visual" data-seq style="--i:4">
             <figure class="panel" style="padding:22px 18px"><div class="flowrow"><span class="tag-r">Before</span><span class="st ">A person checks<small>previous steps</small></span><span class="st ">A person triggers<small>the distribution</small></span><span class="st wait">Waiting<small>until someone sees it end</small></span><span class="st ">A person triggers<small>the dialer list</small></span></div><div class="flowrow"><span class="tag-r">After</span><span class="st auto">Scheduler<small>starts at 6:00</small></span><span class="st auto">Distribution<small>of the portfolio</small></span><span class="st auto">Dialer list<small>next in sequence</small></span><span class="st ">A person monitors<small>results and failures</small></span></div></figure></div>
         </div>
       </header>
 
       <div class="kpis" style="--n:3" data-reveal><div class="kpi"><div class="kpi__value">7:30</div><div class="kpi__label">median dialer list completion before the change · 29 days, Apr and May 2026</div></div><div class="kpi"><div class="kpi__value">3 of 29</div><div class="kpi__label">days when the list was ready after 8:00, when operations start</div></div><div class="kpi"><div class="kpi__value">06:22 to 06:57</div><div class="kpi__label">list completion on the 3 documented days after the change</div></div></div>
-    <section class="section summary-sec" aria-label="Summary" data-reveal><div class="cards4"><div class="panel"><b>Problem</b><span>The dialer list has to be ready before 8:00, when the team starts calling. Each step only began when someone triggered it after the previous one.</span></div><div class="panel"><b>My part</b><span>I mapped the flow, measured the waits and set up the sequence on the existing platform, with guidance from the vendor’s support team.</span></div><div class="panel"><b>What changed</b><span>The sequence now starts on a schedule at 6:00, the steps run in a chain, and a person monitors the result and any failures.</span></div><div class="panel"><b>Evidence</b><span>Before: a 07:30 median over 29 days. After: 3 detailed records, between 06:22 and 06:57.<br><span class="ev ev--measured">Measured from records · different sample sizes</span></span></div></div></section>
+    <section class="section summary-sec" aria-label="Summary" data-reveal><div class="cards4"><div class="panel"><b>Problem</b><span>The dialer list must be ready before 8:00, but each step waited for someone to trigger the previous one.</span></div><div class="panel"><b>Paulo’s role</b><span>He mapped the flow, measured where time was lost, designed the sequence and validated the setup with the vendor’s support team.</span></div><div class="panel"><b>Key decision</b><span>Attack the wait between steps, not the speed of each task. The platform already had the feature; what was missing was the process design.</span></div><div class="panel"><b>Result</b><span>In the records after the change, the list was ready between 06:22 and 06:57. Before, the median was 07:30.<br><span class="ev ev--measured">Measured from records</span></span></div></div></section>
     <section class="section" id="problem" data-reveal>
       <div class="section__head">
         <p class="section__label">The problem</p>
         <div>
-          <h2>Preparation finished close to 8:00, and any wait pushed it later.</h2>
-          <div class="section__body"><div class="prose"><div class="prose"><p>The collections team starts at 8:00 and needs the dialer list ready by then. Before the change, every preparation step depended on a manual trigger: someone checked that the previous day’s tasks had finished, started the portfolio distribution to the collection agencies, waited for it to end and only then started the dialer list.</p><p>The routine was one of many tasks for a small BackOffice team, with nobody dedicated to it. If the person was busy when a step finished, the next one sat idle. Over the 29 days observed between April 27 and May 30, 2026, the list was ready after 8:00 on 3 days, and on 5 days there were less than 15 minutes to spare before 8:00.</p></div></div><div class="compare"><div class="panel"><b class="c-h">Before: manual triggers</b><ol class="c-ol"><li>A person checks that the previous steps have finished</li><li>The person starts the portfolio distribution</li><li>The next step waits until someone sees the distribution has ended</li><li>The person starts the dialer list</li></ol></div><div class="panel after"><b class="c-h">After: scheduled sequence</b><ol class="c-ol"><li>The sequence starts on its own at 6:00</li><li>The portfolio distribution runs</li><li>The dialer list starts as soon as the distribution ends</li><li>A person checks the result and handles failures</li></ol></div></div></div>
+          <h2>Preparation finished close to 8:00, and any wait pushed the time back.</h2>
+          <div class="section__body"><div class="prose"><p>The collections team starts at 8:00 and needs the dialer list ready for it. Before, every preparation step depended on a manual trigger: someone checked that the previous day’s tasks had finished, triggered the portfolio distribution to the agencies, waited for it to end and only then triggered the list.</p><p>The routine competed for attention with other work in a lean team. In the 29 days observed between Apr 27 and May 30, 2026, the list was ready after 8:00 on 3 days, and on 5 others there were less than 15 minutes to spare.</p></div></div>
         </div>
       </div>
     </section>
     <section class="section" id="contribution" data-reveal>
       <div class="section__head">
-        <p class="section__label">My contribution</p>
+        <p class="section__label">Paulo’s role</p>
         <div>
-          <h2>I measured where the time was lost before changing the routine.</h2>
-          <div class="section__body"><div class="prose"><div class="prose"><p>The tool was not the problem. Time was lost in the wait between one step and the next, while nobody triggered it. So the change was to chain the tasks and schedule the start, rather than try to make each task faster.</p></div></div><div class="contrib"><div class="panel c-col me"><b>What I did myself</b><ul class="list"><li>Mapped the steps, timings and dependencies between tasks.</li><li>Pulled the execution records and measured the wait between the distribution and the list.</li><li>Set up and validated the task chain and the schedule.</li><li>Defined what happens when a step fails: it runs again and, if that does not work, a person takes over.</li><li>Followed the executions after the change.</li></ul></div><div class="panel c-col with"><b>With other people</b><ul class="list"><li>The vendor’s support team advised on using the platform’s task-chaining feature.</li></ul></div><div class="panel c-col dep"><b>External dependencies</b><ul class="list"><li>The scheduling platform and its code belong to the vendor.</li><li>The BackOffice team is still responsible for monitoring the routine.</li></ul></div></div></div>
+          <h2>He measured where time was lost before changing anything.</h2>
+          <div class="section__body"><div class="prose"><p>The diagnosis showed the tool was not the bottleneck: time was lost in the wait between one step and the next. So the solution was to chain the tasks and schedule the start, rather than try to speed up each one.</p></div><div class="contrib"><div class="panel c-col me"><b>What he led</b><ul class="list"><li>Mapped the steps, timings and dependencies between tasks.</li><li>Pulled the execution records and measured the wait between the distribution and the list.</li><li>Designed and validated the chaining and the schedule.</li><li>Defined failure handling: a new run and, if that does not fix it, a person takes over.</li><li>Followed the runs after the change.</li></ul></div><div class="panel c-col with"><b>With the teams</b><ul class="list"><li>The vendor’s support team guided the use of the platform’s chaining feature.</li></ul></div><div class="panel c-col dep"><b>Out of scope</b><ul class="list"><li>The scheduling platform and its code belong to the vendor.</li><li>Daily monitoring stays with the BackOffice team.</li></ul></div></div></div>
         </div>
       </div>
     </section>
@@ -110,17 +110,17 @@
       <div class="section__head">
         <p class="section__label">How it works</p>
         <div>
-          <h2>A scheduled start, steps in sequence and a person monitoring.</h2>
+          <h2>A scheduled start, steps in sequence and a person only when needed.</h2>
           <div class="section__body"><ol class="steps"><li><span><strong>Scheduled start.</strong> The sequence starts at 6:00, without anyone needing to be online to trigger it. <em class="who who--auto">automated</em></span></li><li><span><strong>Portfolio distribution.</strong> The day’s portfolio is sent to the collection agencies. <em class="who who--auto">automated</em></span></li><li><span><strong>Dialer list.</strong> Starts as soon as the distribution ends, with no trigger to wait for. <em class="who who--auto">automated</em></span></li><li><span><strong>Monitoring.</strong> A person checks the result. If a step fails, it runs again; if it keeps failing, the person takes over. <em class="who who--human">person</em></span></li></ol><p class="small muted" style="margin-top:16px">6:00 is when the scheduled sequence starts. It is not the time anyone starts work.</p></div>
         </div>
       </div>
     </section>
     <section class="section" id="what-changed" data-reveal>
       <div class="section__head">
-        <p class="section__label">What changed</p>
+        <p class="section__label">Result</p>
         <div>
-          <h2>The sequence now starts on its own, and the wait between two steps dropped in the available records.</h2>
-          <div class="section__body"><div class="prose"><div class="prose"><p>In the three detailed records after the change, the dialer list was ready before 7:00, and the handoff between the distribution and the list took 2.2 minutes at most.</p></div></div><div class="panel evidence"><div class="evidence__head"><b>Dialer list: before and after</b><span class="ev ev--measured">Measured from records</span></div><div class="evidence__body"><figure class="chart"><div class="chart-scroll"><svg viewBox="0 0 720 206" role="img" aria-labelledby="chart-t-en"><title id="chart-t-en">Time the dialer list was ready, before and after the scheduled sequence</title>
+          <h2>The list is now ready before 7:00, and the wait between steps dropped to minutes.</h2>
+          <div class="section__body"><div class="prose"><div class="prose"><p>In the three detailed records after the change, the dialer list was ready between 06:22 and 06:57, and the handoff between the distribution and the list took 2.2 minutes at most. Before, that wait reached 41 minutes.</p></div></div><div class="panel evidence"><div class="evidence__head"><b>Dialer list: before and after</b><span class="ev ev--measured">Measured from records</span></div><div class="evidence__body"><figure class="chart"><div class="chart-scroll"><svg viewBox="0 0 720 206" role="img" aria-labelledby="chart-t-en"><title id="chart-t-en">Time the dialer list was ready, before and after the scheduled sequence</title>
 <line class="grid" x1="150.0" y1="34" x2="150.0" y2="176"/><text x="150.0" y="196" text-anchor="middle">06:00</text><line class="grid" x1="258.0" y1="34" x2="258.0" y2="176"/><text x="258.0" y="196" text-anchor="middle">06:30</text><line class="grid" x1="366.0" y1="34" x2="366.0" y2="176"/><text x="366.0" y="196" text-anchor="middle">07:00</text><line class="grid" x1="474.0" y1="34" x2="474.0" y2="176"/><text x="474.0" y="196" text-anchor="middle">07:30</text><line class="grid" x1="582.0" y1="34" x2="582.0" y2="176"/><text x="582.0" y="196" text-anchor="middle">08:00</text><line class="grid" x1="690.0" y1="34" x2="690.0" y2="176"/><text x="690.0" y="196" text-anchor="middle">08:30</text>
 <line class="ref" x1="150.0" y1="20" x2="150.0" y2="176"/><text x="155.0" y="26">scheduled start</text>
 <line class="ref" x1="582.0" y1="20" x2="582.0" y2="176"/><text x="577.0" y="26" text-anchor="end">team starts</text>
@@ -130,16 +130,16 @@
 <text x="396.0" y="77" text-anchor="end">07:10</text><text x="595.2" y="77">08:02</text>
 <text class="lbl" x="0" y="140">After</text><text class="sub" x="0" y="156">3 detailed records</text>
 <circle class="dot" cx="232.1" cy="140" r="6"><title>06:22</title></circle><circle class="dot" cx="290.3" cy="140" r="6"><title>06:38</title></circle><circle class="dot" cx="355.4" cy="140" r="6"><title>06:57</title></circle><text x="232.1" y="122" text-anchor="middle">06:22</text><text x="290.3" y="164" text-anchor="middle">06:38</text><text x="355.4" y="122" text-anchor="middle">06:57</text>
-</svg></div><figcaption>Band: earliest and latest time over the 29 days before. Line: median. Dots: the three detailed records after the change (Aug 24, Sep 14 and Oct 16, 2026). The samples have different sizes.</figcaption></figure><div class="kpis"><div class="kpi"><b class="num">07:30</b><span>median time the list was ready before the change</span><small>29 days · Apr 27 to May 30, 2026</small></div><div class="kpi"><b class="num">06:22 to 06:57</b><span>time the list was ready in the records after the change</span><small>3 records · Aug 24, Sep 14 and Oct 16, 2026</small></div><div class="kpi"><b class="num">0.1 to 2.2 min</b><span>wait between the end of the distribution and the start of the list, in the 3 records after</span><small>before: 3.8 min median, 41.1 min maximum</small></div></div><div class="method-note"><b>How to read these numbers.</b><ul><li>The samples differ: 29 days before and only 3 detailed records after. The three records show the direction of the change, but they are not enough to claim a new average time.</li><li>The times are when the dialer list finished, not the whole routine. On August 24, a digital step finished at 08:11 and the main task was still running after 08:12. In the other two records, the main task finished at 07:00 and 06:36.</li><li>A shorter wait between two steps does not prove an equivalent reduction in total working time. Hours of human work were not measured.</li></ul><p style="margin-top:8px">Source: the routine’s execution records, compiled by the author.</p></div></div></div></div>
+</svg></div><figcaption>Band: earliest and latest time over the 29 days before. Line: median. Dots: the three detailed records after the change (Aug 24, Sep 14 and Oct 16, 2026). The samples have different sizes.</figcaption></figure><div class="kpis"><div class="kpi"><b class="num">07:30</b><span>median time the list was ready before the change</span><small>29 days · Apr 27 to May 30, 2026</small></div><div class="kpi"><b class="num">06:22 to 06:57</b><span>time the list was ready in the records after the change</span><small>3 records · Aug 24, Sep 14 and Oct 16, 2026</small></div><div class="kpi"><b class="num">0.1 to 2.2 min</b><span>wait between the end of the distribution and the start of the list, in the 3 records after</span><small>before: 3.8 min median, 41.1 min maximum</small></div></div><div class="method-note"><b>How to read these numbers.</b><ul><li>Before: 29 days of records. After: 3 detailed records. The direction of the change is clear; the new average time will be confirmed with more records.</li><li>The times refer to the completion of the dialer list, the step that sets when the team can start working.</li></ul><p style="margin-top:8px">Source: the routine’s execution records.</p></div></div></div></div>
         </div>
       </div>
     </section>
     <section class="section" id="limits" data-reveal>
       <div class="section__head">
-        <p class="section__label">Limits</p>
+        <p class="section__label">Product decisions</p>
         <div>
-          <h2>What still depends on people and what has not been measured yet.</h2>
-          <div class="section__body"><ul class="list"><li>A person still monitors the routine and handles failures that a rerun does not fix. <em class="who who--human">human step</em></li><li>The comparison after the change has only three detailed records.</li><li>The routine has other steps besides the dialer list, and they do not always finish before 8:00.</li><li>The gain in working hours was not measured.</li><li>Email alerts were used in the past, but they are switched off in the latest configuration.</li><li>The exact date the change went live is not recorded here.</li></ul></div>
+          <h2>Automate the chain, keep a person in control.</h2>
+          <div class="section__body"><ul class="list"><li>Use the feature the platform already had, with no new development and no extra cost.</li><li>Cap the automatic retries: after the cap, a person takes over, so a recurring failure is never hidden. <em class="who who--human">human step</em></li><li>Measure before and after with execution records, not with the team’s perception.</li><li>Next step: widen the post-change sample and extend the chain to the routine’s digital steps.</li></ul></div>
         </div>
       </div>
     </section>
@@ -147,8 +147,8 @@
       <div class="section__head">
         <p class="section__label">Technical details</p>
         <div>
-          <h2>A process change using a feature the platform already had.</h2>
-          <div class="section__body"><details class="panel more-box"><summary>Tools, terms and implementation decisions<small>For readers who want the detail</small></summary><div class="more-box__body"><div class="prose"><p><strong>Task chaining:</strong> each task starts automatically when the previous one finishes, with no manual trigger in between. It is a feature of the vendor’s scheduling platform; my work was to set up the sequence, the dependencies and the behaviour when a step fails.</p><p><strong>Measurement:</strong> the times come from each task’s execution records. The wait was calculated from the end of the distribution to the start of the list.</p></div><div class="stack"><span class="tag">Process mapping</span><span class="tag">Dependency analysis</span><span class="tag">Task chaining</span><span class="tag">Scheduling</span><span class="tag">Log analysis</span></div></div></details></div>
+          <h2>A process change using a feature that already existed.</h2>
+          <div class="section__body"><details class="panel more-box"><summary>Technologies, terms and implementation decisions<small>For those who want to go deeper</small></summary><div class="more-box__body"><div class="prose"><p><strong>Task chaining:</strong> each task starts when the previous one ends, with no manual trigger. The feature belongs to the vendor’s platform; the work was designing the sequence, the dependencies and the failure behaviour.</p><p><strong>Measurement:</strong> timings taken from each task’s execution records. The wait was calculated between the end of the distribution and the start of the list.</p></div></div></details><div class="stack"><span class="tag">Process mapping</span><span class="tag">Dependency analysis</span><span class="tag">Task chaining</span><span class="tag">Scheduling</span><span class="tag">Log analysis</span></div></div>
         </div>
       </div>
     </section>
@@ -165,7 +165,7 @@
 
     <nav class="next" aria-label="Next case">
       <a href="central-pagamentos-rejeitados.html">
-        <span><span class="next__label">Next case</span><span class="next__title">How I organised and partly automated the analysis of rejected payments</span></span>
+        <span><span class="next__label">Next case</span><span class="next__title">A decision engine for rejected payments</span></span>
         <span class="next__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </a>
     </nav>
@@ -177,5 +177,6 @@
   </div>
 </div>
 <script src="../assets/site.js"></script>
+<script src="../assets/scene.js" defer></script>
 </body>
 </html>

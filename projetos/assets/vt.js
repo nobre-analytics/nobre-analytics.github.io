@@ -4,10 +4,11 @@
   // Order of the pages. The slide goes "forward" when moving to a higher number.
   var ORDER = {
     '': 0, 'index': 0,
-    'central-pagamentos-rejeitados': 1,
-    'pagamentos-em-duplicidade': 2,
-    'monitor-operacao': 3,
-    'monitor-operacao-celular': 4
+    'automacao-rotina-operacional': 1,
+    'central-pagamentos-rejeitados': 2,
+    'pagamentos-em-duplicidade': 3,
+    'monitor-operacao': 4,
+    'monitor-operacao-celular': 5
   };
 
   function orderOf(url) {
