@@ -889,17 +889,24 @@ body{padding-top:calc(var(--hdr) + env(safe-area-inset-top,0px))}
 </style>
 <style id="noir">
 /* ================= NOIR TEST LAYER =================
-   Palette: #0B0A06 ink · #FF0000 red · #FF8000 orange · #FFC000 amber · #FDE8A8 cream
+   Palette: #0B0A06 ink · #E9A93A amber accent · #E0322D red (small details only) · #FF8000 orange · #FDE8A8 cream
    Remove this whole block to go back to the original theme. */
 :root{
   --ink:#0B0A06; --red:#FF0000; --orange:#FF8000; --amber:#FFC000; --cream:#FDE8A8;
   --bg:#0B0A06; --panel:#12100A; --panel2:#17140D; --deep:#070604;
   --line:rgba(253,232,168,.09); --line2:rgba(253,232,168,.18);
   --tx:#FDE8A8; --tx2:rgba(253,232,168,.72); --tx3:rgba(253,232,168,.52);
-  --acc:#FF0000; --acc-dim:rgba(255,0,0,.35);
-  --glow:0 0 18px rgba(255,0,0,.45),0 0 2px rgba(255,0,0,.9);
+  /* accent system: fill = buttons and active states; text = labels and small text; spark = tiny red details */
+  --accent:#E9A93A; --accent-ink:#0B0A06; --accent-hover:#F2BB55; --accent-rgb:233,169,58;
+  --accent-text:#E9B44C; --text-rgb:233,180,76; --spark:#E0322D; --spark-rgb:224,50,45;
+  --acc:var(--accent-text); --acc-dim:rgba(var(--text-rgb),.35);
+  --glow:0 0 18px rgba(var(--text-rgb),.45),0 0 2px rgba(var(--text-rgb),.9);
+  --spark-glow:0 0 16px rgba(var(--spark-rgb),.5),0 0 2px rgba(var(--spark-rgb),.9);
 }
-::selection{background:var(--red);color:var(--ink)}
+html[data-pal="vinho"]{--accent:#8C2337;--accent-ink:#FDE8A8;--accent-hover:#A32B42;--accent-rgb:140,35,55;--accent-text:#D46A7E;--text-rgb:212,106,126;--spark:#E0322D;--spark-rgb:224,50,45}
+html[data-pal="ambar"]{--accent:#E9A93A;--accent-ink:#0B0A06;--accent-hover:#F2BB55;--accent-rgb:233,169,58;--accent-text:#E9B44C;--text-rgb:233,180,76;--spark:#E0322D;--spark-rgb:224,50,45}
+html[data-pal="vinho-ambar"]{--accent:#7E2234;--accent-ink:#FDE8A8;--accent-hover:#95293E;--accent-rgb:126,34,52;--accent-text:#E2B04F;--text-rgb:226,176,79;--spark:#E0322D;--spark-rgb:224,50,45}
+::selection{background:var(--spark);color:var(--ink)}
 body{background:var(--ink);color:var(--tx)}
 
 /* film grain + vignette over the whole page */
@@ -911,24 +918,24 @@ body::after{content:'';position:fixed;inset:0;z-index:89;pointer-events:none;
 @keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-3%)}60%{transform:translate(-2%,-1%)}80%{transform:translate(3%,3%)}100%{transform:translate(0,0)}}
 
 /* all sections dark; variation comes from surface, not light paper */
-.paper,.light{--bg:#0B0A06;--panel:#12100A;--panel2:#17140D;--deep:#070604;--line:rgba(253,232,168,.09);--line2:rgba(253,232,168,.18);--tx:#FDE8A8;--tx2:rgba(253,232,168,.72);--tx3:rgba(253,232,168,.52);--acc:#FF0000;--acc-dim:rgba(255,0,0,.35)}
+.paper,.light{--bg:#0B0A06;--panel:#12100A;--panel2:#17140D;--deep:#070604;--line:rgba(253,232,168,.09);--line2:rgba(253,232,168,.18);--tx:#FDE8A8;--tx2:rgba(253,232,168,.72);--tx3:rgba(253,232,168,.52);--acc:var(--accent-text);--acc-dim:rgba(var(--text-rgb),.35)}
 .paper{--bg:#0E0C07;background:#0E0C07}
 .sec,.sec + .sec:not(.paper):not(.light){border-top:1px solid var(--line)}
 
 /* header */
 .hdr{background:rgba(11,10,6,.82)}
 .brand{color:var(--cream)}
-.brand__tag{color:var(--red);text-shadow:var(--glow);animation:flicker 7s infinite}
+.brand__tag{color:var(--spark);text-shadow:var(--spark-glow);animation:flicker 7s infinite}
 @keyframes flicker{0%,92%,100%{opacity:1}93%{opacity:.35}94%{opacity:1}96%{opacity:.5}97%{opacity:1}}
-.nav a.on::after{background:var(--red);box-shadow:var(--glow)}
-.lang button[aria-pressed="true"]{background:var(--red);color:var(--ink)}
+.nav a.on::after{background:var(--accent-text);box-shadow:var(--glow)}
+.lang button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
 
 /* buttons */
 .btn{border-color:rgba(253,232,168,.28);color:var(--cream)}
 .btn:hover{border-color:var(--cream);background:rgba(253,232,168,.04)}
-.btn--solid,.paper .btn--solid,.light .btn--solid{background:var(--red);border-color:var(--red);color:var(--ink)}
-.btn--solid:hover,.paper .btn--solid:hover,.light .btn--solid:hover{background:#FF2A1A;border-color:#FF2A1A;box-shadow:0 0 28px rgba(255,0,0,.45)}
-.link:hover{border-bottom-color:var(--red)}
+.btn--solid,.paper .btn--solid,.light .btn--solid{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn--solid:hover,.paper .btn--solid:hover,.light .btn--solid:hover{background:var(--accent-hover);border-color:var(--accent-hover);box-shadow:0 0 28px rgba(var(--accent-rgb),.45)}
+.link:hover{border-bottom-color:var(--accent-text)}
 
 /* hero: light through venetian blinds + a red neon line */
 .hero{position:relative;overflow:hidden;isolation:isolate}
@@ -937,45 +944,45 @@ body::after{content:'';position:fixed;inset:0;z-index:89;pointer-events:none;
   transform:skewY(-24deg) rotate(-6deg);filter:blur(2px);
   -webkit-mask-image:radial-gradient(ellipse 55% 42% at 58% 52%,#000 15%,transparent 72%);mask-image:radial-gradient(ellipse 55% 42% at 58% 52%,#000 15%,transparent 72%)}
 .hero::after{content:'';position:absolute;z-index:-1;left:-10%;bottom:-30%;width:60%;height:80%;
-  background:radial-gradient(closest-side,rgba(255,0,0,.16),transparent);filter:blur(20px)}
+  background:radial-gradient(closest-side,rgba(var(--accent-rgb),.16),transparent);filter:blur(20px)}
 .hero__pos{color:var(--amber)}
 .hero h1{color:var(--cream);text-shadow:0 2px 30px rgba(0,0,0,.8)}
-.hero h1::after{content:'';display:block;width:72px;height:3px;margin:22px auto 0;background:var(--red);box-shadow:var(--glow)}
+.hero h1::after{content:'';display:block;width:72px;height:3px;margin:22px auto 0;background:var(--spark);box-shadow:var(--spark-glow)}
 .hero__lede{color:var(--tx2)}
 
 /* impact band: black, heat gradient edge, amber numbers */
 .band{background:var(--deep);color:var(--cream);position:relative;border-top:0}
-.band::before{content:'';position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,var(--red),var(--orange) 50%,var(--amber))}
+.band::before{content:'';position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,var(--spark),var(--orange) 50%,var(--amber))}
 .bk b{color:var(--amber);text-shadow:0 0 22px rgba(255,192,0,.25)}
 .bk span{color:var(--tx2)}
 .band [data-ph]{color:var(--tx3);border-bottom-color:var(--tx3)}
 
 /* labels and accents */
-.label--acc{color:var(--red)}
+.label--acc{color:var(--accent-text)}
 .card__impact b{color:var(--amber)}
 .job__when,.pf time{color:var(--orange)}
-.rec__q{color:var(--red);text-shadow:var(--glow)}
+.rec__q{color:var(--accent-text);text-shadow:var(--glow)}
 .rec cite{color:var(--amber)}
-.foot__id span,.foot__base a{color:var(--red)}
+.foot__id span,.foot__base a{color:var(--accent-text)}
 
 /* cards: case files */
 .card{background:var(--panel);border-color:var(--line2);transition:border-color .3s,box-shadow .3s,transform .3s}
-.card:hover{border-color:rgba(255,0,0,.55);box-shadow:0 0 0 1px rgba(255,0,0,.25),0 18px 50px -20px rgba(255,0,0,.35);transform:translateY(-2px)}
+.card:hover{border-color:rgba(var(--text-rgb),.55);box-shadow:0 0 0 1px rgba(var(--text-rgb),.25),0 18px 50px -20px rgba(var(--accent-rgb),.45);transform:translateY(-2px)}
 .card__foot{background:var(--deep);border-top:1px solid var(--line)}
 .card__facts b{color:var(--cream)}
 .card__facts span{color:var(--tx3)}
 .card__foot .link{color:var(--cream);border-bottom-color:rgba(253,232,168,.25)}
-.card__foot .link:hover{border-bottom-color:var(--red)}
+.card__foot .link:hover{border-bottom-color:var(--accent-text)}
 .rec{background:var(--panel)}
 
 /* skills */
 .pills li{background:transparent;border-color:rgba(255,128,0,.35);color:var(--cream)}
 .pills--hard li{background:rgba(253,232,168,.04);border-color:var(--line2)}
 .ccard{background:var(--panel);border-color:var(--line2)}
-.ccard__ic{background:var(--ink);color:var(--red);border:1px solid rgba(255,0,0,.4);text-shadow:var(--glow)}
+.ccard__ic{background:var(--ink);color:var(--accent-text);border:1px solid rgba(var(--text-rgb),.4);text-shadow:var(--glow)}
 
 .foot__btns .btn{border-color:rgba(253,232,168,.5)}
-.fs__box--break{border-color:var(--red);color:#FF6B5A}
+.fs__box--break{border-color:var(--spark);color:#FF6B5A}
 .cs__bar{background:rgba(11,10,6,.94)}
 :focus-visible{outline-color:var(--amber)}
 
@@ -1024,7 +1031,7 @@ body::after{content:'';position:fixed;inset:0;z-index:89;pointer-events:none;
 <!-- ============ 1. HEADER ============ -->
 <header class="hdr" id="hdr">
   <div class="wrap hdr__in">
-    <a class="brand" href="#main">Paulo Nobre <span class="brand__tag">LSS Green Belt</span></a>
+    <a class="brand" href="#main">Paulo Nobre</a>
     <nav class="nav" aria-label="Main">
       <a href="#cases" data-nav="cases" data-pt="Cases" data-en="Cases">Cases</a>
       <a href="#career" data-nav="career" data-pt="Experiência" data-en="Experience">Experience</a>
