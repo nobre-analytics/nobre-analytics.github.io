@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Paulo Nobre | Process Improvement &amp; Automation</title>
-<meta name="description" content="Paulo Nobre, process analyst. I turn operational problems into clear processes, with rules, data and automation. Four case studies with evidence, limits and synthetic demos." data-meta-pt="Paulo Nobre, analista de processos. Transformo problemas da operação em processos claros, com regras, dados e automação. Quatro cases com evidências, limitações e demonstrações sintéticas." data-meta-en="Paulo Nobre, process analyst. I turn operational problems into clear processes, with rules, data and automation. Four case studies with evidence, limits and synthetic demos.">
-<meta property="og:type" content="website"><meta property="og:title" content="Paulo Nobre | Process Improvement &amp; Automation"><meta property="og:description" content="I turn operational problems into clear processes, with rules, data and automation."><meta property="og:url" content="https://nobre-analytics.github.io/"><meta property="og:image" content="https://nobre-analytics.github.io/static/img/og-en.png"><meta name="twitter:card" content="summary_large_image"><link rel="canonical" href="https://nobre-analytics.github.io/"><link rel="alternate" hreflang="pt-BR" href="https://nobre-analytics.github.io/?lang=pt"><link rel="alternate" hreflang="en" href="https://nobre-analytics.github.io/?lang=en"><link rel="icon" href="static/img/favicon.svg" type="image/svg+xml"><meta name="theme-color" content="#0E2320">
+<title>Paulo Nobre | Internal Products &amp; Automation</title>
+<meta name="description" content="Paulo Nobre builds internal products that make financial operations more reliable, reducing manual dependencies and operational risks. Four case studies with evidence, limits and synthetic demos." data-meta-pt="Paulo Nobre constrói produtos internos que tornam operações financeiras mais confiáveis, reduzindo dependências manuais e riscos operacionais. Quatro cases com evidências, limitações e demonstrações sintéticas." data-meta-en="Paulo Nobre builds internal products that make financial operations more reliable, reducing manual dependencies and operational risks. Four case studies with evidence, limits and synthetic demos.">
+<meta property="og:type" content="website"><meta property="og:title" content="Paulo Nobre | Internal Products &amp; Automation"><meta property="og:description" content="Paulo builds internal products that make financial operations more reliable."><meta property="og:url" content="https://nobre-analytics.github.io/"><meta property="og:image" content="https://nobre-analytics.github.io/static/img/og-en.png"><meta name="twitter:card" content="summary_large_image"><link rel="canonical" href="https://nobre-analytics.github.io/"><link rel="alternate" hreflang="pt-BR" href="https://nobre-analytics.github.io/?lang=pt"><link rel="alternate" hreflang="en" href="https://nobre-analytics.github.io/?lang=en"><link rel="icon" href="static/img/favicon.svg" type="image/svg+xml"><meta name="theme-color" content="#0B0A06">
 <script>document.documentElement.classList.add('js')</script>
 <style>
 @font-face{font-family:"Source Serif 4";font-style:normal;font-weight:200 900;font-display:swap;src:url("static/fonts/source-serif-4-latin-opsz.woff2") format("woff2")}
@@ -879,6 +879,143 @@ html{scroll-padding-top:68px}
 /* v11 fix: header is fixed, so shrinking it no longer changes page height (stops the jitter) */
 .hdr{position:fixed;top:0;left:0;right:0}
 body{padding-top:calc(var(--hdr) + env(safe-area-inset-top,0px))}
+
+/* cases: with 5 cards, centre the last row (3 on top, 2 centred below) */
+@media (min-width:1081px){
+  .cases{grid-template-columns:repeat(6,minmax(0,1fr))}
+  .cases>.card{grid-column:span 2}
+  .cases>.card:nth-child(4):nth-last-child(2){grid-column:2 / span 2}
+}
+</style>
+<style id="noir">
+/* ================= NOIR TEST LAYER =================
+   Palette: #0B0A06 ink · #FF0000 red · #FF8000 orange · #FFC000 amber · #FDE8A8 cream
+   Remove this whole block to go back to the original theme. */
+:root{
+  --ink:#0B0A06; --red:#FF0000; --orange:#FF8000; --amber:#FFC000; --cream:#FDE8A8;
+  --bg:#0B0A06; --panel:#12100A; --panel2:#17140D; --deep:#070604;
+  --line:rgba(253,232,168,.09); --line2:rgba(253,232,168,.18);
+  --tx:#FDE8A8; --tx2:rgba(253,232,168,.72); --tx3:rgba(253,232,168,.52);
+  --acc:#FF0000; --acc-dim:rgba(255,0,0,.35);
+  --glow:0 0 18px rgba(255,0,0,.45),0 0 2px rgba(255,0,0,.9);
+}
+::selection{background:var(--red);color:var(--ink)}
+body{background:var(--ink);color:var(--tx)}
+
+/* film grain + vignette over the whole page */
+body::before{content:'';position:fixed;inset:-50%;z-index:90;pointer-events:none;opacity:.075;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1.4 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:grain 1.2s steps(6) infinite}
+body::after{content:'';position:fixed;inset:0;z-index:89;pointer-events:none;
+  background:radial-gradient(ellipse 120% 90% at 50% 40%,transparent 55%,rgba(0,0,0,.55) 100%)}
+@keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-3%)}60%{transform:translate(-2%,-1%)}80%{transform:translate(3%,3%)}100%{transform:translate(0,0)}}
+
+/* all sections dark; variation comes from surface, not light paper */
+.paper,.light{--bg:#0B0A06;--panel:#12100A;--panel2:#17140D;--deep:#070604;--line:rgba(253,232,168,.09);--line2:rgba(253,232,168,.18);--tx:#FDE8A8;--tx2:rgba(253,232,168,.72);--tx3:rgba(253,232,168,.52);--acc:#FF0000;--acc-dim:rgba(255,0,0,.35)}
+.paper{--bg:#0E0C07;background:#0E0C07}
+.sec,.sec + .sec:not(.paper):not(.light){border-top:1px solid var(--line)}
+
+/* header */
+.hdr{background:rgba(11,10,6,.82)}
+.brand{color:var(--cream)}
+.brand__tag{color:var(--red);text-shadow:var(--glow);animation:flicker 7s infinite}
+@keyframes flicker{0%,92%,100%{opacity:1}93%{opacity:.35}94%{opacity:1}96%{opacity:.5}97%{opacity:1}}
+.nav a.on::after{background:var(--red);box-shadow:var(--glow)}
+.lang button[aria-pressed="true"]{background:var(--red);color:var(--ink)}
+
+/* buttons */
+.btn{border-color:rgba(253,232,168,.28);color:var(--cream)}
+.btn:hover{border-color:var(--cream);background:rgba(253,232,168,.04)}
+.btn--solid,.paper .btn--solid,.light .btn--solid{background:var(--red);border-color:var(--red);color:var(--ink)}
+.btn--solid:hover,.paper .btn--solid:hover,.light .btn--solid:hover{background:#FF2A1A;border-color:#FF2A1A;box-shadow:0 0 28px rgba(255,0,0,.45)}
+.link:hover{border-bottom-color:var(--red)}
+
+/* hero: light through venetian blinds + a red neon line */
+.hero{position:relative;overflow:hidden;isolation:isolate}
+.hero::before{content:'';position:absolute;z-index:-1;top:-20%;right:-12%;width:75%;height:150%;
+  background:repeating-linear-gradient(180deg,rgba(255,192,0,.045) 0 26px,transparent 26px 58px);
+  transform:skewY(-24deg) rotate(-6deg);filter:blur(2px);
+  -webkit-mask-image:radial-gradient(ellipse 55% 42% at 58% 52%,#000 15%,transparent 72%);mask-image:radial-gradient(ellipse 55% 42% at 58% 52%,#000 15%,transparent 72%)}
+.hero::after{content:'';position:absolute;z-index:-1;left:-10%;bottom:-30%;width:60%;height:80%;
+  background:radial-gradient(closest-side,rgba(255,0,0,.16),transparent);filter:blur(20px)}
+.hero__pos{color:var(--amber)}
+.hero h1{color:var(--cream);text-shadow:0 2px 30px rgba(0,0,0,.8)}
+.hero h1::after{content:'';display:block;width:72px;height:3px;margin:22px auto 0;background:var(--red);box-shadow:var(--glow)}
+.hero__lede{color:var(--tx2)}
+
+/* impact band: black, heat gradient edge, amber numbers */
+.band{background:var(--deep);color:var(--cream);position:relative;border-top:0}
+.band::before{content:'';position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,var(--red),var(--orange) 50%,var(--amber))}
+.bk b{color:var(--amber);text-shadow:0 0 22px rgba(255,192,0,.25)}
+.bk span{color:var(--tx2)}
+.band [data-ph]{color:var(--tx3);border-bottom-color:var(--tx3)}
+
+/* labels and accents */
+.label--acc{color:var(--red)}
+.card__impact b{color:var(--amber)}
+.job__when,.pf time{color:var(--orange)}
+.rec__q{color:var(--red);text-shadow:var(--glow)}
+.rec cite{color:var(--amber)}
+.foot__id span,.foot__base a{color:var(--red)}
+
+/* cards: case files */
+.card{background:var(--panel);border-color:var(--line2);transition:border-color .3s,box-shadow .3s,transform .3s}
+.card:hover{border-color:rgba(255,0,0,.55);box-shadow:0 0 0 1px rgba(255,0,0,.25),0 18px 50px -20px rgba(255,0,0,.35);transform:translateY(-2px)}
+.card__foot{background:var(--deep);border-top:1px solid var(--line)}
+.card__facts b{color:var(--cream)}
+.card__facts span{color:var(--tx3)}
+.card__foot .link{color:var(--cream);border-bottom-color:rgba(253,232,168,.25)}
+.card__foot .link:hover{border-bottom-color:var(--red)}
+.rec{background:var(--panel)}
+
+/* skills */
+.pills li{background:transparent;border-color:rgba(255,128,0,.35);color:var(--cream)}
+.pills--hard li{background:rgba(253,232,168,.04);border-color:var(--line2)}
+.ccard{background:var(--panel);border-color:var(--line2)}
+.ccard__ic{background:var(--ink);color:var(--red);border:1px solid rgba(255,0,0,.4);text-shadow:var(--glow)}
+
+.foot__btns .btn{border-color:rgba(253,232,168,.5)}
+.fs__box--break{border-color:var(--red);color:#FF6B5A}
+.cs__bar{background:rgba(11,10,6,.94)}
+:focus-visible{outline-color:var(--amber)}
+
+@media (prefers-reduced-motion:reduce){body::before,.brand__tag{animation:none}}
+@media (max-width:760px){.hero::before{width:120%;right:-40%}}
+
+/* ================= NOIR ANIMATED BACKGROUND =================
+   Fixed layer behind everything (z-index:-1). Built by noir-bg.js. */
+.paper,.light{background:rgba(14,12,7,.38)}
+.beyond{background:transparent}
+.band{background:rgba(7,6,4,.72)}
+.nb{position:fixed;inset:0;z-index:-1;background:#0B0A06;overflow:hidden;pointer-events:none;contain:strict}
+.nb svg{display:block;overflow:visible}
+
+/* light rays from the top right, slow sway + breathing */
+.nb__rays{position:absolute;inset:-30%;transform-origin:78% 2%;
+  background:repeating-conic-gradient(from 196deg at 78% 2%,rgba(255,170,40,.045) 0deg 1.6deg,transparent 1.6deg 7deg,rgba(255,120,0,.025) 7deg 8.4deg,transparent 8.4deg 15deg);
+  -webkit-mask-image:radial-gradient(ellipse 60% 70% at 78% 2%,#000 0%,rgba(0,0,0,.5) 40%,transparent 75%);mask-image:radial-gradient(ellipse 60% 70% at 78% 2%,#000 0%,rgba(0,0,0,.5) 40%,transparent 75%);
+  filter:blur(5px);animation:nbSway 26s ease-in-out infinite alternate,nbBreath 9s ease-in-out infinite alternate}
+.nb__rays--2{animation-duration:34s,13s;animation-direction:alternate-reverse,alternate;opacity:.7;transform:rotate(4deg)}
+@keyframes nbSway{from{transform:rotate(-4deg)}to{transform:rotate(5deg)}}
+@keyframes nbBreath{from{opacity:.55}to{opacity:1}}
+
+/* drifting warm glow */
+.nb__glow{position:absolute;width:70vmax;height:70vmax;left:-35vmax;top:-35vmax;border-radius:50%;
+  background:radial-gradient(closest-side,rgba(255,64,0,.13),rgba(255,128,0,.05) 50%,transparent);transition:transform 16s ease-in-out;will-change:transform}
+
+/* sea: painterly water + school of fish (canvas) */
+.nb__sea{position:absolute;inset:0;width:100%;height:100%;display:block;transition:opacity .4s linear;filter:blur(2.5px);transform:scale(1.03)}
+/* thin grid frames with bracket labels */
+.nb__box{position:absolute;border:1px solid rgba(253,232,168,.11);opacity:0;transition:opacity 2.8s ease}
+.nb__box.on{opacity:1}
+.nb__box span{position:absolute;left:10px;top:8px;font:500 11px/1 var(--f);letter-spacing:.04em;color:rgba(253,232,168,.32)}
+.nb__box::after{content:'';position:absolute;right:-1px;bottom:-1px;width:12px;height:12px;border-right:1px solid rgba(255,0,0,.45);border-bottom:1px solid rgba(255,0,0,.45)}
+
+/* dust in the light */
+.nb__mote{position:absolute;border-radius:50%;background:rgba(220,232,240,.5);animation:nbMote var(--d,16s) linear infinite;animation-delay:var(--dl,0s)}
+@keyframes nbMote{0%{transform:translate3d(0,0,0);opacity:0}15%{opacity:var(--o,.5)}85%{opacity:var(--o,.5)}100%{transform:translate3d(var(--dx,-30px),var(--dy,-120px),0);opacity:0}}
+
+@media (prefers-reduced-motion:reduce){.nb *{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
@@ -893,7 +1030,7 @@ body{padding-top:calc(var(--hdr) + env(safe-area-inset-top,0px))}
       <a href="#career" data-nav="career" data-pt="Experiência" data-en="Experience">Experience</a>
       <a href="projetos/" data-proj-link data-pt="Projetos" data-en="Projects">Projects</a>
       <a href="#bring" data-nav="bring" data-pt="Competências" data-en="Skills">Skills</a>
-      <a href="#story" data-nav="story" data-pt="Minha história" data-en="My Story">My Story</a>
+      <a href="#story" data-nav="story" data-pt="Trajetória" data-en="Background">Background</a>
       <a href="#contact" data-nav="contact" data-pt="Contato" data-en="Contact">Contact</a>
     </nav>
     <div class="lang" role="group" aria-label="Language / Idioma">
@@ -908,7 +1045,7 @@ body{padding-top:calc(var(--hdr) + env(safe-area-inset-top,0px))}
   <a href="#career" data-nav="career" data-pt="Experiência" data-en="Experience">Experience</a>
       <a href="projetos/" data-proj-link data-pt="Projetos" data-en="Projects">Projects</a>
   <a href="#bring" data-nav="bring" data-pt="Competências" data-en="Skills">Skills</a>
-  <a href="#story" data-nav="story" data-pt="Minha história" data-en="My Story">My Story</a>
+  <a href="#story" data-nav="story" data-pt="Trajetória" data-en="Background">Background</a>
   <a href="#contact" data-nav="contact" data-pt="Contato" data-en="Contact">Contact</a>
   <div class="lang" role="group" aria-label="Language / Idioma">
     <button type="button" data-set-lang="en" aria-pressed="true">EN</button>
@@ -921,9 +1058,9 @@ body{padding-top:calc(var(--hdr) + env(safe-area-inset-top,0px))}
 <!-- ============ 2. HERO ============ -->
 <section class="hero">
   <div class="wrap hero__grid">
-    <p class="hero__pos"><span>Process Improvement · Operational Excellence</span><span data-pt="Business analysis · Automação" data-en="Business analysis · Automation">Business analysis · Automation</span></p>
-    <h1 data-pt="Transformo problemas da operação em processos claros, com regras, dados e automação." data-en="I turn operational problems into clear processes, with rules, data and automation.">I turn operational problems into clear processes, with rules, data and automation.</h1>
-    <p class="hero__lede" data-pt="Sou analista de processos em uma operação de recuperação de crédito. Mapeio o fluxo, encontro a causa do problema e escrevo as regras. Automatizo onde faz sentido e deixo claro o que continua com pessoas." data-en="I am a process analyst in a credit recovery operation. I map the flow, find the cause of the problem and write the rules. I automate where it makes sense and make clear what stays with people.">I am a process analyst in a credit recovery operation. I map the flow, find the cause of the problem and write the rules. I automate where it makes sense and make clear what stays with people.</p>
+    <p class="hero__pos"><span data-pt="Analista de Processos Pleno" data-en="Process Analyst (mid-level)">Process Analyst (mid-level)</span><span data-pt="Produtos internos · Automação · Operações financeiras" data-en="Internal products · Automation · Financial operations">Internal products · Automation · Financial operations</span></p>
+    <h1 data-pt="Paulo constrói produtos internos que tornam operações financeiras mais confiáveis." data-en="Paulo builds internal products that make financial operations more reliable.">Paulo builds internal products that make financial operations more reliable.</h1>
+    <p class="hero__lede" data-pt="Ele atua da identificação do problema à entrega da solução: levanta necessidades com as áreas, estrutura regras de negócio, define requisitos, alinha prioridades com a gestão e implementa a solução. O resultado são operações com menos dependência manual e menos risco." data-en="He works from identifying the problem to delivering the solution: he gathers needs with the teams, structures business rules, defines requirements, aligns priorities with management and implements the solution. The result is operations with less manual dependency and less risk.">He works from identifying the problem to delivering the solution: he gathers needs with the teams, structures business rules, defines requirements, aligns priorities with management and implements the solution. The result is operations with less manual dependency and less risk.</p>
     <div class="hero__cta">
       <a class="btn btn--solid" href="#cases" data-pt="Ver os cases" data-en="See the cases">See the cases</a>
       <a class="btn" href="projetos/" data-proj-link data-pt="Projetos detalhados" data-en="Detailed projects">Detailed projects</a>
@@ -937,9 +1074,9 @@ body{padding-top:calc(var(--hdr) + env(safe-area-inset-top,0px))}
 <!-- ============ 3. IMPACT BAND ============ -->
 <section class="band" aria-label="Highlights">
   <div class="wrap band__grid">
-    <div class="bk rv"><b class="num">4</b><span data-pt="Cases detalhados com demonstração interativa" data-en="Detailed case studies with interactive demos">Detailed case studies with interactive demos</span></div>
-    <div class="bk rv"><b class="num">Green Belt</b><span data-pt="Lean Six Sigma" data-en="Lean Six Sigma">Lean Six Sigma</span></div>
-    <div class="bk rv"><b class="num" data-pt="Desde 2022" data-en="Since 2022">Since 2022</b><span data-pt="Em operações financeiras e melhoria de processos" data-en="In financial operations and process improvement">In financial operations and process improvement</span></div>
+    <div class="bk rv"><b class="num" data-pt="R$ 200 mil" data-en="R$ 200k">R$ 200k</b><span data-pt="Por ano em capacidade liberada: o equivalente a três pessoas em tempo integral" data-en="A year in freed capacity: the equivalent of three full-time people">A year in freed capacity: the equivalent of three full-time people</span></div>
+    <div class="bk rv"><b class="num">200+</b><span data-pt="Rejeições de pagamento por dia com tratativa definida por regras" data-en="Rejected payments a day routed by business rules">Rejected payments a day routed by business rules</span></div>
+    <div class="bk rv"><b class="num" data-pt="Green Belt" data-en="Green Belt">Green Belt</b><span data-pt="Lean Six Sigma · em operações financeiras desde 2022" data-en="Lean Six Sigma · in financial operations since 2022">Lean Six Sigma · in financial operations since 2022</span></div>
   </div>
 </section>
 
@@ -948,8 +1085,8 @@ body{padding-top:calc(var(--hdr) + env(safe-area-inset-top,0px))}
   <div class="wrap">
     <div class="sec__head sec__head--stack">
       <p class="label label--acc rv">Cases</p>
-      <h2 class="h2 rv" data-pt="Quatro problemas de operação, do diagnóstico ao resultado" data-en="Four operational problems, from diagnosis to result">Four operational problems, from diagnosis to result</h2>
-      <p class="lead rv" data-pt="Cada case mostra o problema, a minha parte no trabalho, como a solução funciona, o que mudou e o que continua com pessoas. Cada um tem página detalhada e demonstração com dados sintéticos." data-en="Each case shows the problem, my part in the work, how the solution works, what changed and what stays with people. Each has a detailed page and a demo with synthetic data.">Each case shows the problem, my part in the work, how the solution works, what changed and what stays with people. Each has a detailed page and a demo with synthetic data.</p>
+      <h2 class="h2 rv" data-pt="O que Paulo entrega, com evidência" data-en="What Paulo delivers, with evidence">What Paulo delivers, with evidence</h2>
+      <p class="lead rv" data-pt="Quatro problemas reais de uma operação financeira. Cada case mostra o problema, a parte dele no trabalho, como a solução funciona e o que continua com pessoas. Todos têm página detalhada e demonstração com dados sintéticos." data-en="Four real problems from a financial operation. Each case shows the problem, his part in the work, how the solution works and what stays with people. Each has a detailed page and a demo with synthetic data.">Four real problems from a financial operation. Each case shows the problem, his part in the work, how the solution works and what stays with people. Each has a detailed page and a demo with synthetic data.</p>
     </div>
     <div class="cases" id="caseList"></div>
     <div class="cases__nav" aria-hidden="true"><span class="cases__count" id="caseCount"></span><span class="cases__dots" id="caseDots"></span></div>
@@ -960,22 +1097,22 @@ body{padding-top:calc(var(--hdr) + env(safe-area-inset-top,0px))}
 <section class="sec" id="method">
   <div class="wrap">
     <div class="sec__head">
-      <p class="label label--acc rv" data-pt="Como eu trabalho" data-en="How I work">How I work</p>
-      <h2 class="h2 rv" data-pt="Primeiro o processo, depois a ferramenta" data-en="Process first, tools second">Process first, tools second</h2>
-      <p class="lead rv" data-pt="A automação é uma das formas de resolver um problema de operação, não o objetivo. É assim que conduzo uma melhoria." data-en="Automation is one way to solve an operational problem, not the goal. This is how I run an improvement.">Automation is one way to solve an operational problem, not the goal. This is how I run an improvement.</p>
+      <p class="label label--acc rv" data-pt="Como ele trabalha" data-en="How he works">How he works</p>
+      <h2 class="h2 rv" data-pt="Primeiro o problema, depois a ferramenta" data-en="Problem first, tools second">Problem first, tools second</h2>
+      <p class="lead rv" data-pt="A automação é um meio, não o objetivo. É assim que Paulo conduz um produto, do problema ao resultado." data-en="Automation is a means, not the goal. This is how Paulo runs a product, from problem to result.">Automation is a means, not the goal. This is how Paulo runs a product, from problem to result.</p>
     </div>
     <div class="method" id="methodRow">
       <span class="method__rail" aria-hidden="true"></span>
-      <div class="step"><span class="step__n num">01</span><h3 data-pt="Entender o problema" data-en="Understand the problem">Understand the problem</h3><p class="step__lead" data-pt="Primeiro, o problema real." data-en="Find the real problem first.">Find the real problem first.</p><p data-pt="Mapeio o fluxo com quem executa e meço onde o tempo e o controle se perdem, antes de propor qualquer solução." data-en="I map the flow with the people who run it and measure where time and control are lost, before proposing any solution.">I map the flow with the people who run it and measure where time and control are lost, before proposing any solution.</p></div>
-      <div class="step"><span class="step__n num">02</span><h3 data-pt="Escrever as regras" data-en="Write the rules">Write the rules</h3><p class="step__lead" data-pt="O que está na cabeça vira regra." data-en="What lives in heads becomes rules.">What lives in heads becomes rules.</p><p data-pt="Transformo o que está na cabeça das pessoas em regras explícitas, com as exceções e quem decide cada uma." data-en="I turn what lives in people’s heads into explicit rules, with the exceptions and who decides each one.">I turn what lives in people’s heads into explicit rules, with the exceptions and who decides each one.</p></div>
-      <div class="step"><span class="step__n num">03</span><h3 data-pt="Automatizar o repetitivo" data-en="Automate the repetitive">Automate the repetitive</h3><p class="step__lead" data-pt="Só o que segue sempre a mesma regra." data-en="Only what always follows the same rule.">Only what always follows the same rule.</p><p data-pt="Automatizo as etapas que seguem sempre a mesma regra e deixo claro o que continua com uma pessoa." data-en="I automate the steps that always follow the same rule and make clear what stays with a person.">I automate the steps that always follow the same rule and make clear what stays with a person.</p></div>
-      <div class="step"><span class="step__n num">04</span><h3 data-pt="Medir e sustentar" data-en="Measure and sustain">Measure and sustain</h3><p class="step__lead" data-pt="O resultado precisa durar." data-en="The result has to last.">The result has to last.</p><p data-pt="Registro o que mudou, com período e amostra, documento o processo e defino o que fazer quando algo falha." data-en="I record what changed, with the period and sample, document the process and define what happens when something fails.">I record what changed, with the period and sample, document the process and define what happens when something fails.</p></div>
+      <div class="step"><span class="step__n num">01</span><h3 data-pt="Descobrir" data-en="Discover">Discover</h3><p class="step__lead" data-pt="Primeiro, o problema real." data-en="Find the real problem first.">Find the real problem first.</p><p data-pt="Mapeia o fluxo com quem executa e mede onde tempo, dinheiro e controle se perdem, antes de propor qualquer solução." data-en="He maps the flow with the people who run it and measures where time, money and control are lost, before proposing any solution.">He maps the flow with the people who run it and measures where time, money and control are lost, before proposing any solution.</p></div>
+      <div class="step"><span class="step__n num">02</span><h3 data-pt="Definir regras e requisitos" data-en="Define rules and requirements">Define rules and requirements</h3><p class="step__lead" data-pt="O que está na cabeça vira regra." data-en="What lives in heads becomes rules.">What lives in heads becomes rules.</p><p data-pt="Transforma o que está na cabeça das pessoas em regras explícitas e requisitos claros, com as exceções e quem decide cada uma." data-en="He turns what lives in people’s heads into explicit rules and clear requirements, with the exceptions and who decides each one.">He turns what lives in people’s heads into explicit rules and clear requirements, with the exceptions and who decides each one.</p></div>
+      <div class="step"><span class="step__n num">03</span><h3 data-pt="Priorizar" data-en="Prioritise">Prioritise</h3><p class="step__lead" data-pt="Impacto no cliente primeiro." data-en="Customer impact first.">Customer impact first.</p><p data-pt="Prioriza por impacto no cliente, risco financeiro e operacional, volume e capacidade, e deixa os trade-offs explícitos. Com a gestão alinhada, assumiu o vencimento de cinco casos de SLA curto para concluir a automação que hoje trata mais de 200 rejeições por dia." data-en="He prioritises by customer impact, financial and operational risk, volume and capacity, and makes trade-offs explicit. With management aligned, he accepted that five short-SLA cases would miss their deadline in order to finish the automation that now handles more than 200 rejections a day.">He prioritises by customer impact, financial and operational risk, volume and capacity, and makes trade-offs explicit. With management aligned, he accepted that five short-SLA cases would miss their deadline in order to finish the automation that now handles more than 200 rejections a day.</p></div>
+      <div class="step"><span class="step__n num">04</span><h3 data-pt="Entregar e medir" data-en="Deliver and measure">Deliver and measure</h3><p class="step__lead" data-pt="O resultado precisa durar." data-en="The result has to last.">The result has to last.</p><p data-pt="Automatiza só o que segue sempre a mesma regra, registra o que mudou com período e amostra e define o que fazer quando algo falha." data-en="He automates only what always follows the same rule, records what changed with the period and sample, and defines what happens when something fails.">He automates only what always follows the same rule, records what changed with the period and sample, and defines what happens when something fails.</p></div>
     </div>
-    <p class="label label--acc principles__label rv" data-pt="Minha visão" data-en="My view">My view</p>
+    <p class="label label--acc principles__label rv" data-pt="No que ele acredita" data-en="What he believes">What he believes</p>
     <div class="principles">
       <p class="rv" data-pt="Tecnologia é meio. <span>O resultado é um processo melhor.</span>" data-en="Technology is the means. <span>The result is a better process.</span>">Technology is the means. <span>The result is a better process.</span></p>
-      <p class="rv" data-pt="Automatizo para reduzir <span>dependência, risco e esforço manual.</span>" data-en="I automate to reduce <span>dependency, risk and manual effort.</span>">I automate to reduce <span>dependency, risk and manual effort.</span></p>
-      <p class="rv" data-pt="Todo projeto precisa de <span>um responsável, uma direção e um resultado mensurável.</span>" data-en="Every project needs <span>an owner, a direction and a result you can measure.</span>">Every project needs <span>an owner, a direction and a result you can measure.</span></p>
+      <p class="rv" data-pt="A automação serve para reduzir <span>dependência, risco e esforço manual.</span>" data-en="Automation exists to reduce <span>dependency, risk and manual effort.</span>">Automation exists to reduce <span>dependency, risk and manual effort.</span></p>
+      <p class="rv" data-pt="Todo produto precisa de <span>um responsável, uma direção e um resultado mensurável.</span>" data-en="Every product needs <span>an owner, a direction and a result you can measure.</span>">Every product needs <span>an owner, a direction and a result you can measure.</span></p>
       <p class="rv" data-pt="Processos bem estruturados <span>tornam resultados previsíveis e sustentáveis.</span>" data-en="Well-structured processes <span>make results predictable and sustainable.</span>">Well-structured processes <span>make results predictable and sustainable.</span></p>
     </div>
   </div>
@@ -987,51 +1124,51 @@ body{padding-top:calc(var(--hdr) + env(safe-area-inset-top,0px))}
   <div class="wrap">
     <div class="sec__head sec__head--stack">
       <p class="label label--acc rv" data-pt="Carreira" data-en="Career">Career</p>
-      <h2 class="h2 rv" data-pt="Comecei na operação, e é dela que vêm os problemas que resolvo" data-en="I started in operations, and that is where the problems I solve come from">I started in operations, and that is where the problems I solve come from</h2>
-      <p class="lead rv" data-pt="Cada etapa somou uma camada: operação, melhoria de processos, PMO e, hoje, processos com automação." data-en="Each step added a layer: operations, process improvement, PMO and, today, processes with automation.">Each step added a layer: operations, process improvement, PMO and, today, processes with automation.</p>
+      <h2 class="h2 rv" data-pt="Começou na operação, e é dela que vêm os problemas que ele resolve" data-en="He started in operations, and that is where the problems he solves come from">He started in operations, and that is where the problems he solves come from</h2>
+      <p class="lead rv" data-pt="Cada etapa somou uma camada: operação, melhoria de processos, PMO e, hoje, produtos internos com automação." data-en="Each step added a layer: operations, process improvement, PMO and, today, internal products with automation.">Each step added a layer: operations, process improvement, PMO and, today, internal products with automation.</p>
     </div>
     <ol class="progress rv" aria-label="Career progression">
       <li><span class="num">01</span><span data-pt="Operações" data-en="Operations">Operations</span></li>
       <li><span class="num">02</span><span data-pt="Melhoria de processos" data-en="Process improvement">Process improvement</span></li>
       <li><span class="num">03</span><span>PMO</span></li>
-      <li><span class="num">04</span><span data-pt="Processos e automação" data-en="Processes &amp; automation">Processes &amp; automation</span></li>
+      <li><span class="num">04</span><span data-pt="Produtos internos" data-en="Internal products">Internal products</span></li>
     </ol>
     <div class="jobs">
       <article class="job rv">
         <p class="job__when" data-pt="2026 – atual" data-en="2026 – present">2026 – present</p>
         <div class="job__who">
           <h3>Simplic <span data-pt="· Enova International" data-en="· Enova International">· Enova International</span></h3>
-          <p data-pt="Analista de Processos Pleno · Melhoria de processos e automação" data-en="Process Analyst (mid-level) · Process improvement &amp; automation">Process Analyst (mid-level) · Process improvement &amp; automation</p>
-          <span class="job__tag" data-pt="Melhoria de processos · Automação" data-en="Process improvement · Automation">Process improvement · Automation</span>
+          <p data-pt="Analista de Processos Pleno · Produtos internos e automação" data-en="Process Analyst (mid-level) · Internal products &amp; automation">Process Analyst (mid-level) · Internal products &amp; automation</p>
+          <span class="job__tag" data-pt="Produtos internos · Automação" data-en="Internal products · Automation">Internal products · Automation</span>
         </div>
-        <p class="job__what" data-pt="Trabalho na melhoria dos processos de uma operação de recuperação de crédito. Investigo problemas operacionais, organizo as regras, automatizo etapas repetitivas e acompanho o resultado com Operações, Tecnologia, gestão e fornecedores." data-en="I work on improving the processes of a credit recovery operation. I investigate operational problems, organise the rules, automate repetitive steps and follow the results with Operations, Technology, management and vendors.">I work on improving the processes of a credit recovery operation. I investigate operational problems, organise the rules, automate repetitive steps and follow the results with Operations, Technology, management and vendors.</p>
+        <p class="job__what" data-pt="Conduz produtos internos do BackOffice de uma fintech de crédito, do diagnóstico ao resultado: define regras e requisitos com a operação, prioriza com a gestão e entrega as soluções, construindo em Python e SQL porque não há um time de desenvolvimento dedicado. Automatizou atividades que exigiam três pessoas em tempo integral, liberando cerca de R$ 200 mil por ano em capacidade para outras tarefas, e conduziu a contratação e o treinamento de um novo assistente." data-en="He leads the BackOffice’s internal products at a credit fintech, from diagnosis to result: he defines rules and requirements with operations, prioritises with management and delivers the solutions, building them in Python and SQL because there is no dedicated development team. He automated work that took three full-time people, freeing about R$ 200k a year in capacity for other tasks, and led the hiring and training of a new assistant.">He leads the BackOffice’s internal products at a credit fintech, from diagnosis to result: he defines rules and requirements with operations, prioritises with management and delivers the solutions, building them in Python and SQL because there is no dedicated development team. He automated work that took three full-time people, freeing about R$ 200k a year in capacity for other tasks, and led the hiring and training of a new assistant.</p>
       </article>
       <article class="job rv">
         <p class="job__when" data-pt="2025" data-en="2025">2025</p>
         <div class="job__who">
           <h3>Itaú Unibanco</h3>
-          <p data-pt="HR Business Partner (estágio) · Consultoria interna de pessoas" data-en="HR Business Partner (intern) · Internal people consulting">HR Business Partner (intern) · Internal people consulting</p>
+          <p data-pt="HR Business Partner · Consultoria interna de pessoas" data-en="HR Business Partner · Internal people consulting">HR Business Partner · Internal people consulting</p>
           <span class="job__tag">PMO</span>
         </div>
-        <p class="job__what" data-pt="Organizei em modelo de PMO o controle das demandas de gestão de pessoas da rede de agências, o que facilitou o acompanhamento das mudanças de posição entre as equipes. Também trabalhei com people analytics e dados de alto volume. Foi aqui que minha prática de PMO começou." data-en="I organised the branch network’s people-management requests in a PMO model, which made it easier to track position changes across teams. I also worked with people analytics and high-volume data. This is where my PMO practice started.">I organised the branch network’s people-management requests in a PMO model, which made it easier to track position changes across teams. I also worked with people analytics and high-volume data. This is where my PMO practice started.</p>
+        <p class="job__what" data-pt="Organizou em modelo de PMO as demandas de gestão de pessoas da rede de agências, dentro de um time Scrum, com Scrum Master e dailies. Também trabalhou com people analytics e dados de alto volume. Foi ali que a prática de PMO dele começou." data-en="He organised the branch network’s people-management requests in a PMO model, inside a Scrum team with a Scrum Master and dailies. He also worked with people analytics and high-volume data. That is where his PMO practice started.">He organised the branch network’s people-management requests in a PMO model, inside a Scrum team with a Scrum Master and dailies. He also worked with people analytics and high-volume data. That is where his PMO practice started.</p>
       </article>
       <article class="job rv">
         <p class="job__when" data-pt="2024 – 2025" data-en="2024 – 2025">2024 – 2025</p>
         <div class="job__who">
           <h3>Itaú Unibanco</h3>
-          <p data-pt="Collateral Management · Garantias Reais" data-en="Collateral Management · Notarial guarantees">Collateral Management · Notarial guarantees</p>
+          <p data-pt="Collateral Management · Garantias Cartorárias" data-en="Collateral Management · Notarial guarantees">Collateral Management · Notarial guarantees</p>
           <span class="job__tag" data-pt="Melhoria de processos" data-en="Process improvement">Process improvement</span>
         </div>
-        <p class="job__what" data-pt="Reestruturei o fluxo financeiro da operação de garantias reais." data-en="I restructured the financial flow of the notarial guarantees operation.">I restructured the financial flow of the notarial guarantees operation.</p>
+        <p class="job__what" data-pt="Reestruturou o fluxo financeiro da operação de garantias cartorárias e automatizou etapas manuais de pagamento, economizando cerca de 42 horas por mês." data-en="He restructured the financial flow of the notarial guarantees operation and automated manual payment steps, saving about 42 hours a month.">He restructured the financial flow of the notarial guarantees operation and automated manual payment steps, saving about 42 hours a month.</p>
       </article>
       <article class="job rv">
         <p class="job__when" data-pt="2022 – 2024" data-en="2022 – 2024">2022 – 2024</p>
         <div class="job__who">
           <h3>Itaú Unibanco</h3>
-          <p>Customer Due Diligence</p>
+          <p data-pt="Customer Due Diligence" data-en="Customer Due Diligence">Customer Due Diligence</p>
           <span class="job__tag" data-pt="Operações" data-en="Operations">Operations</span>
         </div>
-        <p class="job__what" data-pt="Processos de alto volume, dados e indicadores. Foi onde aprendi como a operação funciona na prática: restrições, passagens de uma área para outra e falhas recorrentes." data-en="High-volume processes, data and KPIs. This is where I learned how operations really work: constraints, handoffs between teams and recurring failures.">High-volume processes, data and KPIs. This is where I learned how operations really work: constraints, handoffs between teams and recurring failures.</p>
+        <p class="job__what" data-pt="Processos de alto volume, dados e indicadores. Foi onde ele aprendeu como a operação funciona na prática: restrições, passagens de uma área para outra e falhas recorrentes." data-en="High-volume processes, data and KPIs. This is where he learned how operations really work: constraints, handoffs between teams and recurring failures.">High-volume processes, data and KPIs. This is where he learned how operations really work: constraints, handoffs between teams and recurring failures.</p>
       </article>
     </div>
   </div>
@@ -1042,7 +1179,7 @@ body{padding-top:calc(var(--hdr) + env(safe-area-inset-top,0px))}
   <div class="wrap">
     <div class="sec__head sec__head--stack">
       <p class="label label--acc rv" data-pt="Portfólio de projetos" data-en="Project portfolio">Project portfolio</p>
-      <h2 class="h2 rv" data-pt="Projetos selecionados em melhoria de processos e automação operacional" data-en="Selected projects in process improvement and operational automation">Selected projects in process improvement and operational automation</h2>
+      <h2 class="h2 rv" data-pt="Projetos selecionados em produtos internos, processos e automação" data-en="Selected projects in internal products, processes and automation">Selected projects in internal products, processes and automation</h2>
       <p class="lead rv" data-pt="De 2024 até hoje. Fases de uma mesma solução aparecem juntas, e cada item está classificado pelo tipo de problema que resolveu." data-en="From 2024 to today. Phases of the same solution are grouped together, and each item is tagged by the type of problem it solved.">From 2024 to today. Phases of the same solution are grouped together, and each item is tagged by the type of problem it solved.</p>
     </div>
     <div class="pf pf--collapsed" id="pfList"></div>
@@ -1055,7 +1192,7 @@ body{padding-top:calc(var(--hdr) + env(safe-area-inset-top,0px))}
   <div class="wrap">
     <div class="sec__head sec__head--stack">
       <p class="label label--acc rv" data-pt="Recomendações" data-en="Recommendations">Recommendations</p>
-      <h2 class="h2 rv" data-pt="Quem trabalhou comigo" data-en="People who worked with me">People who worked with me</h2>
+      <h2 class="h2 rv" data-pt="Quem trabalhou com ele" data-en="People who worked with him">People who worked with him</h2>
     </div>
     <div class="recs">
       <figure class="rec rv">
@@ -1072,8 +1209,8 @@ body{padding-top:calc(var(--hdr) + env(safe-area-inset-top,0px))}
       </figure>
     </div>
     <div class="recs__cta rv">
-      <a class="btn" href="https://www.linkedin.com/in/paulo-nobre-/details/recommendations/" target="_blank" rel="noopener" data-pt="Ler todas as recomendações no LinkedIn" data-en="Read all my recommendations on LinkedIn">Read all my recommendations on LinkedIn</a>
-      <small class="note" data-pt="Abre meu perfil no LinkedIn, na seção Recomendações (é preciso estar logado)." data-en="Opens my LinkedIn profile, in the Recommendations section (login required).">Opens my LinkedIn profile, in the Recommendations section (login required).</small>
+      <a class="btn" href="https://www.linkedin.com/in/paulo-nobre-/details/recommendations/" target="_blank" rel="noopener" data-pt="Ler todas as recomendações no LinkedIn" data-en="Read all recommendations on LinkedIn">Read all recommendations on LinkedIn</a>
+      <small class="note" data-pt="Abre o perfil do Paulo no LinkedIn, na seção Recomendações (é preciso estar logado)." data-en="Opens Paulo’s LinkedIn profile, in the Recommendations section (login required).">Opens Paulo’s LinkedIn profile, in the Recommendations section (login required).</small>
     </div>
   </div>
 </section>
@@ -1082,10 +1219,10 @@ body{padding-top:calc(var(--hdr) + env(safe-area-inset-top,0px))}
 <section class="sec light" id="bring">
   <div class="wrap bring">
     <div>
-      <p class="label label--acc rv" data-pt="O que eu entrego" data-en="What I bring">What I bring</p>
+      <p class="label label--acc rv" data-pt="O que ele entrega" data-en="What he brings">What he brings</p>
       <h2 class="h2 rv" data-pt="Competências principais" data-en="Core competencies">Core competencies</h2>
-      <p class="pills__grp rv" data-pt="Processos e coordenação" data-en="Processes &amp; coordination">Processes &amp; coordination</p>
-      <ul class="pills rv"><li data-pt="Mapeamento de processos" data-en="Process mapping">Process mapping</li><li data-pt="Análise de causa raiz" data-en="Root cause analysis">Root cause analysis</li><li data-pt="Regras de negócio e documentação" data-en="Business rules &amp; documentation">Business rules &amp; documentation</li><li data-pt="Demandas em modelo de PMO" data-en="Requests in a PMO model">Requests in a PMO model</li><li data-pt="Coordenação entre áreas" data-en="Cross-team coordination">Cross-team coordination</li><li data-pt="Levantamento de requisitos" data-en="Requirements gathering">Requirements gathering</li><li data-pt="Comunicação com a gestão" data-en="Communication with management">Communication with management</li><li data-pt="Redução de risco operacional" data-en="Operational risk reduction">Operational risk reduction</li></ul>
+      <p class="pills__grp rv" data-pt="Produto, processos e coordenação" data-en="Product, processes &amp; coordination">Product, processes &amp; coordination</p>
+      <ul class="pills rv"><li data-pt="Mapeamento de processos" data-en="Process mapping">Process mapping</li><li data-pt="Análise de causa raiz" data-en="Root cause analysis">Root cause analysis</li><li data-pt="Regras de negócio e documentação" data-en="Business rules &amp; documentation">Business rules &amp; documentation</li><li data-pt="Product ownership de ferramentas internas" data-en="Product ownership of internal tools">Product ownership of internal tools</li><li data-pt="Coordenação entre áreas" data-en="Cross-team coordination">Cross-team coordination</li><li data-pt="Levantamento de requisitos" data-en="Requirements gathering">Requirements gathering</li><li data-pt="Comunicação com a gestão" data-en="Communication with management">Communication with management</li><li data-pt="Redução de risco operacional" data-en="Operational risk reduction">Operational risk reduction</li></ul>
       <p class="pills__grp rv" data-pt="Métodos e ferramentas" data-en="Methods &amp; tools">Methods &amp; tools</p>
       <ul class="pills pills--hard rv"><li>Lean Six Sigma</li><li>DMAIC</li><li>Excel</li><li>Power Query</li><li>Power BI</li><li>SQL</li><li>Python</li><li>APIs</li><li>n8n</li><li data-pt="IA aplicada ao trabalho" data-en="Applied AI at work">Applied AI at work</li></ul>
     </div>
@@ -1098,7 +1235,8 @@ body{padding-top:calc(var(--hdr) + env(safe-area-inset-top,0px))}
         <div class="ccard rv"><span class="ccard__ic">EDU</span><div><b data-pt="Ciência de Dados" data-en="Data Science">Data Science</b><small data-pt="Univesp · Em curso" data-en="Univesp · In progress">Univesp · In progress</small></div></div>
         <div class="ccard rv"><span class="ccard__ic">OPS</span><div><b data-pt="Qualidade · PCP · Gestão de fornecedores" data-en="Quality · Production planning &amp; control · Supplier management">Quality · Production planning &amp; control · Supplier management</b><small data-pt="Certificações em gestão de operações" data-en="Operations management certifications">Operations management certifications</small></div></div>
         <div class="ccard rv"><span class="ccard__ic">AI</span><div><b>AI Journey</b><small data-pt="Inteligência artificial aplicada" data-en="Applied artificial intelligence">Applied artificial intelligence</small></div></div>
-        <div class="ccard rv"><span class="ccard__ic">LNG</span><div><b data-pt="Português nativo · Inglês: intermediário (B1), em desenvolvimento contínuo" data-en="Portuguese (native) · English: Intermediate (B1), actively improving">Portuguese (native) · English: Intermediate (B1), actively improving</b><small data-pt="Idiomas" data-en="Languages">Languages</small></div></div>
+        <div class="ccard rv"><span class="ccard__ic">PO</span><div><b data-pt="Product Owner · Liderança e Governança" data-en="Product Owner · Leadership &amp; Governance">Product Owner · Leadership &amp; Governance</b><small data-pt="Cursos em andamento" data-en="Courses in progress">Courses in progress</small></div></div>
+        <div class="ccard rv"><span class="ccard__ic">LNG</span><div><b data-pt="Português nativo · Inglês B2 (intermediário superior)" data-en="Portuguese (native) · English B2 (upper-intermediate)">Portuguese (native) · English B2 (upper-intermediate)</b><small data-pt="Idiomas" data-en="Languages">Languages</small></div></div>
       </div>
     </div>
   </div>
@@ -1109,15 +1247,15 @@ body{padding-top:calc(var(--hdr) + env(safe-area-inset-top,0px))}
   <div class="story-fx" aria-hidden="true"><canvas id="storyFx"></canvas></div>
   <div class="wrap">
     <div class="sec__head">
-      <p class="label label--acc rv" data-pt="Minha história" data-en="My Story">My Story</p>
+      <p class="label label--acc rv" data-pt="Trajetória" data-en="Background">Background</p>
       <h2 class="h2 rv" data-pt="Da operação à entrega" data-en="From operations to delivery">From operations to delivery</h2>
     </div>
     <div class="story">
       <div class="story__txt rv">
-        <p data-pt="Entendo a operação porque comecei nela. No Itaú Unibanco, passei por Customer Due Diligence, Garantias Reais e consultoria interna de pessoas, sempre com processos de alto volume, dados e indicadores." data-en="I understand operations because I started there. At Itaú Unibanco I worked in Customer Due Diligence, Collateral Management and internal people consulting, always with high-volume processes, data and KPIs.">I understand operations because I started there. At Itaú Unibanco I worked in Customer Due Diligence, Collateral Management and internal people consulting, always with high-volume processes, data and KPIs.</p>
-        <p data-pt="Ali aprendi a olhar o processo antes da ferramenta." data-en="There I learned to look at the process before the tool.">There I learned to look at the process before the tool.</p>
-        <p data-pt="Na Simplic, o trabalho evoluiu de melhoria de processos para a condução de iniciativas: diagnosticar problemas, organizar as soluções, conectar Operações e Tecnologia e medir o resultado. A automação entra como meio, para tirar dependência manual e risco da operação." data-en="At Simplic, the work grew from process improvement into leading initiatives: diagnosing problems, organising solutions, connecting Operations and Technology, and measuring the result. Automation is a means to remove manual dependency and risk from the operation.">At Simplic, the work grew from process improvement into leading initiatives: diagnosing problems, organising solutions, connecting Operations and Technology, and measuring the result. Automation is a means to remove manual dependency and risk from the operation.</p>
-        <p data-pt="Meu próximo passo é aplicar essa experiência em ambientes de maior escala, em melhoria de processos, excelência operacional, PMO, operações de negócio e automação, inclusive em equipes internacionais e remotas." data-en="My next step is to apply this experience at a larger scale, in process improvement, operational excellence, PMO, business operations and automation, including international and remote teams.">My next step is to apply this experience at a larger scale, in process improvement, operational excellence, PMO, business operations and automation, including international and remote teams.</p>
+        <p data-pt="Paulo entende a operação porque começou nela. No Itaú Unibanco, passou por Customer Due Diligence, Garantias Cartorárias e consultoria interna de pessoas, sempre com processos de alto volume, dados e indicadores." data-en="Paulo understands operations because he started there. At Itaú Unibanco he worked in Customer Due Diligence, notarial guarantees and internal people consulting, always with high-volume processes, data and KPIs.">Paulo understands operations because he started there. At Itaú Unibanco he worked in Customer Due Diligence, notarial guarantees and internal people consulting, always with high-volume processes, data and KPIs.</p>
+        <p data-pt="Ali aprendeu a olhar o processo antes da ferramenta." data-en="There he learned to look at the process before the tool.">There he learned to look at the process before the tool.</p>
+        <p data-pt="Hoje, em uma fintech de crédito, conduz produtos internos do diagnóstico ao resultado: entende o problema com quem executa, define as regras, prioriza com a gestão e entrega a solução funcionando. A automação entra como meio, para tirar dependência manual e risco da operação." data-en="Today, at a credit fintech, he leads internal products from diagnosis to result: he understands the problem with the people who run it, defines the rules, prioritises with management and delivers a working solution. Automation is a means to remove manual dependency and risk from the operation.">Today, at a credit fintech, he leads internal products from diagnosis to result: he understands the problem with the people who run it, defines the rules, prioritises with management and delivers a working solution. Automation is a means to remove manual dependency and risk from the operation.</p>
+        <p data-pt="O próximo passo é atuar como Product Owner de produtos internos e operacionais em fintechs, bancos e empresas de tecnologia, inclusive em equipes internacionais e remotas." data-en="His next step is to work as a Product Owner of internal and operational products at fintechs, banks and technology companies, including international and remote teams.">His next step is to work as a Product Owner of internal and operational products at fintechs, banks and technology companies, including international and remote teams.</p>
       </div>
     </div>
   </div>
@@ -1128,7 +1266,7 @@ body{padding-top:calc(var(--hdr) + env(safe-area-inset-top,0px))}
 <!-- ============ 12. FOOTER ============ -->
 <footer class="foot" id="contact">
   <div class="wrap">
-    <p class="foot__id">Paulo Nobre <span>Process Improvement &amp; Automation</span></p>
+    <p class="foot__id">Paulo Nobre <span>Internal Products &amp; Automation</span></p>
     <div class="foot__btns">
       <a class="btn btn--solid" href="mailto:nobrecontato21@outlook.com">nobrecontato21@outlook.com</a>
       <a class="btn" href="https://www.linkedin.com/in/paulo-nobre-/" target="_blank" rel="noopener">LinkedIn</a>
@@ -1165,63 +1303,63 @@ if(DRAFT) document.documentElement.classList.add('draft');
 /* ================= CASES ================= */
 function L(pt,en){ return {pt:pt,en:en}; }
 var CASES = [
-{ id:'rotina', kind:L('Case principal · medido em registros','Core case · measured from records'),
+{ id:'rotina', kind:L('Automação de processo · medido em registros','Process automation · measured from records'),
   page:L('projetos/automacao-rotina-operacional.html','projetos/en/automacao-rotina-operacional.html'),
-  ctx:L('Simplic · Melhoria de processo e automação','Simplic · Process improvement and automation'),
-  title:L('Como a rotina da manhã deixou de depender de disparos manuais','How the morning routine stopped depending on manual triggers'),
+  ctx:L('Fintech de crédito · Rotina operacional','Credit fintech · Operational routine'),
+  title:L('Uma rotina da manhã que começa sozinha','A morning routine that starts on its own'),
   problem:L('A lista do discador precisava estar pronta antes das 8h, mas cada etapa esperava alguém disparar a anterior.','The dialer list had to be ready before 8:00, but each step waited for someone to trigger the previous one.'),
-  did:L('Medi as esperas entre as etapas e configurei, com orientação do suporte do fornecedor, uma sequência que começa sozinha às 6h, com uma pessoa acompanhando falhas.','I measured the waits between steps and, with guidance from the vendor’s support team, set up a sequence that starts on its own at 6:00, with a person monitoring failures.'),
+  did:L('Mediu as esperas entre as etapas e, com o suporte do fornecedor, configurou uma sequência que começa sozinha às 6h, com uma pessoa acompanhando as falhas.','He measured the waits between steps and, with the vendor’s support team, set up a sequence that starts on its own at 6:00, with a person monitoring failures.'),
   metric:'', metricLabel:L('Lista pronta entre 06h22 e 06h57 nos 3 registros depois da mudança; antes, mediana de 07h30 em 29 dias.','List ready between 06:22 and 06:57 in the 3 records after the change; before, a 07:30 median over 29 days.'),
   kpis:[]
 },
-{ id:'rejections', kind:L('Case principal · resultado qualitativo','Core case · qualitative result'),
+{ id:'rejections', kind:L('Produto interno · regras de negócio','Internal product · business rules'),
   page:L('projetos/central-pagamentos-rejeitados.html','projetos/en/central-pagamentos-rejeitados.html'),
-  ctx:L('Simplic · Regras de negócio e automação','Simplic · Business rules and automation'),
-  title:L('Como organizei e automatizei parte da análise de pagamentos rejeitados','How I organised and partly automated the analysis of rejected payments'),
+  ctx:L('Fintech de crédito · Regras de negócio e automação','Credit fintech · Business rules and automation'),
+  title:L('Um motor de decisão para pagamentos rejeitados','A decision engine for rejected payments'),
   problem:L('O destino de cada pagamento rejeitado dependia de quem analisava, e o mesmo caso podia ter tratamentos diferentes.','Where each rejected payment went depended on who analysed it, and the same case could be handled in different ways.'),
-  did:L('Levantei as regras com a equipe e construí a extração, as regras que indicam o próximo passo e o painel de trabalho.','I gathered the rules with the team and built the extraction, the rules that suggest the next step and the working panel.'),
-  metric:'', metricLabel:L('Motivo registrado em cada caso; o que não tem evidência suficiente vai para revisão de uma pessoa.','A recorded reason for every case; anything without enough evidence goes to a person for review.'),
+  did:L('Levantou as necessidades com quem tratava os casos, estruturou as regras e entregou extração, motor e painel. Evoluiu o produto a partir de casos reais: de 4 categorias e uma fila de revisão manual para 7 tratativas e 3 canais de entrada.','He gathered needs with the people handling the cases, structured the rules and delivered the extraction, the engine and the panel. He evolved the product from real cases: from 4 categories and a manual review queue to 7 next steps and 3 intake channels.'),
+  metric:'200+', metricLabel:L('rejeições por dia recebem uma tratativa definida, com o motivo registrado. A fila de revisão manual deixou de ser necessária, e ação que move dinheiro começa por uma pessoa.','rejected payments a day get a defined next step, with the reason recorded. The manual review queue is no longer needed, and any action that moves money starts with a person.'),
   kpis:[]
 },
-{ id:'duplicates', kind:L('Case principal · resultado qualitativo','Core case · qualitative result'),
+{ id:'duplicates', kind:L('Produto interno · controle financeiro','Internal product · financial control'),
   page:L('projetos/pagamentos-em-duplicidade.html','projetos/en/pagamentos-em-duplicidade.html'),
-  ctx:L('Simplic · Conciliação e controle de risco','Simplic · Reconciliation and risk control'),
-  title:L('Como passei a identificar pagamentos duplicados antes de qualquer reembolso','How I started identifying duplicate payments before any refund'),
+  ctx:L('Fintech de crédito · Conciliação e controle de risco','Credit fintech · Reconciliation and risk control'),
+  title:L('Pagamentos duplicados identificados antes de qualquer reembolso','Duplicate payments identified before any refund'),
   problem:L('Quem paga a mesma parcela duas vezes precisa receber de volta, mas só depois de a duplicidade estar comprovada.','A customer who pays the same instalment twice must get the money back, but only once the duplicate is proven.'),
-  did:L('Desenhei as regras de identificação e construí um painel que separa quem monta o lote de quem executa o reembolso.','I designed the identification rules and built a panel that separates who builds the batch from who carries out the refund.'),
+  did:L('Estruturou a solução a partir das necessidades da cobrança e dos controles financeiros, definiu as regras de identificação de duplicidades e organizou o fluxo de conciliação, aprovação e reembolso, em que quem monta o lote não é quem executa.','He shaped the solution around the needs of collections and financial controls, defined the rules for identifying duplicates and organised the reconciliation, approval and refund flow, where the person who builds the batch is not the one who executes it.'),
   metric:'', metricLabel:L('Estado e histórico de cada caso em um só lugar. A decisão e o pagamento continuam com pessoas.','Status and history for every case in one place. The decision and the payment stay with people.'),
   kpis:[]
 },
-{ id:'monitor', kind:L('Case principal · resultado qualitativo','Core case · qualitative result'),
+{ id:'monitor', kind:L('Produto interno · visibilidade da operação','Internal product · operational visibility'),
   page:L('projetos/monitor-operacao.html','projetos/en/monitor-operacao.html'),
-  ctx:L('Simplic · Acompanhamento da operação','Simplic · Operations monitoring'),
-  title:L('Como tornei visíveis as falhas das rotinas que rodam antes do expediente','How I made failures in the pre-workday routines visible'),
+  ctx:L('Fintech de crédito · Acompanhamento da operação','Credit fintech · Operations monitoring'),
+  title:L('Um monitor que mostra cedo se a operação está pronta','A monitor that shows early whether operations are ready'),
   problem:L('Quando uma rotina de madrugada falhava sem ninguém perceber, a equipe começava o dia com dados incompletos.','When an overnight routine failed without anyone noticing, the team started the day with incomplete data.'),
-  did:L('Organizei uma tela que mostra se a manhã fechou e onde uma falha parou, e corrigi uma falha que exibia valores errados. Inclui uma versão para o celular do gestor.','I built a screen that shows whether the morning closed and where a failure stopped, and fixed a bug that displayed wrong values. Includes a version for the manager’s phone.'),
+  did:L('Partiu das três perguntas do gestor (está pronta, quanto rodou, o que falhou), desenhou a tela em torno delas e corrigiu uma falha que exibia valores errados. Inclui uma versão para o celular do gestor.','He started from the manager’s three questions (is it ready, how much ran, what failed), designed the screen around them and fixed a bug that displayed wrong values. Includes a version for the manager’s phone.'),
   metric:'', metricLabel:L('Falhas visíveis com a etapa em que pararam, e o caso passa para uma pessoa quando a nova tentativa não resolve.','Failures visible with the step where they stopped, and the case passes to a person when a retry does not fix it.'),
   kpis:[]
 },
 { id:'infra',
   kind:L('Iniciativa relacionada · resultado qualitativo','Related initiative · qualitative result'),
-  ctx:L('Simplic · Diagnóstico e escalada','Simplic · Diagnosis and escalation'),
-  title:L('Como encontrei a causa das falhas nos dias de pico','How I found the cause of failures on peak days'),
+  ctx:L('Fintech de crédito · Diagnóstico e escalada','Credit fintech · Diagnosis and escalation'),
+  title:L('A causa das falhas nos dias de pico','The cause of failures on peak days'),
   problem:L('Nos dias de maior entrada de carteira, o processamento falhava e os clientes novos ficavam de fora, justamente nos dias de maior volume.','On the days with the largest portfolio intake, processing failed and new customers were left out, exactly on the highest-volume days.'),
-  did:L('Acionei o time da plataforma de CRM, que encontrou a causa: a capacidade contratada estava abaixo da demanda real. Levei a causa e o impacto no negócio à diretoria e coordenei o ajuste em um dia de menor volume.','I asked the CRM platform team to investigate, and they found the cause: contracted capacity was below real demand. I took the cause and the business impact to the director and coordinated the change on a low-volume day.'),
+  did:L('Acionou o time da plataforma de CRM, que encontrou a causa: a capacidade contratada estava abaixo da demanda real. Levou a causa e o impacto no negócio à diretoria e coordenou o ajuste em um dia de menor volume.','He asked the CRM platform team to investigate, and they found the cause: contracted capacity was below real demand. He took the cause and the business impact to the director and coordinated the change on a low-volume day.'),
   metric:'', metricLabel:L('Depois do ajuste, o processamento deixou de falhar nos dias de produção intensa, sem interromper a operação.','After the change, processing stopped failing on heavy production days, without disrupting operations.'),
   kpis:[],
   context:L('O processamento diário de carteira, que precisa absorver grandes volumes nos dias de entrada.','Daily portfolio processing, which must absorb large volumes on intake days.'),
   challenge:L('O sistema falhava exatamente nos dias de maior volume. Sem uma causa clara, cada dia de pico era um risco operacional.','The system failed exactly on the highest-volume days. Without a clear cause, every peak day was an operational risk.'),
   diagnosis:L('A revisão de desempenho mostrou onde o pico acontecia e onde o processamento se perdia: a capacidade contratada era muito menor do que o número de clientes em carteira.','The performance review showed where the peak happened and where processing was lost: contracted capacity was far below the number of customers in the portfolio.'),
-  role:L('Assumi o problema do diagnóstico à resolução: mostrei o risco para o negócio, pedi a revisão técnica, levei a evidência a quem decide e coordenei a implementação. O conhecimento técnico de infraestrutura era do time da plataforma de CRM; minha parte foi transformar a evidência em uma decisão de negócio.','I owned the problem from diagnosis to resolution: I framed the business risk, requested the technical review, took the evidence to the decision-maker and coordinated implementation. The infrastructure expertise sat with the CRM platform team; my part was turning the evidence into a business decision.'),
+  role:L('Assumiu o problema do diagnóstico à resolução: mostrou o risco para o negócio, pediu a revisão técnica, levou a evidência a quem decide e coordenou a implementação. O conhecimento técnico de infraestrutura era do time da plataforma de CRM; a parte dele foi transformar a evidência em uma decisão de negócio.','He owned the problem from diagnosis to resolution: he framed the business risk, requested the technical review, took the evidence to the people who decide and coordinated the implementation. The infrastructure expertise belonged to the CRM platform team; his part was turning the evidence into a business decision.'),
   stakeholders:L('Time da plataforma de CRM, diretoria e time técnico.','CRM platform team, director and technical team.'),
   approach:L('Começar pela evidência: localizar onde o pico quebra o processamento e só então levar uma causa clara, com o impacto no negócio, para quem pode decidir.','Start with evidence: find where the peak breaks processing, and only then take a clear cause, with its business impact, to the people who can decide.'),
-  execution:L('O time da plataforma de CRM conduziu a revisão de desempenho, apresentei a causa e o impacto à diretoria, o aumento foi aprovado e coordenei o ajuste com o time técnico.','The CRM platform team ran the performance review, I presented the cause and the impact to the director, the increase was approved and I coordinated the change with the technical team.'),
+  execution:L('O time da plataforma de CRM conduziu a revisão de desempenho, Paulo apresentou a causa e o impacto à diretoria, o aumento foi aprovado e ele coordenou o ajuste com o time técnico.','The CRM platform team ran the performance review, Paulo presented the cause and the impact to the director, the increase was approved and he coordinated the change with the technical team.'),
   flow:{before:[['Entrada de carteira','Portfolio intake'],['Pico de volume','Volume peak'],['Capacidade insuficiente','Insufficient capacity','break'],['Só carteira do dia anterior','Previous day’s portfolio only']],
         after:[['Entrada de carteira','Portfolio intake'],['Pico de volume','Volume peak'],['Capacidade ajustada','Right-sized capacity','new'],['Clientes novos processados','New customers processed']]},
   solution:L('Aumento de infraestrutura dimensionado para o volume real de clientes processados.','An infrastructure increase sized to the real volume of customers processed.'),
   tools:['Análise de causa raiz|Root cause analysis','Revisão de desempenho|Performance review','Coordenação entre áreas|Cross-team coordination','Escalada com evidência|Evidence-based escalation'],
   results:[L('O processamento deixou de falhar nos dias de produção intensa.','Processing stopped failing on heavy production days.'),L('Ajuste feito em um dia de menor volume, sem interromper a operação.','Change made on a low-volume day, with no disruption to operations.')],
-  lessons:L('Antes de corrigir o sistema, confirme se ele tem capacidade para o volume que você pede dele. E leve à decisão a causa junto com o impacto no negócio.','Before fixing the system, confirm it has capacity for the volume you ask of it. And take the cause to the decision together with its business impact.')
+  lessons:L('Antes de corrigir o sistema, confirmar se ele tem capacidade para o volume que se pede dele. E levar à decisão a causa junto com o impacto no negócio.','Before fixing the system, confirm it has capacity for the volume it is asked to handle. And take the cause to the decision together with its business impact.')
 }
 ];
 
@@ -1235,7 +1373,7 @@ var PROJECTS = [
   {y:L('2026','2026'), org:'Simplic', t:L('Capacidade nos dias de pico','Capacity on peak days'), d:L('Diagnóstico, escalada à diretoria e ajuste de infraestrutura sem interromper a operação','Diagnosis, escalation to the director and an infrastructure change without disrupting operations'), a:L('Diagnóstico','Diagnosis')},
   {y:L('2026','2026'), org:'Simplic', t:L('Mapeamento e documentação dos processos do BackOffice','Mapping and documenting BackOffice processes'), d:L('Fluxos principais mapeados e documentados, como base para as automações','Main workflows mapped and documented, as the basis for the automations'), a:L('Melhoria de processos','Process improvement')},
   {y:L('2026','2026'), org:'Simplic', t:L('Base de conhecimento da equipe','Team knowledge base'), d:L('Processos documentados e compartilhados com a equipe','Processes documented and shared with the team'), a:L('Gestão do conhecimento','Knowledge management')},
-  {y:L('2026','2026'), org:'Simplic', t:L('Entrada de novos parceiros via API','Onboarding new partners via API'), d:L('Conduzi a criação, os testes e a entrada em produção de novos parceiros','I led the setup, testing and go-live of new partners'), a:L('Implantação','Implementation')},
+  {y:L('2026','2026'), org:'Simplic', t:L('Entrada de novos parceiros via API','Onboarding new partners via API'), d:L('Conduziu a criação, os testes e a entrada em produção de novos parceiros','Led the setup, testing and go-live of new partners'), a:L('Implantação','Implementation')},
   {y:L('2026','2026'), org:'Simplic', t:L('Conciliador de baixas duplicadas','Duplicate write-off reconciler'), d:L('Robô em Python que trata um pagamento registrado duas vezes no sistema de cobrança. Execução parcial; diferente do case 03','Python bot that handles a payment recorded twice in the collections system. Partially delivered; different from case 03'), a:L('Conciliação','Reconciliation')},
   {y:L('2025','2025'), org:'Itaú Unibanco', t:L('Demandas da rede de agências em modelo de PMO','Branch-network requests in a PMO model'), d:L('Consultoria interna de pessoas','Internal people consulting'), a:L('PMO','PMO')},
   {y:L('2025','2025'), org:'Itaú Unibanco', t:L('People analytics com dados de alto volume','People analytics on high-volume data'), d:L('Apoio às decisões da consultoria de pessoas','Support for people consulting decisions'), a:L('Dados e analytics','Data & analytics')},
@@ -1248,11 +1386,11 @@ function t(v){ return v == null ? '' : (typeof v === 'string' ? v : v[lang]); }
 function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 function pair(s){ var p = s.split('|'); return lang === 'en' && p[1] ? p[1] : p[0]; }
 var UI = {
-  challenge:L('Problema','Problem'), action:L('O que fiz','What I did'), impact:L('Impacto','Impact'),
+  challenge:L('Problema','Problem'), action:L('O que ele fez','What he did'), impact:L('Impacto','Impact'),
   read:L('Ler o caso completo','Read the full case'), readPage:L('Ver o case detalhado e a demonstração','See the case study and demo'), back:L('Todos os cases','All cases'), next:L('Próximo caso','Next case'),
   before:L('Antes','Before'), after:L('Depois','After'), exhibit:L('Antes e depois','Before and after'),
   draft:L('A escrever.','To be written.'), all:L('Todos','All'),
-  sec:{context:L('Contexto','Context'),challenge:L('Problema de negócio','Business problem'),diagnosis:L('Diagnóstico','Diagnosis'),role:L('Meu papel','My role'),approach:L('Abordagem','Approach'),solution:L('Solução','Solution'),stakeholders:L('Áreas envolvidas','People involved'),execution:L('Execução','Execution'),tools:L('Métodos e ferramentas','Methods & tools'),results:L('Resultados','Results'),lessons:L('Aprendizado','Lessons learned')}
+  sec:{context:L('Contexto','Context'),challenge:L('Problema de negócio','Business problem'),diagnosis:L('Diagnóstico','Diagnosis'),role:L('Papel do Paulo','Paulo’s role'),approach:L('Abordagem','Approach'),solution:L('Solução','Solution'),stakeholders:L('Áreas envolvidas','People involved'),execution:L('Execução','Execution'),tools:L('Métodos e ferramentas','Methods & tools'),results:L('Resultados','Results'),lessons:L('Aprendizado','Lessons learned')}
 };
 function metricText(c){ return lang === 'en' && c.metricEn ? c.metricEn : c.metric; }
 function kv(k){ return lang==='en' && k[2] ? k[2] : k[0]; }
@@ -1351,7 +1489,7 @@ function openCase(id){
 function closeCase(silent){
   if(!current && cs.hidden) return;
   current = null; cs.hidden = true; cs.innerHTML = ''; document.body.classList.remove('lock');
-  document.title = 'Paulo Nobre | Process Improvement & Automation';
+  document.title = 'Paulo Nobre | Internal Products & Automation';
   if(!silent){
     var w = document.getElementById('cases');
     if(lastFocus && document.contains(lastFocus)) lastFocus.focus({preventScroll:true});
@@ -1453,7 +1591,7 @@ if('IntersectionObserver' in window){
   var ctx = cv.getContext('2d');
   var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var W, H, L, S, hz, vx, dpr, bg, parts = [], running = false, raf = 0, last = 0, t0 = performance.now();
-  var gold = '217,130,91', ivory = '240,235,225';
+  var gold = '255,64,0', ivory = '253,232,168';
   function rnd(seed){ return function(){ seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }; }
 
   function setup(){
@@ -1488,7 +1626,7 @@ if('IntersectionObserver' in window){
     /* glow breathes very gently */
     var pulse = still ? 1 : 0.9 + 0.1*Math.sin(t*0.8);
     var g = ctx.createRadialGradient(vx,hz,0,vx,hz,S*0.55*pulse);
-    g.addColorStop(0,'rgba(255,228,210,.85)'); g.addColorStop(.04,'rgba(240,170,130,.5)'); g.addColorStop(.18,'rgba('+gold+',.18)'); g.addColorStop(1,'rgba('+gold+',0)');
+    g.addColorStop(0,'rgba(255,232,168,.85)'); g.addColorStop(.04,'rgba(255,128,0,.5)'); g.addColorStop(.18,'rgba('+gold+',.18)'); g.addColorStop(1,'rgba('+gold+',0)');
     ctx.fillStyle = g; ctx.fillRect(0,0,L,S);
     for(var i=0;i<parts.length;i++){
       var q = parts[i];
@@ -1563,6 +1701,199 @@ if(reduce || !('IntersectionObserver' in window)){
   }, {threshold:.12, rootMargin:'0px 0px -6% 0px'});
   targets.forEach(function(el){ io.observe(el); });
 }
+})();
+</script>
+<script id="noir-bg">/* NOIR ANIMATED BACKGROUND: builds a fixed layer behind the page with
+   light rays, a drifting glow, floating crystals, butterflies, labelled frames and dust.
+   Everything is positioned at random and re-randomised over time. */
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var small = window.innerWidth < 760;
+  var R = function(a,b){ return a + Math.random()*(b-a); };
+  var pick = function(arr){ return arr[Math.floor(Math.random()*arr.length)]; };
+  var W = function(){ return window.innerWidth; }, H = function(){ return window.innerHeight; };
+
+  var nb = document.createElement('div');
+  nb.className = 'nb'; nb.setAttribute('aria-hidden','true');
+  nb.innerHTML =
+    ''
+    + '<div class="nb__glow"></div><div class="nb__rays"></div><div class="nb__rays nb__rays--2"></div>';
+  document.body.insertBefore(nb, document.body.firstChild);
+
+  /* drifting glow */
+  var glow = nb.querySelector('.nb__glow');
+  function moveGlow(){ glow.style.transform = 'translate3d('+R(.05,.95)*W()+'px,'+R(.1,.9)*H()+'px,0)'; }
+  moveGlow(); if(!reduce) setInterval(moveGlow, 16000);
+
+  /* dust motes concentrated in the light beam (top right) */
+  var motes = small ? 14 : 30;
+  for(var m=0;m<motes;m++){
+    var d = document.createElement('i'); d.className = 'nb__mote'; var z = R(1,2.8);
+    d.style.cssText = 'left:'+R(40,98)+'%;top:'+R(5,80)+'%;width:'+z+'px;height:'+z+'px;--o:'+R(.2,.6).toFixed(2)
+      +';--d:'+R(12,26).toFixed(1)+'s;--dl:-'+R(0,26).toFixed(1)+'s;--dx:'+R(-60,20)+'px;--dy:'+R(-160,-40)+'px';
+    nb.appendChild(d);
+  }
+
+  /* labelled frames that fade in and out at random places */
+  var words = ['[mapeamento]','[causa raiz]','[regras]','[dados]','[automação]','[DMAIC]','[indicadores]','[PMO]','[python]','[controle]'];
+  var boxes = 0;
+  function placeBox(b){
+    b.style.left = (Math.random()<.5 ? R(1,16) : R(72,86))+'%'; b.style.top = R(6,80)+'%';
+    b.style.width = R(110,190)+'px'; b.style.height = R(70,170)+'px';
+    var used=[].map.call(nb.querySelectorAll('.nb__box span'),function(x){return x.textContent;}); var free=words.filter(function(w){return used.indexOf(w)<0;}); b.firstChild.textContent = pick(free.length?free:words);
+  }
+  function cycle(b){
+    placeBox(b);
+    setTimeout(function(){ b.classList.add('on'); }, 60);
+    setTimeout(function(){ b.classList.remove('on'); setTimeout(function(){ cycle(b); }, R(1500,5000)); }, R(6000,11000));
+  }
+  for(var k=0;k<boxes;k++){
+    var b = document.createElement('div'); b.className = 'nb__box'; b.appendChild(document.createElement('span'));
+    nb.appendChild(b);
+    if(reduce){ placeBox(b); b.classList.add('on'); }
+    else (function(bb){ setTimeout(function(){ cycle(bb); }, R(0,6000)); })(b);
+  }
+
+  /* ===== SEA: original painterly water + a school of fish (boids), drawn on canvas.
+     Visible on the first part of the page, fades out past the middle (the story section has its own animation). */
+  var sea = document.createElement('canvas'); sea.className = 'nb__sea';
+  nb.insertBefore(sea, nb.querySelector('.nb__rays'));
+  var cx = sea.getContext('2d'), DPR = Math.min(window.devicePixelRatio||1, small?1:1.5);
+  var SW, SH, water, fish = [], t0 = performance.now(), mouse = {x:-9999,y:-9999}, cur = R(-2.4,-1.9);
+  var GOLD = ['#E9C77B','#F2D9A0','#D8A85A','#FDE8A8','#C99A4E'], RED = ['#E2552B','#C8401E','#F06A2E','#D9461F'], DARK = ['#16324A','#1E3F5A','#0F2233','#24496A'];
+
+  function paintWater(w, h){
+    var c = document.createElement('canvas'); c.width = w; c.height = h; var g = c.getContext('2d');
+    var lg = g.createLinearGradient(0,0,0,h);
+    lg.addColorStop(0,'#24566f'); lg.addColorStop(.35,'#143a52'); lg.addColorStop(.75,'#0a2031'); lg.addColorStop(1,'#050c13');
+    g.fillStyle = lg; g.fillRect(0,0,w,h);
+    var Lx = w*.62, Ly = -h*.05;
+    var rg = g.createRadialGradient(Lx,Ly,0,Lx,Ly,h*.95);
+    rg.addColorStop(0,'rgba(236,232,210,.32)'); rg.addColorStop(.35,'rgba(170,190,190,.10)'); rg.addColorStop(1,'rgba(0,0,0,0)');
+    g.fillStyle = rg; g.fillRect(0,0,w,h);
+    var blues = ['#1f5a7a','#2b6c8c','#143a52','#0c2436','#3b7f99','#2d6f73','#18465f','#0e2a3d'];
+    var lights = ['#cfdbd2','#9cc3cf','#b8d2da','#7fb0c2','#e3e0cc','#8fbac8'];
+    var n = Math.round(w*h/700);
+    for(var i=0;i<n;i++){
+      var x = Math.random()*w, y = Math.random()*h;
+      var d = Math.hypot(x-Lx, y-Ly)/h;
+      var near = Math.random() < Math.max(0, .75 - d);
+      var ang = Math.atan2(y-Ly, x-Lx) + Math.PI/2 + R(-.6,.6);
+      g.save(); g.translate(x,y); g.rotate(ang);
+      g.globalAlpha = near ? R(.18,.5) : R(.2,.55);
+      g.fillStyle = near ? pick(lights) : pick(blues);
+      var sw = R(10,64)*(w/1600+.4), sh = R(3,13)*(w/1600+.4);
+      g.beginPath(); g.ellipse(0,0,sw/2,sh/2,0,0,Math.PI*2); g.fill();
+      g.restore();
+    }
+    for(var k=0;k<n/6;k++){ /* splatter near the light */
+      var a = R(0,Math.PI*2), r = Math.pow(Math.random(),1.6)*h*.7;
+      g.globalAlpha = R(.2,.7); g.fillStyle = Math.random()<.7?'#f6ecd0':'#a9d0dc';
+      g.beginPath(); g.arc(Lx+Math.cos(a)*r*1.1, Ly+Math.abs(Math.sin(a))*r, R(.6,2.2), 0, Math.PI*2); g.fill();
+    }
+    g.globalAlpha = 1;
+    var vg = g.createRadialGradient(w*.55,h*.3,h*.2,w*.5,h*.5,h*1.1);
+    vg.addColorStop(0,'rgba(0,0,0,0)'); vg.addColorStop(1,'rgba(3,6,10,.75)');
+    g.fillStyle = vg; g.fillRect(0,0,w,h);
+    return c;
+  }
+
+  function makeFish(){
+    var z = Math.pow(Math.random(), .8), r = Math.random();
+    var col = r < .55 ? pick(GOLD) : r < .82 ? pick(RED) : pick(DARK);
+    return { x:R(0,SW), y:R(0,SH), vx:Math.cos(cur), vy:Math.sin(cur), z:z,
+      L:(small?10:14) + z*(small?22:32), col:col, ph:R(0,6.28), f:R(7,11),
+      sp:(.55 + z*1.1)*(small?.8:1) };
+  }
+
+  function resize(){
+    SW = window.innerWidth; SH = window.innerHeight;
+    sea.width = Math.round(SW*DPR); sea.height = Math.round(SH*DPR);
+    water = paintWater(Math.round(SW*1.12), Math.round(SH*1.12));
+    var want = small ? 45 : Math.min(110, Math.round(SW*SH/13000));
+    while(fish.length < want) fish.push(makeFish());
+    fish.length = want;
+    fish.sort(function(a,b){ return a.z - b.z; });
+  }
+
+  function drawFish(f, t){
+    var L = f.L, wag = Math.sin(t*f.f*0.001*6.28/6 + f.ph);
+    var a = Math.atan2(f.vy, f.vx);
+    cx.save(); cx.translate(f.x, f.y); cx.rotate(a + wag*.06);
+    cx.globalAlpha = .12 + f.z*.3;
+    cx.fillStyle = f.col;
+    cx.beginPath();
+    cx.moveTo(L*.5,0);
+    cx.bezierCurveTo(L*.32,-L*.19,-L*.18,-L*.13,-L*.3,0);
+    cx.bezierCurveTo(-L*.18,L*.13,L*.32,L*.19,L*.5,0);
+    cx.fill();
+    cx.save(); cx.translate(-L*.28,0); cx.rotate(wag*.45);
+    cx.beginPath(); cx.moveTo(0,0); cx.lineTo(-L*.24,-L*.15); cx.lineTo(-L*.18,0); cx.lineTo(-L*.24,L*.15); cx.closePath(); cx.fill();
+    cx.restore();
+    cx.globalAlpha *= .7; cx.lineCap = 'round';
+    cx.strokeStyle = 'rgba(255,246,220,.55)'; cx.lineWidth = Math.max(1, L*.05);
+    cx.beginPath(); cx.moveTo(L*.36,-L*.04); cx.quadraticCurveTo(L*.05,-L*.12,-L*.2,-L*.05); cx.stroke();
+    cx.strokeStyle = 'rgba(5,12,20,.45)';
+    cx.beginPath(); cx.moveTo(L*.3,L*.07); cx.quadraticCurveTo(0,L*.12,-L*.22,L*.05); cx.stroke();
+    cx.restore();
+  }
+
+  function step(dt){
+    cur += R(-.004,.004); if(cur < -2.7) cur = -2.7; if(cur > -1.6) cur = -1.6;
+    var cvx = Math.cos(cur), cvy = Math.sin(cur), n = fish.length;
+    for(var i=0;i<n;i++){
+      var a = fish[i], ax=0, ay=0, cxs=0, cys=0, sx=0, sy=0, c=0;
+      for(var j=0;j<n;j++){ if(i===j) continue; var b = fish[j];
+        if(Math.abs(b.z-a.z) > .35) continue;
+        var dx=b.x-a.x, dy=b.y-a.y, d2=dx*dx+dy*dy;
+        if(d2 < 4900){ c++; ax+=b.vx; ay+=b.vy; cxs+=dx; cys+=dy; if(d2 < 500){ sx-=dx/(d2+1); sy-=dy/(d2+1); } }
+      }
+      var vx=a.vx, vy=a.vy;
+      if(c){ vx += (ax/c - vx)*.05 + (cxs/c)*.0009; vy += (ay/c - vy)*.05 + (cys/c)*.0009; }
+      vx += sx*1.6 + (cvx - vx)*.012; vy += sy*1.6 + (cvy - vy)*.012;
+      var mx=a.x-mouse.x, my=a.y-mouse.y, md=mx*mx+my*my;
+      if(md < 22000){ vx += mx/Math.sqrt(md+1)*.25; vy += my/Math.sqrt(md+1)*.25; }
+      var m = Math.hypot(vx,vy)||1; vx/=m; vy/=m;
+      a.vx=vx; a.vy=vy;
+      a.x += vx*a.sp*dt*.06; a.y += vy*a.sp*dt*.06;
+      var pad = a.L;
+      if(a.x < -pad) a.x = SW+pad; if(a.x > SW+pad) a.x = -pad;
+      if(a.y < -pad){ a.y = SH+pad; a.x = R(0,SW); } if(a.y > SH+pad) a.y = -pad;
+    }
+  }
+
+  var vis = 1, last = performance.now(), running = true;
+  function seaVis(){
+    var max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    var p = window.scrollY / max;
+    vis = 1 - Math.min(1, Math.max(0, (p - .38) / .2));
+    sea.style.opacity = vis;
+  }
+  function frame(now){
+    var dt = Math.min(50, now - last); last = now;
+    if(vis > 0 && running){
+      var t = now - t0;
+      cx.setTransform(DPR,0,0,DPR,0,0);
+      cx.globalAlpha = 1; cx.fillStyle = '#05090e'; cx.fillRect(0,0,SW,SH);
+      var ox = Math.sin(t/9000)*SW*.03 - SW*.06, oy = Math.cos(t/11000)*SH*.025 - SH*.06;
+      cx.globalAlpha = .62; cx.drawImage(water, ox, oy);
+      cx.globalAlpha = .16; cx.drawImage(water, -SW*.06 - ox*.6, -SH*.06 - oy*.6);
+      if(!reduce) step(dt);
+      for(var i=0;i<fish.length;i++) drawFish(fish[i], t);
+      cx.globalAlpha = 1;
+      /* calmer reading zone behind the centred content */
+      var rz = cx.createRadialGradient(SW/2,SH*.5,0,SW/2,SH*.5,Math.max(SW*.42,320));
+      rz.addColorStop(0,'rgba(5,9,14,.5)'); rz.addColorStop(1,'rgba(5,9,14,0)');
+      cx.fillStyle = rz; cx.fillRect(0,0,SW,SH);
+    }
+    if(!reduce) requestAnimationFrame(frame);
+  }
+  resize(); seaVis();
+  window.addEventListener('resize', function(){ clearTimeout(resize._t); resize._t = setTimeout(resize, 200); });
+  window.addEventListener('scroll', seaVis, {passive:true});
+  window.addEventListener('pointermove', function(e){ mouse.x = e.clientX; mouse.y = e.clientY; }, {passive:true});
+  document.addEventListener('visibilitychange', function(){ running = !document.hidden; last = performance.now(); });
+  requestAnimationFrame(frame);
 })();
 </script>
 </body>
