@@ -533,6 +533,7 @@ p[data-ph],time[data-ph]{width:fit-content}
 .sec__head--stack .h2{max-width:none}
 .rec__q{font-size:4.2rem;line-height:1;height:40px;font-family:Georgia,serif}
 .hero__pos span{white-space:nowrap}
+@media (max-width:1100px){.hero__pos span+span{white-space:normal}}
 @media (max-width:760px){ .card__foot .card__facts{grid-template-columns:1fr} }
 
 /* ================= v4 OVERRIDES ================= */
@@ -832,6 +833,7 @@ html{scroll-padding-top:68px}
   .cases{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;margin:0 calc(var(--g) * -1);padding:2px var(--g) 6px;scroll-padding-left:var(--g);scrollbar-width:none}
   .cases::-webkit-scrollbar{display:none}
   .cases .card{flex:0 0 86%;scroll-snap-align:start}
+  .cases:has(>.card--wide){align-items:flex-start}
   .cases__nav{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px}
   .cases__count{font-size:.85rem;color:var(--tx2)}
   .cases__dots{display:flex;gap:6px}
@@ -885,7 +887,16 @@ body{padding-top:calc(var(--hdr) + env(safe-area-inset-top,0px))}
   .cases{grid-template-columns:repeat(6,minmax(0,1fr))}
   .cases>.card{grid-column:span 2}
   .cases>.card:nth-child(4):nth-last-child(2){grid-column:2 / span 2}
+  /* a wide case on top, the other four in two rows of two */
+  .cases>.card--wide{grid-column:1 / -1}
+  .cases:has(>.card--wide)>.card:not(.card--wide){grid-column:span 3}
+  .cases:has(>.card--wide)[data-n="3"]>.card:not(.card--wide){grid-column:span 2}
+  .cases:has(>.card--wide)[data-n="1"]>.card:not(.card--wide){grid-column:1 / -1}
+  .card--wide .card__main{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:clamp(24px,3vw,44px);align-items:start}
+  .card--wide .card__main>.card__kind,.card--wide .card__main>h3{grid-column:1 / -1}
+  .card--wide .card__main>h3{margin-bottom:6px}
 }
+@media (min-width:761px) and (max-width:1080px){ .cases>.card--wide{grid-column:1 / -1} }
 </style>
 <style id="noir">
 /* ================= NOIR TEST LAYER =================
@@ -939,12 +950,6 @@ body::after{content:'';position:fixed;inset:0;z-index:89;pointer-events:none;
 
 /* hero: light through venetian blinds + a red neon line */
 .hero{position:relative;overflow:hidden;isolation:isolate}
-.hero::before{content:'';position:absolute;z-index:-1;top:-20%;right:-12%;width:75%;height:150%;
-  background:repeating-linear-gradient(180deg,rgba(255,192,0,.045) 0 26px,transparent 26px 58px);
-  transform:skewY(-24deg) rotate(-6deg);filter:blur(2px);
-  -webkit-mask-image:radial-gradient(ellipse 55% 42% at 58% 52%,#000 15%,transparent 72%);mask-image:radial-gradient(ellipse 55% 42% at 58% 52%,#000 15%,transparent 72%)}
-.hero::after{content:'';position:absolute;z-index:-1;left:-10%;bottom:-30%;width:60%;height:80%;
-  background:radial-gradient(closest-side,rgba(var(--accent-rgb),.16),transparent);filter:blur(20px)}
 .hero__pos{color:var(--amber)}
 .hero h1{color:var(--cream);text-shadow:0 2px 30px rgba(0,0,0,.8)}
 .hero h1::after{content:'';display:block;width:72px;height:3px;margin:22px auto 0;background:var(--spark);box-shadow:var(--spark-glow)}
@@ -987,7 +992,6 @@ body::after{content:'';position:fixed;inset:0;z-index:89;pointer-events:none;
 :focus-visible{outline-color:var(--amber)}
 
 @media (prefers-reduced-motion:reduce){body::before,.brand__tag{animation:none}}
-@media (max-width:760px){.hero::before{width:120%;right:-40%}}
 
 /* ================= NOIR ANIMATED BACKGROUND =================
    Fixed layer behind everything (z-index:-1). Built by noir-bg.js. */
@@ -997,21 +1001,8 @@ body::after{content:'';position:fixed;inset:0;z-index:89;pointer-events:none;
 .nb{position:fixed;inset:0;z-index:-1;background:#0B0A06;overflow:hidden;pointer-events:none;contain:strict}
 .nb svg{display:block;overflow:visible}
 
-/* light rays from the top right, slow sway + breathing */
-.nb__rays{position:absolute;inset:-30%;transform-origin:78% 2%;
-  background:repeating-conic-gradient(from 196deg at 78% 2%,rgba(255,170,40,.045) 0deg 1.6deg,transparent 1.6deg 7deg,rgba(255,120,0,.025) 7deg 8.4deg,transparent 8.4deg 15deg);
-  -webkit-mask-image:radial-gradient(ellipse 60% 70% at 78% 2%,#000 0%,rgba(0,0,0,.5) 40%,transparent 75%);mask-image:radial-gradient(ellipse 60% 70% at 78% 2%,#000 0%,rgba(0,0,0,.5) 40%,transparent 75%);
-  filter:blur(5px);animation:nbSway 26s ease-in-out infinite alternate,nbBreath 9s ease-in-out infinite alternate}
-.nb__rays--2{animation-duration:34s,13s;animation-direction:alternate-reverse,alternate;opacity:.7;transform:rotate(4deg)}
-@keyframes nbSway{from{transform:rotate(-4deg)}to{transform:rotate(5deg)}}
-@keyframes nbBreath{from{opacity:.55}to{opacity:1}}
-
-/* drifting warm glow */
-.nb__glow{position:absolute;width:70vmax;height:70vmax;left:-35vmax;top:-35vmax;border-radius:50%;
-  background:radial-gradient(closest-side,rgba(255,64,0,.13),rgba(255,128,0,.05) 50%,transparent);transition:transform 16s ease-in-out;will-change:transform}
-
 /* sea: painterly water + school of fish (canvas) */
-.nb__sea{position:absolute;inset:0;width:100%;height:100%;display:block;transition:opacity .4s linear;filter:blur(2.5px);transform:scale(1.03)}
+.nb__sea{position:absolute;inset:0;width:100%;height:100%;display:block;transition:opacity .4s linear;transform:scale(1.03)}
 /* thin grid frames with bracket labels */
 .nb__box{position:absolute;border:1px solid rgba(253,232,168,.11);opacity:0;transition:opacity 2.8s ease}
 .nb__box.on{opacity:1}
@@ -1023,6 +1014,63 @@ body::after{content:'';position:fixed;inset:0;z-index:89;pointer-events:none;
 @keyframes nbMote{0%{transform:translate3d(0,0,0);opacity:0}15%{opacity:var(--o,.5)}85%{opacity:var(--o,.5)}100%{transform:translate3d(var(--dx,-30px),var(--dy,-120px),0);opacity:0}}
 
 @media (prefers-reduced-motion:reduce){.nb *{animation:none!important;transition:none!important}}
+.card__txt p{font-size:.98rem;color:var(--tx2)}
+.card__txt p+p{margin-top:.7em}
+.card__res ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.card__res li{font-size:.92rem;line-height:1.5;color:var(--tx2);padding-left:14px;position:relative}
+.card__res li::before{content:'';position:absolute;left:0;top:.62em;width:5px;height:5px;border-radius:50%;background:var(--accent-text,var(--acc))}
+.card__res li b{color:var(--tx);font-weight:600}
+.card__biz{margin-top:18px;padding:16px 18px;border:1px solid var(--line2);background:rgba(253,232,168,.04)}
+.card__biz .label{margin-bottom:6px}
+.card__biz p:not(.label){font-size:.98rem;color:var(--tx);line-height:1.55;max-width:90ch}
+@media (min-width:1081px){ .card--wide .card__main>.card__biz{grid-column:1 / -1} }
+.cases>.card--more{display:none}
+.cases.cases--all>.card--more{display:flex}
+.cases__more{display:flex;justify-content:center;margin-top:clamp(20px,2.4vw,32px)}
+@media (min-width:1081px){ .cases:has(>.card--wide)[data-n="2"]>.card--more{grid-column:span 3} }
+/* ================= OCEAN DEPTH: blue surfaces, layers crossfade with scroll ================= */
+:root{--bg:#06131F;--panel:#0A1B2A;--panel2:#0E2233;--deep:#051019}
+html{background:#060c27}
+body{background:transparent!important}
+.paper,.light{--bg:#06131F;--panel:#0A1B2A;--panel2:#0E2233;--deep:#051019;background:rgba(4,14,26,.18)}
+.band{background:rgba(3,12,22,.5)}
+.hdr{background:rgba(8,12,16,.84)}
+.cs__bar{background:rgba(6,12,20,.94)}
+.nb{background:#10285e}
+.nb__deep,.nb__school,.nb__mid{position:absolute;left:0;top:-20px;width:100%;height:calc(100% + 40px);display:block;will-change:transform,opacity}
+.nb__mid{}
+.nb__school{opacity:0;animation:nbDrift 60s ease-in-out infinite alternate}
+@keyframes nbDrift{from{translate:-14px 0}to{translate:14px 0}}
+.nb__motes{position:absolute;inset:0;display:none}
+@media (prefers-reduced-motion:reduce){.nb__school{animation:none}}
+/* story animation continues behind the footer and fades in at the top */
+#story{overflow:visible}
+.story-fx{-webkit-mask-image:linear-gradient(to left,#000 45%,transparent 100%),linear-gradient(to bottom,transparent 0,#000 18%,#000 100%);
+  mask-image:linear-gradient(to left,#000 45%,transparent 100%),linear-gradient(to bottom,transparent 0,#000 18%,#000 100%);
+  -webkit-mask-composite:source-in;mask-composite:intersect}
+footer.foot{position:relative;z-index:1}
+/* sunbeams and caustics (built in the background script) */
+.nb__rays{position:absolute;left:0;top:0;width:0;height:0;transform-origin:0 0;will-change:transform;pointer-events:none}
+.nb__ray{position:absolute;left:0;top:0;will-change:opacity}
+.nb__ray span{position:absolute;display:block;left:-150vmax;top:-150vmax;width:300vmax;height:300vmax;mix-blend-mode:screen;transform-origin:50% 50%;
+  animation:raySway 44s ease-in-out infinite alternate,rayBreath 11s ease-in-out infinite alternate}
+.nb__ray--warm span{filter:blur(10px);-webkit-mask-image:radial-gradient(circle closest-side,transparent 0,#000 6%,rgba(0,0,0,.55) 24%,transparent 48%);mask-image:radial-gradient(circle closest-side,transparent 0,#000 6%,rgba(0,0,0,.55) 24%,transparent 48%)}
+.nb__ray--cool span{filter:blur(14px);animation-duration:60s,15s;-webkit-mask-image:radial-gradient(circle closest-side,transparent 0,#000 8%,rgba(0,0,0,.6) 35%,transparent 80%);mask-image:radial-gradient(circle closest-side,transparent 0,#000 8%,rgba(0,0,0,.6) 35%,transparent 80%)}
+@keyframes raySway{from{transform:rotate(-2.2deg)}to{transform:rotate(2.4deg)}}
+@keyframes rayBreath{from{opacity:.78}to{opacity:1}}
+.nb__caus{position:absolute;inset:0;opacity:0;will-change:opacity;mix-blend-mode:screen;
+  -webkit-mask-image:linear-gradient(180deg,#000 0,rgba(0,0,0,.5) 60%,transparent 100%);mask-image:linear-gradient(180deg,#000 0,rgba(0,0,0,.5) 60%,transparent 100%)}
+.nb__caus i{position:absolute;inset:-640px;background-size:1100px 1100px;opacity:.045;filter:blur(3px);animation:causDrift 50s ease-in-out infinite alternate}
+.nb__caus i+i{background-size:1500px 1500px;opacity:.03;animation-duration:70s;animation-direction:alternate-reverse}
+@keyframes causDrift{from{transform:translate3d(-90px,-40px,0)}to{transform:translate3d(110px,70px,0)}}
+@media (prefers-reduced-motion:reduce){.nb__ray span,.nb__caus i{animation:none}}
+/* slow breathing of the painted background layers */
+.nb__sea{animation:bgSurface 46s ease-in-out infinite alternate}
+.nb__mid{animation:bgDrift 52s ease-in-out infinite alternate}
+.nb__deep{animation:bgDrift 64s ease-in-out infinite alternate-reverse}
+@keyframes bgSurface{from{translate:-10px 0;scale:1}to{translate:10px -6px;scale:1.025}}
+@keyframes bgDrift{from{translate:-12px 4px;scale:1.01}to{translate:12px -4px;scale:1.045}}
+@media (prefers-reduced-motion:reduce){.nb__sea,.nb__mid,.nb__deep{animation:none}}
 </style>
 </head>
 <body>
@@ -1065,9 +1113,9 @@ body::after{content:'';position:fixed;inset:0;z-index:89;pointer-events:none;
 <!-- ============ 2. HERO ============ -->
 <section class="hero">
   <div class="wrap hero__grid">
-    <p class="hero__pos"><span data-pt="Analista de Processos Pleno" data-en="Process Analyst (mid-level)">Process Analyst (mid-level)</span><span data-pt="Produtos internos · Automação · Operações financeiras" data-en="Internal products · Automation · Financial operations">Internal products · Automation · Financial operations</span></p>
-    <h1 data-pt="Paulo constrói produtos internos que tornam operações financeiras mais confiáveis." data-en="Paulo builds internal products that make financial operations more reliable.">Paulo builds internal products that make financial operations more reliable.</h1>
-    <p class="hero__lede" data-pt="Ele atua da identificação do problema à entrega da solução: levanta necessidades com as áreas, estrutura regras de negócio, define requisitos, alinha prioridades com a gestão e implementa a solução. O resultado são operações com menos dependência manual e menos risco." data-en="He works from identifying the problem to delivering the solution: he gathers needs with the teams, structures business rules, defines requirements, aligns priorities with management and implements the solution. The result is operations with less manual dependency and less risk.">He works from identifying the problem to delivering the solution: he gathers needs with the teams, structures business rules, defines requirements, aligns priorities with management and implements the solution. The result is operations with less manual dependency and less risk.</p>
+    <p class="hero__pos"><span data-pt="Analista de Processos Pleno" data-en="Process Analyst (mid-level)">Process Analyst (mid-level)</span><span data-pt="Produtos internos e automação em fintech · De fluxos manuais a ferramentas escaláveis" data-en="Internal products &amp; automation in fintech · Turning manual workflows into scalable tools">Internal products &amp; automation in fintech · Turning manual workflows into scalable tools</span></p>
+    <h1 data-pt="Construo produtos internos que tornam operações financeiras mais confiáveis." data-en="I build internal products that make financial operations more reliable.">I build internal products that make financial operations more reliable.</h1>
+    <p class="hero__lede" data-pt="Atuo da identificação do problema à entrega da solução: levanto necessidades com as áreas, estruturo regras de negócio, defino requisitos, alinho prioridades com a gestão e implemento a solução. O resultado são operações com menos dependência manual e menos risco." data-en="I work from identifying the problem to delivering the solution: I gather needs with the teams, structure business rules, define requirements, align priorities with management and implement the solution. The result is operations with less manual dependency and less risk.">I work from identifying the problem to delivering the solution: I gather needs with the teams, structure business rules, define requirements, align priorities with management and implement the solution. The result is operations with less manual dependency and less risk.</p>
     <div class="hero__cta">
       <a class="btn btn--solid" href="#cases" data-pt="Ver os cases" data-en="See the cases">See the cases</a>
       <a class="btn" href="projetos/" data-proj-link data-pt="Projetos detalhados" data-en="Detailed projects">Detailed projects</a>
@@ -1081,7 +1129,7 @@ body::after{content:'';position:fixed;inset:0;z-index:89;pointer-events:none;
 <!-- ============ 3. IMPACT BAND ============ -->
 <section class="band" aria-label="Highlights">
   <div class="wrap band__grid">
-    <div class="bk rv"><b class="num" data-pt="R$ 200 mil" data-en="R$ 200k">R$ 200k</b><span data-pt="Por ano em capacidade liberada: o equivalente a três pessoas em tempo integral" data-en="A year in freed capacity: the equivalent of three full-time people">A year in freed capacity: the equivalent of three full-time people</span></div>
+    <div class="bk rv"><b class="num" data-pt="+R$ 500 mil" data-en="+R$ 500k">+R$ 500k</b><span data-pt="Por ano em capacidade liberada: o equivalente a três pessoas em tempo integral" data-en="A year in freed capacity: the equivalent of three full-time people">A year in freed capacity: the equivalent of three full-time people</span></div>
     <div class="bk rv"><b class="num">200+</b><span data-pt="Rejeições de pagamento por dia com tratativa definida por regras" data-en="Rejected payments a day routed by business rules">Rejected payments a day routed by business rules</span></div>
     <div class="bk rv"><b class="num" data-pt="Green Belt" data-en="Green Belt">Green Belt</b><span data-pt="Lean Six Sigma · em operações financeiras desde 2022" data-en="Lean Six Sigma · in financial operations since 2022">Lean Six Sigma · in financial operations since 2022</span></div>
   </div>
@@ -1092,11 +1140,12 @@ body::after{content:'';position:fixed;inset:0;z-index:89;pointer-events:none;
   <div class="wrap">
     <div class="sec__head sec__head--stack">
       <p class="label label--acc rv">Cases</p>
-      <h2 class="h2 rv" data-pt="O que Paulo entrega, com evidência" data-en="What Paulo delivers, with evidence">What Paulo delivers, with evidence</h2>
-      <p class="lead rv" data-pt="Quatro problemas reais de uma operação financeira. Cada case mostra o problema, a parte dele no trabalho, como a solução funciona e o que continua com pessoas. Todos têm página detalhada e demonstração com dados sintéticos." data-en="Four real problems from a financial operation. Each case shows the problem, his part in the work, how the solution works and what stays with people. Each has a detailed page and a demo with synthetic data.">Four real problems from a financial operation. Each case shows the problem, his part in the work, how the solution works and what stays with people. Each has a detailed page and a demo with synthetic data.</p>
+      <h2 class="h2 rv" data-pt="O que eu entrego, com evidência" data-en="What I deliver, with evidence">What I deliver, with evidence</h2>
+      <p class="lead rv" data-pt="Quatro problemas reais de uma operação financeira. Cada case mostra o problema, a minha parte no trabalho, como a solução funciona e o que continua com pessoas." data-en="Four real problems from a financial operation. Each case shows the problem, my part in the work, how the solution works and what stays with people.">Four real problems from a financial operation. Each case shows the problem, my part in the work, how the solution works and what stays with people.</p>
     </div>
     <div class="cases" id="caseList"></div>
     <div class="cases__nav" aria-hidden="true"><span class="cases__count" id="caseCount"></span><span class="cases__dots" id="caseDots"></span></div>
+    <div class="cases__more"><button class="btn" type="button" id="casesMore" aria-controls="caseList" aria-expanded="false"></button></div>
   </div>
 </section>
 
@@ -1104,18 +1153,18 @@ body::after{content:'';position:fixed;inset:0;z-index:89;pointer-events:none;
 <section class="sec" id="method">
   <div class="wrap">
     <div class="sec__head">
-      <p class="label label--acc rv" data-pt="Como ele trabalha" data-en="How he works">How he works</p>
+      <p class="label label--acc rv" data-pt="Como eu trabalho" data-en="How I work">How I work</p>
       <h2 class="h2 rv" data-pt="Primeiro o problema, depois a ferramenta" data-en="Problem first, tools second">Problem first, tools second</h2>
-      <p class="lead rv" data-pt="A automação é um meio, não o objetivo. É assim que Paulo conduz um produto, do problema ao resultado." data-en="Automation is a means, not the goal. This is how Paulo runs a product, from problem to result.">Automation is a means, not the goal. This is how Paulo runs a product, from problem to result.</p>
+      <p class="lead rv" data-pt="A automação é um meio, não o objetivo. É assim que conduzo um produto, do problema ao resultado." data-en="Automation is a means, not the goal. This is how I run a product, from problem to result.">Automation is a means, not the goal. This is how I run a product, from problem to result.</p>
     </div>
     <div class="method" id="methodRow">
       <span class="method__rail" aria-hidden="true"></span>
-      <div class="step"><span class="step__n num">01</span><h3 data-pt="Descobrir" data-en="Discover">Discover</h3><p class="step__lead" data-pt="Primeiro, o problema real." data-en="Find the real problem first.">Find the real problem first.</p><p data-pt="Mapeia o fluxo com quem executa e mede onde tempo, dinheiro e controle se perdem, antes de propor qualquer solução." data-en="He maps the flow with the people who run it and measures where time, money and control are lost, before proposing any solution.">He maps the flow with the people who run it and measures where time, money and control are lost, before proposing any solution.</p></div>
-      <div class="step"><span class="step__n num">02</span><h3 data-pt="Definir regras e requisitos" data-en="Define rules and requirements">Define rules and requirements</h3><p class="step__lead" data-pt="O que está na cabeça vira regra." data-en="What lives in heads becomes rules.">What lives in heads becomes rules.</p><p data-pt="Transforma o que está na cabeça das pessoas em regras explícitas e requisitos claros, com as exceções e quem decide cada uma." data-en="He turns what lives in people’s heads into explicit rules and clear requirements, with the exceptions and who decides each one.">He turns what lives in people’s heads into explicit rules and clear requirements, with the exceptions and who decides each one.</p></div>
-      <div class="step"><span class="step__n num">03</span><h3 data-pt="Priorizar" data-en="Prioritise">Prioritise</h3><p class="step__lead" data-pt="Impacto no cliente primeiro." data-en="Customer impact first.">Customer impact first.</p><p data-pt="Prioriza por impacto no cliente, risco financeiro e operacional, volume e capacidade, e deixa os trade-offs explícitos. Com a gestão alinhada, assumiu o vencimento de cinco casos de SLA curto para concluir a automação que hoje trata mais de 200 rejeições por dia." data-en="He prioritises by customer impact, financial and operational risk, volume and capacity, and makes trade-offs explicit. With management aligned, he accepted that five short-SLA cases would miss their deadline in order to finish the automation that now handles more than 200 rejections a day.">He prioritises by customer impact, financial and operational risk, volume and capacity, and makes trade-offs explicit. With management aligned, he accepted that five short-SLA cases would miss their deadline in order to finish the automation that now handles more than 200 rejections a day.</p></div>
-      <div class="step"><span class="step__n num">04</span><h3 data-pt="Entregar e medir" data-en="Deliver and measure">Deliver and measure</h3><p class="step__lead" data-pt="O resultado precisa durar." data-en="The result has to last.">The result has to last.</p><p data-pt="Automatiza só o que segue sempre a mesma regra, registra o que mudou com período e amostra e define o que fazer quando algo falha." data-en="He automates only what always follows the same rule, records what changed with the period and sample, and defines what happens when something fails.">He automates only what always follows the same rule, records what changed with the period and sample, and defines what happens when something fails.</p></div>
+      <div class="step"><span class="step__n num">01</span><h3 data-pt="Descobrir" data-en="Discover">Discover</h3><p class="step__lead" data-pt="Primeiro, o problema real." data-en="Find the real problem first.">Find the real problem first.</p><p data-pt="Mapeio o fluxo com quem executa e meço onde tempo, dinheiro e controle se perdem, antes de propor qualquer solução." data-en="I map the flow with the people who run it and measure where time, money and control are lost, before proposing any solution.">I map the flow with the people who run it and measure where time, money and control are lost, before proposing any solution.</p></div>
+      <div class="step"><span class="step__n num">02</span><h3 data-pt="Definir regras e requisitos" data-en="Define rules and requirements">Define rules and requirements</h3><p class="step__lead" data-pt="O que está na cabeça vira regra." data-en="What lives in heads becomes rules.">What lives in heads becomes rules.</p><p data-pt="Transformo o que está na cabeça das pessoas em regras explícitas e requisitos claros, com as exceções e quem decide cada uma." data-en="I turn what lives in people’s heads into explicit rules and clear requirements, with the exceptions and who decides each one.">I turn what lives in people’s heads into explicit rules and clear requirements, with the exceptions and who decides each one.</p></div>
+      <div class="step"><span class="step__n num">03</span><h3 data-pt="Priorizar" data-en="Prioritise">Prioritise</h3><p class="step__lead" data-pt="Impacto no cliente primeiro." data-en="Customer impact first.">Customer impact first.</p><p data-pt="Priorizo por impacto no cliente, risco financeiro e operacional, volume e capacidade, e deixo os trade-offs explícitos. Com a gestão alinhada, assumi o vencimento de cinco casos de SLA curto para concluir a automação que hoje trata mais de 200 rejeições por dia." data-en="I prioritise by customer impact, financial and operational risk, volume and capacity, and make trade-offs explicit. With management aligned, I accepted that five short-SLA cases would miss their deadline in order to finish the automation that now handles more than 200 rejections a day.">I prioritise by customer impact, financial and operational risk, volume and capacity, and make trade-offs explicit. With management aligned, I accepted that five short-SLA cases would miss their deadline in order to finish the automation that now handles more than 200 rejections a day.</p></div>
+      <div class="step"><span class="step__n num">04</span><h3 data-pt="Entregar e medir" data-en="Deliver and measure">Deliver and measure</h3><p class="step__lead" data-pt="O resultado precisa durar." data-en="The result has to last.">The result has to last.</p><p data-pt="Automatizo só o que segue sempre a mesma regra, registro o que mudou com período e amostra e defino o que fazer quando algo falha." data-en="I automate only what always follows the same rule, record what changed with the period and sample, and define what happens when something fails.">I automate only what always follows the same rule, record what changed with the period and sample, and define what happens when something fails.</p></div>
     </div>
-    <p class="label label--acc principles__label rv" data-pt="No que ele acredita" data-en="What he believes">What he believes</p>
+    <p class="label label--acc principles__label rv" data-pt="No que eu acredito" data-en="What I believe">What I believe</p>
     <div class="principles">
       <p class="rv" data-pt="Tecnologia é meio. <span>O resultado é um processo melhor.</span>" data-en="Technology is the means. <span>The result is a better process.</span>">Technology is the means. <span>The result is a better process.</span></p>
       <p class="rv" data-pt="A automação serve para reduzir <span>dependência, risco e esforço manual.</span>" data-en="Automation exists to reduce <span>dependency, risk and manual effort.</span>">Automation exists to reduce <span>dependency, risk and manual effort.</span></p>
@@ -1131,7 +1180,7 @@ body::after{content:'';position:fixed;inset:0;z-index:89;pointer-events:none;
   <div class="wrap">
     <div class="sec__head sec__head--stack">
       <p class="label label--acc rv" data-pt="Carreira" data-en="Career">Career</p>
-      <h2 class="h2 rv" data-pt="Começou na operação, e é dela que vêm os problemas que ele resolve" data-en="He started in operations, and that is where the problems he solves come from">He started in operations, and that is where the problems he solves come from</h2>
+      <h2 class="h2 rv" data-pt="Comecei na operação, e é dela que vêm os problemas que resolvo" data-en="I started in operations, and that is where the problems I solve come from">I started in operations, and that is where the problems I solve come from</h2>
       <p class="lead rv" data-pt="Cada etapa somou uma camada: operação, melhoria de processos, PMO e, hoje, produtos internos com automação." data-en="Each step added a layer: operations, process improvement, PMO and, today, internal products with automation.">Each step added a layer: operations, process improvement, PMO and, today, internal products with automation.</p>
     </div>
     <ol class="progress rv" aria-label="Career progression">
@@ -1148,7 +1197,7 @@ body::after{content:'';position:fixed;inset:0;z-index:89;pointer-events:none;
           <p data-pt="Analista de Processos Pleno · Produtos internos e automação" data-en="Process Analyst (mid-level) · Internal products &amp; automation">Process Analyst (mid-level) · Internal products &amp; automation</p>
           <span class="job__tag" data-pt="Produtos internos · Automação" data-en="Internal products · Automation">Internal products · Automation</span>
         </div>
-        <p class="job__what" data-pt="Conduz produtos internos do BackOffice de uma fintech de crédito, do diagnóstico ao resultado: define regras e requisitos com a operação, prioriza com a gestão e entrega as soluções, construindo em Python e SQL porque não há um time de desenvolvimento dedicado. Automatizou atividades que exigiam três pessoas em tempo integral, liberando cerca de R$ 200 mil por ano em capacidade para outras tarefas, e conduziu a contratação e o treinamento de um novo assistente." data-en="He leads the BackOffice’s internal products at a credit fintech, from diagnosis to result: he defines rules and requirements with operations, prioritises with management and delivers the solutions, building them in Python and SQL because there is no dedicated development team. He automated work that took three full-time people, freeing about R$ 200k a year in capacity for other tasks, and led the hiring and training of a new assistant.">He leads the BackOffice’s internal products at a credit fintech, from diagnosis to result: he defines rules and requirements with operations, prioritises with management and delivers the solutions, building them in Python and SQL because there is no dedicated development team. He automated work that took three full-time people, freeing about R$ 200k a year in capacity for other tasks, and led the hiring and training of a new assistant.</p>
+        <p class="job__what" data-pt="Conduzo produtos internos do BackOffice de uma fintech de crédito, do diagnóstico ao resultado: defino regras e requisitos com a operação, priorizo com a gestão e entrego as soluções, construindo em Python e SQL porque não há um time de desenvolvimento dedicado. Automatizei atividades que exigiam três pessoas em tempo integral, liberando mais de R$ 500 mil por ano em capacidade para outras tarefas, e conduzi a contratação e o treinamento de um novo assistente." data-en="I lead the BackOffice’s internal products at a credit fintech, from diagnosis to result: I define rules and requirements with operations, prioritise with management and deliver the solutions, building them in Python and SQL because there is no dedicated development team. I automated work that took three full-time people, freeing more than R$ 500k a year in capacity for other tasks, and led the hiring and training of a new assistant.">I lead the BackOffice’s internal products at a credit fintech, from diagnosis to result: I define rules and requirements with operations, prioritise with management and deliver the solutions, building them in Python and SQL because there is no dedicated development team. I automated work that took three full-time people, freeing more than R$ 500k a year in capacity for other tasks, and led the hiring and training of a new assistant.</p>
       </article>
       <article class="job rv">
         <p class="job__when" data-pt="2025" data-en="2025">2025</p>
@@ -1157,7 +1206,7 @@ body::after{content:'';position:fixed;inset:0;z-index:89;pointer-events:none;
           <p data-pt="HR Business Partner · Consultoria interna de pessoas" data-en="HR Business Partner · Internal people consulting">HR Business Partner · Internal people consulting</p>
           <span class="job__tag">PMO</span>
         </div>
-        <p class="job__what" data-pt="Organizou em modelo de PMO as demandas de gestão de pessoas da rede de agências, dentro de um time Scrum, com Scrum Master e dailies. Também trabalhou com people analytics e dados de alto volume. Foi ali que a prática de PMO dele começou." data-en="He organised the branch network’s people-management requests in a PMO model, inside a Scrum team with a Scrum Master and dailies. He also worked with people analytics and high-volume data. That is where his PMO practice started.">He organised the branch network’s people-management requests in a PMO model, inside a Scrum team with a Scrum Master and dailies. He also worked with people analytics and high-volume data. That is where his PMO practice started.</p>
+        <p class="job__what" data-pt="Organizei em modelo de PMO as demandas de gestão de pessoas da rede de agências, dentro de um time Scrum, com Scrum Master e dailies. Também trabalhei com people analytics e dados de alto volume. Foi ali que minha prática de PMO começou." data-en="I organised the branch network’s people-management requests in a PMO model, inside a Scrum team with a Scrum Master and dailies. I also worked with people analytics and high-volume data. That is where my PMO practice started.">I organised the branch network’s people-management requests in a PMO model, inside a Scrum team with a Scrum Master and dailies. I also worked with people analytics and high-volume data. That is where my PMO practice started.</p>
       </article>
       <article class="job rv">
         <p class="job__when" data-pt="2024 – 2025" data-en="2024 – 2025">2024 – 2025</p>
@@ -1166,7 +1215,7 @@ body::after{content:'';position:fixed;inset:0;z-index:89;pointer-events:none;
           <p data-pt="Collateral Management · Garantias Cartorárias" data-en="Collateral Management · Notarial guarantees">Collateral Management · Notarial guarantees</p>
           <span class="job__tag" data-pt="Melhoria de processos" data-en="Process improvement">Process improvement</span>
         </div>
-        <p class="job__what" data-pt="Reestruturou o fluxo financeiro da operação de garantias cartorárias e automatizou etapas manuais de pagamento, economizando cerca de 42 horas por mês." data-en="He restructured the financial flow of the notarial guarantees operation and automated manual payment steps, saving about 42 hours a month.">He restructured the financial flow of the notarial guarantees operation and automated manual payment steps, saving about 42 hours a month.</p>
+        <p class="job__what" data-pt="Reestruturei o fluxo financeiro da operação de garantias cartorárias e automatizei etapas manuais de pagamento, economizando cerca de 42 horas por mês." data-en="I restructured the financial flow of the notarial guarantees operation and automated manual payment steps, saving about 42 hours a month.">I restructured the financial flow of the notarial guarantees operation and automated manual payment steps, saving about 42 hours a month.</p>
       </article>
       <article class="job rv">
         <p class="job__when" data-pt="2022 – 2024" data-en="2022 – 2024">2022 – 2024</p>
@@ -1175,7 +1224,7 @@ body::after{content:'';position:fixed;inset:0;z-index:89;pointer-events:none;
           <p data-pt="Customer Due Diligence" data-en="Customer Due Diligence">Customer Due Diligence</p>
           <span class="job__tag" data-pt="Operações" data-en="Operations">Operations</span>
         </div>
-        <p class="job__what" data-pt="Processos de alto volume, dados e indicadores. Foi onde ele aprendeu como a operação funciona na prática: restrições, passagens de uma área para outra e falhas recorrentes." data-en="High-volume processes, data and KPIs. This is where he learned how operations really work: constraints, handoffs between teams and recurring failures.">High-volume processes, data and KPIs. This is where he learned how operations really work: constraints, handoffs between teams and recurring failures.</p>
+        <p class="job__what" data-pt="Processos de alto volume, dados e indicadores. Foi onde aprendi como a operação funciona na prática: restrições, passagens de uma área para outra e falhas recorrentes." data-en="High-volume processes, data and KPIs. This is where I learned how operations really work: constraints, handoffs between teams and recurring failures.">High-volume processes, data and KPIs. This is where I learned how operations really work: constraints, handoffs between teams and recurring failures.</p>
       </article>
     </div>
   </div>
@@ -1199,7 +1248,7 @@ body::after{content:'';position:fixed;inset:0;z-index:89;pointer-events:none;
   <div class="wrap">
     <div class="sec__head sec__head--stack">
       <p class="label label--acc rv" data-pt="Recomendações" data-en="Recommendations">Recommendations</p>
-      <h2 class="h2 rv" data-pt="Quem trabalhou com ele" data-en="People who worked with him">People who worked with him</h2>
+      <h2 class="h2 rv" data-pt="Quem trabalhou comigo" data-en="People who worked with me">People who worked with me</h2>
     </div>
     <div class="recs">
       <figure class="rec rv">
@@ -1217,7 +1266,7 @@ body::after{content:'';position:fixed;inset:0;z-index:89;pointer-events:none;
     </div>
     <div class="recs__cta rv">
       <a class="btn" href="https://www.linkedin.com/in/paulo-nobre-/details/recommendations/" target="_blank" rel="noopener" data-pt="Ler todas as recomendações no LinkedIn" data-en="Read all recommendations on LinkedIn">Read all recommendations on LinkedIn</a>
-      <small class="note" data-pt="Abre o perfil do Paulo no LinkedIn, na seção Recomendações (é preciso estar logado)." data-en="Opens Paulo’s LinkedIn profile, in the Recommendations section (login required).">Opens Paulo’s LinkedIn profile, in the Recommendations section (login required).</small>
+      <small class="note" data-pt="Abre o meu perfil no LinkedIn, na seção Recomendações (é preciso estar logado)." data-en="Opens my LinkedIn profile, in the Recommendations section (login required).">Opens my LinkedIn profile, in the Recommendations section (login required).</small>
     </div>
   </div>
 </section>
@@ -1226,7 +1275,7 @@ body::after{content:'';position:fixed;inset:0;z-index:89;pointer-events:none;
 <section class="sec light" id="bring">
   <div class="wrap bring">
     <div>
-      <p class="label label--acc rv" data-pt="O que ele entrega" data-en="What he brings">What he brings</p>
+      <p class="label label--acc rv" data-pt="O que eu entrego" data-en="What I bring">What I bring</p>
       <h2 class="h2 rv" data-pt="Competências principais" data-en="Core competencies">Core competencies</h2>
       <p class="pills__grp rv" data-pt="Produto, processos e coordenação" data-en="Product, processes &amp; coordination">Product, processes &amp; coordination</p>
       <ul class="pills rv"><li data-pt="Mapeamento de processos" data-en="Process mapping">Process mapping</li><li data-pt="Análise de causa raiz" data-en="Root cause analysis">Root cause analysis</li><li data-pt="Regras de negócio e documentação" data-en="Business rules &amp; documentation">Business rules &amp; documentation</li><li data-pt="Product ownership de ferramentas internas" data-en="Product ownership of internal tools">Product ownership of internal tools</li><li data-pt="Coordenação entre áreas" data-en="Cross-team coordination">Cross-team coordination</li><li data-pt="Levantamento de requisitos" data-en="Requirements gathering">Requirements gathering</li><li data-pt="Comunicação com a gestão" data-en="Communication with management">Communication with management</li><li data-pt="Redução de risco operacional" data-en="Operational risk reduction">Operational risk reduction</li></ul>
@@ -1251,7 +1300,7 @@ body::after{content:'';position:fixed;inset:0;z-index:89;pointer-events:none;
 
 <!-- ============ 10. MY STORY ============ -->
 <section class="sec" id="story">
-  <div class="story-fx" aria-hidden="true"><canvas id="storyFx"></canvas></div>
+  
   <div class="wrap">
     <div class="sec__head">
       <p class="label label--acc rv" data-pt="Trajetória" data-en="Background">Background</p>
@@ -1259,10 +1308,10 @@ body::after{content:'';position:fixed;inset:0;z-index:89;pointer-events:none;
     </div>
     <div class="story">
       <div class="story__txt rv">
-        <p data-pt="Paulo entende a operação porque começou nela. No Itaú Unibanco, passou por Customer Due Diligence, Garantias Cartorárias e consultoria interna de pessoas, sempre com processos de alto volume, dados e indicadores." data-en="Paulo understands operations because he started there. At Itaú Unibanco he worked in Customer Due Diligence, notarial guarantees and internal people consulting, always with high-volume processes, data and KPIs.">Paulo understands operations because he started there. At Itaú Unibanco he worked in Customer Due Diligence, notarial guarantees and internal people consulting, always with high-volume processes, data and KPIs.</p>
-        <p data-pt="Ali aprendeu a olhar o processo antes da ferramenta." data-en="There he learned to look at the process before the tool.">There he learned to look at the process before the tool.</p>
-        <p data-pt="Hoje, em uma fintech de crédito, conduz produtos internos do diagnóstico ao resultado: entende o problema com quem executa, define as regras, prioriza com a gestão e entrega a solução funcionando. A automação entra como meio, para tirar dependência manual e risco da operação." data-en="Today, at a credit fintech, he leads internal products from diagnosis to result: he understands the problem with the people who run it, defines the rules, prioritises with management and delivers a working solution. Automation is a means to remove manual dependency and risk from the operation.">Today, at a credit fintech, he leads internal products from diagnosis to result: he understands the problem with the people who run it, defines the rules, prioritises with management and delivers a working solution. Automation is a means to remove manual dependency and risk from the operation.</p>
-        <p data-pt="O próximo passo é atuar como Product Owner de produtos internos e operacionais em fintechs, bancos e empresas de tecnologia, inclusive em equipes internacionais e remotas." data-en="His next step is to work as a Product Owner of internal and operational products at fintechs, banks and technology companies, including international and remote teams.">His next step is to work as a Product Owner of internal and operational products at fintechs, banks and technology companies, including international and remote teams.</p>
+        <p data-pt="Entendo a operação porque comecei nela. No Itaú Unibanco, passei por Customer Due Diligence, Garantias Cartorárias e consultoria interna de pessoas, sempre com processos de alto volume, dados e indicadores." data-en="I understand operations because I started there. At Itaú Unibanco I worked in Customer Due Diligence, notarial guarantees and internal people consulting, always with high-volume processes, data and KPIs.">I understand operations because I started there. At Itaú Unibanco I worked in Customer Due Diligence, notarial guarantees and internal people consulting, always with high-volume processes, data and KPIs.</p>
+        <p data-pt="Ali aprendi a olhar o processo antes da ferramenta." data-en="There I learned to look at the process before the tool.">There I learned to look at the process before the tool.</p>
+        <p data-pt="Hoje, em uma fintech de crédito, conduzo produtos internos do diagnóstico ao resultado: entendo o problema com quem executa, defino as regras, priorizo com a gestão e entrego a solução funcionando. A automação entra como meio, para tirar dependência manual e risco da operação." data-en="Today, at a credit fintech, I lead internal products from diagnosis to result: I understand the problem with the people who run it, define the rules, prioritise with management and deliver a working solution. Automation is a means to remove manual dependency and risk from the operation.">Today, at a credit fintech, I lead internal products from diagnosis to result: I understand the problem with the people who run it, define the rules, prioritise with management and deliver a working solution. Automation is a means to remove manual dependency and risk from the operation.</p>
+        <p data-pt="Meu próximo passo é atuar como Product Owner de produtos internos e operacionais em fintechs, bancos e empresas de tecnologia, inclusive em equipes internacionais e remotas." data-en="My next step is to work as a Product Owner of internal and operational products at fintechs, banks and technology companies, including international and remote teams.">My next step is to work as a Product Owner of internal and operational products at fintechs, banks and technology companies, including international and remote teams.</p>
       </div>
     </div>
   </div>
@@ -1311,29 +1360,59 @@ if(DRAFT) document.documentElement.classList.add('draft');
 function L(pt,en){ return {pt:pt,en:en}; }
 var CASES = [
 { id:'rotina', kind:L('Automação de processo · medido em registros','Process automation · measured from records'),
-  page:L('projetos/automacao-rotina-operacional.html','projetos/en/automacao-rotina-operacional.html'),
+  noDetail:true,
   ctx:L('Fintech de crédito · Rotina operacional','Credit fintech · Operational routine'),
-  title:L('Uma rotina da manhã que começa sozinha','A morning routine that starts on its own'),
-  problem:L('A lista do discador precisava estar pronta antes das 8h, mas cada etapa esperava alguém disparar a anterior.','The dialer list had to be ready before 8:00, but each step waited for someone to trigger the previous one.'),
-  did:L('Mediu as esperas entre as etapas e, com o suporte do fornecedor, configurou uma sequência que começa sozinha às 6h, com uma pessoa acompanhando as falhas.','He measured the waits between steps and, with the vendor’s support team, set up a sequence that starts on its own at 6:00, with a person monitoring failures.'),
-  metric:'', metricLabel:L('Lista pronta entre 06h22 e 06h57 nos 3 registros depois da mudança; antes, mediana de 07h30 em 29 dias.','List ready between 06:22 and 06:57 in the 3 records after the change; before, a 07:30 median over 29 days.'),
+  title:L('Automação da rotina de preparação da base comercial','Automating the sales list preparation routine'),
+  problem:L(['A base utilizada pelo time Comercial precisava estar disponível antes das 8h, mas sua preparação dependia de um fluxo operacional demorado e altamente manual. O processo era dividido em várias etapas, e cada avanço exigia que um colaborador acompanhasse a conclusão da etapa anterior e acionasse manualmente a próxima.',
+             'Essa dependência gerava atrasos recorrentes, comprometendo o início das atividades comerciais e o contato com os clientes. Para garantir a execução diária, foi necessário alocar um colaborador dedicado exclusivamente a essa rotina.'],
+            ['The list used by the Sales team had to be available before 8:00, but preparing it depended on a slow, highly manual operational flow. The process was split into several steps, and each one required someone to watch for the previous step to finish and then trigger the next one by hand.',
+             'This dependency caused recurring delays that held back the start of sales activities and customer contact. To keep it running every day, one team member had to be dedicated exclusively to this routine.']),
+  did:L(['Mapeei o fluxo e analisei os intervalos de espera entre as etapas para identificar oportunidades de otimização. Em conjunto com a equipe técnica responsável pelo sistema, estruturei uma sequência automatizada, programada para iniciar às 6h e avançar por meio de gatilhos automáticos após a conclusão de cada etapa.',
+         'Com isso, eliminamos a necessidade de monitoramento e acionamento manual recorrente, mantendo uma margem de segurança para controle de eventuais intercorrências.'],
+        ['I mapped the flow and analysed the waiting time between steps to find where it could be optimised. Together with the technical team responsible for the system, I structured an automated sequence that starts at 6:00 and moves forward through automatic triggers as each step finishes.',
+         'This removed the need for constant monitoring and manual triggering, while keeping a safety margin to handle any incidents.']),
+  outcomes:[
+    [L('Disponibilidade antecipada','Earlier availability'), L('base concluída diariamente entre 6h22 e 6h57, antes do início das atividades comerciais.','list completed daily between 6:22 and 6:57, before sales activities start.')],
+    [L('Maior previsibilidade operacional','More predictable operations'), L('fluxo automatizado, com execução sequencial e menor dependência de intervenção humana.','an automated flow that runs in sequence, with less dependence on human intervention.')],
+    [L('Redução de atrasos','Fewer delays'), L('eliminação dos acionamentos manuais que interrompiam o andamento da rotina.','no more manual triggers interrupting the routine.')],
+    [L('Monitoramento de exceções','Exception monitoring'), L('comunicação em caso de falhas ou intercorrências durante o processamento.','alerts when failures or incidents occur during processing.')]
+  ],
+  metric:'', metricLabel:L('',''),
   kpis:[]
 },
+
 { id:'rejections', kind:L('Produto interno · regras de negócio','Internal product · business rules'),
-  page:L('projetos/central-pagamentos-rejeitados.html','projetos/en/central-pagamentos-rejeitados.html'),
+  noDetail:true,
   ctx:L('Fintech de crédito · Regras de negócio e automação','Credit fintech · Business rules and automation'),
-  title:L('Um motor de decisão para pagamentos rejeitados','A decision engine for rejected payments'),
-  problem:L('O destino de cada pagamento rejeitado dependia de quem analisava, e o mesmo caso podia ter tratamentos diferentes.','Where each rejected payment went depended on who analysed it, and the same case could be handled in different ways.'),
-  did:L('Levantou as necessidades com quem tratava os casos, estruturou as regras e entregou extração, motor e painel. Evoluiu o produto a partir de casos reais: de 4 categorias e uma fila de revisão manual para 7 tratativas e 3 canais de entrada.','He gathered needs with the people handling the cases, structured the rules and delivered the extraction, the engine and the panel. He evolved the product from real cases: from 4 categories and a manual review queue to 7 next steps and 3 intake channels.'),
-  metric:'200+', metricLabel:L('rejeições por dia recebem uma tratativa definida, com o motivo registrado. A fila de revisão manual deixou de ser necessária, e ação que move dinheiro começa por uma pessoa.','rejected payments a day get a defined next step, with the reason recorded. The manual review queue is no longer needed, and any action that moves money starts with a person.'),
+  title:L('Motor de decisão para pagamentos rejeitados','Decision engine for rejected payments'),
+  problem:L(['A operação recebia um volume elevado de pagamentos de clientes rejeitados pelos processos do sistema interno de BackOffice. Cada ocorrência precisava ser analisada individualmente para definir a tratativa adequada, considerando regras de negócio, exceções e diferentes cenários operacionais.',
+             'A ausência de critérios estruturados aumentava a dependência da interpretação dos analistas, gerava inconsistências no tratamento de casos semelhantes e limitava a capacidade de processamento. No cenário anterior, aproximadamente 80 rejeições consumiam um dia inteiro de trabalho de três operadores.'],
+            ['The operation received a high volume of customer payments rejected by the internal BackOffice system’s processes. Each case had to be analysed individually to define the right next step, taking into account business rules, exceptions and different operational scenarios.',
+             'Without structured criteria, the outcome depended on each analyst’s interpretation, similar cases were handled inconsistently and processing capacity was limited. Before, about 80 rejections took a full day of work from three operators.']),
+  did:L(['Conduzi o levantamento das necessidades junto aos profissionais responsáveis pelo tratamento das ocorrências, identificando cenários, regras de negócio, exceções e critérios utilizados nas análises.',
+         'A partir desse mapeamento, estruturei um motor de decisão com regras padronizadas em código, reproduzindo os critérios operacionais utilizados pelos analistas. Então automatizei a identificação e recuperação dos pagamentos rejeitados e desenvolvi uma interface de acompanhamento com apoio de IA no desenvolvimento do Front-end.',
+         'A solução passou a classificar as ocorrências em diversos possíveis cenários, sem a necessidade da manualidade humana.',
+         'A iniciativa transformou a esteira de backoffice, substituindo processos manuais no maior gargalo da área, por uma esteira estruturada, baseada em regras e automações.'],
+        ['I led the requirements gathering with the people who handled these cases, identifying the scenarios, business rules, exceptions and criteria they used in their analysis.',
+         'Based on that mapping, I built a decision engine with standardised rules in code, reproducing the operational criteria the analysts applied. I then automated the identification and retrieval of rejected payments and built a tracking interface, using AI to support the front-end development.',
+         'The solution now classifies each case into one of several possible scenarios, with no manual handling.',
+         'The initiative transformed the BackOffice pipeline, replacing manual work at the team’s biggest bottleneck with a structured flow based on rules and automation.']),
+  outcomes:[
+    [L('Ganho de capacidade operacional','Operational capacity gain'), L('mais de 200 rejeições tratadas diariamente, frente às aproximadamente 80 ocorrências que anteriormente consumiam um dia inteiro de trabalho de três operadores.','more than 200 rejections handled a day, compared with about 80 that used to take a full day of work from three operators.')],
+    [L('Automação das decisões','Automated decisions'), L('aproximadamente 100% das rejeições direcionadas por regras automatizadas.','about 100% of rejections routed by automated rules.')],
+    [L('Padronização','Standardisation'), L('aplicação consistente das regras de negócio, reduzindo a dependência de interpretações individuais.','business rules applied consistently, with less reliance on individual interpretation.')],
+    [L('Escalabilidade','Scalability'), L('descontinuação dos processos manuais da esteira anterior, permitindo absorver o crescimento do volume operacional sem aumento proporcional do esforço humano.','the manual steps of the old pipeline were discontinued, so the operation can absorb volume growth without a proportional increase in human effort.')]
+  ],
+  metric:'', metricLabel:L('',''),
   kpis:[]
 },
+
 { id:'duplicates', kind:L('Produto interno · controle financeiro','Internal product · financial control'),
   page:L('projetos/pagamentos-em-duplicidade.html','projetos/en/pagamentos-em-duplicidade.html'),
   ctx:L('Fintech de crédito · Conciliação e controle de risco','Credit fintech · Reconciliation and risk control'),
   title:L('Pagamentos duplicados identificados antes de qualquer reembolso','Duplicate payments identified before any refund'),
   problem:L('Quem paga a mesma parcela duas vezes precisa receber de volta, mas só depois de a duplicidade estar comprovada.','A customer who pays the same instalment twice must get the money back, but only once the duplicate is proven.'),
-  did:L('Estruturou a solução a partir das necessidades da cobrança e dos controles financeiros, definiu as regras de identificação de duplicidades e organizou o fluxo de conciliação, aprovação e reembolso, em que quem monta o lote não é quem executa.','He shaped the solution around the needs of collections and financial controls, defined the rules for identifying duplicates and organised the reconciliation, approval and refund flow, where the person who builds the batch is not the one who executes it.'),
+  did:L('Estruturei a solução a partir das necessidades da cobrança e dos controles financeiros, defini as regras de identificação de duplicidades e organizei o fluxo de conciliação, aprovação e reembolso, em que quem monta o lote não é quem executa.','I shaped the solution around the needs of collections and financial controls, defined the rules for identifying duplicates and organised the reconciliation, approval and refund flow, where the person who builds the batch is not the one who executes it.'),
   metric:'', metricLabel:L('Estado e histórico de cada caso em um só lugar. A decisão e o pagamento continuam com pessoas.','Status and history for every case in one place. The decision and the payment stay with people.'),
   kpis:[]
 },
@@ -1342,31 +1421,40 @@ var CASES = [
   ctx:L('Fintech de crédito · Acompanhamento da operação','Credit fintech · Operations monitoring'),
   title:L('Um monitor que mostra cedo se a operação está pronta','A monitor that shows early whether operations are ready'),
   problem:L('Quando uma rotina de madrugada falhava sem ninguém perceber, a equipe começava o dia com dados incompletos.','When an overnight routine failed without anyone noticing, the team started the day with incomplete data.'),
-  did:L('Partiu das três perguntas do gestor (está pronta, quanto rodou, o que falhou), desenhou a tela em torno delas e corrigiu uma falha que exibia valores errados. Inclui uma versão para o celular do gestor.','He started from the manager’s three questions (is it ready, how much ran, what failed), designed the screen around them and fixed a bug that displayed wrong values. Includes a version for the manager’s phone.'),
+  did:L('Parti das três perguntas do gestor (está pronta, quanto rodou, o que falhou), desenhei a tela em torno delas e corrigi uma falha que exibia valores errados. Inclui uma versão para o celular do gestor.','I started from the manager’s three questions (is it ready, how much ran, what failed), designed the screen around them and fixed a bug that displayed wrong values. Includes a version for the manager’s phone.'),
   metric:'', metricLabel:L('Falhas visíveis com a etapa em que pararam, e o caso passa para uma pessoa quando a nova tentativa não resolve.','Failures visible with the step where they stopped, and the case passes to a person when a retry does not fix it.'),
   kpis:[]
 },
 { id:'infra',
-  kind:L('Iniciativa relacionada · resultado qualitativo','Related initiative · qualitative result'),
+  kind:L('Diagnóstico · capacidade de plataforma','Diagnosis · platform capacity'),
+  noDetail:true,
   ctx:L('Fintech de crédito · Diagnóstico e escalada','Credit fintech · Diagnosis and escalation'),
-  title:L('A causa das falhas nos dias de pico','The cause of failures on peak days'),
-  problem:L('Nos dias de maior entrada de carteira, o processamento falhava e os clientes novos ficavam de fora, justamente nos dias de maior volume.','On the days with the largest portfolio intake, processing failed and new customers were left out, exactly on the highest-volume days.'),
-  did:L('Acionou o time da plataforma de CRM, que encontrou a causa: a capacidade contratada estava abaixo da demanda real. Levou a causa e o impacto no negócio à diretoria e coordenou o ajuste em um dia de menor volume.','He asked the CRM platform team to investigate, and they found the cause: contracted capacity was below real demand. He took the cause and the business impact to the director and coordinated the change on a low-volume day.'),
-  metric:'', metricLabel:L('Depois do ajuste, o processamento deixou de falhar nos dias de produção intensa, sem interromper a operação.','After the change, processing stopped failing on heavy production days, without disrupting operations.'),
-  kpis:[],
-  context:L('O processamento diário de carteira, que precisa absorver grandes volumes nos dias de entrada.','Daily portfolio processing, which must absorb large volumes on intake days.'),
-  challenge:L('O sistema falhava exatamente nos dias de maior volume. Sem uma causa clara, cada dia de pico era um risco operacional.','The system failed exactly on the highest-volume days. Without a clear cause, every peak day was an operational risk.'),
-  diagnosis:L('A revisão de desempenho mostrou onde o pico acontecia e onde o processamento se perdia: a capacidade contratada era muito menor do que o número de clientes em carteira.','The performance review showed where the peak happened and where processing was lost: contracted capacity was far below the number of customers in the portfolio.'),
-  role:L('Assumiu o problema do diagnóstico à resolução: mostrou o risco para o negócio, pediu a revisão técnica, levou a evidência a quem decide e coordenou a implementação. O conhecimento técnico de infraestrutura era do time da plataforma de CRM; a parte dele foi transformar a evidência em uma decisão de negócio.','He owned the problem from diagnosis to resolution: he framed the business risk, requested the technical review, took the evidence to the people who decide and coordinated the implementation. The infrastructure expertise belonged to the CRM platform team; his part was turning the evidence into a business decision.'),
-  stakeholders:L('Time da plataforma de CRM, diretoria e time técnico.','CRM platform team, director and technical team.'),
-  approach:L('Começar pela evidência: localizar onde o pico quebra o processamento e só então levar uma causa clara, com o impacto no negócio, para quem pode decidir.','Start with evidence: find where the peak breaks processing, and only then take a clear cause, with its business impact, to the people who can decide.'),
-  execution:L('O time da plataforma de CRM conduziu a revisão de desempenho, Paulo apresentou a causa e o impacto à diretoria, o aumento foi aprovado e ele coordenou o ajuste com o time técnico.','The CRM platform team ran the performance review, Paulo presented the cause and the impact to the director, the increase was approved and he coordinated the change with the technical team.'),
-  flow:{before:[['Entrada de carteira','Portfolio intake'],['Pico de volume','Volume peak'],['Capacidade insuficiente','Insufficient capacity','break'],['Só carteira do dia anterior','Previous day’s portfolio only']],
-        after:[['Entrada de carteira','Portfolio intake'],['Pico de volume','Volume peak'],['Capacidade ajustada','Right-sized capacity','new'],['Clientes novos processados','New customers processed']]},
-  solution:L('Aumento de infraestrutura dimensionado para o volume real de clientes processados.','An infrastructure increase sized to the real volume of customers processed.'),
-  tools:['Análise de causa raiz|Root cause analysis','Revisão de desempenho|Performance review','Coordenação entre áreas|Cross-team coordination','Escalada com evidência|Evidence-based escalation'],
-  results:[L('O processamento deixou de falhar nos dias de produção intensa.','Processing stopped failing on heavy production days.'),L('Ajuste feito em um dia de menor volume, sem interromper a operação.','Change made on a low-volume day, with no disruption to operations.')],
-  lessons:L('Antes de corrigir o sistema, confirmar se ele tem capacidade para o volume que se pede dele. E levar à decisão a causa junto com o impacto no negócio.','Before fixing the system, confirm it has capacity for the volume it is asked to handle. And take the cause to the decision together with its business impact.')
+  title:L('Otimização da capacidade do CRM: eliminação de falhas em dias de pico','CRM capacity optimisation: eliminating failures on peak days'),
+  problem:L(['Nos dias de maior volume de arquivos recebidos, o CRM apresentava falhas recorrentes durante o processamento e a disponibilização da base comercial. Como consequência, novos clientes deixavam de ser disponibilizados para atuação comercial justamente nos períodos de maior demanda e de potencial faturamento.',
+             'As falhas limitavam a capacidade da empresa de aproveitar integralmente as oportunidades comerciais nos dias de pico, quando o volume operacional chegava a aproximadamente R$ 1,5 milhão por dia.'],
+            ['On the days with the highest volume of incoming files, the CRM failed repeatedly while processing and releasing the sales list. As a result, new customers were not made available to the sales team exactly in the periods of highest demand and revenue potential.',
+             'The failures limited the company’s ability to make full use of sales opportunities on peak days, when operational volume reached about R$ 1.5 million a day.']),
+  did:L(['Acionei a equipe técnica responsável pela plataforma de CRM e solicitei uma análise abrangente e técnica de performance, contemplando o comportamento do sistema antes, durante e após a recepção e o processamento dos arquivos.',
+         'A investigação identificou a causa raiz: a capacidade sistêmica contratada estava abaixo da demanda operacional real da empresa.',
+         'Apresentei o diagnóstico técnico e seus impactos para o negócio à diretoria, obtendo alinhamento para a adequação da capacidade da plataforma.',
+         'Na sequência, coordenei a implementação junto à equipe técnica, com autonomia para conduzir o processo. A mudança foi programada para um dia de menor volume e em uma janela que não gerasse impacto na operação.',
+         'Como medida preventiva, também estabeleci revisões trimestrais de capacidade, garantindo o acompanhamento da evolução da demanda e o alinhamento entre os recursos contratados e o crescimento da operação.'],
+        ['I engaged the technical team responsible for the CRM platform and requested a thorough technical performance review, covering the system’s behaviour before, during and after the files were received and processed.',
+         'The investigation found the root cause: the contracted system capacity was below the company’s real operational demand.',
+         'I presented the technical diagnosis and its business impact to leadership and got alignment to resize the platform’s capacity.',
+         'I then coordinated the implementation with the technical team, with autonomy to run the process. The change was scheduled for a low-volume day, in a window that would not affect operations.',
+         'As a preventive measure, I also set up quarterly capacity reviews to track demand growth and keep contracted resources aligned with the growth of the operation.']),
+  outcomes:[
+    [L('Eliminação das falhas recorrentes','Recurring failures eliminated'), L('após o ajuste, não foram registrados novos erros de processamento nos dias de maior volume.','after the change, no new processing errors were recorded on the highest-volume days.')],
+    [L('Aumento da capacidade operacional','Higher operational capacity'), L('a estrutura passou a suportar picos de até R$ 4 milhões por dia, frente ao patamar anterior de aproximadamente R$ 1,5 milhão.','the platform now supports peaks of up to R$ 4 million a day, compared with about R$ 1.5 million before.')],
+    [L('Melhoria de performance','Better performance'), L('maior velocidade e estabilidade no processamento das atividades da plataforma.','faster, more stable processing across the platform.')],
+    [L('Zero impacto operacional','Zero operational impact'), L('implementação realizada sem interrupção ou prejuízo às atividades da operação.','implemented without interrupting or harming operations.')],
+    [L('Governança preventiva','Preventive governance'), L('estabelecimento de revisões trimestrais para antecipar possíveis limitações de capacidade.','quarterly reviews to anticipate capacity limits.')]
+  ],
+  impact:L('Remoção de um gargalo tecnológico que limitava o aproveitamento das oportunidades comerciais em períodos de alta demanda, criando uma estrutura operacional mais estável e preparada para acompanhar o crescimento da empresa.',
+           'Removed a technology bottleneck that limited sales opportunities in high-demand periods, creating a more stable operation ready to keep up with the company’s growth.'),
+  metric:'', metricLabel:L('',''),
+  kpis:[]
 }
 ];
 
@@ -1380,7 +1468,7 @@ var PROJECTS = [
   {y:L('2026','2026'), org:'Simplic', t:L('Capacidade nos dias de pico','Capacity on peak days'), d:L('Diagnóstico, escalada à diretoria e ajuste de infraestrutura sem interromper a operação','Diagnosis, escalation to the director and an infrastructure change without disrupting operations'), a:L('Diagnóstico','Diagnosis')},
   {y:L('2026','2026'), org:'Simplic', t:L('Mapeamento e documentação dos processos do BackOffice','Mapping and documenting BackOffice processes'), d:L('Fluxos principais mapeados e documentados, como base para as automações','Main workflows mapped and documented, as the basis for the automations'), a:L('Melhoria de processos','Process improvement')},
   {y:L('2026','2026'), org:'Simplic', t:L('Base de conhecimento da equipe','Team knowledge base'), d:L('Processos documentados e compartilhados com a equipe','Processes documented and shared with the team'), a:L('Gestão do conhecimento','Knowledge management')},
-  {y:L('2026','2026'), org:'Simplic', t:L('Entrada de novos parceiros via API','Onboarding new partners via API'), d:L('Conduziu a criação, os testes e a entrada em produção de novos parceiros','Led the setup, testing and go-live of new partners'), a:L('Implantação','Implementation')},
+  {y:L('2026','2026'), org:'Simplic', t:L('Entrada de novos parceiros via API','Onboarding new partners via API'), d:L('Conduzi a criação, os testes e a entrada em produção de novos parceiros','I led the setup, testing and go-live of new partners'), a:L('Implantação','Implementation')},
   {y:L('2026','2026'), org:'Simplic', t:L('Conciliador de baixas duplicadas','Duplicate write-off reconciler'), d:L('Robô em Python que trata um pagamento registrado duas vezes no sistema de cobrança. Execução parcial; diferente do case 03','Python bot that handles a payment recorded twice in the collections system. Partially delivered; different from case 03'), a:L('Conciliação','Reconciliation')},
   {y:L('2025','2025'), org:'Itaú Unibanco', t:L('Demandas da rede de agências em modelo de PMO','Branch-network requests in a PMO model'), d:L('Consultoria interna de pessoas','Internal people consulting'), a:L('PMO','PMO')},
   {y:L('2025','2025'), org:'Itaú Unibanco', t:L('People analytics com dados de alto volume','People analytics on high-volume data'), d:L('Apoio às decisões da consultoria de pessoas','Support for people consulting decisions'), a:L('Dados e analytics','Data & analytics')},
@@ -1393,29 +1481,34 @@ function t(v){ return v == null ? '' : (typeof v === 'string' ? v : v[lang]); }
 function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 function pair(s){ var p = s.split('|'); return lang === 'en' && p[1] ? p[1] : p[0]; }
 var UI = {
-  challenge:L('Problema','Problem'), action:L('O que ele fez','What he did'), impact:L('Impacto','Impact'),
-  read:L('Ler o caso completo','Read the full case'), readPage:L('Ver o case detalhado e a demonstração','See the case study and demo'), back:L('Todos os cases','All cases'), next:L('Próximo caso','Next case'),
+  challenge:L('Problema','Problem'), action:L('O que eu fiz','What I did'), impact:L('Impacto','Impact'),
+  biz:L('Impacto no negócio','Business impact'), read:L('Ler o caso completo','Read the full case'), readPage:L('Ver o case detalhado e a demonstração','See the case study and demo'), back:L('Todos os cases','All cases'), next:L('Próximo caso','Next case'),
   before:L('Antes','Before'), after:L('Depois','After'), exhibit:L('Antes e depois','Before and after'),
   draft:L('A escrever.','To be written.'), all:L('Todos','All'),
-  sec:{context:L('Contexto','Context'),challenge:L('Problema de negócio','Business problem'),diagnosis:L('Diagnóstico','Diagnosis'),role:L('Papel do Paulo','Paulo’s role'),approach:L('Abordagem','Approach'),solution:L('Solução','Solution'),stakeholders:L('Áreas envolvidas','People involved'),execution:L('Execução','Execution'),tools:L('Métodos e ferramentas','Methods & tools'),results:L('Resultados','Results'),lessons:L('Aprendizado','Lessons learned')}
+  sec:{context:L('Contexto','Context'),challenge:L('Problema de negócio','Business problem'),diagnosis:L('Diagnóstico','Diagnosis'),role:L('Meu papel','My role'),approach:L('Abordagem','Approach'),solution:L('Solução','Solution'),stakeholders:L('Áreas envolvidas','People involved'),execution:L('Execução','Execution'),tools:L('Métodos e ferramentas','Methods & tools'),results:L('Resultados','Results'),lessons:L('Aprendizado','Lessons learned')}
 };
+function paras(v){ v = t(v); return (Array.isArray(v) ? v : [v]).map(function(x){ return '<p>'+esc(x)+'</p>'; }).join(''); }
 function metricText(c){ return lang === 'en' && c.metricEn ? c.metricEn : c.metric; }
 function kv(k){ return lang==='en' && k[2] ? k[2] : k[0]; }
 
 /* ================= case cards ================= */
 function renderCards(){
   var h = '';
-  CASES.forEach(function(c){
+  var ordered = CASES.filter(function(c){ return c.outcomes; }).concat(CASES.filter(function(c){ return !c.outcomes; }));
+  ordered.forEach(function(c){
     var facts = c.kpis.filter(function(k){ return kv(k) !== metricText(c); }).map(function(k){ return '<li><b class="num">'+esc(kv(k))+'</b><span>'+esc(t(k[1]))+'</span></li>'; }).join('');
-    h += '<article class="card rv in">'
+    h += '<article class="card rv in'+(c.outcomes?' card--wide':' card--more')+'">'
       + '<div class="card__main">'+(c.kind?'<p class="label label--acc card__kind">'+esc(t(c.kind))+'</p>':'')+'<h3>'+esc(t(c.title))+'</h3>'
-      + '<div class="card__row"><p class="label">'+t(UI.challenge)+'</p><p>'+esc(t(c.problem))+'</p></div>'
-      + '<div class="card__row"><p class="label">'+t(UI.action)+'</p><p>'+esc(t(c.did))+'</p></div>'
-      + '<div class="card__impact'+(metricText(c)?'':' card__impact--text')+'">'+(metricText(c)?'<b class="num">'+esc(metricText(c))+'</b>':'')+'<span>'+esc(t(c.metricLabel))+'</span></div></div>'
-      + '<div class="card__foot"><a class="link" href="'+(c.page?esc(t(c.page)):'#case/'+c.id)+'">'+t(c.page?UI.readPage:UI.read)+' <span aria-hidden="true">→</span></a></div>'
+      + '<div class="card__row"><p class="label">'+t(UI.challenge)+'</p><div class="card__txt">'+paras(c.problem)+'</div></div>'
+      + '<div class="card__row"><p class="label">'+t(UI.action)+'</p><div class="card__txt">'+paras(c.did)+'</div></div>'
+      + (c.outcomes
+          ? '<div class="card__row card__res"><p class="label">'+t(UI.sec.results)+'</p><ul>'+c.outcomes.map(function(r){ return '<li><b>'+esc(t(r[0]))+':</b> '+esc(t(r[1]))+'</li>'; }).join('')+'</ul></div>'+(c.impact?'<div class="card__biz"><p class="label">'+t(UI.biz)+'</p><p>'+esc(t(c.impact))+'</p></div>':'')+'</div>'
+          : '<div class="card__impact'+(metricText(c)?'':' card__impact--text')+'">'+(metricText(c)?'<b class="num">'+esc(metricText(c))+'</b>':'')+'<span>'+esc(t(c.metricLabel))+'</span></div></div>')
+      + (c.noDetail ? '' : '<div class="card__foot"><a class="link" href="'+(c.page?esc(t(c.page)):'#case/'+c.id)+'">'+t(c.page?UI.readPage:UI.read)+' <span aria-hidden="true">→</span></a></div>')
       + '</article>';
   });
   document.getElementById('caseList').innerHTML = h;
+  document.getElementById('caseList').setAttribute('data-n', CASES.filter(function(c){ return !c.outcomes; }).length);
 }
 
 /* ================= project portfolio ================= */
@@ -1485,7 +1578,7 @@ function renderCase(c){
 function openCase(id){
   var ALIAS = {engine:'rejections', routine:'rotina'}; if(ALIAS[id]) id = ALIAS[id];
   var c = CASES.filter(function(x){ return x.id === id; })[0];
-  if(!c){ closeCase(true); return; }
+  if(!c || c.noDetail){ closeCase(true); return; }
   if(c.page){ location.replace(t(c.page)); return; }
   if(!current) lastFocus = document.activeElement;
   current = c; renderCase(c);
@@ -1602,6 +1695,8 @@ if('IntersectionObserver' in window){
   function rnd(seed){ return function(){ seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }; }
 
   function setup(){
+    var fx = cv.parentNode, ft = document.querySelector('footer.foot');
+    if(ft) fx.style.bottom = (-ft.offsetHeight) + 'px';
     var r = cv.getBoundingClientRect(); dpr = Math.min(window.devicePixelRatio || 1, 2);
     W = Math.max(1, r.width); H = Math.max(1, r.height);
     cv.width = W * dpr; cv.height = H * dpr;
@@ -1669,7 +1764,7 @@ if('IntersectionObserver' in window){
 (function(){
   var row = document.getElementById('caseList'), cnt = document.getElementById('caseCount'), dots = document.getElementById('caseDots');
   function paint(){
-    var cards = row.querySelectorAll('.card'); if(!cards.length) return;
+    var cards = [].filter.call(row.querySelectorAll('.card'), function(c){ return c.offsetParent !== null; }); if(!cards.length) return;
     var w = cards[0].getBoundingClientRect().width + 12;
     var i = Math.min(cards.length - 1, Math.max(0, Math.round(row.scrollLeft / w)));
     cnt.textContent = (lang === 'pt' ? 'Deslize · ' : 'Swipe · ') + (i + 1) + ' / ' + cards.length;
@@ -1685,8 +1780,21 @@ if('IntersectionObserver' in window){
     more.setAttribute('aria-expanded', String(open));
   }
   more.addEventListener('click', function(){ pf.classList.toggle('pf--collapsed'); label(); if(pf.classList.contains('pf--collapsed')) pf.scrollIntoView({block:'start'}); });
-  window.__mobileUi = function(){ paint(); label(); };
-  paint(); label();
+  var cm = document.getElementById('casesMore');
+  function cmLabel(){
+    var open = row.classList.contains('cases--all');
+    cm.textContent = open ? (lang === 'pt' ? 'Mostrar menos cases' : 'Show fewer cases') : (lang === 'pt' ? 'Ler mais cases' : 'Read more cases');
+    cm.setAttribute('aria-expanded', String(open));
+    cm.parentNode.hidden = !row.querySelector('.card--more');
+  }
+  cm.addEventListener('click', function(){
+    var before = cm.getBoundingClientRect().top;
+    var open = row.classList.toggle('cases--all'); cmLabel(); paint();
+    if(!open) window.scrollBy({top: cm.getBoundingClientRect().top - before, behavior:'instant'});
+    if(open){ var first = row.querySelector('.card--more'); if(first) first.scrollIntoView({behavior:'smooth', block:'nearest', inline:'start'}); }
+  });
+  window.__mobileUi = function(){ paint(); label(); cmLabel(); };
+  paint(); label(); cmLabel();
 })();
 
 /* ================= init ================= */
@@ -1724,21 +1832,18 @@ if(reduce || !('IntersectionObserver' in window)){
   nb.className = 'nb'; nb.setAttribute('aria-hidden','true');
   nb.innerHTML =
     ''
-    + '<div class="nb__glow"></div><div class="nb__rays"></div><div class="nb__rays nb__rays--2"></div>';
+    + '';
   document.body.insertBefore(nb, document.body.firstChild);
 
-  /* drifting glow */
-  var glow = nb.querySelector('.nb__glow');
-  function moveGlow(){ glow.style.transform = 'translate3d('+R(.05,.95)*W()+'px,'+R(.1,.9)*H()+'px,0)'; }
-  moveGlow(); if(!reduce) setInterval(moveGlow, 16000);
 
   /* dust motes concentrated in the light beam (top right) */
   var motes = small ? 14 : 30;
+  var moteBox = document.createElement('div'); moteBox.className = 'nb__motes'; nb.appendChild(moteBox);
   for(var m=0;m<motes;m++){
     var d = document.createElement('i'); d.className = 'nb__mote'; var z = R(1,2.8);
     d.style.cssText = 'left:'+R(40,98)+'%;top:'+R(5,80)+'%;width:'+z+'px;height:'+z+'px;--o:'+R(.2,.6).toFixed(2)
       +';--d:'+R(12,26).toFixed(1)+'s;--dl:-'+R(0,26).toFixed(1)+'s;--dx:'+R(-60,20)+'px;--dy:'+R(-160,-40)+'px';
-    nb.appendChild(d);
+    moteBox.appendChild(d);
   }
 
   /* labelled frames that fade in and out at random places */
@@ -1764,45 +1869,405 @@ if(reduce || !('IntersectionObserver' in window)){
   /* ===== SEA: original painterly water + a school of fish (boids), drawn on canvas.
      Visible on the first part of the page, fades out past the middle (the story section has its own animation). */
   var sea = document.createElement('canvas'); sea.className = 'nb__sea';
-  nb.insertBefore(sea, nb.querySelector('.nb__rays'));
+  /* ===== OCEAN DEPTH: surface (sea canvas) -> midwater (distant schools) -> deep (silhouettes).
+     Midwater and deep are painted once per size; scrolling only changes opacity and a small translate. */
+  var deepC = document.createElement('canvas'); deepC.className = 'nb__deep';
+  var midG = document.createElement('canvas'); midG.className = 'nb__mid';
+  var schoolC = document.createElement('canvas'); schoolC.className = 'nb__school';
+  nb.insertBefore(deepC, nb.firstChild);
+  nb.insertBefore(midG, deepC.nextSibling);
+  nb.insertBefore(schoolC, midG.nextSibling);
+  nb.insertBefore(sea, schoolC.nextSibling);
+  /* caustics: soft light patterns, only underwater */
+  var CAUS = "<svg xmlns='http://www.w3.org/2000/svg' width='640' height='640'><filter id='c' x='0' y='0' width='100%' height='100%'><feTurbulence type='turbulence' baseFrequency='.009' numOctaves='2' seed='4' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .85  0 0 0 0 .95  0 0 0 0 1  0 0 0 -18 2.3'/></filter><rect width='100%' height='100%' filter='url(#c)'/></svg>";
+  var caus = document.createElement('div'); caus.className = 'nb__caus';
+  caus.innerHTML = '<i></i><i></i>';
+  [].forEach.call(caus.children, function(c){ c.style.backgroundImage = 'url("data:image/svg+xml,' + encodeURIComponent(CAUS) + '")'; });
+  nb.insertBefore(caus, sea);
+  /* sunbeams: fans of irregular rays from the sun, one warm and crisp, one cool and diffuse */
+  function rayFan(rgb, a0, a1, minW, maxW, minGap, maxGap, alpha){
+    var st = [], ang = a0, rr = seeded(rgb.length * 13 + a0);
+    st.push('rgba(' + rgb + ',0) ' + a0 + 'deg');
+    while(ang < a1){
+      var wd = rr(minW, maxW), gp = rr(minGap, maxGap), al = (alpha * rr(.4, 1)).toFixed(3);
+      st.push('rgba(' + rgb + ',0) ' + ang.toFixed(1) + 'deg', 'rgba(' + rgb + ',' + al + ') ' + (ang + wd/2).toFixed(1) + 'deg', 'rgba(' + rgb + ',0) ' + (ang + wd).toFixed(1) + 'deg');
+      ang += wd + gp;
+    }
+    st.push('rgba(' + rgb + ',0) ' + a1 + 'deg', 'rgba(' + rgb + ',0) 360deg');
+    return 'conic-gradient(from 0deg at 50% 50%,' + st.join(',') + ')';
+  }
+  var rays = document.createElement('div'); rays.className = 'nb__rays';
+  rays.innerHTML = '<div class="nb__ray nb__ray--warm"><span></span></div><div class="nb__ray nb__ray--cool"><span></span></div>';
+  rays.querySelector('.nb__ray--warm span').style.backgroundImage = rayFan('255,220,160', 132, 228, 2, 6, 3, 9, .16);
+  rays.querySelector('.nb__ray--cool span').style.backgroundImage = rayFan('205,232,248', 138, 222, 3, 8, 2.5, 8, .34) + ',radial-gradient(ellipse 22% 34% at 50% 50%,rgba(190,225,245,.2),rgba(190,225,245,0) 72%)';
+  nb.insertBefore(rays, sea.nextSibling);
+  var rayWarm = rays.children[0], rayCool = rays.children[1];
+
+  function seeded(seed){ return function(a,b){ seed = (seed * 16807) % 2147483647; return a + ((seed - 1) / 2147483646) * (b - a); }; }
+  function fishShape(g, x, y, len, ang){
+    var h = len * .34;
+    g.save(); g.translate(x, y); g.rotate(ang);
+    g.beginPath();
+    g.moveTo(len*.5, 0);
+    g.quadraticCurveTo(len*.08, -h, -len*.36, -h*.12);
+    g.lineTo(-len*.56, -h*.62); g.lineTo(-len*.5, 0); g.lineTo(-len*.56, h*.62); g.lineTo(-len*.36, h*.12);
+    g.quadraticCurveTo(len*.08, h, len*.5, 0);
+    g.fill(); g.restore();
+  }
+  var scratch = document.createElement('canvas');
+  function blurred(g, w, h, blur, draw){
+    scratch.width = w; scratch.height = h; var o = scratch.getContext('2d');
+    draw(o); g.filter = 'blur(' + blur + 'px)'; g.drawImage(scratch, 0, 0); g.filter = 'none';
+  }
+  var SOFT = 3.5;   /* background blur, in px at 1440 wide; scales with screen size */
+  function soften(cv, px){
+    var t = document.createElement('canvas'); t.width = cv.width; t.height = cv.height;
+    t.getContext('2d').drawImage(cv, 0, 0);
+    var g = cv.getContext('2d'); g.clearRect(0, 0, cv.width, cv.height);
+    g.filter = 'blur(' + px.toFixed(2) + 'px)'; g.drawImage(t, 0, 0); g.filter = 'none';
+  }
+  function grain(g, w, h, amount, col){
+    var r = seeded(97), n = Math.round(w*h*amount);
+    g.fillStyle = col;
+    for(var i=0;i<n;i++){ g.globalAlpha = r(.03,.12); g.fillRect(r(0,w), r(0,h), 1, 1); }
+    g.globalAlpha = 1;
+  }
+  /* midwater water: painterly brush strokes following a slow current */
+  function paintMid(w, h){
+    var g = midG.getContext('2d'); midG.width = w; midG.height = h;
+    var r = seeded(5);
+    var lg = g.createLinearGradient(0, 0, w*.4, h);
+    lg.addColorStop(0,'#1c5a92'); lg.addColorStop(.5,'#133f71'); lg.addColorStop(1,'#0b2a52');
+    g.fillStyle = lg; g.fillRect(0,0,w,h);
+    var light = g.createRadialGradient(w*.66, 0, 0, w*.66, 0, Math.max(w,h)*.7);
+    light.addColorStop(0,'rgba(170,215,230,.22)'); light.addColorStop(.4,'rgba(110,170,215,.1)'); light.addColorStop(1,'rgba(110,170,215,0)');
+    g.fillStyle = light; g.fillRect(0,0,w,h);
+    var cols = ['#2a6fae','#1d5994','#3b86c2','#123e6e','#4f9bd0','#0e3360','#6aaed8'];
+    function flow(x, y){ return Math.sin(x*.0026 + y*.0017) * 1.1 + Math.cos(y*.0031 - x*.001) * .6 - .4; }
+    g.lineCap = 'round';
+    for(var sw=0; sw<14; sw++){   /* broad soft swirls for depth */
+      g.globalAlpha = r(.03,.07); g.fillStyle = cols[Math.floor(r(0,cols.length))];
+      g.save(); g.translate(r(0,w), r(0,h)); g.rotate(r(-.8,.8)); g.beginPath(); g.ellipse(0,0,r(140,380),r(40,110),0,0,Math.PI*2); g.fill(); g.restore();
+    }
+    var n = Math.round(w*h/650);
+    for(var i=0;i<n;i++){
+      var x = r(0,w), y = r(0,h), L = r(30,120), a1 = flow(x,y), a2 = flow(x + Math.cos(a1)*L, y + Math.sin(a1)*L);
+      g.globalAlpha = r(.04,.11); g.strokeStyle = cols[Math.floor(r(0,cols.length))]; g.lineWidth = r(1.4,4.2);
+      g.beginPath(); g.moveTo(x,y);
+      g.quadraticCurveTo(x + Math.cos(a1)*L*.6, y + Math.sin(a1)*L*.6, x + Math.cos(a2)*L, y + Math.sin(a2)*L);
+      g.stroke();
+    }
+    g.globalAlpha = 1;
+    var vg = g.createRadialGradient(w*.55,h*.45,Math.min(w,h)*.3,w*.5,h*.5,Math.max(w,h)*.8);
+    vg.addColorStop(0,'rgba(6,20,40,0)'); vg.addColorStop(1,'rgba(6,20,40,.45)');
+    g.fillStyle = vg; g.fillRect(0,0,w,h);
+    grain(g, w, h, .05, '#d8ecff');
+  }
+  /* a fish with fine hatching, like brush work */
+  function paintedFish(g, x, y, len, ang, body, hatch, eye){
+    var h2 = len*.34;
+    g.save(); g.translate(x,y); g.rotate(ang);
+    g.beginPath();
+    g.moveTo(len*.5,0); g.quadraticCurveTo(len*.08,-h2,-len*.36,-h2*.12);
+    g.lineTo(-len*.58,-h2*.66); g.lineTo(-len*.5,0); g.lineTo(-len*.58,h2*.66); g.lineTo(-len*.36,h2*.12);
+    g.quadraticCurveTo(len*.08,h2,len*.5,0); g.closePath();
+    g.fillStyle = body; g.fill();
+    g.save(); g.clip();
+    g.strokeStyle = hatch; g.lineWidth = Math.max(.6, len/90); g.globalAlpha *= .5;
+    for(var k=-h2; k<h2; k+=Math.max(2, len/26)){ g.beginPath(); g.moveTo(-len*.6, k); g.lineTo(len*.5, k + len*.06); g.stroke(); }
+    g.restore();
+    if(eye){ g.globalAlpha = Math.min(1, g.globalAlpha*1.6); g.fillStyle = '#e9f4ff'; g.beginPath(); g.arc(len*.3, -h2*.12, Math.max(1, len/34), 0, Math.PI*2); g.fill(); }
+    g.restore();
+  }
+  function paintSchool(w, h){
+    var g = schoolC.getContext('2d'); schoolC.width = w; schoolC.height = h;
+    var r = seeded(11), k = Math.max(.55, Math.min(1.15, w / 1440)), many = w < 760 ? .5 : 1;
+    var tones = [['#0f2f5c','#1d4a82'],['#163f74','#2a5f9a'],['#1f5a95','#3a7ab5'],['#2d76b3','#5a9ed0'],['#0b2448','#173a6a']];
+    /* a curved stream of fish: from lower left, rising and turning right */
+    function along(t){ return { x: -w*.08 + w*1.0*t, y: h*(.86 - .5*t + .22*t*t) }; }
+    function school(n, size, blur, alpha, spread){
+      blurred(g, w, h, blur, function(g){
+      for(var i=0;i<n;i++){
+        var t = r(0,1), a = along(t), b = along(Math.min(1, t + .01));
+        var ang = Math.atan2(b.y - a.y, b.x - a.x);
+        var off = (r(-1,1) + r(-1,1) + r(-1,1)) / 3 * h * spread;
+        var x = a.x - Math.sin(ang)*off, y = a.y + Math.cos(ang)*off;
+        var tone = tones[Math.floor(r(0,tones.length))];
+        g.globalAlpha = alpha * r(.6,1);
+        paintedFish(g, x, y, size*r(.7,1.3)*k, ang + r(-.1,.1), tone[0], tone[1], r(0,1) < .35);
+      }
+      });
+    }
+    school(Math.round(70*many), 40, 3.4, .42, .24);  /* far fish, soft */
+    school(Math.round(60*many), 70, 1.2, .62, .17);  /* nearer fish */
+    g.globalAlpha = 1;
+  }
+  /* deep water: light from above, a distant ray, and a sea floor in three depths
+     (far and soft, middle, near and dark), with kelp, sea fans and round corals */
+  function paintDeep(w, h){
+    var g = deepC.getContext('2d'); deepC.width = w; deepC.height = h;
+    var r = seeded(29), sc = Math.max(.55, Math.min(1.2, w/1440)), bx = w*.66;
+    var lg = g.createLinearGradient(0,0,0,h);
+    lg.addColorStop(0,'#1a3f88'); lg.addColorStop(.55,'#12296e'); lg.addColorStop(1,'#0b1b52');
+    g.fillStyle = lg; g.fillRect(0,0,w,h);
+    /* light from above */
+    blurred(g, w, h, 34, function(g){
+      [[0,.17,.17],[-.1,.1,.09],[.13,.09,.08],[-.2,.07,.05]].forEach(function(bm){
+        var x0 = bx + w*bm[0], sp = w*bm[1];
+        var sg = g.createLinearGradient(0,0,0,h);
+        sg.addColorStop(0,'rgba(200,225,255,' + bm[2] + ')'); sg.addColorStop(1,'rgba(200,225,255,0)');
+        g.fillStyle = sg; g.beginPath(); g.moveTo(x0 - sp*.25, -30); g.lineTo(x0 + sp*.25, -30); g.lineTo(x0 + sp*1.4, h); g.lineTo(x0 - sp*1.1, h); g.fill();
+      });
+    });
+    /* a ray gliding far away, and a few distant fish */
+    blurred(g, w, h, 3.5*sc, function(g){
+      var mx = w*.22, my = h*.3, ws = 170*sc;
+      g.fillStyle = '#0f2867'; g.globalAlpha = .55;
+      g.beginPath(); g.moveTo(mx + ws*.08, my - ws*.05);
+      g.bezierCurveTo(mx + ws*.35, my - ws*.12, mx + ws*.55, my + ws*.02, mx + ws*.62, my + ws*.14);
+      g.bezierCurveTo(mx + ws*.3, my + ws*.1, mx + ws*.12, my + ws*.16, mx, my + ws*.22);
+      g.bezierCurveTo(mx - ws*.12, my + ws*.16, mx - ws*.3, my + ws*.1, mx - ws*.62, my + ws*.14);
+      g.bezierCurveTo(mx - ws*.55, my + ws*.02, mx - ws*.35, my - ws*.12, mx - ws*.08, my - ws*.05);
+      g.closePath(); g.fill();
+      g.lineWidth = 2*sc; g.strokeStyle = '#0f2867'; g.beginPath(); g.moveTo(mx, my + ws*.2); g.quadraticCurveTo(mx + ws*.05, my + ws*.45, mx - ws*.04, my + ws*.62); g.stroke();
+      g.fillStyle = '#163276';
+      for(var f=0;f<14;f++){ g.globalAlpha = r(.3,.5); fishShape(g, w*r(.7,.94), h*r(.16,.4), r(16,30)*sc, Math.PI*.85 + r(-.15,.15)); }
+      g.globalAlpha = 1;
+    });
+    /* sea floor rows */
+    var off = document.createElement('canvas'); off.width = w; off.height = h; var o = off.getContext('2d');
+    function ground(base, amp, ph){ return function(x){ return h - base - amp*(.55*Math.sin(x*.0042 + ph) + .3*Math.sin(x*.011 + ph*2.3) + .15*Math.sin(x*.027 + ph*.7)); }; }
+    /* tall seaweed: a wide wavy ribbon that bends with the current */
+    function kelp(x, y0, height, wd, sway){
+      var segs = 40, Lp = [], Rp = [];
+      for(var j=0;j<=segs;j++){
+        var t = j/segs, cx2 = x + sway*height*.22*Math.pow(t,1.5) + Math.sin(t*5.2 + x*.03)*wd*1.6*t, cy2 = y0 - height*t;
+        var half = wd*(1.05 - t*.75)*(1 + .28*Math.sin(t*11 + x));
+        Lp.push([cx2 - half, cy2]); Rp.unshift([cx2 + half, cy2]);
+      }
+      var all = Lp.concat(Rp); o.beginPath(); o.moveTo(all[0][0], all[0][1]);
+      for(var q=1;q<all.length;q++){ var m = all[q-1]; o.quadraticCurveTo(m[0], m[1], (m[0]+all[q][0])/2, (m[1]+all[q][1])/2); }
+      o.closePath(); o.fill();
+    }
+    /* tube sponges: a small cluster of rounded tubes with open tops */
+    function tubes(x, y0, height, light){
+      var n = Math.round(r(3,5));
+      for(var i=0;i<n;i++){
+        var hh = height*r(.45,1), wd = r(9,16)*sc, tx = x + (i - n/2)*wd*1.5 + r(-4,4), lean = r(-.12,.12)*hh;
+        o.beginPath(); o.moveTo(tx - wd/2, y0); o.quadraticCurveTo(tx - wd/2 + lean*.4, y0 - hh*.6, tx - wd*.55 + lean, y0 - hh);
+        o.lineTo(tx + wd*.55 + lean, y0 - hh); o.quadraticCurveTo(tx + wd/2 + lean*.4, y0 - hh*.6, tx + wd/2, y0); o.closePath(); o.fill();
+        o.beginPath(); o.ellipse(tx + lean, y0 - hh, wd*.55, wd*.2, 0, 0, Math.PI*2); o.fill();
+        o.save(); o.globalAlpha = .3; o.fillStyle = light; o.beginPath(); o.ellipse(tx + lean, y0 - hh, wd*.38, wd*.11, 0, 0, Math.PI*2); o.fill(); o.restore();
+      }
+    }
+    /* table coral: short stems with wide flat plates */
+    function table(x, y0, size){
+      o.lineCap = 'round'; o.lineWidth = size*.12;
+      o.beginPath(); o.moveTo(x, y0); o.quadraticCurveTo(x + size*.08, y0 - size*.3, x, y0 - size*.5); o.stroke();
+      o.beginPath(); o.ellipse(x, y0 - size*.52, size*.95, size*.14, r(-.05,.05), 0, Math.PI*2); o.fill();
+      o.beginPath(); o.ellipse(x + size*.35, y0 - size*.3, size*.55, size*.09, 0, 0, Math.PI*2); o.fill();
+    }
+    /* a clump of sea grass: several thin blades from one base */
+    function grass(x, y0, height){
+      var n = Math.round(r(7,12)), lean = r(-1,1);
+      for(var i=0;i<n;i++){
+        var hh = height*r(.45,1), bend = (lean + r(-.6,.6))*hh*.35, wb = r(3,5.5)*sc, bx2 = x + r(-12,12)*sc;
+        o.beginPath(); o.moveTo(bx2 - wb, y0);
+        o.quadraticCurveTo(bx2 - wb*.4 + bend*.3, y0 - hh*.55, bx2 + bend, y0 - hh);
+        o.quadraticCurveTo(bx2 + wb*.4 + bend*.35, y0 - hh*.5, bx2 + wb, y0);
+        o.closePath(); o.fill();
+      }
+    }
+    function fan(x, y, len, ang, wd, d){
+      var x2 = x + Math.cos(ang)*len, y2 = y + Math.sin(ang)*len;
+      o.lineWidth = wd; o.beginPath(); o.moveTo(x,y); o.quadraticCurveTo((x+x2)/2 + r(-3,3), (y+y2)/2, x2, y2); o.stroke();
+      if(d <= 0) return;
+      var n = d > 3 ? 3 : 2;
+      for(var c=0;c<n;c++) fan(x2, y2, len*r(.7,.86), ang + (c - (n-1)/2)*r(.25,.42) + r(-.08,.08), Math.max(.6, wd*.7), d-1);
+    }
+    function boulder(x, y, rw, rh, light){
+      o.beginPath(); o.ellipse(x, y, rw, rh, 0, Math.PI, 0); o.closePath(); o.fill();
+      o.save(); o.globalAlpha = .18; o.strokeStyle = light; o.lineWidth = Math.max(1, rw*.04);
+      for(var i=1;i<4;i++){ o.beginPath(); o.ellipse(x, y, rw*(1 - i*.22), rh*(1 - i*.22), 0, Math.PI*1.05, Math.PI*1.95); o.stroke(); }
+      o.restore();
+    }
+    var rows = [
+      {c:'#163472', blur:5*sc, a:.75, base:h*.27, amp:h*.04, k:[.24,.4], step:60, light:'#4068b4'},
+      {c:'#0d2160', blur:2.2*sc, a:.95, base:h*.17, amp:h*.035, k:[.22,.36], step:75, light:'#2f54a0'},
+      {c:'#050c2e', blur:.6, a:1, base:h*.08, amp:h*.03, k:[.26,.42], step:95, light:'#1f356f'}
+    ];
+    rows.forEach(function(row, ri){
+      o.clearRect(0,0,w,h); o.fillStyle = row.c; o.strokeStyle = row.c; o.lineCap = 'round';
+      var gy = ground(row.base, row.amp, r(0,6.28));
+      o.beginPath(); o.moveTo(-10, h + 10);
+      for(var x=-10; x<=w+10; x+=8) o.lineTo(x, gy(x));
+      o.lineTo(w+10, h+10); o.closePath(); o.fill();
+      for(var x2=-30; x2<w+30; x2+=row.step*sc*r(.55,1.25)){
+        /* the near row keeps the middle of the screen lighter, behind the content */
+        var centre = Math.abs(x2 - w/2) / (w/2);
+        if(ri === 2 && centre < .45 && r(0,1) < .7) continue;
+        var y0 = gy(x2) + 4, pick = r(0,1), ht = h*r(row.k[0], row.k[1]) * (ri === 2 ? .6 + centre*.6 : 1);
+        if(pick < .26) kelp(x2, y0, ht, r(7,12)*sc*(ri ? 1.15 : 1), r(.3,1) * (r(0,1) < .7 ? 1 : -1));
+        else if(pick < .52) grass(x2, y0, ht*.6);
+        else if(pick < .7) tubes(x2, y0, ht*.5, row.light);
+        else if(pick < .84) table(x2, y0, r(50,90)*sc*(1 + ri*.25));
+        else boulder(x2, y0 + 6, r(34,72)*sc*(1 + ri*.3), r(24,48)*sc*(1 + ri*.3), row.light);
+      }
+      g.filter = 'blur(' + row.blur.toFixed(2) + 'px)'; g.globalAlpha = row.a; g.drawImage(off, 0, 0); g.filter = 'none'; g.globalAlpha = 1;
+      if(ri === 0){   /* light pool on the far floor, where the beam lands */
+        g.globalCompositeOperation = 'screen';
+        var pool = g.createRadialGradient(bx + w*.05, h*.86, 0, bx + w*.05, h*.86, w*.32);
+        pool.addColorStop(0,'rgba(120,165,235,.22)'); pool.addColorStop(1,'rgba(120,165,235,0)');
+        g.save(); g.translate(bx + w*.05, h*.86); g.scale(1, .35); g.translate(-(bx + w*.05), -h*.86); g.fillStyle = pool; g.fillRect(0, 0, w, h*2); g.restore();
+        g.globalCompositeOperation = 'source-over';
+      }
+    });
+    /* soft focus for the whole scene, then crisp particles on top */
+    soften(deepC, SOFT * sc);
+    for(var i=0;i<Math.round(240*sc);i++){
+      var t = Math.pow(r(0,1), 1.7), y = t*h*.8, x = bx + r(-1,1)*(w*.05 + t*w*.2);
+      g.globalAlpha = r(.12,.5)*(1 - t*.7); g.fillStyle = '#e6eeff'; g.beginPath(); g.arc(x, y, r(.4,1.4), 0, Math.PI*2); g.fill();
+    }
+    for(var m=0;m<Math.round(w*h/16000);m++){ g.globalAlpha = r(.06,.22); g.fillStyle = '#cfdcff'; g.beginPath(); g.arc(r(0,w), r(0,h*.85), r(.5,1.3), 0, Math.PI*2); g.fill(); }
+    blurred(g, w, h, .8, function(g){
+      for(var q=0;q<Math.round(14*sc);q++){ g.globalAlpha = r(.2,.42); g.strokeStyle = '#dfe9ff'; g.lineWidth = 1; g.beginPath(); g.arc(r(w*.2,w*.9), r(h*.1,h*.7), r(2.5,5.5)*sc, 0, Math.PI*2); g.stroke(); }
+    });
+    g.globalAlpha = 1;
+    grain(g, w, h, .08, '#c9d8ff');
+  }
+  var paintedW = 0, paintedH = 0;
+  function paintDepth(){
+    var w = Math.round(window.innerWidth), h = Math.round(window.innerHeight);
+    if(w === paintedW && Math.abs(h - paintedH) < 140) return;
+    paintedW = w; paintedH = h;
+    var hh = h + 40;  /* a little taller, so the small parallax never shows an edge */
+    paintMid(w, hh); paintSchool(w, hh); paintDeep(w, hh);
+    var px = SOFT * Math.max(.6, Math.min(1.2, w / 1440));
+    soften(midG, px); soften(schoolC, px*.6);
+  }
+  paintDepth();
+  function smooth(a, b, x){ var t = Math.min(1, Math.max(0, (x-a)/(b-a))); return t*t*(3-2*t); }
   var cx = sea.getContext('2d'), DPR = Math.min(window.devicePixelRatio||1, small?1:1.5);
   var SW, SH, water, fish = [], t0 = performance.now(), mouse = {x:-9999,y:-9999}, cur = R(-2.4,-1.9);
   var GOLD = ['#E9C77B','#F2D9A0','#D8A85A','#FDE8A8','#C99A4E'], RED = ['#E2552B','#C8401E','#F06A2E','#D9461F'], DARK = ['#16324A','#1E3F5A','#0F2233','#24496A'];
 
+  var SUN_X = .64, SUN_HZ = .24;
   function paintWater(w, h){
     var c = document.createElement('canvas'); c.width = w; c.height = h; var g = c.getContext('2d');
-    var lg = g.createLinearGradient(0,0,0,h);
-    lg.addColorStop(0,'#24566f'); lg.addColorStop(.35,'#143a52'); lg.addColorStop(.75,'#0a2031'); lg.addColorStop(1,'#050c13');
-    g.fillStyle = lg; g.fillRect(0,0,w,h);
-    var Lx = w*.62, Ly = -h*.05;
-    var rg = g.createRadialGradient(Lx,Ly,0,Lx,Ly,h*.95);
-    rg.addColorStop(0,'rgba(236,232,210,.32)'); rg.addColorStop(.35,'rgba(170,190,190,.10)'); rg.addColorStop(1,'rgba(0,0,0,0)');
-    g.fillStyle = rg; g.fillRect(0,0,w,h);
-    var blues = ['#1f5a7a','#2b6c8c','#143a52','#0c2436','#3b7f99','#2d6f73','#18465f','#0e2a3d'];
-    var lights = ['#cfdbd2','#9cc3cf','#b8d2da','#7fb0c2','#e3e0cc','#8fbac8'];
-    var n = Math.round(w*h/700);
-    for(var i=0;i<n;i++){
-      var x = Math.random()*w, y = Math.random()*h;
-      var d = Math.hypot(x-Lx, y-Ly)/h;
-      var near = Math.random() < Math.max(0, .75 - d);
-      var ang = Math.atan2(y-Ly, x-Lx) + Math.PI/2 + R(-.6,.6);
-      g.save(); g.translate(x,y); g.rotate(ang);
-      g.globalAlpha = near ? R(.18,.5) : R(.2,.55);
-      g.fillStyle = near ? pick(lights) : pick(blues);
-      var sw = R(10,64)*(w/1600+.4), sh = R(3,13)*(w/1600+.4);
-      g.beginPath(); g.ellipse(0,0,sw/2,sh/2,0,0,Math.PI*2); g.fill();
-      g.restore();
+    var rnd = (function(seed){ return function(a,b){ seed = (seed*16807) % 2147483647; return a + ((seed-1)/2147483646)*(b-a); }; })(41);
+    var hz = h*SUN_HZ;
+    function mix(a, b, t){
+      var A = parseInt(a.slice(1),16), B = parseInt(b.slice(1),16);
+      var r1 = (A>>16)&255, g1 = (A>>8)&255, b1 = A&255, r2 = (B>>16)&255, g2 = (B>>8)&255, b2 = B&255;
+      return 'rgb(' + Math.round(r1+(r2-r1)*t) + ',' + Math.round(g1+(g2-g1)*t) + ',' + Math.round(b1+(b2-b1)*t) + ')';
     }
-    for(var k=0;k<n/6;k++){ /* splatter near the light */
-      var a = R(0,Math.PI*2), r = Math.pow(Math.random(),1.6)*h*.7;
-      g.globalAlpha = R(.2,.7); g.fillStyle = Math.random()<.7?'#f6ecd0':'#a9d0dc';
-      g.beginPath(); g.arc(Lx+Math.cos(a)*r*1.1, Ly+Math.abs(Math.sin(a))*r, R(.6,2.2), 0, Math.PI*2); g.fill();
+    /* sky: misty teal with faint vertical streaks */
+    var sk = g.createLinearGradient(0,0,0,hz);
+    sk.addColorStop(0,'#2b6a82'); sk.addColorStop(1,'#3f8197');
+    g.fillStyle = sk; g.fillRect(0,0,w,hz+4);
+    for(var i=0;i<w/3;i++){ g.globalAlpha = rnd(.03,.08); g.fillStyle = rnd(0,1)<.5?'#5d9db2':'#22576e'; g.fillRect(rnd(0,w), rnd(-20,hz*.6), rnd(1,2.5), rnd(hz*.3,hz)); }
+    g.globalAlpha = 1;
+    /* the sun, low over the horizon, with a warm sky around it */
+    var sunX = w*SUN_X, sr = Math.max(14, Math.min(w,h)*.03), sunY = hz - sr*.45;
+    var glow = g.createRadialGradient(sunX, sunY, 0, sunX, sunY, w*.5);
+    glow.addColorStop(0,'rgba(255,222,165,.62)'); glow.addColorStop(.12,'rgba(250,206,150,.32)'); glow.addColorStop(.4,'rgba(170,200,195,.12)'); glow.addColorStop(1,'rgba(150,190,200,0)');
+    g.save(); g.translate(sunX, sunY); g.scale(1, .6); g.translate(-sunX, -sunY); g.fillStyle = glow; g.fillRect(-w, -h*2, w*3, h*4); g.restore();
+    var disc = g.createRadialGradient(sunX, sunY, 0, sunX, sunY, sr);
+    disc.addColorStop(0,'#fffaf0'); disc.addColorStop(.6,'#fff0cf'); disc.addColorStop(1,'rgba(255,226,170,.85)');
+    g.fillStyle = disc; g.beginPath(); g.arc(sunX, sunY, sr, 0, Math.PI*2); g.fill();
+    var bloom = g.createRadialGradient(sunX, sunY, sr*.8, sunX, sunY, sr*5);
+    bloom.addColorStop(0,'rgba(255,236,196,.55)'); bloom.addColorStop(1,'rgba(255,236,196,0)');
+    g.fillStyle = bloom; g.fillRect(sunX - sr*5, sunY - sr*5, sr*10, sr*10);
+    /* sea base, lighter far away, darker near */
+    var sg = g.createLinearGradient(0,hz,0,h);
+    sg.addColorStop(0,'#5b9fb6'); sg.addColorStop(.35,'#3f8aa5'); sg.addColorStop(.7,'#24647f'); sg.addColorStop(1,'#0d2a3b');
+    g.fillStyle = sg; g.fillRect(0,hz,w,h-hz);
+    var pal = ['#7fbccd','#5aa3bb','#3f8aa5','#2e7590','#245f78','#1a4b61','#a9d6e2'];
+    /* rows of waves with perspective: thin and many near the horizon, big near the viewer.
+       Crests are sharp (1-|sin|), and an envelope makes some stretches swell and others calm. */
+    var y = hz + 2, row = 0;
+    while(y < h + 60){
+      var d = (y - hz) / (h - hz);
+      var amp = 2 + d*d*86, len = 30 + d*320, gap = 2.5 + d*d*30;
+      var ph = rnd(0,6.28), ph2 = rnd(0,6.28), ph3 = rnd(0,6.28);
+      var crest = (function(amp,len,ph,ph2,ph3){ return function(x){
+        var env = .25 + .75*(.5+.5*Math.sin(x/(len*3.3)+ph2))*(.6+.4*Math.sin(x/(len*1.7)+ph3));
+        var c = Math.pow(1 - Math.abs(Math.sin(x/len*3.1416 + ph)), 1.7);
+        return y - amp*env*(.25 + c);
+      }; })(amp,len,ph,ph2,ph3);
+      var shade = Math.min(1, d*1.2);
+      /* body */
+      g.beginPath(); g.moveTo(-20, y + gap*2 + amp);
+      for(var x=-20; x<=w+20; x+=4) g.lineTo(x, crest(x));
+      g.lineTo(w+20, y + gap*2 + amp); g.closePath();
+      var wg = g.createLinearGradient(0, y - amp*1.2, 0, y + gap*2 + amp);
+      wg.addColorStop(0, mix('#7cb8c9', '#2f7590', shade));
+      wg.addColorStop(.45, mix('#4b93ad', '#1a4c63', shade));
+      wg.addColorStop(1, mix('#1d5670', '#0b2534', shade));
+      g.globalAlpha = .95; g.fillStyle = wg; g.fill();
+      /* shadow at the foot of the crest, gives the wave a back */
+      g.globalAlpha = .22 + shade*.25; g.strokeStyle = '#0c2836'; g.lineWidth = 1 + d*7; g.beginPath();
+      for(var x1=-20; x1<=w+20; x1+=6) g.lineTo(x1, crest(x1) + amp*.55 + d*6);
+      g.stroke();
+      /* knife strokes: light on the crest, darker lower down */
+      var strokes = Math.round(w / (5 + d*18));
+      for(var k=0;k<strokes;k++){
+        var sx = rnd(-20, w+20), cy = crest(sx), down = rnd(0,1);
+        var sy = cy + down*down*(amp*1.1 + gap);
+        var slope = (crest(sx + 3) - crest(sx - 3)) / 6;
+        g.save(); g.translate(sx, sy); g.rotate(Math.atan(slope)*(1-down) + rnd(-.12,.12));
+        g.globalAlpha = rnd(.2,.6);
+        g.fillStyle = down < .25 ? (rnd(0,1) < .4 ? '#d4ecf2' : '#93c8d6') : pal[Math.floor(rnd(1,pal.length-1))];
+        var L = rnd(5, 14 + d*80), T = rnd(.8, 1.6 + d*5);
+        g.beginPath(); g.moveTo(-L/2, 0); g.quadraticCurveTo(0, -T, L/2, 0); g.quadraticCurveTo(0, T*.5, -L/2, 0); g.fill();
+        g.restore();
+      }
+      /* foam on the sharpest crests */
+      g.strokeStyle = '#e1f2f6'; g.lineWidth = .5 + d*2.4; g.globalAlpha = .55;
+      g.beginPath(); var on = false;
+      for(var x2=-20; x2<=w+20; x2+=4){
+        var tip = 1 - Math.abs(Math.sin(x2/len*3.1416 + ph));
+        if(tip > .8 && crest(x2) < y - amp*.55){ if(!on){ g.moveTo(x2, crest(x2)); on = true; } else g.lineTo(x2, crest(x2)); } else on = false;
+      }
+      g.stroke(); g.globalAlpha = 1;
+      y += gap; row++;
+    }
+    /* haze on the horizon, warm near the sun */
+    var hzg = g.createLinearGradient(0, hz - h*.05, 0, hz + h*.08);
+    hzg.addColorStop(0,'rgba(140,185,196,0)'); hzg.addColorStop(.5,'rgba(150,190,198,.5)'); hzg.addColorStop(1,'rgba(140,185,196,0)');
+    g.fillStyle = hzg; g.fillRect(0, hz - h*.05, w, h*.13);
+    g.globalCompositeOperation = 'screen';
+    /* warm column of light on the water, under the sun */
+    var col = g.createRadialGradient(sunX, hz + h*.18, 0, sunX, hz + h*.18, h*.5);
+    col.addColorStop(0,'rgba(255,205,140,.32)'); col.addColorStop(.5,'rgba(255,205,140,.1)'); col.addColorStop(1,'rgba(255,205,140,0)');
+    g.save(); g.translate(sunX, hz); g.scale(.42, 1); g.translate(-sunX, -hz); g.fillStyle = col; g.fillRect(0, hz, w*3, h); g.restore();
+    /* golden glints along the wave tops, narrow far away and wider near */
+    for(var gl=0; gl<w*1.7; gl++){
+      var t = Math.pow(rnd(0,1), 1.25), gy = hz + 2 + t*(h - hz)*.9;
+      var gs = (rnd(-1,1) + rnd(-1,1) + rnd(-1,1)) / 3, gx = sunX + gs*w*(.012 + t*.2);
+      g.globalAlpha = (1 - t*.55) * (1 - Math.abs(gs)*.6) * rnd(.25,.85);
+      g.fillStyle = rnd(0,1) < .5 ? '#ffe3a8' : '#fff4da';
+      var gl2 = 2 + t*44*rnd(.4,1), gt = .6 + t*2.4;
+      g.beginPath(); g.ellipse(gx, gy, gl2/2, gt/2, rnd(-.08,.08), 0, Math.PI*2); g.fill();
     }
     g.globalAlpha = 1;
-    var vg = g.createRadialGradient(w*.55,h*.3,h*.2,w*.5,h*.5,h*1.1);
-    vg.addColorStop(0,'rgba(0,0,0,0)'); vg.addColorStop(1,'rgba(3,6,10,.75)');
-    g.fillStyle = vg; g.fillRect(0,0,w,h);
-    return c;
+    g.globalCompositeOperation = 'source-over';
+    /* a small red-sailed boat far away, off to the side of the light */
+    if(w >= 760){
+    var bx = sunX - w*.16, by = hz + h*.045, bs = Math.max(9, h*.02);
+    g.fillStyle = '#1c130f'; g.beginPath(); g.moveTo(bx - bs*.9, by); g.lineTo(bx + bs*.9, by); g.lineTo(bx + bs*.6, by + bs*.32); g.lineTo(bx - bs*.6, by + bs*.32); g.fill();
+    g.strokeStyle = '#1c130f'; g.lineWidth = Math.max(1, bs*.08); g.beginPath(); g.moveTo(bx, by); g.lineTo(bx, by - bs*1.9); g.stroke();
+    g.fillStyle = '#b8301e'; g.beginPath(); g.moveTo(bx + bs*.06, by - bs*1.8); g.lineTo(bx + bs*.06, by - bs*.1); g.lineTo(bx + bs*.85, by - bs*.1); g.closePath(); g.fill();
+    g.fillStyle = '#8f2316'; g.beginPath(); g.moveTo(bx - bs*.06, by - bs*1.5); g.lineTo(bx - bs*.06, by - bs*.1); g.lineTo(bx - bs*.6, by - bs*.1); g.closePath(); g.fill();
+    }
+    /* darker foreground */
+    var fg = g.createLinearGradient(0, h*.7, 0, h);
+    fg.addColorStop(0,'rgba(6,20,30,0)'); fg.addColorStop(1,'rgba(6,20,30,.55)');
+    g.fillStyle = fg; g.fillRect(0, h*.7, w, h*.3);
+    /* slight blur over the whole painting */
+    var out = document.createElement('canvas'); out.width = w; out.height = h; var o = out.getContext('2d');
+    o.filter = 'blur(' + (3.2 * Math.max(.6, Math.min(1.2, w / 1440))).toFixed(2) + 'px)'; o.drawImage(c, 0, 0);
+    return out;
   }
 
   function makeFish(){
@@ -1817,7 +2282,7 @@ if(reduce || !('IntersectionObserver' in window)){
     SW = window.innerWidth; SH = window.innerHeight;
     sea.width = Math.round(SW*DPR); sea.height = Math.round(SH*DPR);
     water = paintWater(Math.round(SW*1.12), Math.round(SH*1.12));
-    var want = small ? 45 : Math.min(110, Math.round(SW*SH/13000));
+    var want = 0;
     while(fish.length < want) fish.push(makeFish());
     fish.length = want;
     fish.sort(function(a,b){ return a.z - b.z; });
@@ -1873,8 +2338,25 @@ if(reduce || !('IntersectionObserver' in window)){
   function seaVis(){
     var max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
     var p = window.scrollY / max;
-    vis = 1 - Math.min(1, Math.max(0, (p - .38) / .2));
-    sea.style.opacity = vis;
+    p = Math.min(1, Math.max(0, p));
+    var surf = 1 - smooth(.12, .42, p);                        /* surface sea + light motes */
+    var mid  = 1 - smooth(.55, .86, p);                        /* midwater blue over the deep layer */
+    var fish = smooth(.12, .34, p) * (1 - smooth(.5, .74, p)); /* distant schools in the middle */
+    vis = surf; sea.style.opacity = surf.toFixed(3); moteBox.style.opacity = surf.toFixed(3);
+    midG.style.opacity = mid.toFixed(3); schoolC.style.opacity = fish.toFixed(3);
+    /* light: warm and crisp at the top, cooler, longer and more diffuse with depth */
+    var warm = (.55 + .45*smooth(.05, .25, p)) * (1 - smooth(.3, .68, p));
+    var cool = .2 + .8*smooth(.1, .45, p) - .3*smooth(.82, 1, p);
+    rayWarm.style.opacity = warm.toFixed(3); rayCool.style.opacity = cool.toFixed(3);
+    caus.style.opacity = (smooth(.2, .45, p) * (1 - .55*smooth(.7, 1, p))).toFixed(3);
+    var vw = window.innerWidth, vh = window.innerHeight;
+    var sx = SUN_X * vw * 1.12 - vw*.03, sy = SUN_HZ * vh * 1.12 - vh*.03;
+    var oy2 = sy * (1 - smooth(.15, .55, p)) - vh*.12*smooth(.15, .55, p);   /* the source rises to the surface above */
+    rays.style.transform = 'translate3d(' + sx.toFixed(1) + 'px,' + oy2.toFixed(1) + 'px,0) scale(' + (1 + p*.7).toFixed(3) + ')';
+    if(!reduce){
+      schoolC.style.transform = 'translate3d(0,' + ((.4 - p) * 70).toFixed(1) + 'px,0)';
+      deepC.style.transform = 'translate3d(0,' + ((1 - p) * 16).toFixed(1) + 'px,0)';
+    }
   }
   function frame(now){
     var dt = Math.min(50, now - last); last = now;
@@ -1883,21 +2365,22 @@ if(reduce || !('IntersectionObserver' in window)){
       cx.setTransform(DPR,0,0,DPR,0,0);
       cx.globalAlpha = 1; cx.fillStyle = '#05090e'; cx.fillRect(0,0,SW,SH);
       var ox = Math.sin(t/9000)*SW*.03 - SW*.06, oy = Math.cos(t/11000)*SH*.025 - SH*.06;
-      cx.globalAlpha = .62; cx.drawImage(water, ox, oy);
-      cx.globalAlpha = .16; cx.drawImage(water, -SW*.06 - ox*.6, -SH*.06 - oy*.6);
+      cx.globalAlpha = 1; cx.drawImage(water, ox*.18 - SW*.03, oy*.18 - SH*.03);
       if(!reduce) step(dt);
       for(var i=0;i<fish.length;i++) drawFish(fish[i], t);
       cx.globalAlpha = 1;
       /* calmer reading zone behind the centred content */
       var rz = cx.createRadialGradient(SW/2,SH*.5,0,SW/2,SH*.5,Math.max(SW*.42,320));
-      rz.addColorStop(0,'rgba(5,9,14,.5)'); rz.addColorStop(1,'rgba(5,9,14,0)');
+      rz.addColorStop(0,'rgba(6,22,32,.55)'); rz.addColorStop(1,'rgba(6,22,32,0)');
       cx.fillStyle = rz; cx.fillRect(0,0,SW,SH);
     }
     if(!reduce) requestAnimationFrame(frame);
   }
   resize(); seaVis();
   window.addEventListener('resize', function(){ clearTimeout(resize._t); resize._t = setTimeout(resize, 200); });
-  window.addEventListener('scroll', seaVis, {passive:true});
+  var ticking = false;
+  window.addEventListener('scroll', function(){ if(ticking) return; ticking = true; requestAnimationFrame(function(){ ticking = false; seaVis(); }); }, {passive:true});
+  window.addEventListener('resize', function(){ clearTimeout(paintDepth._t); paintDepth._t = setTimeout(function(){ paintDepth(); seaVis(); }, 250); });
   window.addEventListener('pointermove', function(e){ mouse.x = e.clientX; mouse.y = e.clientY; }, {passive:true});
   document.addEventListener('visibilitychange', function(){ running = !document.hidden; last = performance.now(); });
   requestAnimationFrame(frame);
